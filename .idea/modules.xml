@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/NOT Pokemon.iml" filepath="$PROJECT_DIR$/NOT Pokemon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Type-Calculator/Type-Calculator.iml" filepath="$PROJECT_DIR$/../Type-Calculator/Type-Calculator.iml" />
+    </modules>
+  </component>
+</project>
