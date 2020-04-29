@@ -14,7 +14,7 @@ public class BasicMove {
  String category;
         int accuracy;
     int priority;
-
+//asdfds
     //    private String status;
 //    private int statusChance;
 //    private String modifier;
