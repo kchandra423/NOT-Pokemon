@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c409674a-022d-407e-a93f-62a2b7549e75" name="Default Changelist" comment="" />
+    <list default="true" id="c409674a-022d-407e-a93f-62a2b7549e75" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Moves.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Moves.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/BasicMove.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NOT Pokemon/BasicMove.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/BasicPokemon.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NOT Pokemon/BasicPokemon.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NOT Pokemon/Calculator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/EaseOfUse.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NOT Pokemon/EaseOfUse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NOT Pokemon/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/Move.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NOT Pokemon/Move.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NOT Pokemon/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/Pokemon.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NOT Pokemon/Pokemon.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReadFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReadFile.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
