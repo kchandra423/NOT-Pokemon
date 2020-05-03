@@ -26,6 +26,7 @@ public class BasicMove {
     private String status;
     private String target;
     private String type;
+    //
 //
     // private String status;
 //    private int statusChance;
