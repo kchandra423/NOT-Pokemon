@@ -3,17 +3,27 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class BasicMove {
-	private String moveName;
-	private int moveNumber;
-	private int basePower;
-	String description;
-	int pp;
-	String flags;
+	// Num, accuracy, power, category, desc, name, pp , priority, flags, chance, self, boosts,
+	// crit ratio, drain, heal,status,target, type
 //    private boolean isSpecial;
-	private String type;
-	String category;
+	private int moveNumber;
 	int accuracy;
+	private int basePower;
+	String category;
+	String description;
+	private String moveName;
+	int pp;
 	int priority;
+	String flags;
+	private int chance;
+	private boolean self;
+	private String boosts;
+	private double critical;
+	private Ratio drain;
+	private Ratio heal;
+	private String status;
+	private String target;
+	private String type;
 
 	// private String status;
 //    private int statusChance;
@@ -76,11 +86,9 @@ public class BasicMove {
 		String stats = splittedCopy[moveNumber - 1];
 		String[] s = stats.split("#");
 		moveNumber = Integer.parseInt(s[0]);
-		if (s[1].equalsIgnoreCase("true")) {
-			accuracy = 100;
-		} else {
-			accuracy = Integer.parseInt(s[1]);
-		}
+		// Num, accuracy, power, category, desc, name, pp , priority, flags, chance, self, boosts,
+		// crit ratio, drain, heal,status,target, type
+		accuracy = (s[1].equalsIgnoreCase("true")) ? 100 : Integer.parseInt(s[1]);
 		basePower = Integer.parseInt(s[2]);
 		category = s[3];
 		description = s[4];
@@ -88,7 +96,31 @@ public class BasicMove {
 		pp = Integer.parseInt(s[6]);
 		priority = Integer.parseInt(s[7]);
 		flags = s[8];
-		type = s[9];
+		chance = (s[9].equalsIgnoreCase("null")) ? 0 : Integer.parseInt(s[9]);
+		self = (s[10].equalsIgnoreCase("null")) ? false : true;
+		boosts = s[11];
+		critical = (s[12].equalsIgnoreCase("null")) ? 0 : Integer.parseInt(s[12]);
+		if(s[13].equalsIgnoreCase("null")) {
+			drain = new Ratio(0, 1);
+		}
+		else {
+			String[] s2 = s[13].replaceAll("[\\[\\],]", "").split(" ");
+			int first = Integer.parseInt(s2[0]);
+			int second = Integer.parseInt(s2[1]);
+			drain = new Ratio(first, second);
+		}
+		if(s[14].equalsIgnoreCase("null")) {
+			heal = new Ratio(0, 1);
+		}
+		else {
+			String[] s2 = s[14].replaceAll("[\\[\\],]", "").split(" ");
+			int first = Integer.parseInt(s2[0]);
+			int second = Integer.parseInt(s2[1]);
+			heal = new Ratio(first, second);
+		}
+		status = s[15];
+		target = s[16];
+		type = s[17];
 
 //        for(int i =0;i<s.length;i++){
 //
