@@ -114,6 +114,7 @@ public class BasicMove {
         if(s[14].equalsIgnoreCase("null")) {
             heal = new Ratio(0, 1);
         }
+        //
         else {
             String[] s2 = s[14].replaceAll("[\\[\\],]", "").split(" ");
             int first = Integer.parseInt(s2[0]);
