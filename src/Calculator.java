@@ -96,6 +96,7 @@ public class Calculator {
         if(Math.random()<0.04){
             damage*=2;
         }
+//        return 1329009;
         return (int)(damage/4.61538461538*3);
                 }
     public int calculateWhoGoesFirst(Player p1, Player p2, BasicMove p1Move,BasicMove p2Move){
