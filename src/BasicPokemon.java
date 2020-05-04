@@ -5,19 +5,19 @@ import java.nio.file.Files;
 import java.io.*;
 
 public class BasicPokemon {
-
+    Calculator calculator = new Calculator();
     private int dex = 0;
     private String name = "";
-    private int baseHealth;
+     int baseHealth;
     private int health;
     private int baseSpecialDefense;
-
+    int sleepCounter;
     private int baseDefense;
 
     private int baseAttack;
 
     private int baseSpecialAttack;
-
+    public String status = "";
     private int baseSpeed;
 
     BasicMove[] moves = new BasicMove[4];
@@ -415,6 +415,68 @@ public class BasicPokemon {
 
         speedDecrease += stages;
 
+    }
+    public void beParalyzed(BasicPokemon target)
+    {
+        if(target.getType1().equalsIgnoreCase("Electric") || target.getType2().equalsIgnoreCase("Electric"))
+        {
+            return;
+        }
+    }
+
+    public void bePoisoned(BasicPokemon target)
+    {
+        if(target.getType1().equalsIgnoreCase("Poison") || target.getType2().equalsIgnoreCase("Posion") || target.getType1().equalsIgnoreCase("Steel") || target.getType2().equalsIgnoreCase("Steel"))
+        {
+            return;
+        }
+        health = (int)(health - baseHealth * 1.0/8);
+    }
+
+    public void beBurned(BasicPokemon target)
+    {
+        if(target.getType1().equalsIgnoreCase("Fire") || target.getType2().equalsIgnoreCase("Fire"))
+        {
+            return;
+        }
+        health = (int)(health - baseHealth * 0.06);
+    }
+    public void beFrozen(BasicPokemon target)
+    {
+        if(target.getType1().equalsIgnoreCase("Ice") || target.getType2().equalsIgnoreCase("Ice"))
+        {
+            return;
+        }
+        int unfreeze = (int)(Math.random()*5);
+        if(unfreeze == 0)
+        {
+            return;
+        }
+        else
+        {
+            moves = null;
+        }
+    }
+
+    public void beFlinched(BasicPokemon target)
+    {
+        moves = null;
+        return;
+    }
+
+    public void beConfused(BasicPokemon target)
+    {
+        int unflinch = (int)(Math.random()*4);
+        if(unflinch == 0)
+        {
+            return;
+        }
+        int damage = (int)(Math.random()*2);
+        if(damage == 0)
+        {
+            calculator.calculateBasicDamage(this, this, new BasicMove(1));
+            moves = null;
+        }
     }
     // public String getStatus() {
 //        return status;

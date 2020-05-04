@@ -72,7 +72,73 @@ public class Player {
     }
     public void fight(int indexOfMove){
         if(currentMon.getHealth()<=0){}
-    else {
+        else if(currentMon.status.equalsIgnoreCase("burn"))
+        {
+            int moveType = calculator.getIntFromType(currentMon.getMoves()[indexOfMove].getType());
+            int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
+            int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
+            int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
+            ez.print(currentMon.getName() + " did " + damage /2 + " damage to " + opposingPlayer.currentMon.getName());
+            System.out.println(calculator.howEffective(moveType, opposingType1, opposingType2));
+            opposingPlayer.currentMon.takeDamage(damage/2);
+            currentMon.takeDamage((int)(currentMon.baseHealth * 0.06));
+            System.out.println(currentMon.getName() + " was hurt from its burn");
+        }
+        else if(currentMon.status.equalsIgnoreCase("Para"))
+        {
+            if(Math.random() < 0.25) {
+                System.out.println(currentMon.getName() + " was Paralyzed");
+            }
+            else
+            {
+                int moveType = calculator.getIntFromType(currentMon.getMoves()[indexOfMove].getType());
+                int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
+                int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
+                int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
+                ez.print(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
+                System.out.println(calculator.howEffective(moveType, opposingType1, opposingType2));
+                opposingPlayer.currentMon.takeDamage(damage);
+            }
+        }
+        else if(currentMon.status.equalsIgnoreCase("Frzn"))
+        {
+            if(Math.random() < 0.2)
+            {
+                currentMon.status = "";
+                int moveType = calculator.getIntFromType(currentMon.getMoves()[indexOfMove].getType());
+                int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
+                int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
+                int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
+                ez.print(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
+                System.out.println(calculator.howEffective(moveType, opposingType1, opposingType2));
+                opposingPlayer.currentMon.takeDamage(damage);
+            }
+            else
+            {
+                System.out.println(currentMon.getName() + " was Frozen Solid");
+            }
+        }
+        else if(currentMon.status.equalsIgnoreCase("psn"))
+        {
+            int moveType = calculator.getIntFromType(currentMon.getMoves()[indexOfMove].getType());
+            int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
+            int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
+            int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
+            ez.print(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
+            System.out.println(calculator.howEffective(moveType, opposingType1, opposingType2));
+            opposingPlayer.currentMon.takeDamage(damage);
+            currentMon.takeDamage((int)(currentMon.baseHealth * 1.0/8));
+            System.out.println(currentMon.getName() + " was hurt from the poison");
+        }
+        else if(currentMon.status.equalsIgnoreCase("slp"))
+        {
+            System.out.println(currentMon.getName() + " is fast asleep");
+            if(Math.random() < 1.0/3)
+            {
+                currentMon.status = "";
+            }
+        }
+        else {
             int moveType = calculator.getIntFromType(currentMon.getMoves()[indexOfMove].getType());
             int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
             int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());

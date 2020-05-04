@@ -103,6 +103,14 @@ public class Calculator {
         int p2Speed=p2.currentMon.getSpeed();
         int p1Priority=p1Move.priority;
         int p2Priority=p2Move.priority;
+        if(p1.currentMon.status.equals("para"))
+        {
+            p1Speed /= 2;
+        }
+        if(p2.currentMon.status.equals("para"))
+        {
+            p2Speed /= 2;
+        }
         if(p1Priority>p2Priority){
             return 1;
         }
