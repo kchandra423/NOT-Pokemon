@@ -57,7 +57,7 @@ public class Pokemon {
 		statsApplied = true;
 	}
 
-	private void setStats(int dexNUmber) {
+	private void setStats(int dexNumber) {
 		// code some way of using the dex Number to get the stats of the pokemon
 	}
 
@@ -134,7 +134,7 @@ public class Pokemon {
 
 	}
 
-	public boolean StatsApplied() {
+	public boolean statsApplied() {
 		return statsApplied;
 	}
 
