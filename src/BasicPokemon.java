@@ -39,7 +39,7 @@ public class BasicPokemon {
 	int speedIncrease;
 	int speedDecrease;
 
-	public int convertMmonName(String monName) {
+	public int convertMonName(String monName) {
 		int moveNumber = -1;
 		String copy = "something went wrong; ";
 		try {
@@ -76,7 +76,7 @@ public class BasicPokemon {
 
 	public BasicPokemon(String pokeName) {
 		name = pokeName;
-		int dexNumber = convertMmonName(pokeName);
+		int dexNumber = convertMonName(pokeName);
 		dex = dexNumber;
 		for (int i = 0; i < 4; i++) {
 			moves[i] = new BasicMove(1);
@@ -129,7 +129,7 @@ public class BasicPokemon {
 ////        statsApplied=true;
 //    }
 
-	public void setStats(int dexNUmber) {
+	public void setStats(int dexNumber) {
 
 		String copy = "something went wrong; ";
 		try {
@@ -141,7 +141,7 @@ public class BasicPokemon {
 		}
 		String[] splittedCopy;
 		splittedCopy = copy.split("\n");
-		String stats = splittedCopy[dexNUmber - 1];
+		String stats = splittedCopy[dexNumber - 1];
 		String[] s = stats.split(";");
 		name = s[1];
 		type1 = s[2];

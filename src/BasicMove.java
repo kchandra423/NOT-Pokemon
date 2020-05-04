@@ -3,8 +3,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class BasicMove {
-	// Num, accuracy, power, category, desc, name, pp , priority, flags, chance, self, boosts,
-	// crit ratio, drain, heal,status,target, type
+	// Num, accuracy, power, category, desc, name, pp , priority, flags, chance,
+	// self, boosts, crit ratio, drain, heal,status,target, type
 //    private boolean isSpecial;
 	private int moveNumber;
 	int accuracy;
@@ -86,8 +86,8 @@ public class BasicMove {
 		String stats = splittedCopy[moveNumber - 1];
 		String[] s = stats.split("#");
 		moveNumber = Integer.parseInt(s[0]);
-		// Num, accuracy, power, category, desc, name, pp , priority, flags, chance, self, boosts,
-		// crit ratio, drain, heal,status,target, type
+		// Num, accuracy, power, category, desc, name, pp , priority, flags, chance,
+		// self, boosts, crit ratio, drain, heal,status,target, type
 		accuracy = (s[1].equalsIgnoreCase("true")) ? 100 : Integer.parseInt(s[1]);
 		basePower = Integer.parseInt(s[2]);
 		category = s[3];
@@ -100,19 +100,17 @@ public class BasicMove {
 		self = (s[10].equalsIgnoreCase("null")) ? false : true;
 		boosts = s[11];
 		critical = (s[12].equalsIgnoreCase("null")) ? 0 : Integer.parseInt(s[12]);
-		if(s[13].equalsIgnoreCase("null")) {
+		if (s[13].equalsIgnoreCase("null")) {
 			drain = new Ratio(0, 1);
-		}
-		else {
+		} else {
 			String[] s2 = s[13].replaceAll("[\\[\\],]", "").split(" ");
 			int first = Integer.parseInt(s2[0]);
 			int second = Integer.parseInt(s2[1]);
 			drain = new Ratio(first, second);
 		}
-		if(s[14].equalsIgnoreCase("null")) {
+		if (s[14].equalsIgnoreCase("null")) {
 			heal = new Ratio(0, 1);
-		}
-		else {
+		} else {
 			String[] s2 = s[14].replaceAll("[\\[\\],]", "").split(" ");
 			int first = Integer.parseInt(s2[0]);
 			int second = Integer.parseInt(s2[1]);
