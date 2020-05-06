@@ -1,13 +1,26 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Main {
-
-
+    public static int P1numberOfFaintedMons=0;
+    public static int P2numberOfFaintedMons=0;
 
     public static void main (String[] args) {
+//    ReadFile read = new ReadFile();
+//        String copy = "something went wrong; ";
+//        try {
+////			copy = Files.readString(Paths.get("Stats.txt"));
+//            byte[] file = Files.readAllBytes(Paths.get("ShowdownMovesets.txt"));
+//            copy = new String(file);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    System.out.println(read.orderMoves(read.formatShowDownMovesets(copy)));
 
         EaseOfUse ez=new EaseOfUse();
         Scanner kboard=new Scanner(System.in);
@@ -41,7 +54,7 @@ public class Main {
         p2mons[4]=new BasicPokemon(kboard.nextInt());
         ez.print("P2) Select your sixth pokemon's dex number");
         p2mons[5]=new BasicPokemon(kboard.nextInt());
-        givenMoves[0]= new int[]{2,3,4,5};
+        givenMoves[0]= new int[]{14,370,609,1};
         givenMoves[1]= new int[]{6,7,8,9};
         givenMoves[2]= new int[]{10,11,12,13};
         givenMoves[3]= new int[]{14,15,16,17};
@@ -64,7 +77,7 @@ public class Main {
             while (youShallNotPass) {
                 System.out.println("Player1 what would you like to do\n1)Switch out\n2)Fight");
                 selection = kboard.nextInt();
-                if (selection == 1) {
+                if (selection == 1&&P1numberOfFaintedMons<5) {
                     p1WillSwitch = true;
                     youShallNotPass = false;
                 } else if (selection == 2) {
@@ -74,11 +87,16 @@ public class Main {
                     }
                     p1SelectedMoveIndex = kboard.nextInt() - 1;
                     youShallNotPass = false;
-                } else {
+                }
+                else if(selection == 1&&P1numberOfFaintedMons>=5){
+                    ez.print("You have no available pokemon to switch in, because every other Pokemon has fainted");
+                }
+                else {
                     System.out.println("That wasn't a valid input");
                 }
             }
             youShallNotPass=true;
+            selection=0;
             while(youShallNotPass) {
                 System.out.println("Player2 what would you like to do\n1)Switch out\n2)Fight");
                 selection = kboard.nextInt();
@@ -92,7 +110,10 @@ public class Main {
                     }
                     p2SelectedMoveIndex = kboard.nextInt() - 1;
                     youShallNotPass = false;
-                } else {
+                }
+                else if(selection == 1&&P2numberOfFaintedMons>=5){
+                    ez.print("You have no available pokemon to switch in, because every other Pokemon has fainted");
+                }else {
                     System.out.println("That wasn't a valid input");
                 }
             }
@@ -153,9 +174,11 @@ public class Main {
             }
             if(p1.currentMon.getHealth()<=0){
                 p1.switchOut();
+                P1numberOfFaintedMons++;
             }
             if(p2.currentMon.getHealth()<=0){
                 p2.switchOut();
+                P2numberOfFaintedMons++;
             }
         }
 

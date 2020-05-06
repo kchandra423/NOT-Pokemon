@@ -94,13 +94,39 @@ public class ReadFile {
                     currentChunksLines[14] = currentLine.substring
                             (currentLine.indexOf("heal: ") + 6, currentLine.indexOf("],") + 1)
                             + "#";
-                } else if (currentLine.contains("\ttarget ")) {
-                    System.out.println(k);
-                    currentChunksLines[16] = currentLine
+                } else if (currentLine.contains("\ttarget: \"self\"")) {
+                    System.out.println("hjjjhhjj");
+                    currentChunksLines[16] ="true#";
+
 //                            currentLine.substring
-//                            (currentLine.indexOf("target: ") + 8, currentLine.indexOf(","))
-                            + "#";
-                } else if (currentLine.contains("\tself: {")) {
+//                            (currentLine.indexOf("target: ") + 8, currentLine.indexOf("\""))
+//                            + "#";
+                }
+                else if (currentLine.contains("\ttarget: \"adjacentAllyOrSelf\"")) {
+                    System.out.println("hjjjhhjj");
+                    currentChunksLines[16] ="true#";
+
+//                            currentLine.substring
+//                            (currentLine.indexOf("target: ") + 8, currentLine.indexOf("\""))
+//                            + "#";
+                }
+                else if (currentLine.contains("\ttarget: \"allyTeam\"")) {
+                    System.out.println("hjjjhhjj");
+                    currentChunksLines[16] ="true#";
+
+//                            currentLine.substring
+//                            (currentLine.indexOf("target: ") + 8, currentLine.indexOf("\""))
+//                            + "#";
+                }
+                else if (currentLine.contains("\ttarget: \"adjacentAlly\"")) {
+                    System.out.println("hjjjhhjj");
+                    currentChunksLines[16] ="true#";
+
+//                            currentLine.substring
+//                            (currentLine.indexOf("target: ") + 8, currentLine.indexOf("\""))
+//                            + "#";
+                }
+                else if (currentLine.contains("\tself: {")) {
 
                     currentChunksLines[10] = "true"
                             + "#";
@@ -134,6 +160,8 @@ public class ReadFile {
     }
 //  0    1        2      3          4     5    6    7         8      9       10     11       12         13    14     15   16     17
 //Num, accuracy, power, category, desc, name, pp , priority, flags, chance, self, boosts, crit ratio, drain, heal,status,target, type,
+    //self= boosts target self
+    // target= everything targets self
 //
 //            if(currentLine.contains("status: "))
 //            {

@@ -72,7 +72,7 @@ public class Player {
     }
     public void fight(int indexOfMove){
         if(currentMon.getHealth()<=0){}
-        else if(currentMon.status.equalsIgnoreCase("burn"))
+        else if(currentMon.status.equalsIgnoreCase("brn"))
         {
             int moveType = calculator.getIntFromType(currentMon.getMoves()[indexOfMove].getType());
             int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
@@ -84,10 +84,11 @@ public class Player {
             currentMon.takeDamage((int)(currentMon.baseHealth * 0.06));
             System.out.println(currentMon.getName() + " was hurt from its burn");
         }
-        else if(currentMon.status.equalsIgnoreCase("Para"))
+        else if(currentMon.status.equalsIgnoreCase("par"))
         {
+            System.out.println(currentMon.getName() + " has paralysis");
             if(Math.random() < 0.25) {
-                System.out.println(currentMon.getName() + " was Paralyzed");
+                System.out.println(currentMon.getName() + " was fully Paralyzed");
             }
             else
             {
@@ -100,7 +101,7 @@ public class Player {
                 opposingPlayer.currentMon.takeDamage(damage);
             }
         }
-        else if(currentMon.status.equalsIgnoreCase("Frzn"))
+        else if(currentMon.status.equalsIgnoreCase("frz"))
         {
             if(Math.random() < 0.2)
             {

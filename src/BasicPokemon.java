@@ -179,10 +179,10 @@ public class BasicPokemon {
 
     public int getSpecialDefense() {
         if (specialDefenseDecrease == 0 && specialDefenseIncrease > 0) {// no stat decrease, their is a stat increase
-            return baseSpecialDefense * ((2 + specialDefenseIncrease) / 2);
+            return (int) (baseSpecialDefense * ((2.0 + specialDefenseIncrease) / 2.0));
         } else if (specialDefenseDecrease > 0 && specialDefenseIncrease == 0) {// no stat increase, their is a stat
             // decrease
-            return baseSpecialDefense * (2 / (2 + specialDefenseDecrease));
+            return (int) (baseSpecialDefense * (2.0 / (2.0 + specialDefenseDecrease)));
         } else if (specialDefenseIncrease > specialDefenseDecrease && specialDefenseDecrease != 0) {// stat increase and
             // stat decrease,
             // but stat increase
@@ -191,7 +191,7 @@ public class BasicPokemon {
                 specialDefenseDecrease--;
                 specialDefenseIncrease--;
             }
-            return baseSpecialDefense * ((2 + specialDefenseIncrease) / 2);
+            return (int) (baseSpecialDefense * ((2.0 + specialDefenseIncrease) / 2.0));
         } else if (specialDefenseDecrease > specialDefenseIncrease && specialDefenseIncrease != 0) {// stat increase and
             // decrease, but
             // stat decrease is
@@ -200,7 +200,7 @@ public class BasicPokemon {
                 specialDefenseDecrease--;
                 specialDefenseIncrease--;
             }
-            return baseSpecialDefense * (2 / (2 + specialDefenseDecrease));
+            return (int) (baseSpecialDefense * (2.0 / (2.0 + specialDefenseDecrease)));
 
         } else if (specialDefenseDecrease == 0 && specialDefenseIncrease == 0) {// no stat changes
             return baseSpecialDefense;
@@ -213,23 +213,23 @@ public class BasicPokemon {
 
     public int getDefense() {
         if (defenseDecrease == 0 && defenseIncrease > 0) {// no stat decrease, their is a stat increase
-            return baseDefense * ((2 + defenseIncrease) / 2);
+            return(int) (baseDefense * ((2.0 + defenseIncrease) / 2.0));
         } else if (defenseDecrease > 0 && defenseIncrease == 0) {// no stat increase, their is a stat decrease
-            return baseDefense * (2 / (2 + defenseDecrease));
+            return (int)(baseDefense * (2.0 / (2.0 + defenseDecrease)));
         } else if (defenseIncrease > defenseDecrease && defenseDecrease != 0) {// stat increase and stat decrease, but
             // stat increase is higher.
             while (defenseDecrease > 0) {
                 defenseDecrease--;
                 defenseIncrease--;
             }
-            return baseDefense * ((2 + defenseIncrease) / 2);
+            return(int) (baseDefense * ((2.0 + defenseIncrease) / 2.0));
         } else if (defenseDecrease > defenseIncrease && defenseIncrease != 0) {// stat increase and decrease, but stat
             // decrease is higher
             while (defenseIncrease > 0) {
                 defenseDecrease--;
                 defenseIncrease--;
             }
-            return baseDefense * (2 / (2 + defenseDecrease));
+            return (int) (baseDefense * (2.0 / (2.0 + defenseDecrease)));
 
         } else if (defenseDecrease == 0 && defenseIncrease == 0) {// no stat changes
             return baseDefense;
@@ -243,23 +243,23 @@ public class BasicPokemon {
 
     public int getAttack() {
         if (attackDecrease == 0 && attackIncrease > 0) {// no stat decrease, their is a stat increase
-            return baseAttack * ((2 + attackIncrease) / 2);
+            return (int) (baseAttack * ((2.0 + attackIncrease) / 2.0));
         } else if (attackDecrease > 0 && attackIncrease == 0) {// no stat increase, their is a stat decrease
-            return baseAttack * (2 / (2 + attackDecrease));
+            return (int) (baseAttack * (2.0 / (2.0 + attackDecrease)));
         } else if (attackIncrease > attackDecrease && attackDecrease != 0) {// stat increase and stat decrease, but stat
             // increase is higher.
             while (attackDecrease > 0) {
                 attackDecrease--;
                 attackIncrease--;
             }
-            return baseAttack * ((2 + attackIncrease) / 2);
+            return (int) (baseAttack * ((2.0 + attackIncrease) / 2.0));
         } else if (attackDecrease > attackIncrease && attackIncrease != 0) {// stat increase and decrease, but stat
             // decrease is higher
             while (attackIncrease > 0) {
                 attackDecrease--;
                 attackIncrease--;
             }
-            return baseAttack * (2 / (2 + attackDecrease));
+            return (int) (baseAttack * (2.0 / (2.0 + attackDecrease)));
 
         } else if (attackDecrease == 0 && attackIncrease == 0) {// no stat changes
             return baseAttack;
@@ -272,10 +272,10 @@ public class BasicPokemon {
 
     public int getSpecialAttack() {
         if (specialAttackDecrease == 0 && specialAttackIncrease > 0) {// no stat decrease, their is a stat increase
-            return baseSpecialAttack * ((2 + specialAttackIncrease) / 2);
+            return (int) (baseSpecialAttack * ((2.0 + specialAttackIncrease) / 2.0));
         } else if (specialAttackDecrease > 0 && specialAttackIncrease == 0) {// no stat increase, their is a stat
             // decrease
-            return baseSpecialAttack * (2 / (2 + specialAttackDecrease));
+            return (int) (baseSpecialAttack * (2.0 / (2.0 + specialAttackDecrease)));
         } else if (specialAttackIncrease > specialAttackDecrease && specialAttackDecrease != 0) {// stat increase and
             // stat decrease,
             // but stat increase
@@ -284,7 +284,7 @@ public class BasicPokemon {
                 specialAttackDecrease--;
                 specialAttackIncrease--;
             }
-            return baseSpecialAttack * ((2 + specialAttackIncrease) / 2);
+            return (int) (baseSpecialAttack * ((2.0 + specialAttackIncrease) / 2.0));
         } else if (specialAttackDecrease > specialAttackIncrease && specialAttackIncrease != 0) {// stat increase and
             // decrease, but
             // stat decrease is
@@ -293,7 +293,7 @@ public class BasicPokemon {
                 specialAttackDecrease--;
                 specialAttackIncrease--;
             }
-            return baseSpecialAttack * (2 / (2 + specialAttackDecrease));
+            return (int) (baseSpecialAttack * (2.0 / (2.0 + specialAttackDecrease)));
 
         } else if (specialAttackDecrease == 0 && specialAttackIncrease == 0) {// no stat changes
             return baseSpecialAttack;
@@ -306,23 +306,23 @@ public class BasicPokemon {
 
     public int getSpeed() {
         if (speedDecrease == 0 && speedIncrease > 0) {// no stat decrease, their is a stat increase
-            return baseSpeed * ((2 + speedIncrease) / 2);
+            return (int) (baseSpeed * ((2.0 + speedIncrease) / 2.0));
         } else if (speedDecrease > 0 && speedIncrease == 0) {// no stat increase, their is a stat decrease
-            return baseSpeed * (2 / (2 + speedDecrease));
+            return (int) (baseSpeed * (2.0 / (2.0 + speedDecrease)));
         } else if (speedIncrease > speedDecrease && speedDecrease != 0) {// stat increase and stat decrease, but stat
             // increase is higher.
             while (speedDecrease > 0) {
                 speedDecrease--;
                 speedIncrease--;
             }
-            return baseSpeed * ((2 + speedIncrease) / 2);
+            return (int) (baseSpeed * ((2.0 + speedIncrease) / 2.0));
         } else if (speedDecrease > speedIncrease && speedIncrease != 0) {// stat increase and decrease, but stat
             // decrease is higher
             while (speedIncrease > 0) {
                 speedDecrease--;
                 speedIncrease--;
             }
-            return baseSpeed * (2 / (2 + speedDecrease));
+            return (int) (baseSpeed * (2.0 / (2.0 + speedDecrease)));
 
         } else if (speedDecrease == 0 && speedIncrease == 0) {// no stat changes
             return baseSpeed;
@@ -366,118 +366,121 @@ public class BasicPokemon {
 
     public void setAttackIncrease(int stages) {
         attackIncrease += stages;
+        System.out.println(name +"'s attack increased by "+stages+" stages!");
 
     }
 
     public void setSpecialAttackIncrease(int stages) {
         specialAttackIncrease += stages;
-
+        System.out.println(name +"'s special attack increased by "+stages+" stages!");
     }
 
     public void setDefenseIncrease(int stages) {
 
         defenseIncrease += stages;
-
+        System.out.println(name +"'s defense increased by "+stages+" stages!");
     }
 
     public void setSpecialDefenseIncrease(int stages) {
         specialDefenseIncrease += stages;
-
+        System.out.println(name +"'s special defense increased by "+stages+" stage!");
     }
 
     public void setSpeedIncrease(int stages) {
 
         speedIncrease += stages;
+        System.out.println(name +"'s speed increased by "+stages+" stages!");
 
     }
 
     public void setAttackDecrease(int stages) {
         attackDecrease += stages;
+        System.out.println(name +"'s attack decreased by "+stages+" stages...");
 
     }
 
     public void setSpecialAttackDecrease(int stages) {
         specialAttackDecrease += stages;
-
+        System.out.println(name +"'s special attack decreased by "+stages+" stages...");
     }
 
     public void setDefenseDecrease(int stages) {
         defenseDecrease += stages;
-
+        System.out.println(name +"'s defense decreased by "+stages+" stages...");
     }
 
     public void setSpecialDefenseDecrease(int stages) {
         specialDefenseDecrease += stages;
-
+        System.out.println(name +"'s special defense decreased by "+stages+" stages...");
     }
 
     public void setSpeedDecrease(int stages) {
 
         speedDecrease += stages;
-
+        System.out.println(name +"'s speed decreased by "+stages+" stages...");
     }
-    public void beParalyzed(BasicPokemon target)
-    {
-        if(target.getType1().equalsIgnoreCase("Electric") || target.getType2().equalsIgnoreCase("Electric"))
-        {
-            return;
-        }
-    }
-
-    public void bePoisoned(BasicPokemon target)
-    {
-        if(target.getType1().equalsIgnoreCase("Poison") || target.getType2().equalsIgnoreCase("Posion") || target.getType1().equalsIgnoreCase("Steel") || target.getType2().equalsIgnoreCase("Steel"))
-        {
-            return;
-        }
-        health = (int)(health - baseHealth * 1.0/8);
-    }
-
-    public void beBurned(BasicPokemon target)
-    {
-        if(target.getType1().equalsIgnoreCase("Fire") || target.getType2().equalsIgnoreCase("Fire"))
-        {
-            return;
-        }
-        health = (int)(health - baseHealth * 0.06);
-    }
-    public void beFrozen(BasicPokemon target)
-    {
-        if(target.getType1().equalsIgnoreCase("Ice") || target.getType2().equalsIgnoreCase("Ice"))
-        {
-            return;
-        }
-        int unfreeze = (int)(Math.random()*5);
-        if(unfreeze == 0)
-        {
-            return;
-        }
-        else
-        {
-            moves = null;
-        }
-    }
-
-    public void beFlinched(BasicPokemon target)
-    {
-        moves = null;
-        return;
-    }
-
-    public void beConfused(BasicPokemon target)
-    {
-        int unflinch = (int)(Math.random()*4);
-        if(unflinch == 0)
-        {
-            return;
-        }
-        int damage = (int)(Math.random()*2);
-        if(damage == 0)
-        {
-            calculator.calculateBasicDamage(this, this, new BasicMove(1));
-            moves = null;
-        }
-    }
+//    public void beParalyzed(BasicPokemon target)
+//    {
+//        if(target.getType1().equalsIgnoreCase("Electric") || target.getType2().equalsIgnoreCase("Electric"))
+//        {
+//            return;
+//        }
+//    }
+//
+//    public void bePoisoned(BasicPokemon target)
+//    {
+//        if(target.getType1().equalsIgnoreCase("Poison") || target.getType2().equalsIgnoreCase("Posion") || target.getType1().equalsIgnoreCase("Steel") || target.getType2().equalsIgnoreCase("Steel"))
+//        {
+//            return;
+//        }
+//        health = (int)(health - baseHealth * 1.0/8);
+//    }
+//
+//    public void beBurned(BasicPokemon target)
+//    {
+//        if(target.getType1().equalsIgnoreCase("Fire") || target.getType2().equalsIgnoreCase("Fire"))
+//        {
+//            return;
+//        }
+//        health = (int)(health - baseHealth * 0.06);
+//    }
+//    public void beFrozen(BasicPokemon target)
+//    {
+//        if(target.getType1().equalsIgnoreCase("Ice") || target.getType2().equalsIgnoreCase("Ice"))
+//        {
+//            return;
+//        }
+//        int unfreeze = (int)(Math.random()*5);
+//        if(unfreeze == 0)
+//        {
+//            return;
+//        }
+//        else
+//        {
+//            moves = null;
+//        }
+//    }
+//
+//    public void beFlinched(BasicPokemon target)
+//    {
+//        moves = null;
+//        return;
+//    }
+//
+//    public void beConfused(BasicPokemon target)
+//    {
+//        int unflinch = (int)(Math.random()*4);
+//        if(unflinch == 0)
+//        {
+//            return;
+//        }
+//        int damage = (int)(Math.random()*2);
+//        if(damage == 0)
+//        {
+//            calculator.calculateBasicDamage(this, this, new BasicMove(1));
+//            moves = null;
+//        }
+//    }
     // public String getStatus() {
 //        return status;
 //    }

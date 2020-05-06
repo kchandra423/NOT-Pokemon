@@ -3,6 +3,7 @@ import java.nio.file.Files;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 
 public class BasicMove {
     // Num, accuracy, power, category, desc, name, pp , priority, flags, chance, self, boosts,
@@ -17,15 +18,16 @@ public class BasicMove {
     int pp;
     int priority;
     String flags;
-    private int chance;
-    private boolean self;
-    private String boosts;
-    private double critical;
-    private Ratio drain;
-    private Ratio heal;
-    private String status;
-    private String target;
-    private String type;
+    int chance;
+boolean self;
+    String boosts;
+ double critical;
+  Ratio drain;
+    Ratio heal;
+  String status;
+boolean target;
+  String type;
+  HashMap<String,Object> stats=new HashMap<String, Object>();
 //
     // private String status;
 //    private int statusChance;
@@ -85,12 +87,15 @@ public class BasicMove {
         }
         String[] splittedCopy;
         splittedCopy = copy.split("\n");
-        String stats = splittedCopy[moveNumber - 1];
-        String[] s = stats.split("#");
+        String stopdoingthat = splittedCopy[moveNumber - 1];
+        String[] s = stopdoingthat.split("#");
         moveNumber = Integer.parseInt(s[0]);
         // Num, accuracy, power, category, desc, name, pp , priority, flags, chance, self, boosts,
         // crit ratio, drain, heal,status,target, type
-        accuracy = (s[1].equalsIgnoreCase("true")) ? 100 : Integer.parseInt(s[1]);
+//        for(int i = 0;i<s.length;i++) {
+//            System.out.println(s[i]);
+//        }
+        accuracy = (s[1].equalsIgnoreCase("true")) ? 101 : Integer.parseInt(s[1]);
         basePower = Integer.parseInt(s[2]);
         category = s[3];
         description = s[4];
@@ -122,8 +127,16 @@ public class BasicMove {
             heal = new Ratio(first, second);
         }
         status = s[15];
-        target = s[16];
+        target = (s[16].equalsIgnoreCase("null")) ? false : true;
         type = s[17];
+//        stats.put("accuracy",accuracy);
+//        stats.put("basePower",basePower);
+//        stats.put("category",category);
+//        stats.put("description",description);
+//        stats.put("name",moveName);
+//        stats.put("pp",pp);
+//        stats.put("priority",priority);
+//        stats.put("flags",flags);
 
 //        for(int i =0;i<s.length;i++){
 //

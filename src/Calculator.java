@@ -59,8 +59,20 @@ public class Calculator {
 //    }
         public int calculateBasicDamage(BasicPokemon user, BasicPokemon target,BasicMove move){
         //code way to calculate damage
-        int damage=0;
+            if(move.accuracy==101){
+
+            }
+            else if(Math.random()>(double)move.accuracy/100){
+                System.out.println(target.getName()+" evaded the attack!");
+                return 0;
+
+            }
+            if(move.target==true){
+                target=user;
+            }
+            int damage=0;
         int attack,defense,power,moveType,defenseType1,defenseType2,userType1,userType2;
+        BasicPokemon boostsTarget;
     if(move.category.equalsIgnoreCase("Physical")) {
          attack = user.getAttack();
                  defense = target.getDefense();
@@ -82,19 +94,297 @@ public class Calculator {
                 userType1 = getIntFromType(user.getType1());
                  userType2 = getIntFromType(user.getType2());
     }
-    else{
+    else {
+        if (move.self == true) {
+            boostsTarget = user;
+        } else {
+            boostsTarget = target;
+        }
+        if (!(move.boosts.equalsIgnoreCase("null"))) {
+            if (move.boosts.contains("atk")) {
+                String attackChange = move.boosts.substring(move.boosts.indexOf("atk") + 5, move.boosts.indexOf(",", move.boosts.indexOf("atk")));
+                int attackChangeNum = 0;
+                System.out.println(attackChange);
+                try {
+                    attackChangeNum = Integer.parseInt(attackChange);
+                } catch (Exception e) {
+                    System.out.println("There was a problem trying to parse the attack change to an integer");
+                    e.printStackTrace();
+                }
+                if (attackChangeNum < 0) {
+                    boostsTarget.setAttackDecrease(Math.abs(attackChangeNum));
+                } else if (attackChangeNum > 0) {
+                    boostsTarget.setAttackIncrease(attackChangeNum);
+                } else {
+                    System.out.println("Something went wrong while setting the attack stat changes");
+                }
+            }
+            if (move.boosts.contains("def")) {
+                String defenseChange = move.boosts.substring(move.boosts.indexOf("def") + 5, move.boosts.indexOf(",", move.boosts.indexOf("def")));
+                int defenseChangeNum = 0;
+                try {
+                    defenseChangeNum = Integer.parseInt(defenseChange);
+                } catch (Exception e) {
+                    System.out.println("There was a problem trying to parse the defense change to an integer");
+                    e.printStackTrace();
+                }
+                if (defenseChangeNum < 0) {
+                    boostsTarget.setDefenseDecrease(Math.abs(defenseChangeNum));
+                } else if (defenseChangeNum > 0) {
+                    boostsTarget.setDefenseIncrease(defenseChangeNum);
+                } else {
+                    System.out.println("Something went wrong while setting the defense stat changes");
+                }
+            }
+            if (move.boosts.contains("spe")) {
+                String speedChange = move.boosts.substring(move.boosts.indexOf("spe") + 5, move.boosts.indexOf(",", move.boosts.indexOf("spe")));
+                int speedChangeNum = 0;
+                try {
+                    speedChangeNum = Integer.parseInt(speedChange);
+                } catch (Exception e) {
+                    System.out.println("There was a problem trying to parse the speed change to an integer");
+                    e.printStackTrace();
+                }
+                if (speedChangeNum < 0) {
+                    boostsTarget.setSpeedDecrease(Math.abs(speedChangeNum));
+                } else if (speedChangeNum > 0) {
+                    boostsTarget.setSpeedIncrease(speedChangeNum);
+                } else {
+                    System.out.println("Something went wrong while setting the speed stat changes");
+                }
+            }
+            if (move.boosts.contains("spd")) {
+
+                String specialDefenseChange = move.boosts.substring(move.boosts.indexOf("spd") + 5, move.boosts.indexOf(",", move.boosts.indexOf("spd")));
+                int specialDefenseChangeNum = 0;
+                try {
+                    specialDefenseChangeNum = Integer.parseInt(specialDefenseChange);
+                } catch (Exception e) {
+                    System.out.println("There was a problem trying to parse the specialDefense change to an integer");
+                    e.printStackTrace();
+                }
+                if (specialDefenseChangeNum < 0) {
+                    boostsTarget.setSpecialDefenseDecrease(Math.abs(specialDefenseChangeNum));
+                } else if (specialDefenseChangeNum > 0) {
+                    boostsTarget.setSpecialDefenseIncrease(specialDefenseChangeNum);
+                } else {
+                    System.out.println("Something went wrong while setting the specialDefense stat changes");
+                }
+            }
+
+            if (move.boosts.contains("spa")) {
+
+                String specialAttackChange = move.boosts.substring(move.boosts.indexOf("spa") + 5, move.boosts.indexOf(",", move.boosts.indexOf("spa")));
+                int specialAttackChangeNum = 0;
+                try {
+                    specialAttackChangeNum = Integer.parseInt(specialAttackChange);
+                } catch (Exception e) {
+                    System.out.println("There was a problem trying to parse the specialAttack change to an integer");
+                    e.printStackTrace();
+                }
+                if (specialAttackChangeNum < 0) {
+                    boostsTarget.setSpecialAttackDecrease(Math.abs(specialAttackChangeNum));
+                } else if (specialAttackChangeNum > 0) {
+                    boostsTarget.setSpecialAttackIncrease(specialAttackChangeNum);
+                } else {
+                    System.out.println("Something went wrong while setting the specialAttack stat changes");
+                }
+            }
+            if (move.status.equalsIgnoreCase("par") &&
+                    (target.getType1().equalsIgnoreCase("Electric") || target.getType2().equalsIgnoreCase("Electric"))) {
+
+            } else if (move.status.equalsIgnoreCase("brn") &&
+                    (target.getType1().equalsIgnoreCase("Fire") || target.getType2().equalsIgnoreCase("Fire"))) {
+
+            } else if (move.status.equalsIgnoreCase("frz") &&
+                    (target.getType1().equalsIgnoreCase("Ice") || target.getType2().equalsIgnoreCase("Ice"))) {
+
+            } else if (move.status.equalsIgnoreCase("psn") &&
+                    (target.getType1().equalsIgnoreCase("Poison") || target.getType2().equalsIgnoreCase("Poison"))) {
+
+            } else if (!(move.status.equalsIgnoreCase("null"))) {
+                if (Math.random() <= (double) move.chance / 100 && (boostsTarget.status.equalsIgnoreCase("") || boostsTarget.status.equalsIgnoreCase("null"))) {
+                    boostsTarget.status = move.status;
+                }
+            }
+
+        }
         return 0;
     }
+    if(move.self==true){
+        boostsTarget=user;
+    }
+    else{
+        boostsTarget=target;
+    }
 
-            damage=(int)((((200/5+2)*power*attack/defense)/50+2)*typeModifier(moveType,defenseType1,defenseType2)* ThreadLocalRandom.current().nextDouble(.85,1.01)
-            );
+    if (move.status.equalsIgnoreCase("par")&&
+            (target.getType1().equalsIgnoreCase("Electric")||target.getType2().equalsIgnoreCase("Electric"))){
+
+    }
+    else if (move.status.equalsIgnoreCase("brn")&&
+                    (target.getType1().equalsIgnoreCase("Fire")||target.getType2().equalsIgnoreCase("Fire"))){
+
+            }
+    else if (move.status.equalsIgnoreCase("frz")&&
+            (target.getType1().equalsIgnoreCase("Ice")||target.getType2().equalsIgnoreCase("Ice"))){
+
+    }
+    else if (move.status.equalsIgnoreCase("psn")&&
+            (target.getType1().equalsIgnoreCase("Poison")||target.getType2().equalsIgnoreCase("Poison"))){
+
+    }
+    else if(!(move.status.equalsIgnoreCase("null"))){
+        if(Math.random()<=(double)move.chance/100&&(boostsTarget.status.equalsIgnoreCase("")||boostsTarget.status.equalsIgnoreCase("null"))){
+            boostsTarget.status=move.status;
+        }
+    }
+    if(!(move.boosts.equalsIgnoreCase("null"))){
+        if (move.boosts.contains("atk")){
+            String attackChange = move.boosts.substring(move.boosts.indexOf("atk")+5,move.boosts.indexOf(",",move.boosts.indexOf("atk")));
+            int attackChangeNum=0;
+            try{
+                attackChangeNum=Integer.parseInt(attackChange);
+            }
+            catch(Exception e){
+                System.out.println("There was a problem trying to parse the attack change to an integer");
+                e.printStackTrace();
+            }
+            if(attackChangeNum<0){
+                boostsTarget.setAttackDecrease(Math.abs(attackChangeNum));
+            }
+            else if (attackChangeNum>0){
+                boostsTarget.setAttackIncrease(attackChangeNum);
+            }
+            else{
+                System.out.println("Something went wrong while setting the attack stat changes");
+            }
+        }
+        if (move.boosts.contains("def")){
+            String defenseChange = move.boosts.substring(move.boosts.indexOf("def")+5,move.boosts.indexOf(",",move.boosts.indexOf("def")));
+            int defenseChangeNum=0;
+            try{
+                defenseChangeNum=Integer.parseInt(defenseChange);
+            }
+            catch(Exception e){
+                System.out.println("There was a problem trying to parse the defense change to an integer");
+                e.printStackTrace();
+            }
+            if(defenseChangeNum<0){
+                boostsTarget.setDefenseDecrease(Math.abs(defenseChangeNum));
+            }
+            else if (defenseChangeNum>0){
+                boostsTarget.setDefenseIncrease(defenseChangeNum);
+            }
+            else{
+                System.out.println("Something went wrong while setting the defense stat changes");
+            }
+        }
+        if (move.boosts.contains("spe")){
+            String speedChange = move.boosts.substring(move.boosts.indexOf("spe")+5,move.boosts.indexOf(",",move.boosts.indexOf("spe")));
+            int speedChangeNum=0;
+            try{
+                speedChangeNum=Integer.parseInt(speedChange);
+            }
+            catch(Exception e){
+                System.out.println("There was a problem trying to parse the speed change to an integer");
+                e.printStackTrace();
+            }
+            if(speedChangeNum<0){
+                boostsTarget.setSpeedDecrease(Math.abs(speedChangeNum));
+            }
+            else if (speedChangeNum>0){
+                boostsTarget.setSpeedIncrease(speedChangeNum);
+            }
+            else{
+                System.out.println("Something went wrong while setting the speed stat changes");
+            }
+        }
+        if (move.boosts.contains("spd")){
+
+                String specialDefenseChange = move.boosts.substring(move.boosts.indexOf("spd")+5,move.boosts.indexOf(",",move.boosts.indexOf("spd")));
+                int specialDefenseChangeNum=0;
+                try{
+                    specialDefenseChangeNum=Integer.parseInt(specialDefenseChange);
+                }
+                catch(Exception e){
+                    System.out.println("There was a problem trying to parse the specialDefense change to an integer");
+                    e.printStackTrace();
+                }
+                if(specialDefenseChangeNum<0){
+                    boostsTarget.setSpecialDefenseDecrease(Math.abs(specialDefenseChangeNum));
+                }
+                else if (specialDefenseChangeNum>0){
+                    boostsTarget.setSpecialDefenseIncrease(specialDefenseChangeNum);
+                }
+                else{
+                    System.out.println("Something went wrong while setting the specialDefense stat changes");
+                }
+            }
+
+        if (move.boosts.contains("spa")){
+
+                String specialAttackChange = move.boosts.substring(move.boosts.indexOf("spa")+5,move.boosts.indexOf(",",move.boosts.indexOf("spa")));
+        int specialAttackChangeNum=0;
+        try{
+            specialAttackChangeNum=Integer.parseInt(specialAttackChange);
+        }
+        catch(Exception e){
+            System.out.println("There was a problem trying to parse the specialAttack change to an integer");
+            e.printStackTrace();
+        }
+        if(specialAttackChangeNum<0){
+            boostsTarget.setSpecialAttackDecrease(Math.abs(specialAttackChangeNum));
+        }
+        else if (specialAttackChangeNum>0){
+            boostsTarget.setSpecialAttackIncrease(specialAttackChangeNum);
+        }
+        else{
+            System.out.println("Something went wrong while setting the specialAttack stat changes");
+        }
+    }
+
+    }
+
+    damage=(int) (((((((200 / 5) + 2) * power * attack) / defense) / 50) + 2) * typeModifier(moveType, defenseType1, defenseType2) * ThreadLocalRandom.current().nextDouble(.85, 1.01)
+    );
 
 
         if(userType1==moveType||userType2==moveType){
             damage=(int)(damage*1.5);
         }
-        if(Math.random()<0.04){
+
+        if(Math.random()<0.083&&move.critical==0){
+            damage*=1.5;
+            if(user.status.equalsIgnoreCase("brn")){
             damage*=2;
+        }
+            System.out.println(user.getName()+" scored a critical hit!");
+
+        }
+        else if(Math.random()<0.25&&move.critical==1){
+            damage*=1.5;
+            if(user.status.equalsIgnoreCase("brn")){
+                damage*=2;
+            }
+            System.out.println(user.getName()+" scored a critical hit!");
+
+        }
+        else if(Math.random()<=1&&move.critical==2){//only because we assume they have max affection
+            damage*=1.5;
+            if(user.status.equalsIgnoreCase("brn")){
+                damage*=2;
+            }
+
+            System.out.println(user.getName()+" scored a critical hit!");
+        }
+        else if(move.critical>=3){
+            damage*=1.5;
+            if(user.status.equalsIgnoreCase("brn")){
+                damage*=2;
+            }
+            System.out.println(user.getName()+" scored a critical hit!");
+
         }
         return (int)(damage/4.61538461538*3);
                 }
