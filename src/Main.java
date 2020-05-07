@@ -36,7 +36,7 @@ public class Main {
 
         ez.print("P1) Select your first pokemon's dex number");
         p1mons[0]=new BasicPokemon(kboard.nextInt());
-        System.out.println(calc.hasMove(p1mons[0],new BasicMove(512)));
+
         ez.print("P1) Select your second pokemon's dex number");
         p1mons[1]=new BasicPokemon(kboard.nextInt());
         ez.print("P1) Select your third pokemon's dex number");
