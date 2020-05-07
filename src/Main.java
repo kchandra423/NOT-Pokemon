@@ -11,18 +11,18 @@ public class Main {
     public static int P2numberOfFaintedMons=0;
 
     public static void main (String[] args) {
-//    ReadFile read = new ReadFile();
-//        String copy = "something went wrong; ";
-//        try {
-////			copy = Files.readString(Paths.get("Stats.txt"));
-//            byte[] file = Files.readAllBytes(Paths.get("ShowdownMovesets.txt"));
-//            copy = new String(file);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    System.out.println(
+    ReadFile read = new ReadFile();
+        String copy = "something went wrong; ";
+        try {
+//			copy = Files.readString(Paths.get("Stats.txt"));
+            byte[] file = Files.readAllBytes(Paths.get("ShowdownLearnsets.txt"));
+            copy = new String(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    System.out.println(
 //            read.orderMoves(
-//            read.formatShowDownMovesets(copy)));
+            (read.formatShowDownLearnSets(copy).replace("\t","")));
 
         EaseOfUse ez=new EaseOfUse();
         Scanner kboard=new Scanner(System.in);
