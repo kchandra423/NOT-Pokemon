@@ -10,7 +10,7 @@ public class ReadFile {
         String[] chunks;
         chunks = s.split("ENDLINE");
         String[] lines;
-        String[] currentChunksLines = new String[18];
+        String[] currentChunksLines = new String[19];
         String currentLine = "";
         for (int i = 0; i < chunks.length; i++) {
             String chunk = chunks[i];
@@ -73,7 +73,7 @@ public class ReadFile {
 
                     currentChunksLines[17] = currentLine.substring
                             (currentLine.indexOf("type: ") + 6, currentLine.indexOf(","))
-                            + "\n";
+                            + "#";
                 } else if (currentLine.contains("\tcritRatio: ")) {
 
                     currentChunksLines[12] = currentLine.substring
@@ -135,7 +135,14 @@ public class ReadFile {
                     currentChunksLines[9] = currentLine.substring
                             (currentLine.indexOf("chance: ") + 8, currentLine.indexOf(","))
                             + "#";
-                } else if (currentLine.indexOf("\tboosts: ") != -1) {
+                }
+            else if (currentLine.contains("\tid: ")) {
+
+                currentChunksLines[18] = currentLine.substring
+                        (currentLine.indexOf("id: ") + 4, currentLine.indexOf(","))
+                        + "\n";
+            }
+                else if (currentLine.indexOf("\tboosts: ") != -1) {
                     currentChunksLines[11] = "";
                     for (int z = 1; !lines[k + z].equalsIgnoreCase("NOTLINEEND"); z++) {
                         currentChunksLines[11] += lines[k + z];
@@ -158,8 +165,8 @@ public class ReadFile {
         }
         return masterString;
     }
-//  0    1        2      3          4     5    6    7         8      9       10     11       12         13    14     15   16     17
-//Num, accuracy, power, category, desc, name, pp , priority, flags, chance, self, boosts, crit ratio, drain, heal,status,target, type,
+//  0    1        2      3          4     5    6    7         8      9       10     11       12         13    14     15   16     17     18
+//Num, accuracy, power, category, desc, name, pp , priority, flags, chance, self, boosts, crit ratio, drain, heal,status,target, type, id
     //self= boosts target self
     // target= everything targets self
 //
@@ -210,6 +217,18 @@ public class ReadFile {
 
             masterString += neu[i] + "\n";
         }
+        return masterString;
+    }
+    public String formatShowDownLearnSets(String s) {
+        String masterString = "";
+        String[] chunks;
+        chunks = s.split("}},");
+        String[] lines;
+
+        String currentLine = "";
+
+
+
         return masterString;
     }
 //        masterString.replace("num: ", "");

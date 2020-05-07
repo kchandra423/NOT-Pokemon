@@ -20,7 +20,9 @@ public class Main {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-//    System.out.println(read.orderMoves(read.formatShowDownMovesets(copy)));
+//    System.out.println(
+//            read.orderMoves(
+//            read.formatShowDownMovesets(copy)));
 
         EaseOfUse ez=new EaseOfUse();
         Scanner kboard=new Scanner(System.in);
