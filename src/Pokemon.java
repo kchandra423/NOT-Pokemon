@@ -12,6 +12,8 @@ public class Pokemon {
     private Move[] moves;
     private String type1;
     private String type2;
+    public int testing = 0;
+    //hello again kumar
     private String status;
     private boolean hasStatus;
     private int attackModifier;
