@@ -4,12 +4,27 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.Scanner;
+import javax.swing.*;
 
 public class Main {
     public static int P1numberOfFaintedMons=0;
     public static int P2numberOfFaintedMons=0;
 
+    public Main() {
+    	JFrame frame = new JFrame();
+    	JPanel panel = new JPanel();
+    	GroupLayout layout = new GroupLayout(panel);
+    	layout.setAutoCreateContainerGaps(true);
+    	layout.setAutoCreateGaps(true);
+    	panel.setLayout(layout);
+    	frame.getContentPane().add(panel);
+    	frame.setBounds(100, 100, 854, 480);
+    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	frame.setTitle("NOT Pokemon");
+    	frame.setVisible(true);
+    }
+    
     public static void main (String[] args) {
 //    ReadFile read = new ReadFile();
 //        String copy = "something went wrong; ";
@@ -22,6 +37,8 @@ public class Main {
 //        }
 //    System.out.println(read.orderMoves(read.formatShowDownMovesets(copy)));
 
+    	new Main();
+    	
         EaseOfUse ez=new EaseOfUse();
         Scanner kboard=new Scanner(System.in);
         Calculator calc=new Calculator();
