@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c409674a-022d-407e-a93f-62a2b7549e75" name="Default Changelist" comment="" />
+    <list default="true" id="c409674a-022d-407e-a93f-62a2b7549e75" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -162,15 +164,19 @@
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state x="0" y="23" width="2864" height="1803" key="dock-window-1/0.23.3840.2057@0.23.3840.2057" timestamp="1587091475779" />
+    <state x="2024" y="694" width="855" height="714" key="find.popup" timestamp="1588829721453">
+      <screen x="0" y="23" width="3840" height="2057" />
+    </state>
+    <state x="2024" y="694" width="855" height="714" key="find.popup/0.23.3840.2057@0.23.3840.2057" timestamp="1588829721453" />
     <state x="1226" y="576" key="new project wizard" timestamp="1587097650922">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state x="1226" y="576" key="new project wizard/0.0.3840.2160@0.23.3840.2057" timestamp="1587097650922" />
     <state x="1226" y="576" key="new project wizard/0.23.3840.2057@0.23.3840.2057" timestamp="1586987751094" />
-    <state x="1035" y="697" width="670" height="676" key="search.everywhere.popup" timestamp="1587196991950">
+    <state x="1035" y="697" width="670" height="676" key="search.everywhere.popup" timestamp="1588829725312">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
-    <state x="1035" y="697" width="670" height="676" key="search.everywhere.popup/0.23.3840.2057@0.23.3840.2057" timestamp="1587196991950" />
+    <state x="1035" y="697" width="670" height="676" key="search.everywhere.popup/0.23.3840.2057@0.23.3840.2057" timestamp="1588829725312" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
