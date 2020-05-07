@@ -27,6 +27,7 @@ boolean self;
   String status;
 boolean target;
   String type;
+  String id;
   HashMap<String,Object> stats=new HashMap<String, Object>();
 //
     // private String status;
@@ -129,6 +130,7 @@ boolean target;
         status = s[15];
         target = (s[16].equalsIgnoreCase("null")) ? false : true;
         type = s[17];
+        id=s[18];
 //        stats.put("accuracy",accuracy);
 //        stats.put("basePower",basePower);
 //        stats.put("category",category);

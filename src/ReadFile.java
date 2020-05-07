@@ -222,11 +222,22 @@ public class ReadFile {
     public String formatShowDownLearnSets(String s) {
         String masterString = "";
         String[] chunks;
-        chunks = s.split("}},");
+        chunks = s.split("\t}},\n");
         String[] lines;
 
         String currentLine = "";
+for(int i=0;i< chunks.length;i++){
+    lines=chunks[i].split("\n");
+//    System.out.println(chunks[i]);
+    for(int k=0;k<lines.length;k++){
+currentLine=lines[k];
+//System.out.println(currentLine);
 
+
+        masterString+=currentLine.substring(0,currentLine.indexOf(":"))+"#";
+    }
+    masterString+="\n";
+}
 
 
         return masterString;

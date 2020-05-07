@@ -30,14 +30,14 @@ public class Main {
 //        String copy = "something went wrong; ";
 //        try {
 ////			copy = Files.readString(Paths.get("Stats.txt"));
-//            byte[] file = Files.readAllBytes(Paths.get("ShowdownMovesets.txt"));
+//            byte[] file = Files.readAllBytes(Paths.get("ShowdownLearnsets.txt"));
 //            copy = new String(file);
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
 //    System.out.println(
-//            read.orderMoves(
-//            read.formatShowDownMovesets(copy)));
+////            read.orderMoves(
+//            (read.formatShowDownLearnSets(copy).replace("\t","")));
 
     	new Main();
     	
@@ -50,8 +50,10 @@ public class Main {
         BasicPokemon[] p1mons=new BasicPokemon[6];
         BasicPokemon[] p2mons=new BasicPokemon[6];
         int[][] givenMoves = new int[6][4];
+
         ez.print("P1) Select your first pokemon's dex number");
         p1mons[0]=new BasicPokemon(kboard.nextInt());
+
         ez.print("P1) Select your second pokemon's dex number");
         p1mons[1]=new BasicPokemon(kboard.nextInt());
         ez.print("P1) Select your third pokemon's dex number");
