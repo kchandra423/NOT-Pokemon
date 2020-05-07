@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Calculator {
@@ -57,6 +60,28 @@ public class Calculator {
 //        //code way to calculate damage
 //
 //    }
+    public boolean hasMove(BasicPokemon mon, BasicMove move){
+        boolean answer =false;
+        String copy = "something went wrong; ";
+        try {
+//			copy = Files.readString(Paths.get("Stats.txt"));
+            byte[] file = Files.readAllBytes(Paths.get("Learnsets.txt"));
+            copy = new String(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String [] lines=copy.split("\n");
+        String currentLine="";
+        for(int i =0;i<lines.length;i++){
+            currentLine=lines[i];
+            if(currentLine.contains(mon.getName().replace(" ","").replace("-","").replace(".","").toLowerCase())){
+                if(currentLine.contains(move.id)){
+                    answer=true;
+                }
+            }
+        }
+        return answer;
+    }
         public int calculateBasicDamage(BasicPokemon user, BasicPokemon target,BasicMove move){
         //code way to calculate damage
             if(move.accuracy==101){
