@@ -35,13 +35,18 @@ public class Main {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-//    System.out.println(read.orderMoves(read.formatShowDownMovesets(copy)));
+//    System.out.println(
+//            read.orderMoves(
+//            read.formatShowDownMovesets(copy)));
 
     	new Main();
     	
         EaseOfUse ez=new EaseOfUse();
         Scanner kboard=new Scanner(System.in);
         Calculator calc=new Calculator();
+        String filepath = "PokemonTitleScreen.wav";
+        PlayMusic musicObject = new PlayMusic();
+        musicObject.playMusic(filepath);
         BasicPokemon[] p1mons=new BasicPokemon[6];
         BasicPokemon[] p2mons=new BasicPokemon[6];
         int[][] givenMoves = new int[6][4];
