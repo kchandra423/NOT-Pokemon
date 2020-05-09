@@ -9,149 +9,216 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.imageio.*;
 
-public class Main implements ActionListener {
+public class Main {
     public static int P1numberOfFaintedMons=0;
     public static int P2numberOfFaintedMons=0;
     
     private JFrame frame;
     private JPanel panel, display, movePanel, switchPanel;
     private JLabel name1, name2, image1, image2, attack, switchOut;
-    private JButton[] moves = new JButton[4];
-    private JButton[] switches = new JButton[6];
+    private JButton[] movesButtons = new JButton[4];
+    private JButton[] switchesButtons = new JButton[6];
     private JTextArea text;
 
     public Main() {
-    	frame = new JFrame();
-    	panel = new JPanel(new GridBagLayout());
-    	display = new JPanel();
-    	movePanel = new JPanel();
-    	switchPanel = new JPanel();
-    	GridBagConstraints c = new GridBagConstraints();
-    	try {
-    		name1 = new JLabel("Pikachu");
-    		name2 = new JLabel("Pikachu");
-			BufferedImage pic = ImageIO.read(new File("Sprites/SpritesBack/pikachu-back.gif"));
-			image1 = new JLabel(new ImageIcon(pic));
-			pic = ImageIO.read(new File("Sprites/SpritesFront/pikachu.gif"));
-			image2 = new JLabel(new ImageIcon(pic));
-			GroupLayout l = new GroupLayout(display);
-			display.setLayout(l);
-			l.setAutoCreateGaps(true);
-			l.setAutoCreateContainerGaps(true);
-			l.setHorizontalGroup(l.createSequentialGroup()
-				.addGroup(l.createParallelGroup()
-					.addGap(400)
-					.addComponent(name1)
-					.addComponent(image1))
-				.addGroup(l.createParallelGroup(GroupLayout.Alignment.TRAILING)
-					.addComponent(name2)
-					.addComponent(image2))
-			);
-			l.setVerticalGroup(l.createSequentialGroup()
-				.addComponent(name2)
-				.addComponent(image2)
-				.addGap(100)
-				.addComponent(name1)
-				.addComponent(image1)
-			);
-			l.linkSize(SwingConstants.HORIZONTAL, name1, name2, image1, image2);
-			l.linkSize(image1, image2);
-			display.setBackground(Color.LIGHT_GRAY);
-			c.gridx = 0;
-			c.gridy = 0;
-			c.gridwidth = 4;
-			c.gridheight = 3;
-			c.weightx = 0.5;
-			c.weighty = 0.0;
-			c.anchor = GridBagConstraints.FIRST_LINE_START;
-			c.fill = GridBagConstraints.HORIZONTAL;
-			c.insets = new Insets(5, 5, 5, 0);
-			panel.add(display, c);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	attack = new JLabel("Attack");
-    	c.gridx = 0;
-    	c.gridy = 3;
-    	c.gridwidth = 4;
-    	c.gridheight = 1;
-    	c.weightx = 0.5;
-		c.weighty = 0.0;
-    	c.anchor = GridBagConstraints.FIRST_LINE_START;
-    	c.fill = GridBagConstraints.HORIZONTAL;
-    	c.insets = new Insets(0, 10, 0, 0);
-    	panel.add(attack, c);
-    	GridLayout l = new GridLayout(1, 4);
-    	movePanel.setLayout(l);
-    	for(int move = 0; move < moves.length; move++) {
-    		moves[move] = new JButton("" + (move+1));
-    		moves[move].addActionListener(this);
-    		movePanel.add(moves[move]);
-    	}
-    	c.gridx = 0;
-    	c.gridy = 4;
-    	c.gridwidth = 4;
-    	c.gridheight = 1;
-    	c.weightx = 0.5;
-		c.weighty = 0.0;
-    	c.anchor = GridBagConstraints.FIRST_LINE_START;
-    	c.fill = GridBagConstraints.HORIZONTAL;
-    	c.insets = new Insets(0, 0, 0, 0);
-    	panel.add(movePanel, c);
-    	switchOut = new JLabel("Switch");
-    	c.gridx = 0;
-    	c.gridy = 5;
-    	c.gridwidth = 4;
-    	c.gridheight = 1;
-    	c.weightx = 0.5;
-		c.weighty = 0.0;
-    	c.anchor = GridBagConstraints.FIRST_LINE_START;
-    	c.fill = GridBagConstraints.HORIZONTAL;
-    	c.insets = new Insets(0, 10, 0, 0);
-    	panel.add(switchOut, c);
-    	l = new GridLayout(1, 6);
-    	switchPanel.setLayout(l);
-    	for(int mon = 0; mon < switches.length; mon++) {
-    		switches[mon] = new JButton("" + (mon+1));
-    		switches[mon].addActionListener(this);
-    		switchPanel.add(switches[mon]);
-    	}
-    	c.gridx = 0;
-    	c.gridy = 6;
-    	c.gridwidth = 4;
-    	c.gridheight = 1;
-    	c.weightx = 0.5;
-		c.weighty = 0.0;
-    	c.anchor = GridBagConstraints.FIRST_LINE_START;
-    	c.fill = GridBagConstraints.HORIZONTAL;
-    	c.insets = new Insets(0, 0, 0, 0);
-    	panel.add(switchPanel, c);
-    	text = new JTextArea(20, 20);
-    	text.setEditable(false);
-    	text.setLineWrap(true);
-    	text.setWrapStyleWord(true);
-    	JScrollPane pane = new JScrollPane(text,
-    			ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-    			ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-    	c.gridx = 4;
-    	c.gridy = 0;
-    	c.gridwidth = 3;
-    	c.gridheight = 7;
-    	c.weightx = 0.5;
-		c.weighty = 0.5;
-    	c.anchor = GridBagConstraints.FIRST_LINE_END;
-    	c.fill = GridBagConstraints.BOTH;
-    	c.insets = new Insets(5, 5, 5, 5);
-    	panel.add(pane, c);
-    	frame.getContentPane().add(panel);
-    	frame.setBounds(100, 100, 800, 600);
-    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	// frame.setResizable(false);
-    	frame.setTitle("NOT Pokemon");
-    	frame.setVisible(true);
+
+            EaseOfUse ez = new EaseOfUse();
+            Scanner kboard = new Scanner(System.in);
+            Calculator calc = new Calculator();
+            String filepath = "PokemonTitleScreen.wav";
+            PlayMusic musicObject = new PlayMusic();
+            musicObject.playMusic(filepath);
+            BasicPokemon[] p1mons = new BasicPokemon[6];
+            BasicPokemon[] p2mons = new BasicPokemon[6];
+            int[][] givenMoves = new int[6][4];
+
+            ez.print("P1) Select your first pokemon's dex number");
+            p1mons[0] = new BasicPokemon(kboard.nextInt());
+
+            ez.print("P1) Select your second pokemon's dex number");
+            p1mons[1] = new BasicPokemon(kboard.nextInt());
+            ez.print("P1) Select your third pokemon's dex number");
+            p1mons[2] = new BasicPokemon(kboard.nextInt());
+            ez.print("P1) Select your fourth pokemon's dex number");
+            p1mons[3] = new BasicPokemon(kboard.nextInt());
+            ez.print("P1) Select your fifth pokemon's dex number");
+            p1mons[4] = new BasicPokemon(kboard.nextInt());
+            ez.print("P1) Select your sixth pokemon's dex number");
+            p1mons[5] = new BasicPokemon(kboard.nextInt());
+
+
+            ez.print("P2) Select your first pokemon's dex number");
+            p2mons[0] = new BasicPokemon(kboard.nextInt());
+            ez.print("P2) Select your second pokemon's dex number");
+            p2mons[1] = new BasicPokemon(kboard.nextInt());
+            ez.print("P2) Select your third pokemon's dex number");
+            p2mons[2] = new BasicPokemon(kboard.nextInt());
+            ez.print("P2) Select your fourth pokemon's dex number");
+            p2mons[3] = new BasicPokemon(kboard.nextInt());
+            ez.print("P2) Select your fifth pokemon's dex number");
+            p2mons[4] = new BasicPokemon(kboard.nextInt());
+            ez.print("P2) Select your sixth pokemon's dex number");
+            p2mons[5] = new BasicPokemon(kboard.nextInt());
+            givenMoves[0] = new int[]{14, 370, 609, 1};
+            givenMoves[1] = new int[]{6, 7, 8, 9};
+            givenMoves[2] = new int[]{10, 11, 12, 13};
+            givenMoves[3] = new int[]{14, 15, 16, 17};
+            givenMoves[4] = new int[]{18, 19, 20, 21};
+            givenMoves[5] = new int[]{22, 23, 24, 25};
+
+            Player p1 = new Player(p1mons, givenMoves);
+            Player p2 = new Player(p2mons, givenMoves, p1);
+            p1.setOpposingPlayer(p2);
+            frame = new JFrame();
+            panel = new JPanel(new GridBagLayout());
+            display = new JPanel();
+            movePanel = new JPanel();
+            switchPanel = new JPanel();
+            GridBagConstraints c = new GridBagConstraints();
+        boolean gameNotOver = true;
+        boolean p1WillSwitch=false;
+        boolean p2WillSwitch=false;
+        int p1SelectedMoveIndex=0;
+        int p2SelectedMoveIndex = 0;
+        int selection;
+        boolean youShallNotPass = true;
+        attack = new JLabel("Attack");
+        c.gridx = 0;
+        c.gridy = 3;
+        c.gridwidth = 4;
+        c.gridheight = 1;
+        c.weightx = 0.5;
+        c.weighty = 0.0;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(0, 10, 0, 0);
+        panel.add(attack, c);
+        GridLayout l = new GridLayout(1, 4);
+        movePanel.setLayout(l);
+        for (int move = 0; move < movesButtons.length; move++) {
+            movesButtons[move] = new JButton("" + (move + 1));
+            movesButtons[move].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                }
+            });
+            movePanel.add(movesButtons[move]);
+        }
+        c.gridx = 0;
+        c.gridy = 4;
+        c.gridwidth = 4;
+        c.gridheight = 1;
+        c.weightx = 0.5;
+        c.weighty = 0.0;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(0, 0, 0, 0);
+        panel.add(movePanel, c);
+        switchOut = new JLabel("Switch");
+        c.gridx = 0;
+        c.gridy = 5;
+        c.gridwidth = 4;
+        c.gridheight = 1;
+        c.weightx = 0.5;
+        c.weighty = 0.0;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(0, 10, 0, 0);
+        panel.add(switchOut, c);
+        l = new GridLayout(1, 6);
+        switchPanel.setLayout(l);
+        for (int mon = 0; mon < switchesButtons.length; mon++) {
+            switchesButtons[mon] = new JButton("" + (mon + 1));
+            switchesButtons[mon].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                }
+            });
+            switchPanel.add(switchesButtons[mon]);
+        }
+        c.gridx = 0;
+        c.gridy = 6;
+        c.gridwidth = 4;
+        c.gridheight = 1;
+        c.weightx = 0.5;
+        c.weighty = 0.0;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(0, 0, 0, 0);
+        panel.add(switchPanel, c);
+        text = new JTextArea(20, 20);
+        text.setEditable(false);
+        text.setLineWrap(true);
+        text.setWrapStyleWord(true);
+        JScrollPane pane = new JScrollPane(text,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        c.gridx = 4;
+        c.gridy = 0;
+        c.gridwidth = 3;
+        c.gridheight = 7;
+        c.weightx = 0.5;
+        c.weighty = 0.5;
+        c.anchor = GridBagConstraints.FIRST_LINE_END;
+        c.fill = GridBagConstraints.BOTH;
+        c.insets = new Insets(5, 5, 5, 5);
+        panel.add(pane, c);
+        frame.getContentPane().add(panel);
+        frame.setBounds(100, 100, 800, 600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.setResizable(false);
+        frame.setTitle("NOT Pokemon");
+        frame.setVisible(true);
+        while (gameNotOver) {
+            try {
+                name1 = new JLabel(p1.currentMon.getName());
+                name2 = new JLabel(p2.currentMon.getName());
+                BufferedImage pic = ImageIO.read(new File("Sprites/SpritesBack/" + p1.currentMon.getID() + "-back.gif"));
+                image1 = new JLabel(new ImageIcon(pic));
+                pic = ImageIO.read(new File("Sprites/SpritesFront/" + p2.currentMon.getID() + ".gif"));
+                image2 = new JLabel(new ImageIcon(pic));
+                GroupLayout l = new GroupLayout(display);
+                display.setLayout(l);
+                l.setAutoCreateGaps(true);
+                l.setAutoCreateContainerGaps(true);
+                l.setHorizontalGroup(l.createSequentialGroup()
+                        .addGroup(l.createParallelGroup()
+                                .addGap(400)
+                                .addComponent(name1)
+                                .addComponent(image1))
+                        .addGroup(l.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                .addComponent(name2)
+                                .addComponent(image2))
+                );
+                l.setVerticalGroup(l.createSequentialGroup()
+                        .addComponent(name2)
+                        .addComponent(image2)
+                        .addGap(100)
+                        .addComponent(name1)
+                        .addComponent(image1)
+                );
+                l.linkSize(SwingConstants.HORIZONTAL, name1, name2, image1, image2);
+                l.linkSize(image1, image2);
+                display.setBackground(Color.LIGHT_GRAY);
+                c.gridx = 0;
+                c.gridy = 0;
+                c.gridwidth = 4;
+                c.gridheight = 3;
+                c.weightx = 0.5;
+                c.weighty = 0.0;
+                c.anchor = GridBagConstraints.FIRST_LINE_START;
+                c.fill = GridBagConstraints.HORIZONTAL;
+                c.insets = new Insets(5, 5, 5, 0);
+                panel.add(display, c);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+        }
     }
-    
     public static void main (String[] args) {
 //    ReadFile read = new ReadFile();
 //        String copy = "something went wrong; ";
@@ -171,51 +238,51 @@ public class Main implements ActionListener {
         EaseOfUse ez=new EaseOfUse();
         Scanner kboard=new Scanner(System.in);
         Calculator calc=new Calculator();
-        String filepath = "PokemonTitleScreen.wav";
-        PlayMusic musicObject = new PlayMusic();
-        musicObject.playMusic(filepath);
-        BasicPokemon[] p1mons=new BasicPokemon[6];
-        BasicPokemon[] p2mons=new BasicPokemon[6];
-        int[][] givenMoves = new int[6][4];
-
-        ez.print("P1) Select your first pokemon's dex number");
-        p1mons[0]=new BasicPokemon(kboard.nextInt());
-
-        ez.print("P1) Select your second pokemon's dex number");
-        p1mons[1]=new BasicPokemon(kboard.nextInt());
-        ez.print("P1) Select your third pokemon's dex number");
-        p1mons[2]=new BasicPokemon(kboard.nextInt());
-        ez.print("P1) Select your fourth pokemon's dex number");
-        p1mons[3]=new BasicPokemon(kboard.nextInt());
-        ez.print("P1) Select your fifth pokemon's dex number");
-        p1mons[4]=new BasicPokemon(kboard.nextInt());
-        ez.print("P1) Select your sixth pokemon's dex number");
-        p1mons[5]=new BasicPokemon(kboard.nextInt());
-
-
-        ez.print("P2) Select your first pokemon's dex number");
-        p2mons[0]=new BasicPokemon(kboard.nextInt());
-        ez.print("P2) Select your second pokemon's dex number");
-        p2mons[1]=new BasicPokemon(kboard.nextInt());
-        ez.print("P2) Select your third pokemon's dex number");
-        p2mons[2]=new BasicPokemon(kboard.nextInt());
-        ez.print("P2) Select your fourth pokemon's dex number");
-        p2mons[3]=new BasicPokemon(kboard.nextInt());
-        ez.print("P2) Select your fifth pokemon's dex number");
-        p2mons[4]=new BasicPokemon(kboard.nextInt());
-        ez.print("P2) Select your sixth pokemon's dex number");
-        p2mons[5]=new BasicPokemon(kboard.nextInt());
-        givenMoves[0]= new int[]{14,370,609,1};
-        givenMoves[1]= new int[]{6,7,8,9};
-        givenMoves[2]= new int[]{10,11,12,13};
-        givenMoves[3]= new int[]{14,15,16,17};
-        givenMoves[4]= new int[]{18,19,20,21};
-        givenMoves[5]= new int[]{22,23,24,25};
-
-        Player p1=new Player(p1mons,givenMoves);
-        Player p2=new Player(p2mons,givenMoves,p1);
-        p1.setOpposingPlayer(p2);
-        System.out.println("The match has begun!");
+//        String filepath = "PokemonTitleScreen.wav";
+//        PlayMusic musicObject = new PlayMusic();
+//        musicObject.playMusic(filepath);
+//        BasicPokemon[] p1mons=new BasicPokemon[6];
+//        BasicPokemon[] p2mons=new BasicPokemon[6];
+//        int[][] givenMoves = new int[6][4];
+//
+//        ez.print("P1) Select your first pokemon's dex number");
+//        p1mons[0]=new BasicPokemon(kboard.nextInt());
+//
+//        ez.print("P1) Select your second pokemon's dex number");
+//        p1mons[1]=new BasicPokemon(kboard.nextInt());
+//        ez.print("P1) Select your third pokemon's dex number");
+//        p1mons[2]=new BasicPokemon(kboard.nextInt());
+//        ez.print("P1) Select your fourth pokemon's dex number");
+//        p1mons[3]=new BasicPokemon(kboard.nextInt());
+//        ez.print("P1) Select your fifth pokemon's dex number");
+//        p1mons[4]=new BasicPokemon(kboard.nextInt());
+//        ez.print("P1) Select your sixth pokemon's dex number");
+//        p1mons[5]=new BasicPokemon(kboard.nextInt());
+//
+//
+//        ez.print("P2) Select your first pokemon's dex number");
+//        p2mons[0]=new BasicPokemon(kboard.nextInt());
+//        ez.print("P2) Select your second pokemon's dex number");
+//        p2mons[1]=new BasicPokemon(kboard.nextInt());
+//        ez.print("P2) Select your third pokemon's dex number");
+//        p2mons[2]=new BasicPokemon(kboard.nextInt());
+//        ez.print("P2) Select your fourth pokemon's dex number");
+//        p2mons[3]=new BasicPokemon(kboard.nextInt());
+//        ez.print("P2) Select your fifth pokemon's dex number");
+//        p2mons[4]=new BasicPokemon(kboard.nextInt());
+//        ez.print("P2) Select your sixth pokemon's dex number");
+//        p2mons[5]=new BasicPokemon(kboard.nextInt());
+//        givenMoves[0]= new int[]{14,370,609,1};
+//        givenMoves[1]= new int[]{6,7,8,9};
+//        givenMoves[2]= new int[]{10,11,12,13};
+//        givenMoves[3]= new int[]{14,15,16,17};
+//        givenMoves[4]= new int[]{18,19,20,21};
+//        givenMoves[5]= new int[]{22,23,24,25};
+//
+//        Player p1=new Player(p1mons,givenMoves);
+//        Player p2=new Player(p2mons,givenMoves,p1);
+//        p1.setOpposingPlayer(p2);
+//        System.out.println("The match has begun!");
         boolean gameNotOver=true;
         while(gameNotOver) {
 
