@@ -1,26 +1,153 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import javax.imageio.*;
 
-public class Main {
+public class Main implements ActionListener {
     public static int P1numberOfFaintedMons=0;
     public static int P2numberOfFaintedMons=0;
+    
+    private JFrame frame;
+    private JPanel panel, display, movePanel, switchPanel;
+    private JLabel name1, name2, image1, image2, attack, switchOut;
+    private JButton[] moves = new JButton[4];
+    private JButton[] switches = new JButton[6];
+    private JTextArea text;
 
     public Main() {
-    	JFrame frame = new JFrame();
-    	JPanel panel = new JPanel();
-    	GroupLayout layout = new GroupLayout(panel);
-    	layout.setAutoCreateContainerGaps(true);
-    	layout.setAutoCreateGaps(true);
-    	panel.setLayout(layout);
+    	frame = new JFrame();
+    	panel = new JPanel(new GridBagLayout());
+    	display = new JPanel();
+    	movePanel = new JPanel();
+    	switchPanel = new JPanel();
+    	GridBagConstraints c = new GridBagConstraints();
+    	try {
+    		name1 = new JLabel("Pikachu");
+    		name2 = new JLabel("Pikachu");
+			BufferedImage pic = ImageIO.read(new File("Sprites/SpritesBack/pikachu-back.gif"));
+			image1 = new JLabel(new ImageIcon(pic));
+			pic = ImageIO.read(new File("Sprites/SpritesFront/pikachu.gif"));
+			image2 = new JLabel(new ImageIcon(pic));
+			GroupLayout l = new GroupLayout(display);
+			display.setLayout(l);
+			l.setAutoCreateGaps(true);
+			l.setAutoCreateContainerGaps(true);
+			l.setHorizontalGroup(l.createSequentialGroup()
+				.addGroup(l.createParallelGroup()
+					.addGap(400)
+					.addComponent(name1)
+					.addComponent(image1))
+				.addGroup(l.createParallelGroup(GroupLayout.Alignment.TRAILING)
+					.addComponent(name2)
+					.addComponent(image2))
+			);
+			l.setVerticalGroup(l.createSequentialGroup()
+				.addComponent(name2)
+				.addComponent(image2)
+				.addGap(100)
+				.addComponent(name1)
+				.addComponent(image1)
+			);
+			l.linkSize(SwingConstants.HORIZONTAL, name1, name2, image1, image2);
+			l.linkSize(image1, image2);
+			display.setBackground(Color.LIGHT_GRAY);
+			c.gridx = 0;
+			c.gridy = 0;
+			c.gridwidth = 4;
+			c.gridheight = 3;
+			c.weightx = 0.5;
+			c.weighty = 0.0;
+			c.anchor = GridBagConstraints.FIRST_LINE_START;
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.insets = new Insets(5, 5, 5, 0);
+			panel.add(display, c);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	attack = new JLabel("Attack");
+    	c.gridx = 0;
+    	c.gridy = 3;
+    	c.gridwidth = 4;
+    	c.gridheight = 1;
+    	c.weightx = 0.5;
+		c.weighty = 0.0;
+    	c.anchor = GridBagConstraints.FIRST_LINE_START;
+    	c.fill = GridBagConstraints.HORIZONTAL;
+    	c.insets = new Insets(0, 10, 0, 0);
+    	panel.add(attack, c);
+    	GridLayout l = new GridLayout(1, 4);
+    	movePanel.setLayout(l);
+    	for(int move = 0; move < moves.length; move++) {
+    		moves[move] = new JButton("" + (move+1));
+    		moves[move].addActionListener(this);
+    		movePanel.add(moves[move]);
+    	}
+    	c.gridx = 0;
+    	c.gridy = 4;
+    	c.gridwidth = 4;
+    	c.gridheight = 1;
+    	c.weightx = 0.5;
+		c.weighty = 0.0;
+    	c.anchor = GridBagConstraints.FIRST_LINE_START;
+    	c.fill = GridBagConstraints.HORIZONTAL;
+    	c.insets = new Insets(0, 0, 0, 0);
+    	panel.add(movePanel, c);
+    	switchOut = new JLabel("Switch");
+    	c.gridx = 0;
+    	c.gridy = 5;
+    	c.gridwidth = 4;
+    	c.gridheight = 1;
+    	c.weightx = 0.5;
+		c.weighty = 0.0;
+    	c.anchor = GridBagConstraints.FIRST_LINE_START;
+    	c.fill = GridBagConstraints.HORIZONTAL;
+    	c.insets = new Insets(0, 10, 0, 0);
+    	panel.add(switchOut, c);
+    	l = new GridLayout(1, 6);
+    	switchPanel.setLayout(l);
+    	for(int mon = 0; mon < switches.length; mon++) {
+    		switches[mon] = new JButton("" + (mon+1));
+    		switches[mon].addActionListener(this);
+    		switchPanel.add(switches[mon]);
+    	}
+    	c.gridx = 0;
+    	c.gridy = 6;
+    	c.gridwidth = 4;
+    	c.gridheight = 1;
+    	c.weightx = 0.5;
+		c.weighty = 0.0;
+    	c.anchor = GridBagConstraints.FIRST_LINE_START;
+    	c.fill = GridBagConstraints.HORIZONTAL;
+    	c.insets = new Insets(0, 0, 0, 0);
+    	panel.add(switchPanel, c);
+    	text = new JTextArea(20, 20);
+    	text.setEditable(false);
+    	text.setLineWrap(true);
+    	text.setWrapStyleWord(true);
+    	JScrollPane pane = new JScrollPane(text,
+    			ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+    			ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    	c.gridx = 4;
+    	c.gridy = 0;
+    	c.gridwidth = 3;
+    	c.gridheight = 7;
+    	c.weightx = 0.5;
+		c.weighty = 0.5;
+    	c.anchor = GridBagConstraints.FIRST_LINE_END;
+    	c.fill = GridBagConstraints.BOTH;
+    	c.insets = new Insets(5, 5, 5, 5);
+    	panel.add(pane, c);
     	frame.getContentPane().add(panel);
-    	frame.setBounds(100, 100, 854, 480);
+    	frame.setBounds(100, 100, 800, 600);
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	// frame.setResizable(false);
     	frame.setTitle("NOT Pokemon");
     	frame.setVisible(true);
     }
@@ -302,6 +429,12 @@ public class Main {
 //        p1.fight();
 //        System.out.println(p2.currentMon);
     }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 }
