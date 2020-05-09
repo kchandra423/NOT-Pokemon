@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c409674a-022d-407e-a93f-62a2b7549e75" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOT Pokemon.iml" beforeDir="false" afterPath="$PROJECT_DIR$/NOT Pokemon.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/BasicPokemon.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NOT Pokemon/BasicPokemon.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NOT Pokemon/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BasicPokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BasicPokemon.java" afterDir="false" />
