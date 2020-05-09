@@ -177,6 +177,9 @@ public class BasicPokemon {
         return health;
     }
 
+    public String getID(){
+        return name.replace(" ","").replace("-","").replace(".","").toLowerCase();
+}
     public int getSpecialDefense() {
         if (specialDefenseDecrease == 0 && specialDefenseIncrease > 0) {// no stat decrease, their is a stat increase
             return (int) (baseSpecialDefense * ((2.0 + specialDefenseIncrease) / 2.0));

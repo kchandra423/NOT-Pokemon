@@ -9,30 +9,78 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.imageio.*;
 
-public class Main implements ActionListener {
+public class Main extends JFrame {
     public static int P1numberOfFaintedMons=0;
     public static int P2numberOfFaintedMons=0;
     
     private JFrame frame;
     private JPanel panel, display, movePanel, switchPanel;
     private JLabel name1, name2, image1, image2, attack, switchOut;
-    private JButton[] moves = new JButton[4];
-    private JButton[] switches = new JButton[6];
+    private JButton[] movesButtons = new JButton[4];
+    private JButton[] switchesButtons = new JButton[6];
     private JTextArea text;
 
     public Main() {
-    	frame = new JFrame();
+
+        EaseOfUse ez=new EaseOfUse();
+        Scanner kboard=new Scanner(System.in);
+        Calculator calc=new Calculator();
+        String filepath = "PokemonTitleScreen.wav";
+        PlayMusic musicObject = new PlayMusic();
+        musicObject.playMusic(filepath);
+        BasicPokemon[] p1mons=new BasicPokemon[6];
+        BasicPokemon[] p2mons=new BasicPokemon[6];
+        int[][] givenMoves = new int[6][4];
+
+        ez.print("P1) Select your first pokemon's dex number");
+        p1mons[0]=new BasicPokemon(kboard.nextInt());
+
+        ez.print("P1) Select your second pokemon's dex number");
+        p1mons[1]=new BasicPokemon(kboard.nextInt());
+        ez.print("P1) Select your third pokemon's dex number");
+        p1mons[2]=new BasicPokemon(kboard.nextInt());
+        ez.print("P1) Select your fourth pokemon's dex number");
+        p1mons[3]=new BasicPokemon(kboard.nextInt());
+        ez.print("P1) Select your fifth pokemon's dex number");
+        p1mons[4]=new BasicPokemon(kboard.nextInt());
+        ez.print("P1) Select your sixth pokemon's dex number");
+        p1mons[5]=new BasicPokemon(kboard.nextInt());
+
+
+        ez.print("P2) Select your first pokemon's dex number");
+        p2mons[0]=new BasicPokemon(kboard.nextInt());
+        ez.print("P2) Select your second pokemon's dex number");
+        p2mons[1]=new BasicPokemon(kboard.nextInt());
+        ez.print("P2) Select your third pokemon's dex number");
+        p2mons[2]=new BasicPokemon(kboard.nextInt());
+        ez.print("P2) Select your fourth pokemon's dex number");
+        p2mons[3]=new BasicPokemon(kboard.nextInt());
+        ez.print("P2) Select your fifth pokemon's dex number");
+        p2mons[4]=new BasicPokemon(kboard.nextInt());
+        ez.print("P2) Select your sixth pokemon's dex number");
+        p2mons[5]=new BasicPokemon(kboard.nextInt());
+        givenMoves[0]= new int[]{14,370,609,1};
+        givenMoves[1]= new int[]{6,7,8,9};
+        givenMoves[2]= new int[]{10,11,12,13};
+        givenMoves[3]= new int[]{14,15,16,17};
+        givenMoves[4]= new int[]{18,19,20,21};
+        givenMoves[5]= new int[]{22,23,24,25};
+
+        Player p1=new Player(p1mons,givenMoves);
+        Player p2=new Player(p2mons,givenMoves,p1);
+        p1.setOpposingPlayer(p2);
+        frame = new JFrame();
     	panel = new JPanel(new GridBagLayout());
     	display = new JPanel();
     	movePanel = new JPanel();
     	switchPanel = new JPanel();
     	GridBagConstraints c = new GridBagConstraints();
     	try {
-    		name1 = new JLabel("Pikachu");
-    		name2 = new JLabel("Pikachu");
-			BufferedImage pic = ImageIO.read(new File("Sprites/SpritesBack/pikachu-back.gif"));
+    		name1 = new JLabel(p1.currentMon.getName());
+    		name2 = new JLabel(p2.currentMon.getName());
+			BufferedImage pic = ImageIO.read(new File("Sprites/SpritesBack/"+p1.currentMon.getID()+"-back.gif"));
 			image1 = new JLabel(new ImageIcon(pic));
-			pic = ImageIO.read(new File("Sprites/SpritesFront/pikachu.gif"));
+			pic = ImageIO.read(new File("Sprites/SpritesFront/"+p2.currentMon.getID()+".gif"));
 			image2 = new JLabel(new ImageIcon(pic));
 			GroupLayout l = new GroupLayout(display);
 			display.setLayout(l);
@@ -86,7 +134,9 @@ public class Main implements ActionListener {
     	movePanel.setLayout(l);
     	for(int move = 0; move < moves.length; move++) {
     		moves[move] = new JButton("" + (move+1));
-    		moves[move].addActionListener(this);
+    		moves[move].addActionListener(){
+
+            }
     		movePanel.add(moves[move]);
     	}
     	c.gridx = 0;
@@ -151,7 +201,7 @@ public class Main implements ActionListener {
     	frame.setTitle("NOT Pokemon");
     	frame.setVisible(true);
     }
-    
+
     public static void main (String[] args) {
 //    ReadFile read = new ReadFile();
 //        String copy = "something went wrong; ";
@@ -167,55 +217,55 @@ public class Main implements ActionListener {
 //            (read.formatShowDownLearnSets(copy).replace("\t","")));
 
     	new Main();
-    	
+
         EaseOfUse ez=new EaseOfUse();
         Scanner kboard=new Scanner(System.in);
         Calculator calc=new Calculator();
-        String filepath = "PokemonTitleScreen.wav";
-        PlayMusic musicObject = new PlayMusic();
-        musicObject.playMusic(filepath);
-        BasicPokemon[] p1mons=new BasicPokemon[6];
-        BasicPokemon[] p2mons=new BasicPokemon[6];
-        int[][] givenMoves = new int[6][4];
-
-        ez.print("P1) Select your first pokemon's dex number");
-        p1mons[0]=new BasicPokemon(kboard.nextInt());
-
-        ez.print("P1) Select your second pokemon's dex number");
-        p1mons[1]=new BasicPokemon(kboard.nextInt());
-        ez.print("P1) Select your third pokemon's dex number");
-        p1mons[2]=new BasicPokemon(kboard.nextInt());
-        ez.print("P1) Select your fourth pokemon's dex number");
-        p1mons[3]=new BasicPokemon(kboard.nextInt());
-        ez.print("P1) Select your fifth pokemon's dex number");
-        p1mons[4]=new BasicPokemon(kboard.nextInt());
-        ez.print("P1) Select your sixth pokemon's dex number");
-        p1mons[5]=new BasicPokemon(kboard.nextInt());
-
-
-        ez.print("P2) Select your first pokemon's dex number");
-        p2mons[0]=new BasicPokemon(kboard.nextInt());
-        ez.print("P2) Select your second pokemon's dex number");
-        p2mons[1]=new BasicPokemon(kboard.nextInt());
-        ez.print("P2) Select your third pokemon's dex number");
-        p2mons[2]=new BasicPokemon(kboard.nextInt());
-        ez.print("P2) Select your fourth pokemon's dex number");
-        p2mons[3]=new BasicPokemon(kboard.nextInt());
-        ez.print("P2) Select your fifth pokemon's dex number");
-        p2mons[4]=new BasicPokemon(kboard.nextInt());
-        ez.print("P2) Select your sixth pokemon's dex number");
-        p2mons[5]=new BasicPokemon(kboard.nextInt());
-        givenMoves[0]= new int[]{14,370,609,1};
-        givenMoves[1]= new int[]{6,7,8,9};
-        givenMoves[2]= new int[]{10,11,12,13};
-        givenMoves[3]= new int[]{14,15,16,17};
-        givenMoves[4]= new int[]{18,19,20,21};
-        givenMoves[5]= new int[]{22,23,24,25};
-
-        Player p1=new Player(p1mons,givenMoves);
-        Player p2=new Player(p2mons,givenMoves,p1);
-        p1.setOpposingPlayer(p2);
-        System.out.println("The match has begun!");
+//        String filepath = "PokemonTitleScreen.wav";
+//        PlayMusic musicObject = new PlayMusic();
+//        musicObject.playMusic(filepath);
+//        BasicPokemon[] p1mons=new BasicPokemon[6];
+//        BasicPokemon[] p2mons=new BasicPokemon[6];
+//        int[][] givenMoves = new int[6][4];
+//
+//        ez.print("P1) Select your first pokemon's dex number");
+//        p1mons[0]=new BasicPokemon(kboard.nextInt());
+//
+//        ez.print("P1) Select your second pokemon's dex number");
+//        p1mons[1]=new BasicPokemon(kboard.nextInt());
+//        ez.print("P1) Select your third pokemon's dex number");
+//        p1mons[2]=new BasicPokemon(kboard.nextInt());
+//        ez.print("P1) Select your fourth pokemon's dex number");
+//        p1mons[3]=new BasicPokemon(kboard.nextInt());
+//        ez.print("P1) Select your fifth pokemon's dex number");
+//        p1mons[4]=new BasicPokemon(kboard.nextInt());
+//        ez.print("P1) Select your sixth pokemon's dex number");
+//        p1mons[5]=new BasicPokemon(kboard.nextInt());
+//
+//
+//        ez.print("P2) Select your first pokemon's dex number");
+//        p2mons[0]=new BasicPokemon(kboard.nextInt());
+//        ez.print("P2) Select your second pokemon's dex number");
+//        p2mons[1]=new BasicPokemon(kboard.nextInt());
+//        ez.print("P2) Select your third pokemon's dex number");
+//        p2mons[2]=new BasicPokemon(kboard.nextInt());
+//        ez.print("P2) Select your fourth pokemon's dex number");
+//        p2mons[3]=new BasicPokemon(kboard.nextInt());
+//        ez.print("P2) Select your fifth pokemon's dex number");
+//        p2mons[4]=new BasicPokemon(kboard.nextInt());
+//        ez.print("P2) Select your sixth pokemon's dex number");
+//        p2mons[5]=new BasicPokemon(kboard.nextInt());
+//        givenMoves[0]= new int[]{14,370,609,1};
+//        givenMoves[1]= new int[]{6,7,8,9};
+//        givenMoves[2]= new int[]{10,11,12,13};
+//        givenMoves[3]= new int[]{14,15,16,17};
+//        givenMoves[4]= new int[]{18,19,20,21};
+//        givenMoves[5]= new int[]{22,23,24,25};
+//
+//        Player p1=new Player(p1mons,givenMoves);
+//        Player p2=new Player(p2mons,givenMoves,p1);
+//        p1.setOpposingPlayer(p2);
+//        System.out.println("The match has begun!");
         boolean gameNotOver=true;
         while(gameNotOver) {
 
@@ -433,7 +483,7 @@ public class Main implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
