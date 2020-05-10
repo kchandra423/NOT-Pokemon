@@ -150,34 +150,42 @@ public class Player {
         }
     }
 
-    public void switchOut(){
+    public void switchOut(BasicPokemon switchIn){
         System.out.println("Choose which pokemon you want to switch in");
-        int y = indexOfMon(currentMon);
-        int x=y;
+//        int y = indexOfMon(currentMon);
+//        int x=y;
+//
+//
+//        boolean z= true;
+//        while(z) {
+//            for (int i = 0; i < 6; i++) {
+//                if (i == y) {
+//                    System.out.println((i + 1) + ")" + pokemon[i].getName() + " (Already in play)");
+//                }
+//                else if(pokemon[i].getHealth()<=0){
+//                    System.out.println((i + 1) + ")" + pokemon[i].getName() + " (Fainted)");
+//                }
+//                else {
+//                    System.out.println((i + 1) + ")" + pokemon[i].getName());
+//                }
+//            }
+//             x = kboard.nextInt() - 1;
+//            if (x==y||x<0||pokemon[x].getHealth()<=0){
+//                ez.print("That wasn't a valid input");
+//            }
+//            else{
+//                z=false;
+//            }
+//        }
+        if(switchIn.getHealth()<=0){
 
-
-        boolean z= true;
-        while(z) {
-            for (int i = 0; i < 6; i++) {
-                if (i == y) {
-                    System.out.println((i + 1) + ")" + pokemon[i].getName() + " (Already in play)");
-                }
-                else if(pokemon[i].getHealth()<=0){
-                    System.out.println((i + 1) + ")" + pokemon[i].getName() + " (Fainted)");
-                }
-                else {
-                    System.out.println((i + 1) + ")" + pokemon[i].getName());
-                }
-            }
-             x = kboard.nextInt() - 1;
-            if (x==y||x<0||pokemon[x].getHealth()<=0){
-                ez.print("That wasn't a valid input");
-            }
-            else{
-                z=false;
-            }
         }
-        currentMon=pokemon[x];
+        else if(switchIn==currentMon){
+
+        }
+        else {
+            currentMon = switchIn;
+        }
     }
     public int indexOfMon(BasicPokemon mon){
         int answer=-1;

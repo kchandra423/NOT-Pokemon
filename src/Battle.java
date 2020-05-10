@@ -15,8 +15,9 @@ public class Battle {
 	private JPanel panel, display, movePanel, switchPanel;
 	private JLabel name1, name2, image1, image2, attack, switchOut;
 	private Button[] moves = new Button[4];
-
+	private int selection;
 	private Button[] switches = new Button[6];
+	private ButtonGroup buttons=new ButtonGroup();
 	private JTextArea text;
 
 
@@ -124,7 +125,7 @@ public class Battle {
     	l = new GridLayout(1, 6);
     	switchPanel.setLayout(l);
     	for(int mon = 0; mon < switches.length; mon++) {
-    		switches[mon] = new Button("Move" + (mon+1),mon+1);
+    		switches[mon] = new Button("Switch" + (mon+1),mon+5);
 //    		switches[mon].addActionListener(new ActionListener() {
 //                @Override
 //                public void actionPerformed(ActionEvent e) {
@@ -238,7 +239,7 @@ public class Battle {
             boolean p2WillSwitch=false;
             int p1SelectedMoveIndex=0;
             int p2SelectedMoveIndex = 0;
-            int moveSelection;
+//		final int[] moveSelection = new int[1];
 
             int switchSelection;
             for(int i=0;i<b.moves.length;i++){
@@ -246,125 +247,144 @@ public class Battle {
             	b.moves[i].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-
-						b.moves[((Button)e.getSource()).num]=((Button)e.getSource());
+//moveSelection[0] =((Button)e.getSource()).num;
+						b.selection=((Button)e.getSource()).num;
+						((Button) e.getSource()).setSelected(false);
+//						((Button) e.getSource()).setContentAreaFilled(false);
 
 					}
 				});
+            	b.buttons.add(b.moves[i]);
 			}
+		for(int i=0;i<b.switches.length;i++){
+
+			b.switches[i].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+//moveSelection[0] =((Button)e.getSource()).num;
+					b.selection=((Button)e.getSource()).num;
+					((Button) e.getSource()).setSelected(false);
+//					((Button) e.getSource()).setContentAreaFilled(false);
+
+				}
+			});
+			b.buttons.add(b.switches[i]);
+		}
 
         while(gameNotOver) {
 
 
             boolean youShallNotPass = true;
-//            while (youShallNotPass) {
+            while (youShallNotPass) {
 //                System.out.println("Player1 what would you like to do\n1)Switch out\n2)Fight");
 //                selection = kboard.nextInt();
-//                if (selection == 1&&P1numberOfFaintedMons<5) {
-//                    p1WillSwitch = true;
-//                    youShallNotPass = false;
-//                } else if (selection == 2) {
+                if (b.selection >=5&&P1numberOfFaintedMons<5) {
+                    p1WillSwitch = true;
+                    youShallNotPass = false;
+                } else if (b.selection <=4 &&b.selection>0) {
 //                    System.out.println("Choose which move you want to use");
 //                    for (int i = 0; i < 4; i++) {
 //                        System.out.println((i + 1) + ")" + p1.currentMon.getMoves()[i]);
 //                    }
-//                    p1SelectedMoveIndex = kboard.nextInt() - 1;
-//                    youShallNotPass = false;
-//                }
-//                else if(selection == 1&&P1numberOfFaintedMons>=5){
-//                    ez.print("You have no available pokemon to switch in, because every other Pokemon has fainted");
-//                }
+                    p1SelectedMoveIndex = b.selection;
+                    youShallNotPass = false;
+                }
+                else
+//                	if(b.selection >=5 &&P1numberOfFaintedMons>=5)
+				{
+                    ez.print("You have no available pokemon to switch in, because every other Pokemon has fainted");
+                }
 //                else {
 //                    System.out.println("That wasn't a valid input");
 //                }
-//            }
-//            youShallNotPass=true;
-//            selection=0;
-//            while(youShallNotPass) {
-//                System.out.println("Player2 what would you like to do\n1)Switch out\n2)Fight");
-//                selection = kboard.nextInt();
-//                if (selection == 1) {
-//                    p2WillSwitch = true;
-//                    youShallNotPass = false;
-//                } else if (selection == 2) {
-//                    System.out.println("Choose which move you want to use");
-//                    for (int i = 0; i < 4; i++) {
-//                        System.out.println((i + 1) + ")" + p2.currentMon.getMoves()[i]);
-//                    }
-//                    p2SelectedMoveIndex = kboard.nextInt() - 1;
-//                    youShallNotPass = false;
-//                }
-//                else if(selection == 1&&P2numberOfFaintedMons>=5){
-//                    ez.print("You have no available pokemon to switch in, because every other Pokemon has fainted");
-//                }else {
-//                    System.out.println("That wasn't a valid input");
-//                }
-//            }
-//
-//            if(p1WillSwitch==true&&p2WillSwitch==true){
-//                if(p1.currentMon.getSpeed()>p2.currentMon.getSpeed()){
-//                    p1.switchOut();
-//                    p2.switchOut();
-//                }
-//                else if(p2.currentMon.getSpeed()>p1.currentMon.getSpeed()){
-//                    p2.switchOut();
-//                    p1.switchOut();
-//                }
-//                else{
-//                    if(Math.random()>0.5){
-//                        p1.switchOut();
-//                        p2.switchOut();
-//                    }
-//                    else{
-//                        p2.switchOut();
-//                        p1.switchOut();
-//                    }
-//                }
-//
-//            }
-//            else if(p1WillSwitch==true){
-//                p1.switchOut();
-//                p2.fight(p2SelectedMoveIndex);
-//            }
-//            else if(p2WillSwitch==true){
-//                p2.switchOut();
-//                p1.fight(p1SelectedMoveIndex);
-//            }
-//            else{
-//
-//                int x=calc.calculateWhoGoesFirst(p1,p2,p1.currentMon.getMoves()[p1SelectedMoveIndex],p2.currentMon.getMoves()[p2SelectedMoveIndex]);
-//                if(x==1){
-//                    p1.fight(p1SelectedMoveIndex);
-//                    p2.fight(p2SelectedMoveIndex);
-//                }
-//                else if(x==2){
-//                    p2.fight(p2SelectedMoveIndex);
-//                    p1.fight(p1SelectedMoveIndex);
-//                }
-//                else{
-//                    while(true) {
-//                        ez.print("Something went wrong");
-//                    }
-//                }
-//            }
-//            if(p1.isDefeated()){
-//                gameNotOver=false;
-//                break;
-//            }
-//            if(p2.isDefeated()){
-//                gameNotOver=false;
-//                break;
-//            }
-//            if(p1.currentMon.getHealth()<=0){
-//                p1.switchOut();
-//                P1numberOfFaintedMons++;
-//            }
-//            if(p2.currentMon.getHealth()<=0){
-//                p2.switchOut();
-//                P2numberOfFaintedMons++;
-//            }
-//        }
+            }
+            youShallNotPass=true;
+            b.selection=0;
+            while(youShallNotPass) {
+                System.out.println("Player2 what would you like to do\n1)Switch out\n2)Fight");
+                b.selection = kboard.nextInt();
+                if (b.selection == 1) {
+                    p2WillSwitch = true;
+                    youShallNotPass = false;
+                } else if (b.selection == 2) {
+                    System.out.println("Choose which move you want to use");
+                    for (int i = 0; i < 4; i++) {
+                        System.out.println((i + 1) + ")" + p2.currentMon.getMoves()[i]);
+                    }
+                    p2SelectedMoveIndex = kboard.nextInt() - 1;
+                    youShallNotPass = false;
+                }
+                else if(b.selection == 1&&P2numberOfFaintedMons>=5){
+                    ez.print("You have no available pokemon to switch in, because every other Pokemon has fainted");
+                }else {
+                    System.out.println("That wasn't a valid input");
+                }
+            }
+            b.selection=0;
+            if(p1WillSwitch==true&&p2WillSwitch==true){
+                if(p1.currentMon.getSpeed()>p2.currentMon.getSpeed()){
+                    p1.switchOut();
+                    p2.switchOut();
+                }
+                else if(p2.currentMon.getSpeed()>p1.currentMon.getSpeed()){
+                    p2.switchOut();
+                    p1.switchOut();
+                }
+                else{
+                    if(Math.random()>0.5){
+                        p1.switchOut();
+                        p2.switchOut();
+                    }
+                    else{
+                        p2.switchOut();
+                        p1.switchOut();
+                    }
+                }
 
+            }
+            else if(p1WillSwitch==true){
+                p1.switchOut();
+                p2.fight(p2SelectedMoveIndex);
+            }
+            else if(p2WillSwitch==true){
+                p2.switchOut();
+                p1.fight(p1SelectedMoveIndex);
+            }
+            else{
+
+                int x=calc.calculateWhoGoesFirst(p1,p2,p1.currentMon.getMoves()[p1SelectedMoveIndex],p2.currentMon.getMoves()[p2SelectedMoveIndex]);
+                if(x==1){
+                    p1.fight(p1SelectedMoveIndex);
+                    p2.fight(p2SelectedMoveIndex);
+                }
+                else if(x==2){
+                    p2.fight(p2SelectedMoveIndex);
+                    p1.fight(p1SelectedMoveIndex);
+                }
+                else{
+                    while(true) {
+                        ez.print("Something went wrong");
+                    }
+                }
+            }
+            if(p1.isDefeated()){
+                gameNotOver=false;
+                break;
+            }
+            if(p2.isDefeated()){
+                gameNotOver=false;
+                break;
+            }
+            if(p1.currentMon.getHealth()<=0){
+                p1.switchOut();
+                P1numberOfFaintedMons++;
+            }
+            if(p2.currentMon.getHealth()<=0){
+                p2.switchOut();
+                P2numberOfFaintedMons++;
+            }
+        }
+//
 
 
 
