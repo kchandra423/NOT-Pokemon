@@ -151,7 +151,7 @@ public class Player {
     }
 
     public void switchOut(BasicPokemon switchIn){
-        System.out.println("Choose which pokemon you want to switch in");
+//        System.out.println("Choose which pokemon you want to switch in");
 //        int y = indexOfMon(currentMon);
 //        int x=y;
 //
@@ -177,15 +177,7 @@ public class Player {
 //                z=false;
 //            }
 //        }
-        if(switchIn.getHealth()<=0){
-
-        }
-        else if(switchIn==currentMon){
-
-        }
-        else {
-            currentMon = switchIn;
-        }
+        currentMon=switchIn;
     }
     public int indexOfMon(BasicPokemon mon){
         int answer=-1;
