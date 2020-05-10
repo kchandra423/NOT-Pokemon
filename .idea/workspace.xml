@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c409674a-022d-407e-a93f-62a2b7549e75" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Battle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Battle.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +24,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
@@ -36,10 +43,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
@@ -48,7 +56,14 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.Battle">
+    <configuration name="Battle" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Battle" />
+      <module name="NOT Pokemon" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Type-Calculator" />
@@ -56,16 +71,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="NOT Pokemon" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Battle" />
         <item itemvalue="Application.Main (1)" />
       </list>
     </recent_temporary>
@@ -112,51 +120,51 @@
       <screen x="0" y="0" width="3840" height="2160" />
     </state>
     <state x="1632" y="762" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/0.0.3840.2160@0.0.3840.2160" timestamp="1586982822785" />
-    <state width="2571" height="456" key="GridCell.Tab.0.bottom" timestamp="1588888261735">
+    <state width="1758" height="746" key="GridCell.Tab.0.bottom" timestamp="1589151240847">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
-    <state width="3798" height="507" key="GridCell.Tab.0.bottom/0.0.3840.2160@0.0.3840.2160" timestamp="1587249451100" />
-    <state width="2571" height="456" key="GridCell.Tab.0.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1588888261735" />
-    <state width="2571" height="456" key="GridCell.Tab.0.center" timestamp="1588888261734">
+    <state width="3798" height="456" key="GridCell.Tab.0.bottom/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286148" />
+    <state width="1758" height="746" key="GridCell.Tab.0.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1589151240847" />
+    <state width="1758" height="746" key="GridCell.Tab.0.center" timestamp="1589151240846">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
-    <state width="3798" height="507" key="GridCell.Tab.0.center/0.0.3840.2160@0.0.3840.2160" timestamp="1587249451099" />
-    <state width="2571" height="456" key="GridCell.Tab.0.center/0.23.3840.2057@0.23.3840.2057" timestamp="1588888261734" />
-    <state width="2571" height="456" key="GridCell.Tab.0.left" timestamp="1588888261734">
+    <state width="3798" height="456" key="GridCell.Tab.0.center/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286147" />
+    <state width="1758" height="746" key="GridCell.Tab.0.center/0.23.3840.2057@0.23.3840.2057" timestamp="1589151240846" />
+    <state width="1758" height="746" key="GridCell.Tab.0.left" timestamp="1589151240846">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
-    <state width="3798" height="507" key="GridCell.Tab.0.left/0.0.3840.2160@0.0.3840.2160" timestamp="1587249451098" />
-    <state width="2571" height="456" key="GridCell.Tab.0.left/0.23.3840.2057@0.23.3840.2057" timestamp="1588888261734" />
-    <state width="2571" height="456" key="GridCell.Tab.0.right" timestamp="1588888261735">
+    <state width="3798" height="456" key="GridCell.Tab.0.left/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286145" />
+    <state width="1758" height="746" key="GridCell.Tab.0.left/0.23.3840.2057@0.23.3840.2057" timestamp="1589151240846" />
+    <state width="1758" height="746" key="GridCell.Tab.0.right" timestamp="1589151240847">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
-    <state width="3798" height="507" key="GridCell.Tab.0.right/0.0.3840.2160@0.0.3840.2160" timestamp="1587249451100" />
-    <state width="2571" height="456" key="GridCell.Tab.0.right/0.23.3840.2057@0.23.3840.2057" timestamp="1588888261735" />
-    <state width="2571" height="746" key="GridCell.Tab.1.bottom" timestamp="1588839072424">
+    <state width="3798" height="456" key="GridCell.Tab.0.right/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286148" />
+    <state width="1758" height="746" key="GridCell.Tab.0.right/0.23.3840.2057@0.23.3840.2057" timestamp="1589151240847" />
+    <state width="1758" height="746" key="GridCell.Tab.1.bottom" timestamp="1589151243195">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
-    <state width="2571" height="746" key="GridCell.Tab.1.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1588839072424" />
-    <state width="2571" height="746" key="GridCell.Tab.1.center" timestamp="1588839072424">
+    <state width="1758" height="746" key="GridCell.Tab.1.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1589151243195" />
+    <state width="1758" height="746" key="GridCell.Tab.1.center" timestamp="1589151243195">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
-    <state width="2571" height="746" key="GridCell.Tab.1.center/0.23.3840.2057@0.23.3840.2057" timestamp="1588839072424" />
-    <state width="2571" height="746" key="GridCell.Tab.1.left" timestamp="1588839072423">
+    <state width="1758" height="746" key="GridCell.Tab.1.center/0.23.3840.2057@0.23.3840.2057" timestamp="1589151243195" />
+    <state width="1758" height="746" key="GridCell.Tab.1.left" timestamp="1589151243194">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
-    <state width="2571" height="746" key="GridCell.Tab.1.left/0.23.3840.2057@0.23.3840.2057" timestamp="1588839072423" />
-    <state width="2571" height="746" key="GridCell.Tab.1.right" timestamp="1588839072424">
+    <state width="1758" height="746" key="GridCell.Tab.1.left/0.23.3840.2057@0.23.3840.2057" timestamp="1589151243194" />
+    <state width="1758" height="746" key="GridCell.Tab.1.right" timestamp="1589151243195">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
-    <state width="2571" height="746" key="GridCell.Tab.1.right/0.23.3840.2057@0.23.3840.2057" timestamp="1588839072424" />
+    <state width="1758" height="746" key="GridCell.Tab.1.right/0.23.3840.2057@0.23.3840.2057" timestamp="1589151243195" />
     <state x="570" y="817" width="994" height="598" key="NewModule_or_Project.wizard" timestamp="1586930440906">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state x="570" y="817" width="994" height="598" key="NewModule_or_Project.wizard/0.23.3840.2057@0.23.3840.2057" timestamp="1586930440906" />
-    <state x="408" y="698" key="SettingsEditor" timestamp="1588712112214">
+    <state x="1294" y="474" key="SettingsEditor" timestamp="1589088326472">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
-    <state x="2248" y="603" key="SettingsEditor/0.0.3840.2160@0.0.3840.2160" timestamp="1588140809499" />
-    <state x="408" y="698" key="SettingsEditor/0.23.3840.2057@0.23.3840.2057" timestamp="1588712112214" />
+    <state x="2248" y="603" key="SettingsEditor/0.0.3840.2160@0.0.3840.2160" timestamp="1589009089999" />
+    <state x="1294" y="474" key="SettingsEditor/0.23.3840.2057@0.23.3840.2057" timestamp="1589088326472" />
     <state x="2068" y="817" key="com.intellij.ide.util.TipDialog" timestamp="1588840101871">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
@@ -183,29 +191,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Calculator.java</url>
-          <line>287</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Calculator.java</url>
-          <line>291</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Calculator.java</url>
-          <line>373</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ReadFile.java</url>
-          <line>236</line>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ReadFile.java</url>
-          <line>231</line>
-          <option name="timeStamp" value="34" />
+          <url>file://$PROJECT_DIR$/src/Battle.java</url>
+          <line>604</line>
+          <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
