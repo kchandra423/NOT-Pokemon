@@ -1,24 +1,24 @@
-import java.io.*;
 import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import javax.imageio.*;
 
 public class Battle {
     public static int P1numberOfFaintedMons=0;
     public static int P2numberOfFaintedMons=0;
 
 	private JFrame frame;
-	private JPanel Mainpanel, leftPanel,rightPanel, leftDisplayPanel,rightDisplayPanel,leftUI,rightUI,
-			leftMovePanel=new JPanel(),rightMovePanel = new JPanel(), leftSwitchPanel= new JPanel(),rightSwitchPanel=new JPanel();
+	private JPanel mainPanel;
+	private JPanel leftPanel, rightPanel, leftDisplayPanel, rightDisplayPanel;
+	private JPanel leftUI, rightUI;
+	private JPanel leftMovePanel=new JPanel(),rightMovePanel = new JPanel();
+	private JPanel leftSwitchPanel= new JPanel(),rightSwitchPanel=new JPanel();
 
-	private JLabel name1, name2, image1, image2, attack = new JLabel("Attack"), switchOut = new JLabel("Switch");
+	private JLabel name1, name2, image1, image2,name3, name4, attack = new JLabel("Attack"), switchOut = new JLabel("Switch");
 	private Button[] leftMoveButtons = new Button[4],rightMoveButtons=new Button[4];
 	private int p1Selection=-1;
-	private int p2Selecion=-1;
+	private int p2Selection =-1;
 	private Button[] leftSwitchButtons = new Button[6],rightSwitchButtons = new Button[6];
 	private ButtonGroup leftButtons=new ButtonGroup(),rightButtons=new ButtonGroup();
 	private JTextArea text;
@@ -38,7 +38,7 @@ public class Battle {
 //    	movePanel = new JPanel();
 //    	switchPanel = new JPanel();
     	GridBagConstraints c = new GridBagConstraints();
-		Mainpanel=new JPanel(new GridLayout(1,2));
+		mainPanel =new JPanel(new GridLayout(1,2));
 
 		leftPanel=new JPanel(new GridBagLayout());
 		rightPanel=new JPanel(new GridBagLayout());
@@ -56,8 +56,8 @@ public class Battle {
 		leftUI.add(leftSwitchPanel);
 		rightUI.add(rightMovePanel);
 		rightUI.add(rightSwitchPanel);
-		Mainpanel.add(leftPanel);
-		Mainpanel.add(rightPanel);
+		mainPanel.add(leftPanel);
+		mainPanel.add(rightPanel);
 
     		name1 = new JLabel(p1.currentMon.getName());
     		name2 = new JLabel(p2.currentMon.getName());
@@ -192,21 +192,71 @@ public class Battle {
 
 
 
+
+
+
+
+
+
+
+    	GridBagConstraints y = new GridBagConstraints();
+		name3 = new JLabel(p2.currentMon.getName());
+		name4 = new JLabel(p1.currentMon.getName());
+		ImageIcon pic2 = new ImageIcon("Sprites/SpritesBack/"+p2.currentMon.getID()+"-back.gif");
+		image1 = new JLabel(pic2);
+		pic2 = new ImageIcon("Sprites/SpritesFront/"+p1.currentMon.getID()+".gif");
+		image2 = new JLabel(pic2);
+		GroupLayout layout4 = new GroupLayout(rightDisplayPanel);
+		rightDisplayPanel.setLayout(layout4);
+		layout4.setAutoCreateGaps(true);
+		layout4.setAutoCreateContainerGaps(true);
+		layout4.setHorizontalGroup(layout4.createSequentialGroup()
+				.addGroup(layout4.createParallelGroup()
+						.addGap(400)
+						.addComponent(name3)
+						.addComponent(image1))
+				.addGroup(layout4.createParallelGroup(GroupLayout.Alignment.TRAILING)
+						.addComponent(name4)
+						.addComponent(image2))
+		);
+		layout4.setVerticalGroup(layout4.createSequentialGroup()
+				.addComponent(name4)
+				.addComponent(image2)
+				.addGap(100)
+				.addComponent(name3)
+				.addComponent(image1)
+		);
+		layout4.linkSize(SwingConstants.HORIZONTAL, name1, name2, image1, image2);
+		layout4.linkSize(image1, image2);
+		rightDisplayPanel.setBackground(Color.LIGHT_GRAY);
+		y.gridx = 0;
+		y.gridy = 0;
+		y.gridwidth = 4;
+		y.gridheight = 3;
+		y.weightx = 0.5;
+		y.weighty = 0.0;
+		y.anchor = GridBagConstraints.FIRST_LINE_START;
+		y.fill = GridBagConstraints.HORIZONTAL;
+		y.insets = new Insets(5, 5, 5, 0);
+		rightPanel.add(rightDisplayPanel, y);
+
+
+
 		attack = new JLabel("Attack");
-		c.gridx = 0;
-		c.gridy = 3;
-		c.gridwidth = 4;
-		c.gridheight = 1;
-		c.weightx = 0.5;
-		c.weighty = 0.0;
-		c.anchor = GridBagConstraints.FIRST_LINE_START;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.insets = new Insets(0, 10, 0, 0);
-		rightPanel.add(attack, c);
+		y.gridx = 0;
+		y.gridy = 3;
+		y.gridwidth = 4;
+		y.gridheight = 1;
+		y.weightx = 0.5;
+		y.weighty = 0.0;
+		y.anchor = GridBagConstraints.FIRST_LINE_START;
+		y.fill = GridBagConstraints.HORIZONTAL;
+		y.insets = new Insets(0, 10, 0, 0);
+		rightPanel.add(attack, y);
 		GridLayout layout3 = new GridLayout(1, 4);
 		rightMovePanel.setLayout(layout3);
 		for(int i = 0; i < rightMoveButtons.length;i++) {
-			rightMoveButtons[i] = new Button(p1.currentMon.moves[i].getMoveName(),i);
+			rightMoveButtons[i] = new Button(p2.currentMon.moves[i].getMoveName(),i);
 //    		rightMoveButtons[i].addActionListener(new ActionListener() {
 //                @Override
 //                public void actionPerformed(ActionEvent e) {
@@ -215,31 +265,31 @@ public class Battle {
 //            });
 			rightMovePanel.add(rightMoveButtons[i]);
 		}
-		c.gridx = 0;
-		c.gridy = 4;
-		c.gridwidth = 4;
-		c.gridheight = 1;
-		c.weightx = 0.5;
-		c.weighty = 0.0;
-		c.anchor = GridBagConstraints.FIRST_LINE_START;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.insets = new Insets(0, 0, 0, 0);
-		rightPanel.add(rightMovePanel, c);
+		y.gridx = 0;
+		y.gridy = 4;
+		y.gridwidth = 4;
+		y.gridheight = 1;
+		y.weightx = 0.5;
+		y.weighty = 0.0;
+		y.anchor = GridBagConstraints.FIRST_LINE_START;
+		y.fill = GridBagConstraints.HORIZONTAL;
+		y.insets = new Insets(0, 0, 0, 0);
+		rightPanel.add(rightMovePanel, y);
 		switchOut = new JLabel("Switch");
-		c.gridx = 0;
-		c.gridy = 5;
-		c.gridwidth = 4;
-		c.gridheight = 1;
-		c.weightx = 0.5;
-		c.weighty = 0.0;
-		c.anchor = GridBagConstraints.FIRST_LINE_START;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.insets = new Insets(0, 10, 0, 0);
-		rightPanel.add(switchOut, c);
+		y.gridx = 0;
+		y.gridy = 5;
+		y.gridwidth = 4;
+		y.gridheight = 1;
+		y.weightx = 0.5;
+		y.weighty = 0.0;
+		y.anchor = GridBagConstraints.FIRST_LINE_START;
+		y.fill = GridBagConstraints.HORIZONTAL;
+		y.insets = new Insets(0, 10, 0, 0);
+		rightPanel.add(switchOut, y);
 		layout3 = new GridLayout(1, 6);
 		rightSwitchPanel.setLayout(layout3);
 		for(int i = 0; i < rightSwitchButtons.length;i++) {
-			rightSwitchButtons[i] = new Button(p1.pokemon[i].getName(),i+4);
+			rightSwitchButtons[i] = new Button(p2.pokemon[i].getName(),i+4);
 //    		switches[mon].addActionListener(new ActionListener() {
 //                @Override
 //                public void actionPerformed(ActionEvent e) {
@@ -248,16 +298,16 @@ public class Battle {
 //            });
 			rightSwitchPanel.add(rightSwitchButtons[i]);
 		}
-		c.gridx = 0;
-		c.gridy = 6;
-		c.gridwidth = 4;
-		c.gridheight = 1;
-		c.weightx = 0.5;
-		c.weighty = 0.0;
-		c.anchor = GridBagConstraints.FIRST_LINE_START;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.insets = new Insets(0, 0, 0, 0);
-		rightPanel.add(rightSwitchPanel, c);
+		y.gridx = 0;
+		y.gridy = 6;
+		y.gridwidth = 4;
+		y.gridheight = 1;
+		y.weightx = 0.5;
+		y.weighty = 0.0;
+		y.anchor = GridBagConstraints.FIRST_LINE_START;
+		y.fill = GridBagConstraints.HORIZONTAL;
+		y.insets = new Insets(0, 0, 0, 0);
+		rightPanel.add(rightSwitchPanel, y);
 		text = new JTextArea(20, 20);
 //    	text.setEditable(false);
 		text.setLineWrap(true);
@@ -265,18 +315,19 @@ public class Battle {
 		JScrollPane pane2 = new JScrollPane(text,
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		c.gridx = 4;
-		c.gridy = 0;
-		c.gridwidth = 3;
-		c.gridheight = 7;
-		c.weightx = 0.5;
-		c.weighty = 0.5;
-		c.anchor = GridBagConstraints.FIRST_LINE_END;
-		c.fill = GridBagConstraints.BOTH;
-		c.insets = new Insets(5, 5, 5, 5);
-		rightPanel.add(pane2, c);
-    	frame.getContentPane().add(leftPanel);
-    	frame.setBounds(100, 100, 1500, 1250);
+		y.gridx = 4;
+		y.gridy = 0;
+		y.gridwidth = 3;
+		y.gridheight = 7;
+		y.weightx = 0.5;
+		y.weighty = 0.5;
+		y.anchor = GridBagConstraints.FIRST_LINE_END;
+		y.fill = GridBagConstraints.BOTH;
+		y.insets = new Insets(5, 5, 5, 5);
+		rightPanel.add(pane2, y);
+    	frame.getContentPane().add(mainPanel);
+//		frame.getContentPane().add(rightPanel);
+    	frame.setBounds(100, 100, 2250, 750);
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	// frame.setResizable(false);
     	frame.setTitle("NOT Pokemon");
@@ -302,7 +353,7 @@ public class Battle {
         BasicPokemon[] p1mons=new BasicPokemon[6];
         BasicPokemon[] p2mons=new BasicPokemon[6];
         int[][] givenMoves = new int[6][4];
-
+		int[][] givenMoves2 = new int[6][4];
 
 
 
@@ -340,9 +391,14 @@ public class Battle {
         givenMoves[3]= new int[]{14,15,16,17};
         givenMoves[4]= new int[]{18,19,20,21};
         givenMoves[5]= new int[]{22,23,24,25};
-
+		givenMoves2[0]=new int[]{22,23,24,25};
+		givenMoves2[1]= new int[]{14,370,609,1};
+		givenMoves2[2]= new int[]{6,7,8,9};
+		givenMoves2[3]= new int[]{10,11,12,13};
+		givenMoves2[4]= new int[]{14,15,16,17};
+		givenMoves2[5]= new int[]{18,19,20,21};
         Player p1=new Player(p1mons,givenMoves);
-        Player p2=new Player(p2mons,givenMoves,p1);
+        Player p2=new Player(p2mons,givenMoves2,p1);
         p1.setOpposingPlayer(p2);
 		Battle b= new Battle(p1,p2);
 //		b.playerPerspective=1;
@@ -358,7 +414,7 @@ public class Battle {
             int p2SwitchIn=-1;
 //		final int[] moveSelection = new int[1];
 
-            int switchSelection;
+//            int switchSelection;
             for(int i=0;i<b.leftMoveButtons.length;i++){
 
             	b.leftMoveButtons[i].addActionListener(new ActionListener() {
@@ -386,6 +442,36 @@ public class Battle {
 				}
 			});
 			b.leftButtons.add(b.leftSwitchButtons[i]);
+		}
+
+
+		for(int i=0;i<b.rightMoveButtons.length;i++){
+
+			b.rightMoveButtons[i].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+//moveSelection[0] =((Button)e.getSource()).num;
+					b.p2Selection =((Button)e.getSource()).num;
+//						((Button) e.getSource()).setEnabled(false);
+//
+
+				}
+			});
+			b.rightButtons.add(b.rightMoveButtons[i]);
+		}
+		for(int i=0;i<b.rightSwitchButtons.length;i++){
+
+			b.rightSwitchButtons[i].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+//moveSelection[0] =((Button)e.getSource()).num;
+					b.p2Selection =((Button)e.getSource()).num;
+//					((Button) e.getSource()).setEnabled(false);
+//
+
+				}
+			});
+			b.rightButtons.add(b.rightSwitchButtons[i]);
 		}
 
         while(gameNotOver) {
@@ -418,50 +504,61 @@ public class Battle {
             }
 
 			youShallNotPass=true;
-            b.p1Selection=-1;
+
             while(youShallNotPass) {
-                System.out.println("Player2 what would you like to do\n1)Switch out\n2)Fight");
-                b.p1Selection = kboard.nextInt();
-                if (b.p1Selection == 1) {
-                    p2WillSwitch = true;
-                    youShallNotPass = false;
-                } else if (b.p1Selection == 2) {
-                    System.out.println("Choose which move you want to use");
-                    for (int i = 0; i < 4; i++) {
-                        System.out.println((i + 1) + ")" + p2.currentMon.getMoves()[i]);
-                    }
-                    p2SelectedMoveIndex = kboard.nextInt() - 1;
-                    youShallNotPass = false;
-                }
-                else if(b.p1Selection == 1&&P2numberOfFaintedMons>=5){
-                    ez.print("You have no available pokemon to switch in, because every other Pokemon has fainted");
-                }else {
-                    System.out.println("That wasn't a valid input");
-                }
+//                System.out.println("Player2 what would you like to do\n1)Switch out\n2)Fight");
+//                b.p1Selection = kboard.nextInt();
+				if (b.p2Selection >=5&&P2numberOfFaintedMons<5) {
+					p2WillSwitch = true;
+					p2SwitchIn=b.p1Selection-4;
+					youShallNotPass = false;
+				} else if (b.p2Selection <=4 &&b.p2Selection>=0) {
+//                    System.out.println("Choose which move you want to use");
+//                    for (int i = 0; i < 4; i++) {
+//                        System.out.println((i + 1) + ")" + p1.currentMon.getMoves()[i]);
+//                    }
+
+					p2SelectedMoveIndex = b.p2Selection;
+					youShallNotPass = false;
+				}
+//                else if(b.selection >=5 &&P1numberOfFaintedMons>=5)
+////				{
+////                    ez.print("You have no available pokemon to switch in, because every other Pokemon has fainted");
+////                }
+				else {
+					System.out.print("");
+				}
             }
-            b.p1Selection=-1;
+
             if(p1WillSwitch && p2WillSwitch){
                 if(p1.currentMon.getSpeed()>p2.currentMon.getSpeed()){
                     p1.switchOut(p1.pokemon[p1SwitchIn]);
                     p2.switchOut(p2.pokemon[p2SwitchIn]);
                     p1WillSwitch=false;
+                    p2WillSwitch=false;
                 }
                 else if(p2.currentMon.getSpeed()>p1.currentMon.getSpeed()){
                     p2.switchOut(p2.pokemon[p2SwitchIn]);
                     p1.switchOut(p1.pokemon[p1SwitchIn]);
                     p1WillSwitch=false;
-                }
+					p2WillSwitch=false;
+
+				}
                 else{
                     if(Math.random()>0.5){
                         p1.switchOut(p1.pokemon[p1SwitchIn]);
                         p2.switchOut(p2.pokemon[p2SwitchIn]);
 						p1WillSwitch=false;
-                    }
+						p2WillSwitch=false;
+
+					}
                     else{
                         p2.switchOut(p2.pokemon[p2SwitchIn]);
                         p1.switchOut(p1.pokemon[p1SwitchIn]);
 						p1WillSwitch=false;
-                    }
+						p2WillSwitch=false;
+
+					}
                 }
 
             }
@@ -469,12 +566,16 @@ public class Battle {
                 p1.switchOut(p1.pokemon[p1SwitchIn]);
                 p2.fight(p2SelectedMoveIndex);
 				p1WillSwitch=false;
-            }
+				p2WillSwitch=false;
+
+			}
             else if(p2WillSwitch){
                 p2.switchOut(p2.pokemon[p2SwitchIn]);
                 p1.fight(p1SelectedMoveIndex);
 				p1WillSwitch=false;
-            }
+				p2WillSwitch=false;
+
+			}
             else{
 
                 int x=calc.calculateWhoGoesFirst(p1,p2,p1.currentMon.getMoves()[p1SelectedMoveIndex],p2.currentMon.getMoves()[p2SelectedMoveIndex]);
@@ -608,7 +709,7 @@ public class Battle {
 //        System.out.println(p2.currentMon);
     }
     public void repaint(Player p1, Player p2) {
-		if (1==1) {
+
 			name1.setText(p1.currentMon.getName());
 
 			name2 .setText(p2.currentMon.getName());
@@ -640,8 +741,57 @@ public class Battle {
 					leftSwitchButtons[i].setEnabled(true);
 				}
 			}
+
+
+
+
+		name3.setText(p2.currentMon.getName());
+
+		name4 .setText(p1.currentMon.getName());
+		pic = null;
+
+		pic = new ImageIcon("Sprites/SpritesBack/" + p2.currentMon.getID() + "-back.gif");
+		image1.setIcon(pic);
+
+
+
+		pic = new ImageIcon("Sprites/SpritesFront/" + p1.currentMon.getID() + ".gif");
+		image2.setIcon(pic);
+
+
+		for (int i =0;i<rightMoveButtons.length;i++){
+			rightMoveButtons[i].setText(p2.currentMon.moves[i].getMoveName());
 		}
-		leftMovePanel.updateUI();
+		for (int i =0;i<rightSwitchButtons.length;i++){
+			if(p1.pokemon[i].getHealth()<=0){
+				rightSwitchButtons[i].setText(p2.pokemon[i].getName()+" (Fainted)");
+				rightSwitchButtons[i].setEnabled(false);
+			}
+			else if(p1.pokemon[i]==p1.currentMon){
+				rightSwitchButtons[i].setText(p2.pokemon[i].getName()+" (Already in Play)");
+				rightSwitchButtons[i].setEnabled(false);
+			}
+			else{
+				rightSwitchButtons[i].setText(p2.pokemon[i].getName());
+				rightSwitchButtons[i].setEnabled(true);
+			}
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		leftPanel.updateUI();
+			rightPanel.updateUI();
 	}
 
 }
