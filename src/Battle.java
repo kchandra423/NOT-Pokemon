@@ -514,7 +514,7 @@ public class Battle {
 //                b.p1Selection = kboard.nextInt();
 				if (b.p2Selection >=5&&P2numberOfFaintedMons<5) {
 					p2WillSwitch = true;
-					p2SwitchIn=b.p1Selection-4;
+					p2SwitchIn=b.p2Selection-4;
 					youShallNotPass = false;
 					b.p2Selection=-1;
 				} else if (b.p2Selection <=4 &&b.p2Selection>=0) {
