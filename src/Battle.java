@@ -15,7 +15,8 @@ public class Battle {
 	private JPanel leftMovePanel=new JPanel(),rightMovePanel = new JPanel();
 	private JPanel leftSwitchPanel= new JPanel(),rightSwitchPanel=new JPanel();
 
-	private JLabel name1, name2, image1, image2,name3, name4, attack = new JLabel("Attack"), switchOut = new JLabel("Switch");
+	private JLabel name1, name2, image1, image2,name3, name4, image3, image4,
+			attack = new JLabel("Attack"), switchOut = new JLabel("Switch");
 	private Button[] leftMoveButtons = new Button[4],rightMoveButtons=new Button[4];
 	private int p1Selection=-1;
 	private int p2Selection =-1;
@@ -203,9 +204,9 @@ public class Battle {
 		name3 = new JLabel(p2.currentMon.getName());
 		name4 = new JLabel(p1.currentMon.getName());
 		ImageIcon pic2 = new ImageIcon("Sprites/SpritesBack/"+p2.currentMon.getID()+"-back.gif");
-		image1 = new JLabel(pic2);
+		image3 = new JLabel(pic2);
 		pic2 = new ImageIcon("Sprites/SpritesFront/"+p1.currentMon.getID()+".gif");
-		image2 = new JLabel(pic2);
+		image4 = new JLabel(pic2);
 		GroupLayout layout4 = new GroupLayout(rightDisplayPanel);
 		rightDisplayPanel.setLayout(layout4);
 		layout4.setAutoCreateGaps(true);
@@ -214,20 +215,20 @@ public class Battle {
 				.addGroup(layout4.createParallelGroup()
 						.addGap(400)
 						.addComponent(name3)
-						.addComponent(image1))
+						.addComponent(image3))
 				.addGroup(layout4.createParallelGroup(GroupLayout.Alignment.TRAILING)
 						.addComponent(name4)
-						.addComponent(image2))
+						.addComponent(image4))
 		);
 		layout4.setVerticalGroup(layout4.createSequentialGroup()
 				.addComponent(name4)
-				.addComponent(image2)
+				.addComponent(image4)
 				.addGap(100)
 				.addComponent(name3)
-				.addComponent(image1)
+				.addComponent(image3)
 		);
-		layout4.linkSize(SwingConstants.HORIZONTAL, name1, name2, image1, image2);
-		layout4.linkSize(image1, image2);
+		layout4.linkSize(SwingConstants.HORIZONTAL, name3, name4, image3, image4);
+		layout4.linkSize(image3, image4);
 		rightDisplayPanel.setBackground(Color.LIGHT_GRAY);
 		y.gridx = 0;
 		y.gridy = 0;
@@ -350,8 +351,8 @@ public class Battle {
         EaseOfUse ez=new EaseOfUse();
         Scanner kboard=new Scanner(System.in);
         Calculator calc=new Calculator();
-        BasicPokemon[] p1mons=new BasicPokemon[6];
-        BasicPokemon[] p2mons=new BasicPokemon[6];
+        Pokemon[] p1mons=new Pokemon[6];
+        Pokemon[] p2mons=new Pokemon[6];
         int[][] givenMoves = new int[6][4];
 		int[][] givenMoves2 = new int[6][4];
 
@@ -359,32 +360,32 @@ public class Battle {
 
 
         ez.print("P1) Select your first pokemon's dex number");
-        p1mons[0]=new BasicPokemon(kboard.nextInt());
+        p1mons[0]=new Pokemon(kboard.nextInt());
 
         ez.print("P1) Select your second pokemon's dex number");
-        p1mons[1]=new BasicPokemon(kboard.nextInt());
+        p1mons[1]=new Pokemon(kboard.nextInt());
         ez.print("P1) Select your third pokemon's dex number");
-        p1mons[2]=new BasicPokemon(kboard.nextInt());
+        p1mons[2]=new Pokemon(kboard.nextInt());
         ez.print("P1) Select your fourth pokemon's dex number");
-        p1mons[3]=new BasicPokemon(kboard.nextInt());
+        p1mons[3]=new Pokemon(kboard.nextInt());
         ez.print("P1) Select your fifth pokemon's dex number");
-        p1mons[4]=new BasicPokemon(kboard.nextInt());
+        p1mons[4]=new Pokemon(kboard.nextInt());
         ez.print("P1) Select your sixth pokemon's dex number");
-        p1mons[5]=new BasicPokemon(kboard.nextInt());
+        p1mons[5]=new Pokemon(kboard.nextInt());
 
 
         ez.print("P2) Select your first pokemon's dex number");
-        p2mons[0]=new BasicPokemon(kboard.nextInt());
+        p2mons[0]=new Pokemon(kboard.nextInt());
         ez.print("P2) Select your second pokemon's dex number");
-        p2mons[1]=new BasicPokemon(kboard.nextInt());
+        p2mons[1]=new Pokemon(kboard.nextInt());
         ez.print("P2) Select your third pokemon's dex number");
-        p2mons[2]=new BasicPokemon(kboard.nextInt());
+        p2mons[2]=new Pokemon(kboard.nextInt());
         ez.print("P2) Select your fourth pokemon's dex number");
-        p2mons[3]=new BasicPokemon(kboard.nextInt());
+        p2mons[3]=new Pokemon(kboard.nextInt());
         ez.print("P2) Select your fifth pokemon's dex number");
-        p2mons[4]=new BasicPokemon(kboard.nextInt());
+        p2mons[4]=new Pokemon(kboard.nextInt());
         ez.print("P2) Select your sixth pokemon's dex number");
-        p2mons[5]=new BasicPokemon(kboard.nextInt());
+        p2mons[5]=new Pokemon(kboard.nextInt());
         givenMoves[0]= new int[]{14,370,609,1};
         givenMoves[1]= new int[]{6,7,8,9};
         givenMoves[2]= new int[]{10,11,12,13};
@@ -412,6 +413,7 @@ public class Battle {
             int p2SelectedMoveIndex=-1;
             int p1SwitchIn=-1;
             int p2SwitchIn=-1;
+            JOptionPane popup=new JOptionPane("All your pokemon have fainted");
 //		final int[] moveSelection = new int[1];
 
 //            int switchSelection;
@@ -485,6 +487,7 @@ public class Battle {
 					p1WillSwitch = true;
 					p1SwitchIn=b.p1Selection-4;
 					youShallNotPass = false;
+					b.p1Selection=-1;
                 } else if (b.p1Selection <=4 &&b.p1Selection>=0) {
 //                    System.out.println("Choose which move you want to use");
 //                    for (int i = 0; i < 4; i++) {
@@ -493,6 +496,7 @@ public class Battle {
 
                     p1SelectedMoveIndex = b.p1Selection;
                     youShallNotPass = false;
+                    b.p1Selection=-1;
                 }
 //                else if(b.selection >=5 &&P1numberOfFaintedMons>=5)
 ////				{
@@ -512,6 +516,7 @@ public class Battle {
 					p2WillSwitch = true;
 					p2SwitchIn=b.p1Selection-4;
 					youShallNotPass = false;
+					b.p2Selection=-1;
 				} else if (b.p2Selection <=4 &&b.p2Selection>=0) {
 //                    System.out.println("Choose which move you want to use");
 //                    for (int i = 0; i < 4; i++) {
@@ -520,6 +525,7 @@ public class Battle {
 
 					p2SelectedMoveIndex = b.p2Selection;
 					youShallNotPass = false;
+					b.p2Selection=-1;
 				}
 //                else if(b.selection >=5 &&P1numberOfFaintedMons>=5)
 ////				{
@@ -529,7 +535,7 @@ public class Battle {
 					System.out.print("");
 				}
             }
-
+			youShallNotPass=true;
             if(p1WillSwitch && p2WillSwitch){
                 if(p1.currentMon.getSpeed()>p2.currentMon.getSpeed()){
                     p1.switchOut(p1.pokemon[p1SwitchIn]);
@@ -562,6 +568,7 @@ public class Battle {
                 }
 
             }
+
             else if(p1WillSwitch){
                 p1.switchOut(p1.pokemon[p1SwitchIn]);
                 p2.fight(p2SelectedMoveIndex);
@@ -602,12 +609,44 @@ public class Battle {
                 break;
             }
             if(p1.currentMon.getHealth()<=0){
-                p1.switchOut(p1.pokemon[p1SwitchIn]);
+                String x="\n";
+                for (int i =0;i<p1.pokemon.length;i++){
+                	if(p1.pokemon[i].getHealth()<=0){
+
+					}
+                	else if(p1.pokemon[i]==p1.currentMon){
+
+					}
+                	else{
+                		x+=""+(i+1)+") "+p1.pokemon[i].getName()+"\n";
+					}
+				}
+            	p1SwitchIn=Integer.parseInt(popup.showInputDialog(b.leftDisplayPanel,"Your current Pokemon fainted." +
+						" The pokemon that you can switch in are"+x+"Please enter the number of the pokemon you want to switch in."));
+				p1.switchOut(p1.pokemon[p1SwitchIn-1]);
                 P1numberOfFaintedMons++;
+                p1SwitchIn=-1;
             }
             if(p2.currentMon.getHealth()<=0){
-                p2.switchOut(p2.pokemon[p2SwitchIn]);
+				String x="\n";
+				for (int i =0;i<p2.pokemon.length;i++){
+					if(p2.pokemon[i].getHealth()<=0){
+
+					}
+					else if(p2.pokemon[i]==p2.currentMon){
+
+					}
+					else{
+						x+=""+(i+1)+") "+p2.pokemon[i].getName()+"\n";
+					}
+				}
+				p2SwitchIn=Integer.parseInt(popup.showInputDialog(b.rightDisplayPanel,"Your current Pokemon fainted." +
+						" The pokemon that you can switch in are"+x+"Please enter the number of the pokemon you want to switch in."));
+
+
+            	p2.switchOut(p2.pokemon[p2SwitchIn-1]);
                 P2numberOfFaintedMons++;
+				p2SwitchIn=-1;
             }
             b.repaint(p1,p2);
         }
@@ -751,12 +790,12 @@ public class Battle {
 		pic = null;
 
 		pic = new ImageIcon("Sprites/SpritesBack/" + p2.currentMon.getID() + "-back.gif");
-		image1.setIcon(pic);
+		image3.setIcon(pic);
 
 
 
 		pic = new ImageIcon("Sprites/SpritesFront/" + p1.currentMon.getID() + ".gif");
-		image2.setIcon(pic);
+		image4.setIcon(pic);
 
 
 		for (int i =0;i<rightMoveButtons.length;i++){

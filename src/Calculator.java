@@ -60,7 +60,7 @@ public class Calculator {
 //        //code way to calculate damage
 //
 //    }
-    public boolean hasMove(BasicPokemon mon, BasicMove move){
+    public boolean hasMove(Pokemon mon, Move move){
         boolean answer =false;
         String copy = "something went wrong; ";
         try {
@@ -82,7 +82,7 @@ public class Calculator {
         }
         return answer;
     }
-        public int calculateBasicDamage(BasicPokemon user, BasicPokemon target,BasicMove move){
+        public int calculateBasicDamage(Pokemon user, Pokemon target, Move move){
         //code way to calculate damage
             if(move.accuracy==101){
 
@@ -97,7 +97,7 @@ public class Calculator {
             }
             int damage=0;
         int attack,defense,power,moveType,defenseType1,defenseType2,userType1,userType2;
-        BasicPokemon boostsTarget;
+        Pokemon boostsTarget;
     if(move.category.equalsIgnoreCase("Physical")) {
          attack = user.getAttack();
                  defense = target.getDefense();
@@ -413,7 +413,7 @@ public class Calculator {
         }
         return (int)(damage/4.61538461538*3);
                 }
-    public int calculateWhoGoesFirst(Player p1, Player p2, BasicMove p1Move,BasicMove p2Move){
+    public int calculateWhoGoesFirst(Player p1, Player p2, Move p1Move, Move p2Move){
         int p1Speed=p1.currentMon.getSpeed();
         int p2Speed=p2.currentMon.getSpeed();
         int p1Priority=p1Move.priority;

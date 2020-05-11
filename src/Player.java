@@ -2,23 +2,23 @@
 import java.util.Scanner;
 
 public class Player {
-    BasicPokemon[] pokemon;
+    Pokemon[] pokemon;
     EaseOfUse ez = new EaseOfUse();
     Calculator calculator= new Calculator();
-    BasicPokemon currentMon;
+    Pokemon currentMon;
     Player opposingPlayer;
     Scanner kboard = new Scanner(System.in);
-    public Player(BasicPokemon[] givenMons,Player other){
+    public Player(Pokemon[] givenMons, Player other){
         pokemon=givenMons;
         opposingPlayer=other;
         currentMon=givenMons[0];
     }
-    public Player(BasicPokemon[] givenMons,int[][] givenMoves,Player other){
+    public Player(Pokemon[] givenMons, int[][] givenMoves, Player other){
         pokemon=givenMons;
-        BasicMove[] hi=new BasicMove[4];
+        Move[] hi=new Move[4];
         for (int i=0;i<6;i++){
             for(int k=0;k<4;k++){
-                pokemon[i].moves[k]=new BasicMove(givenMoves[i][k]);
+                pokemon[i].moves[k]=new Move(givenMoves[i][k]);
 
             }
 
@@ -28,7 +28,7 @@ public class Player {
         opposingPlayer=other;
         currentMon=givenMons[0];
     }
-    public Player(BasicPokemon[] givenMons,int[][] givenMoves){
+    public Player(Pokemon[] givenMons, int[][] givenMoves){
         pokemon=givenMons;
         for (int i=0;i<givenMons.length;i++){
 //            for(int k=0;k<4;i++){
@@ -38,14 +38,14 @@ public class Player {
 
         currentMon=givenMons[0];
     }
-    public Player(BasicPokemon[] givenMons){
+    public Player(Pokemon[] givenMons){
         pokemon=givenMons;
         currentMon=givenMons[0];
 
     }
     public Player(int[] givenMons,int[][] givenMoves,Player other){
         for (int i=0;i<givenMons.length;i++){
-            pokemon[i]=new BasicPokemon(givenMons[i]);
+            pokemon[i]=new Pokemon(givenMons[i]);
         }
         for (int i=0;i<givenMons.length;i++){
 //            for(int k=0;k<pokemon[i].getMoves().length;i++){
@@ -150,7 +150,7 @@ public class Player {
         }
     }
 
-    public void switchOut(BasicPokemon switchIn){
+    public void switchOut(Pokemon switchIn){
 //        System.out.println("Choose which pokemon you want to switch in");
 //        int y = indexOfMon(currentMon);
 //        int x=y;
@@ -179,7 +179,7 @@ public class Player {
 //        }
         currentMon=switchIn;
     }
-    public int indexOfMon(BasicPokemon mon){
+    public int indexOfMon(Pokemon mon){
         int answer=-1;
         for(int i=0;i<pokemon.length;i++)
         {
