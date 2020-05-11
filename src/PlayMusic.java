@@ -25,7 +25,7 @@ public class PlayMusic {
 				
 //				JOptionPane.showMessageDialog(null, "Hit ok to pause");
 //				long clipTimePosition = clip.getMicrosecondPosition();
-//				clip.stop();
+//f				clip.stop();
 //				
 //				JOptionPane.showMessageDialog(null, "Hit ok to unpause");
 //				clip.setMicrosecondPosition(clipTimePosition);
