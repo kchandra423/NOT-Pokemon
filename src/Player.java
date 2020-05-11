@@ -69,6 +69,7 @@ public class Player {
     }
     public void setOpposingPlayer(Player other){
         opposingPlayer=other;
+        other.opposingPlayer = this;
     }
     public void fight(int indexOfMove){
         if(currentMon.getHealth()<=0){}
@@ -150,6 +151,11 @@ public class Player {
         }
     }
 
+    // so I stop getting errors for now
+    public void switchOut() {
+    	
+    }
+    
     public void switchOut(BasicPokemon switchIn){
         System.out.println("Choose which pokemon you want to switch in");
 //        int y = indexOfMon(currentMon);
@@ -199,6 +205,14 @@ public class Player {
         return answer;
     }
 
+    public BasicPokemon[] getPokemon() {
+    	return pokemon;
+    }
+    
+    public BasicPokemon getCurrentMon() {
+    	return currentMon;
+    }
+    
 //    @Override
     public String toString() {
         String answer="Player)\n" +

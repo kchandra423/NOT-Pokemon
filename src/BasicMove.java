@@ -15,6 +15,7 @@ public class BasicMove {
     String category;
     String description;
     private String moveName;
+    int basePP;
     int pp;
     int priority;
     String flags;
@@ -101,7 +102,8 @@ boolean target;
         category = s[3];
         description = s[4];
         moveName = s[5];
-        pp = Integer.parseInt(s[6]);
+        basePP = Integer.parseInt(s[6]);
+        pp = basePP;
         priority = Integer.parseInt(s[7]);
         flags = s[8];
         chance = (s[9].equalsIgnoreCase("null")) ? 0 : Integer.parseInt(s[9]);
