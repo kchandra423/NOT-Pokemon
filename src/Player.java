@@ -2,12 +2,12 @@
 import java.util.Scanner;
 
 public class Player {
-    Pokemon[] pokemon;
-    EaseOfUse ez = new EaseOfUse();
-    Calculator calculator= new Calculator();
-    Pokemon currentMon;
-    Player opposingPlayer;
-    Scanner kboard = new Scanner(System.in);
+    private Pokemon[] pokemon;
+    private EaseOfUse ez = new EaseOfUse();
+    private Calculator calculator= new Calculator();
+    private Pokemon currentMon;
+    private Player opposingPlayer;
+    private Scanner kboard = new Scanner(System.in);
     public Player(Pokemon[] givenMons, Player other){
         pokemon=givenMons;
         opposingPlayer=other;

@@ -401,14 +401,14 @@ public class Calculator {
 	}
 
 	public int calculateWhoGoesFirst(Player p1, Player p2, Move p1Move, Move p2Move) {
-		int p1Speed = p1.currentMon.getSpeed();
-		int p2Speed = p2.currentMon.getSpeed();
+		int p1Speed = p1.getCurrentMon().getSpeed();
+		int p2Speed = p2.getCurrentMon().getSpeed();
 		int p1Priority = p1Move.getPriority();
 		int p2Priority = p2Move.getPriority();
-		if (p1.currentMon.getStatus().equals("para")) {
+		if (p1.getCurrentMon().getStatus().equals("para")) {
 			p1Speed /= 2;
 		}
-		if (p2.currentMon.getStatus().equals("para")) {
+		if (p2.getCurrentMon().getStatus().equals("para")) {
 			p2Speed /= 2;
 		}
 		if (p1Priority > p2Priority) {
