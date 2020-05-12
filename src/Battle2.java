@@ -1,13 +1,9 @@
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import javax.imageio.*;
+import java.awt.event.*;
 
 public class Battle2 {
     public static int P1numberOfFaintedMons=0;
@@ -98,7 +94,7 @@ public class Battle2 {
         Player p2=new Player(p2mons,givenMoves);
         p1.setOpposingPlayer(p2);
         
-        Battle2 b = new Battle2(p1, p2);
+        new Battle2(p1, p2);
         
         System.out.println("The match has begun!");
         boolean gameNotOver=true;
