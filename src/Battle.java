@@ -351,6 +351,9 @@ public class Battle {
         EaseOfUse ez=new EaseOfUse();
         Scanner kboard=new Scanner(System.in);
         Calculator calc=new Calculator();
+        PlayMusic playMusic = new PlayMusic();
+        String music = "PokemonTitleScreen.wav";
+        playMusic.playMusic(music);
         Pokemon[] p1mons=new Pokemon[6];
         Pokemon[] p2mons=new Pokemon[6];
         int[][] givenMoves = new int[6][4];
