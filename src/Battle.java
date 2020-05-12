@@ -20,19 +20,25 @@ public class Battle {
 	private Button[] leftMoveButtons = new Button[4],rightMoveButtons=new Button[4];
 	private int p1Selection=-1;
 	private int p2Selection =-1;
+	private JButton p1PokemonButton=new JButton("Get your Pokemon's stats"), p2PokemonButton=new JButton("Get your Pokemon's stats");
 	private Button[] leftSwitchButtons = new Button[6],rightSwitchButtons = new Button[6];
 	private ButtonGroup leftButtons=new ButtonGroup(),rightButtons=new ButtonGroup();
-	private JTextArea text;
+	public JTextArea leftText, rightText;
+
+
 //	private int playerPerspective=1;
 
 
 
 
+public Battle(){
 
+}
 	public Battle(Player p1, Player p2) {
 
         String filepath = "PokemonTitleScreen.wav";
         PlayMusic musicObject = new PlayMusic();
+        musicObject.playMusic(filepath);
         frame = new JFrame();
 //    	panel = new JPanel(new GridBagLayout());
 //    	display = new JPanel();
@@ -59,6 +65,32 @@ public class Battle {
 		rightUI.add(rightSwitchPanel);
 		mainPanel.add(leftPanel);
 		mainPanel.add(rightPanel);
+		p1PokemonButton.setVisible(true);
+		p1PokemonButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane leftPokemonInfoPopup=new JOptionPane("P1 current Pokemon info");
+				leftPokemonInfoPopup.showMessageDialog(leftDisplayPanel,
+						p1.currentMon.toString(),"Pokemon Info",
+						2,
+						new ImageIcon("Sprites/SpritesFront/"+p1.currentMon.getID()+".gif"));
+//			leftText.setText(leftText.getText()+p1.currentMon.toString());
+			}
+		});
+		p2PokemonButton.setVisible(true);
+		p2PokemonButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane leftPokemonInfoPopup=new JOptionPane("P2 current Pokemon info");
+				leftPokemonInfoPopup.showMessageDialog(
+						rightDisplayPanel,
+						p2.currentMon.toString(),
+						"Pokemon Info",
+						2,
+						new ImageIcon("Sprites/SpritesFront/"+p2.currentMon.getID()+".gif"));
+//				rightText.setText(rightText.getText()+p2.currentMon.toString());
+			}
+		});
 
     		name1 = new JLabel(p1.currentMon.getName());
     		name2 = new JLabel(p2.currentMon.getName());
@@ -72,21 +104,25 @@ public class Battle {
 			layout1.setAutoCreateContainerGaps(true);
 			layout1.setHorizontalGroup(layout1.createSequentialGroup()
 				.addGroup(layout1.createParallelGroup()
-					.addGap(400)
+					.addGap(500)
 					.addComponent(name1)
-					.addComponent(image1))
+						.addComponent(p1PokemonButton)
+						.addComponent(image1))
+
 				.addGroup(layout1.createParallelGroup(GroupLayout.Alignment.TRAILING)
 					.addComponent(name2)
 					.addComponent(image2))
+
 			);
 			layout1.setVerticalGroup(layout1.createSequentialGroup()
 				.addComponent(name2)
 				.addComponent(image2)
-				.addGap(100)
+				.addGap(200)
 				.addComponent(name1)
 				.addComponent(image1)
+					.addComponent(p1PokemonButton)
 			);
-			layout1.linkSize(SwingConstants.HORIZONTAL, name1, name2, image1, image2);
+			layout1.linkSize(SwingConstants.HORIZONTAL, name1, name2, image1, image2,p1PokemonButton);
 			layout1.linkSize(image1, image2);
 			leftDisplayPanel.setBackground(Color.LIGHT_GRAY);
 			c.gridx = 0;
@@ -158,7 +194,7 @@ public class Battle {
     	}
     	c.gridx = 0;
     	c.gridy = 6;
-    	c.gridwidth = 4;
+    	c.gridwidth = 1;
     	c.gridheight = 1;
     	c.weightx = 0.5;
 		c.weighty = 0.0;
@@ -166,11 +202,11 @@ public class Battle {
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.insets = new Insets(0, 0, 0, 0);
     	leftPanel.add(leftSwitchPanel, c);
-    	text = new JTextArea(20, 20);
+    	leftText = new JTextArea(20, 20);
 //    	text.setEditable(false);
-    	text.setLineWrap(true);
-    	text.setWrapStyleWord(true);
-    	JScrollPane pane = new JScrollPane(text,
+    	leftText.setLineWrap(true);
+    	leftText.setWrapStyleWord(true);
+    	JScrollPane pane = new JScrollPane(leftText,
     			ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
     			ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     	c.gridx = 4;
@@ -213,9 +249,11 @@ public class Battle {
 		layout4.setAutoCreateContainerGaps(true);
 		layout4.setHorizontalGroup(layout4.createSequentialGroup()
 				.addGroup(layout4.createParallelGroup()
-						.addGap(400)
+						.addGap(500)
 						.addComponent(name3)
+						.addComponent(p2PokemonButton)
 						.addComponent(image3))
+
 				.addGroup(layout4.createParallelGroup(GroupLayout.Alignment.TRAILING)
 						.addComponent(name4)
 						.addComponent(image4))
@@ -223,9 +261,10 @@ public class Battle {
 		layout4.setVerticalGroup(layout4.createSequentialGroup()
 				.addComponent(name4)
 				.addComponent(image4)
-				.addGap(100)
+				.addGap(200)
 				.addComponent(name3)
 				.addComponent(image3)
+				.addComponent(p2PokemonButton)
 		);
 		layout4.linkSize(SwingConstants.HORIZONTAL, name3, name4, image3, image4);
 		layout4.linkSize(image3, image4);
@@ -301,7 +340,7 @@ public class Battle {
 		}
 		y.gridx = 0;
 		y.gridy = 6;
-		y.gridwidth = 4;
+		y.gridwidth = 1;
 		y.gridheight = 1;
 		y.weightx = 0.5;
 		y.weighty = 0.0;
@@ -309,11 +348,11 @@ public class Battle {
 		y.fill = GridBagConstraints.HORIZONTAL;
 		y.insets = new Insets(0, 0, 0, 0);
 		rightPanel.add(rightSwitchPanel, y);
-		text = new JTextArea(20, 20);
+		rightText = new JTextArea(20, 20);
 //    	text.setEditable(false);
-		text.setLineWrap(true);
-		text.setWrapStyleWord(true);
-		JScrollPane pane2 = new JScrollPane(text,
+		rightText.setLineWrap(true);
+		rightText.setWrapStyleWord(true);
+		JScrollPane pane2 = new JScrollPane(rightText,
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		y.gridx = 4;
@@ -328,11 +367,14 @@ public class Battle {
 		rightPanel.add(pane2, y);
     	frame.getContentPane().add(mainPanel);
 //		frame.getContentPane().add(rightPanel);
-    	frame.setBounds(100, 100, 2250, 750);
+    	frame.setBounds(100, 100, 3000, 750);
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	// frame.setResizable(false);
     	frame.setTitle("NOT Pokemon");
     	frame.setVisible(true);
+		leftPanel.updateUI();
+		rightPanel.updateUI();
+		repaint(p1,p2);
     }
 
     public static void main (String[] args) {
@@ -345,7 +387,7 @@ public class Battle {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-//    System.out.println(
+//    ez.println(
 ////            read.orderMoves(
 //            (read.formatShowDownLearnSets(copy).replace("\t","")));
         EaseOfUse ez=new EaseOfUse();
@@ -362,39 +404,59 @@ public class Battle {
 
 
 
-        ez.print("P1) Select your first pokemon's dex number");
-        p1mons[0]=new Pokemon(kboard.nextInt());
+//        ez.print("P1) Select your first pokemon's dex number");
+//        p1mons[0]=new Pokemon(kboard.nextInt());
+//
+//        ez.print("P1) Select your second pokemon's dex number");
+//        p1mons[1]=new Pokemon(kboard.nextInt());
+//        ez.print("P1) Select your third pokemon's dex number");
+//        p1mons[2]=new Pokemon(kboard.nextInt());
+//        ez.print("P1) Select your fourth pokemon's dex number");
+//        p1mons[3]=new Pokemon(kboard.nextInt());
+//        ez.print("P1) Select your fifth pokemon's dex number");
+//        p1mons[4]=new Pokemon(kboard.nextInt());
+//        ez.print("P1) Select your sixth pokemon's dex number");
+//        p1mons[5]=new Pokemon(kboard.nextInt());
+//
+//
+//        ez.print("P2) Select your first pokemon's dex number");
+//        p2mons[0]=new Pokemon(kboard.nextInt());
+//        ez.print("P2) Select your second pokemon's dex number");
+//        p2mons[1]=new Pokemon(kboard.nextInt());
+//        ez.print("P2) Select your third pokemon's dex number");
+//        p2mons[2]=new Pokemon(kboard.nextInt());
+//        ez.print("P2) Select your fourth pokemon's dex number");
+//        p2mons[3]=new Pokemon(kboard.nextInt());
+//        ez.print("P2) Select your fifth pokemon's dex number");
+//        p2mons[4]=new Pokemon(kboard.nextInt());
+//        ez.print("P2) Select your sixth pokemon's dex number");
+//        p2mons[5]=new Pokemon(kboard.nextInt());
+		p1mons[0]=new Pokemon(130);
+		p1mons[1]=new Pokemon(143);
+		p1mons[2]=new Pokemon(150);
+		p1mons[3]=new Pokemon(384);
+		p1mons[4]=new Pokemon(493);
+		p1mons[5]=new Pokemon(487);
 
-        ez.print("P1) Select your second pokemon's dex number");
-        p1mons[1]=new Pokemon(kboard.nextInt());
-        ez.print("P1) Select your third pokemon's dex number");
-        p1mons[2]=new Pokemon(kboard.nextInt());
-        ez.print("P1) Select your fourth pokemon's dex number");
-        p1mons[3]=new Pokemon(kboard.nextInt());
-        ez.print("P1) Select your fifth pokemon's dex number");
-        p1mons[4]=new Pokemon(kboard.nextInt());
-        ez.print("P1) Select your sixth pokemon's dex number");
-        p1mons[5]=new Pokemon(kboard.nextInt());
+		p2mons[0]=new Pokemon(700);
+		p2mons[1]=new Pokemon(802);
+		p2mons[2]=new Pokemon(801);
+		p2mons[3]=new Pokemon(800);
+		p2mons[4]=new Pokemon(798);
+		p2mons[5]=new Pokemon(791);
 
 
-        ez.print("P2) Select your first pokemon's dex number");
-        p2mons[0]=new Pokemon(kboard.nextInt());
-        ez.print("P2) Select your second pokemon's dex number");
-        p2mons[1]=new Pokemon(kboard.nextInt());
-        ez.print("P2) Select your third pokemon's dex number");
-        p2mons[2]=new Pokemon(kboard.nextInt());
-        ez.print("P2) Select your fourth pokemon's dex number");
-        p2mons[3]=new Pokemon(kboard.nextInt());
-        ez.print("P2) Select your fifth pokemon's dex number");
-        p2mons[4]=new Pokemon(kboard.nextInt());
-        ez.print("P2) Select your sixth pokemon's dex number");
-        p2mons[5]=new Pokemon(kboard.nextInt());
-        givenMoves[0]= new int[]{14,370,609,1};
-        givenMoves[1]= new int[]{6,7,8,9};
-        givenMoves[2]= new int[]{10,11,12,13};
-        givenMoves[3]= new int[]{14,15,16,17};
-        givenMoves[4]= new int[]{18,19,20,21};
-        givenMoves[5]= new int[]{22,23,24,25};
+		givenMoves[0]= new int[]{14,370,609,26};
+        givenMoves[1]= new int[]{53,56,59,76};
+        givenMoves[2]= new int[]{85,89,94,98};
+		givenMoves[3]= new int[]{14,370,609,26};
+		givenMoves[4]= new int[]{53,56,59,76};
+		givenMoves[5]= new int[]{85,89,94,98};
+
+
+//        givenMoves[3]= new int[]{14,15,16,17};
+//        givenMoves[4]= new int[]{18,19,20,21};
+//        givenMoves[5]= new int[]{22,23,24,25};
 		givenMoves2[0]=new int[]{22,23,24,25};
 		givenMoves2[1]= new int[]{14,370,609,1};
 		givenMoves2[2]= new int[]{6,7,8,9};
@@ -402,13 +464,19 @@ public class Battle {
 		givenMoves2[4]= new int[]{14,15,16,17};
 		givenMoves2[5]= new int[]{18,19,20,21};
         Player p1=new Player(p1mons,givenMoves);
-        Player p2=new Player(p2mons,givenMoves2,p1);
-        p1.setOpposingPlayer(p2);
+//        Player p2=new Player(p2mons,givenMoves2,p1);
+		        Player p2=new Player(p2mons,givenMoves,p1);
+
+		p1.setOpposingPlayer(p2);
 		Battle b= new Battle(p1,p2);
 //		b.playerPerspective=1;
-
-
-        System.out.println("The match has begun!");
+//ez.println(b.leftText.getBounds().height);
+//		ez.println(b.leftText.getBounds().width);
+//		ez.println(b.rightText.getBounds().height);
+//		ez.println(b.rightText.getBounds().width);
+//        ez.println("The match has begun!");
+        b.leftText.setText("The match has begun!");
+		b.rightText.setText("The match has begun!");
         boolean gameNotOver=true;
 		boolean p1WillSwitch=false;
             boolean p2WillSwitch=false;
@@ -417,6 +485,7 @@ public class Battle {
             int p1SwitchIn=-1;
             int p2SwitchIn=-1;
             JOptionPane popup=new JOptionPane("All your pokemon have fainted");
+            popup.setIcon(new ImageIcon (new ImageIcon("icon.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
 //		final int[] moveSelection = new int[1];
 
 //            int switchSelection;
@@ -484,7 +553,7 @@ public class Battle {
 
             boolean youShallNotPass = true;
             while (youShallNotPass) {
-//                System.out.println("Player1 what would you like to do\n1)Switch out\n2)Fight");
+//                ez.println("Player1 what would you like to do\n1)Switch out\n2)Fight");
 //                selection = kboard.nextInt();
                 if (b.p1Selection >=5&&P1numberOfFaintedMons<5) {
 					p1WillSwitch = true;
@@ -492,9 +561,9 @@ public class Battle {
 					youShallNotPass = false;
 					b.p1Selection=-1;
                 } else if (b.p1Selection <=4 &&b.p1Selection>=0) {
-//                    System.out.println("Choose which move you want to use");
+//                    ez.println("Choose which move you want to use");
 //                    for (int i = 0; i < 4; i++) {
-//                        System.out.println((i + 1) + ")" + p1.currentMon.getMoves()[i]);
+//                        ez.println((i + 1) + ")" + p1.currentMon.getMoves()[i]);
 //                    }
 
                     p1SelectedMoveIndex = b.p1Selection;
@@ -513,7 +582,7 @@ public class Battle {
 			youShallNotPass=true;
 
             while(youShallNotPass) {
-//                System.out.println("Player2 what would you like to do\n1)Switch out\n2)Fight");
+//                ez.println("Player2 what would you like to do\n1)Switch out\n2)Fight");
 //                b.p1Selection = kboard.nextInt();
 				if (b.p2Selection >=5&&P2numberOfFaintedMons<5) {
 					p2WillSwitch = true;
@@ -521,9 +590,9 @@ public class Battle {
 					youShallNotPass = false;
 					b.p2Selection=-1;
 				} else if (b.p2Selection <=4 &&b.p2Selection>=0) {
-//                    System.out.println("Choose which move you want to use");
+//                    ez.println("Choose which move you want to use");
 //                    for (int i = 0; i < 4; i++) {
-//                        System.out.println((i + 1) + ")" + p1.currentMon.getMoves()[i]);
+//                        ez.println((i + 1) + ")" + p1.currentMon.getMoves()[i]);
 //                    }
 
 					p2SelectedMoveIndex = b.p2Selection;
@@ -605,14 +674,29 @@ public class Battle {
             }
             if(p1.isDefeated()){
                 gameNotOver=false;
+				popup.showMessageDialog(b.mainPanel,
+						"Player 2 Won the game!",
+						"Game Finished",
+						2,
+						(new ImageIcon (new ImageIcon("Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
                 break;
             }
             if(p2.isDefeated()){
                 gameNotOver=false;
-                break;
+//				popup.showMessageDialog(b.mainPanel,"Player 1 Won the game!");
+				popup.showMessageDialog(b.mainPanel,
+						"Player 1 Won the game!",
+						"Game Finished",
+						2,
+						(new ImageIcon (new ImageIcon("Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+
+				break;
             }
             if(p1.currentMon.getHealth()<=0){
-                String x="\n";
+				P1numberOfFaintedMons++;
+            	int firstOccurence=-1;
+                String x[]=new String[6-Battle.P1numberOfFaintedMons];
+                int z=0;
                 for (int i =0;i<p1.pokemon.length;i++){
                 	if(p1.pokemon[i].getHealth()<=0){
 
@@ -621,17 +705,36 @@ public class Battle {
 
 					}
                 	else{
-                		x+=""+(i+1)+") "+p1.pokemon[i].getName()+"\n";
+                		if (firstOccurence==-1){
+                			firstOccurence=i;
+						}
+
+                		x[z]=(i+1)+") "+p1.pokemon[i].getName()+"\n";
+                		z++;
+
 					}
 				}
-            	p1SwitchIn=Integer.parseInt(popup.showInputDialog(b.leftDisplayPanel,"Your current Pokemon fainted." +
-						" The pokemon that you can switch in are"+x+"Please enter the number of the pokemon you want to switch in."));
+//            	p1SwitchIn=Integer.parseInt(popup.showInputDialog(b.leftDisplayPanel,"Your current Pokemon fainted." +
+//						" The pokemon that you can switch in are"+x+"Please enter the number of the pokemon you want to switch in.","Pokemon defeated",2,new ImageIcon (new ImageIcon("Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+//				p1.switchOut(p1.pokemon[p1SwitchIn-1]);
+				String y= (String) popup.showInputDialog(b.leftDisplayPanel,
+						"Your current Pokemon fainted. Please choose which pokemon you want to switch in."
+						,"Pokemon defeated",
+						2,
+						new ImageIcon (new ImageIcon("Skull.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
+						x,
+						"Please select a Pokemon");
+
+				p1SwitchIn=Integer.parseInt(String.valueOf(y.charAt(0)));
 				p1.switchOut(p1.pokemon[p1SwitchIn-1]);
-                P1numberOfFaintedMons++;
+
                 p1SwitchIn=-1;
             }
             if(p2.currentMon.getHealth()<=0){
-				String x="\n";
+				P2numberOfFaintedMons++;
+            	int firstOccurence=-1;
+            	int z=0;
+				String [] x = new String[6-Battle.P2numberOfFaintedMons];
 				for (int i =0;i<p2.pokemon.length;i++){
 					if(p2.pokemon[i].getHealth()<=0){
 
@@ -640,18 +743,37 @@ public class Battle {
 
 					}
 					else{
-						x+=""+(i+1)+") "+p2.pokemon[i].getName()+"\n";
+						if (firstOccurence==-1){
+							firstOccurence=i;
+						}
+						x[z]=(i+1)+") "+p2.pokemon[i].getName()+"\n";
+						z++;
 					}
 				}
-				p2SwitchIn=Integer.parseInt(popup.showInputDialog(b.rightDisplayPanel,"Your current Pokemon fainted." +
-						" The pokemon that you can switch in are"+x+"Please enter the number of the pokemon you want to switch in."));
+				String y= (String) popup.showInputDialog(b.rightDisplayPanel,
+						"Your current Pokemon fainted. Please choose which pokemon you want to switch in."
+						,"Pokemon defeated",
+						2,
+						new ImageIcon (new ImageIcon("Skull.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
+						x,
+						"Please select a Pokemon");
 
-
+				p2SwitchIn=Integer.parseInt(String.valueOf(y.charAt(0)));
             	p2.switchOut(p2.pokemon[p2SwitchIn-1]);
-                P2numberOfFaintedMons++;
+
 				p2SwitchIn=-1;
             }
+//			ez.println(b.leftText.getBounds().height);
+//			ez.println(b.leftText.getBounds().width);
+//			ez.println(b.rightText.getBounds().height);
+//			ez.println(b.rightText.getBounds().width);
+//			ez.println(b..getWidth());
             b.repaint(p1,p2);
+//            ez.println(b.image4.getWidth());
+//			ez.println(b.leftText.getBounds().height);
+//			ez.println(b.leftText.getBounds().width);
+//			ez.println(b.rightText.getBounds().height);
+//			ez.println(b.rightText.getBounds().width);
         }
 //
 
@@ -700,9 +822,9 @@ public class Battle {
 //        ez.print(p2);
 
         //        BasicPokemon test = new BasicPokemon(1);
-//    System.out.println(test);
+//    ez.println(test);
 //    BasicMove anothertest =new BasicMove(1);
-//        System.out.println(anothertest);
+//        ez.println(anothertest);
 
 //        BasicPokemon[] p1Pokemon={p11,p12,p13,p14,p15,p16};
 //        BasicPokemon[] p2Pokemon={p21,p22,p23,p24,p25,p26};
@@ -738,17 +860,17 @@ public class Battle {
 //                200,50,200,400,moveSet1,"Water","Dragon");
         // declares an array of integers
 //        p1.setOpposingPlayer(p2);
-//        System.out.println(p2.currentMon);
+//        ez.println(p2.currentMon);
 //        p1.fight();
-//        System.out.println(p2.currentMon);
+//        ez.println(p2.currentMon);
 //        p2.switchOut();
-//        System.out.println(p2.currentMon);
+//        ez.println(p2.currentMon);
 //        p1.fight();
-//        System.out.println(p2.currentMon);
+//        ez.println(p2.currentMon);
 //        p2.switchOut();
-//        System.out.println(p2.currentMon);
+//        ez.println(p2.currentMon);
 //        p1.fight();
-//        System.out.println(p2.currentMon);
+//        ez.println(p2.currentMon);
     }
     public void repaint(Player p1, Player p2) {
 
@@ -757,13 +879,13 @@ public class Battle {
 			name2 .setText(p2.currentMon.getName());
 			Icon pic = null;
 
-				pic = new ImageIcon("Sprites/SpritesBack/" + p1.currentMon.getID() + "-back.gif");
-				image1.setIcon(pic);
+//				pic =
+				image1.setIcon(new ImageIcon("Sprites/SpritesBack/" + p1.currentMon.getID() + "-back.gif"));
 
 
 
-				pic = new ImageIcon("Sprites/SpritesFront/" + p2.currentMon.getID() + ".gif");
-				image2.setIcon(pic);
+//				pic =
+				image2.setIcon(new ImageIcon("Sprites/SpritesFront/" + p2.currentMon.getID() + ".gif"));
 
 
 			for (int i =0;i<leftMoveButtons.length;i++){
@@ -771,11 +893,11 @@ public class Battle {
 			}
 			for (int i =0;i<leftSwitchButtons.length;i++){
 				if(p1.pokemon[i].getHealth()<=0){
-					leftSwitchButtons[i].setText(p1.pokemon[i].getName()+" (Fainted)");
+					leftSwitchButtons[i].setText(p1.pokemon[i].getName());
 					leftSwitchButtons[i].setEnabled(false);
 				}
 				else if(p1.pokemon[i]==p1.currentMon){
-					leftSwitchButtons[i].setText(p1.pokemon[i].getName()+" (Already in Play)");
+					leftSwitchButtons[i].setText(p1.pokemon[i].getName());
 					leftSwitchButtons[i].setEnabled(false);
 				}
 				else{
@@ -792,25 +914,25 @@ public class Battle {
 		name4 .setText(p1.currentMon.getName());
 		pic = null;
 
-		pic = new ImageIcon("Sprites/SpritesBack/" + p2.currentMon.getID() + "-back.gif");
-		image3.setIcon(pic);
+//		pic = ;
+		image3.setIcon(new ImageIcon("Sprites/SpritesBack/" + p2.currentMon.getID() + "-back.gif"));
 
 
 
-		pic = new ImageIcon("Sprites/SpritesFront/" + p1.currentMon.getID() + ".gif");
-		image4.setIcon(pic);
+//		pic = ;
+		image4.setIcon(new ImageIcon("Sprites/SpritesFront/" + p1.currentMon.getID() + ".gif"));
 
 
 		for (int i =0;i<rightMoveButtons.length;i++){
 			rightMoveButtons[i].setText(p2.currentMon.moves[i].getMoveName());
 		}
 		for (int i =0;i<rightSwitchButtons.length;i++){
-			if(p1.pokemon[i].getHealth()<=0){
-				rightSwitchButtons[i].setText(p2.pokemon[i].getName()+" (Fainted)");
+			if(p2.pokemon[i].getHealth()<=0){
+				rightSwitchButtons[i].setText(p2.pokemon[i].getName());
 				rightSwitchButtons[i].setEnabled(false);
 			}
-			else if(p1.pokemon[i]==p1.currentMon){
-				rightSwitchButtons[i].setText(p2.pokemon[i].getName()+" (Already in Play)");
+			else if(p2.pokemon[i]==p2.currentMon){
+				rightSwitchButtons[i].setText(p2.pokemon[i].getName());
 				rightSwitchButtons[i].setEnabled(false);
 			}
 			else{
@@ -832,8 +954,7 @@ public class Battle {
 
 
 
-		leftPanel.updateUI();
-			rightPanel.updateUI();
+
 	}
 
 }
@@ -1074,7 +1195,7 @@ public class Battle {
 ////        } catch (IOException e) {
 ////            e.printStackTrace();
 ////        }
-////    System.out.println(
+////    ez.println(
 //////            read.orderMoves(
 ////            (read.formatShowDownLearnSets(copy).replace("\t","")));
 //		EaseOfUse ez=new EaseOfUse();
@@ -1129,7 +1250,7 @@ public class Battle {
 //		b.playerPerspective=1;
 //
 //
-//		System.out.println("The match has begun!");
+//		ez.println("The match has begun!");
 //		boolean gameNotOver=true;
 //		boolean p1WillSwitch=false;
 //		boolean p2WillSwitch=false;
@@ -1174,16 +1295,16 @@ public class Battle {
 //
 //			boolean youShallNotPass = true;
 //			while (youShallNotPass) {
-////                System.out.println("Player1 what would you like to do\n1)Switch out\n2)Fight");
+////                ez.println("Player1 what would you like to do\n1)Switch out\n2)Fight");
 ////                selection = kboard.nextInt();
 //				if (b.selection >=5&&P1numberOfFaintedMons<5) {
 //					p1WillSwitch = true;
 //					p1SwitchIn=b.selection-4;
 //					youShallNotPass = false;
 //				} else if (b.selection <=4 &&b.selection>=0) {
-////                    System.out.println("Choose which move you want to use");
+////                    ez.println("Choose which move you want to use");
 ////                    for (int i = 0; i < 4; i++) {
-////                        System.out.println((i + 1) + ")" + p1.currentMon.getMoves()[i]);
+////                        ez.println((i + 1) + ")" + p1.currentMon.getMoves()[i]);
 ////                    }
 //
 //					p1SelectedMoveIndex = b.selection;
@@ -1194,22 +1315,22 @@ public class Battle {
 //////                    ez.print("You have no available pokemon to switch in, because every other Pokemon has fainted");
 //////                }
 //				else {
-//					System.out.print("");
+//					ez.print("");
 //				}
 //			}
 //
 //			youShallNotPass=true;
 //			b.selection=-1;
 //			while(youShallNotPass) {
-//				System.out.println("Player2 what would you like to do\n1)Switch out\n2)Fight");
+//				ez.println("Player2 what would you like to do\n1)Switch out\n2)Fight");
 //				b.selection = kboard.nextInt();
 //				if (b.selection == 1) {
 //					p2WillSwitch = true;
 //					youShallNotPass = false;
 //				} else if (b.selection == 2) {
-//					System.out.println("Choose which move you want to use");
+//					ez.println("Choose which move you want to use");
 //					for (int i = 0; i < 4; i++) {
-//						System.out.println((i + 1) + ")" + p2.currentMon.getMoves()[i]);
+//						ez.println((i + 1) + ")" + p2.currentMon.getMoves()[i]);
 //					}
 //					p2SelectedMoveIndex = kboard.nextInt() - 1;
 //					youShallNotPass = false;
@@ -1217,7 +1338,7 @@ public class Battle {
 //				else if(b.selection == 1&&P2numberOfFaintedMons>=5){
 //					ez.print("You have no available pokemon to switch in, because every other Pokemon has fainted");
 //				}else {
-//					System.out.println("That wasn't a valid input");
+//					ez.println("That wasn't a valid input");
 //				}
 //			}
 //			b.selection=-1;
@@ -1338,9 +1459,9 @@ public class Battle {
 ////        ez.print(p2);
 //
 //		//        BasicPokemon test = new BasicPokemon(1);
-////    System.out.println(test);
+////    ez.println(test);
 ////    BasicMove anothertest =new BasicMove(1);
-////        System.out.println(anothertest);
+////        ez.println(anothertest);
 //
 ////        BasicPokemon[] p1Pokemon={p11,p12,p13,p14,p15,p16};
 ////        BasicPokemon[] p2Pokemon={p21,p22,p23,p24,p25,p26};
@@ -1376,17 +1497,17 @@ public class Battle {
 ////                200,50,200,400,moveSet1,"Water","Dragon");
 //		// declares an array of integers
 ////        p1.setOpposingPlayer(p2);
-////        System.out.println(p2.currentMon);
+////        ez.println(p2.currentMon);
 ////        p1.fight();
-////        System.out.println(p2.currentMon);
+////        ez.println(p2.currentMon);
 ////        p2.switchOut();
-////        System.out.println(p2.currentMon);
+////        ez.println(p2.currentMon);
 ////        p1.fight();
-////        System.out.println(p2.currentMon);
+////        ez.println(p2.currentMon);
 ////        p2.switchOut();
-////        System.out.println(p2.currentMon);
+////        ez.println(p2.currentMon);
 ////        p1.fight();
-////        System.out.println(p2.currentMon);
+////        ez.println(p2.currentMon);
 //	}
 //	public void repaint(Player p1, Player p2) {
 //		if (playerPerspective==1) {

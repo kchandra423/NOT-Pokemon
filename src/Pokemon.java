@@ -587,15 +587,17 @@ public class Pokemon {
 
                 ;
         try {
-            answer = "\nDexNumber: " + dex + "\n" + "Name: " + name + "\n" + "Health: " + health + "\n" +
+            answer = "\n" + "Name: " + name + "\n" + "Health: " + health +" / "+baseHealth+ "\n" +
 
-                    "Defense: " + getDefense() + "\n" + "Attack: " + getAttack() + "\n" + "Special Attack: "
-                    + getSpecialAttack() + "\n" + "Special Defense: " + getSpecialDefense() + "\n" + "Speed: "
-                    + getSpeed() + "\n" + "Modifiers: " + (attackIncrease - attackDecrease) + " attack, "
+                    "Defense: " + baseDefense + "\n" + "Attack: " + baseAttack + "\n" + "Special Attack: "
+                    + baseSpecialAttack + "\n" + "Special Defense: " + baseSpecialDefense + "\n" + "Speed: "
+                    + baseSpeed + "\n" + "Modifiers: " + (attackIncrease - attackDecrease) + " attack, "
                     + (defenseIncrease - defenseDecrease) + " defense, "
                     + (specialAttackIncrease - specialAttackDecrease) + " special attack, "
-                    + (specialDefenseIncrease - specialDefenseDecrease) + " special defense modifier, "
-                    + (speedIncrease - speedDecrease) + " speed modifier" + "\n" + "Types: " + type1 + " and " + type2
+                    + (specialDefenseIncrease - specialDefenseDecrease) + " special defense , "
+                    + (speedIncrease - speedDecrease) + " speed" +
+                    "\n"+"Status: "+status+
+                    "\n" + "Types: " + type1 + " and " + type2
                     + "\n";
         } catch (Exception e) {
             e.printStackTrace();

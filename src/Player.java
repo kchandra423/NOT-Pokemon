@@ -179,6 +179,7 @@ public class Player {
 //        }
         currentMon=switchIn;
     }
+
     public int indexOfMon(Pokemon mon){
         int answer=-1;
         for(int i=0;i<pokemon.length;i++)

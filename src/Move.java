@@ -199,8 +199,13 @@ boolean target;
 //    }
 
     public String toString() {
-        String answer = "BasePower: " + basePower + "\n" + "MoveNumber: " + moveNumber + "\n" + "MoveName: " + moveName
-                + "\n" + "Type: " + type;
+        String answer = "\n" + "MoveName: " + moveName+"\n"+"BasePower: " + basePower +
+                "\n"+"Accuracy: " + accuracy +
+                "\n"+"Description: " + description +
+                "\n"+"Boosts: " + boosts +
+                "\n"+"Status: " + status +
+                "\n"+"Targets Self: " + self +
+                "\n" + "Type: " + type;
 //                +"\n"+
 //                "Status: "+status
 //                +"\n"+
