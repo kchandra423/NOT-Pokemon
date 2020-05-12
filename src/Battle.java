@@ -38,6 +38,7 @@ public Battle(){
 
         String filepath = "PokemonTitleScreen.wav";
         PlayMusic musicObject = new PlayMusic();
+        musicObject.playMusic(filepath);
         frame = new JFrame();
 //    	panel = new JPanel(new GridBagLayout());
 //    	display = new JPanel();
