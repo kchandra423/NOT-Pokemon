@@ -1,12 +1,18 @@
 import java.io.File;
+import java.util.LinkedList;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.Line;
+import javax.sound.sampled.LineUnavailableException;
 import javax.swing.JOptionPane;
 
 
 public class PlayMusic {
+	
+	 private static LinkedList<Line> speakers = new LinkedList<Line>();
 	
 	public void playMusic(String musicLocation)
 	{
@@ -43,5 +49,4 @@ public class PlayMusic {
 			ex.printStackTrace();
 		}
 	}
-	
 }
