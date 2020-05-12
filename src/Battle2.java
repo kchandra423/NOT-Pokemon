@@ -33,207 +33,7 @@ public class Battle2 {
     	currPlayer = 1;
     	selection = 0;
     	calculator = new Calculator();
-    	
-    	frame = new JFrame();
-    	frame.setLocation(100, 100);
-    	panel = new JPanel(new GridBagLayout());
-    	display = new JPanel();
-    	movePanel = new JPanel();
-    	switchPanel = new JPanel();
-    	GridBagConstraints c = new GridBagConstraints();
-    	try {
-    		name1 = new JLabel(p1.getCurrentMon().getName());
-    		name2 = new JLabel(p2.getCurrentMon().getName());
-			BufferedImage pic = ImageIO.read(new File("Sprites/SpritesBack/" + p1.getCurrentMon().getID() +"-back.gif"));
-			image1 = new JLabel(new ImageIcon(pic));
-			pic = ImageIO.read(new File("Sprites/SpritesFront/" + p2.getCurrentMon().getID() + ".gif"));
-			image2 = new JLabel(new ImageIcon(pic));
-			GroupLayout l = new GroupLayout(display);
-			display.setLayout(l);
-			l.setAutoCreateGaps(true);
-			l.setAutoCreateContainerGaps(true);
-			l.setHorizontalGroup(l.createSequentialGroup()
-				.addGroup(l.createParallelGroup(GroupLayout.Alignment.CENTER)
-					.addGap(100)
-					.addComponent(name1)
-					.addComponent(image1))
-				.addGap(200)
-				.addGroup(l.createParallelGroup(GroupLayout.Alignment.CENTER)
-					.addComponent(name2)
-					.addComponent(image2))
-			);
-			l.setVerticalGroup(l.createSequentialGroup()
-				.addComponent(name2)
-				.addComponent(image2)
-				.addGap(100)
-				.addComponent(name1)
-				.addComponent(image1)
-			);
-			l.linkSize(SwingConstants.HORIZONTAL, name1, name2, image1, image2);
-			display.setBackground(Color.LIGHT_GRAY);
-			c.gridx = 0;
-			c.gridy = 0;
-			c.gridwidth = 4;
-			c.gridheight = 3;
-			c.weightx = 0.0;
-			c.weighty = 0.0;
-			c.anchor = GridBagConstraints.FIRST_LINE_START;
-			c.fill = GridBagConstraints.HORIZONTAL;
-			c.insets = new Insets(5, 5, 5, 0);
-			panel.add(display, c);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	attack = new JLabel("Attack");
-    	c.gridx = 0;
-    	c.gridy = 3;
-    	c.gridwidth = 4;
-    	c.gridheight = 1;
-    	c.weightx = 0.0;
-		c.weighty = 0.0;
-    	c.anchor = GridBagConstraints.FIRST_LINE_START;
-    	c.fill = GridBagConstraints.HORIZONTAL;
-    	c.insets = new Insets(0, 10, 0, 0);
-    	panel.add(attack, c);
-    	GridLayout l = new GridLayout(2, 2);
-    	movePanel.setLayout(l);
-    	for(int move = 0; move < moves.length; move++) {
-    		moves[move] = new Button2(p1.getCurrentMon().getMoves()[move].getMoveName(), move+1);
-    		moves[move].addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					System.out.println("test");
-					int move = ((Button2)e.getSource()).getNum();
-					if(currPlayer == 1) { // p1 fight
-						selection = move;
-					}
-					else { // p2 fight
-						System.out.println("moves: " + selection + " " + p1.getCurrentMon().getMoves()[selection-1].getMoveName() + " " + move + " " + p2.getCurrentMon().getMoves()[move-1].getMoveName());
-						if(selection < 5) { // p1 fight
-							int first = calculator.calculateWhoGoesFirst(p1, p2,
-								p1.getCurrentMon().getMoves()[move-1],
-								p2.getCurrentMon().getMoves()[move-1]);
-							if(first == 1) { // p1 goes first
-								p1.fight(selection-1);  // remember, move is for currPlayer (p2)
-								p2.fight(move-1);
-							}
-							else { // p2 goes first
-								p2.fight(move-1);
-								p1.fight(selection-1);
-							}
-							p1.getCurrentMon().getMoves()[selection-1].pp--;
-						}
-						else { // p1 switch
-							p1.switchOut();
-							p2.fight(move-1);
-						}
-						p2.getCurrentMon().getMoves()[move-1].pp--;
-						selection = 0;
-					}
-					swapView();
-				}
-    		});
-    		movePanel.add(moves[move]);
-    	}
-    	c.gridx = 0;
-    	c.gridy = 4;
-    	c.gridwidth = 4;
-    	c.gridheight = 1;
-    	c.weightx = 0.0;
-		c.weighty = 0.0;
-    	c.anchor = GridBagConstraints.FIRST_LINE_START;
-    	c.fill = GridBagConstraints.HORIZONTAL;
-    	c.insets = new Insets(0, 0, 0, 0);
-    	panel.add(movePanel, c);
-    	switchOut = new JLabel("Switch");
-    	c.gridx = 0;
-    	c.gridy = 5;
-    	c.gridwidth = 4;
-    	c.gridheight = 1;
-    	c.weightx = 0.0;
-		c.weighty = 0.0;
-    	c.anchor = GridBagConstraints.FIRST_LINE_START;
-    	c.fill = GridBagConstraints.HORIZONTAL;
-    	c.insets = new Insets(0, 10, 0, 0);
-    	panel.add(switchOut, c);
-    	l = new GridLayout(3, 2);
-    	switchPanel.setLayout(l);
-    	for(int mon = 0; mon < switches.length; mon++) {
-    		switches[mon] = new Button2(p1.getPokemon()[mon].getName(), mon+1);
-    		switches[mon].addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					int move = ((Button2)e.getSource()).getNum();
-					if(currPlayer == 1) { // p1 switch
-						selection = move+4;
-					}
-					else { // p2 switch
-						if(selection > 4) { // p1 switch
-							if(p1.getCurrentMon().getSpeed()>p2.getCurrentMon().getSpeed()) {
-								p1.switchOut();
-								p2.switchOut();
-							}
-							else if(p2.getCurrentMon().getSpeed()>p1.getCurrentMon().getSpeed()) {
-								p2.switchOut();
-								p1.switchOut();
-			                }
-			                else {
-			                	if(Math.random()>=0.5) {
-			                		p1.switchOut();
-			                		p2.switchOut();
-			                	}
-			                	else {
-			                		p2.switchOut();
-			                		p1.switchOut();
-			                	}
-			                }
-						}
-						else { // p1 fight
-							p2.switchOut();
-							p1.fight(selection-1);
-						}
-						selection = 0;
-					}
-					swapView();
-				}
-    		});
-    		switchPanel.add(switches[mon]);
-    	}
-    	c.gridx = 0;
-    	c.gridy = 6;
-    	c.gridwidth = 4;
-    	c.gridheight = 1;
-    	c.weightx = 0.0;
-		c.weighty = 0.0;
-    	c.anchor = GridBagConstraints.FIRST_LINE_START;
-    	c.fill = GridBagConstraints.HORIZONTAL;
-    	c.insets = new Insets(0, 0, 0, 0);
-    	panel.add(switchPanel, c);
-    	text = new JTextArea(20, 20);
-    	text.setText("The match has begun!");
-    	text.setEditable(false);
-    	text.setLineWrap(true);
-    	text.setWrapStyleWord(true);
-    	JScrollPane pane = new JScrollPane(text,
-    			ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-    			ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-    	c.gridx = 4;
-    	c.gridy = 0;
-    	c.gridwidth = 3;
-    	c.gridheight = 7;
-    	c.weightx = 0.5;
-		c.weighty = 0.5;
-    	c.anchor = GridBagConstraints.FIRST_LINE_END;
-    	c.fill = GridBagConstraints.BOTH;
-    	c.insets = new Insets(5, 5, 5, 5);
-    	panel.add(pane, c);
-    	frame.getContentPane().add(panel);
-    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	frame.pack();
-    	// frame.setResizable(false);
-    	frame.setTitle("NOT Pokemon");
-    	frame.setVisible(true);
+    	setupGUI();
     }
     
     public static void main (String[] args) {
@@ -356,31 +156,31 @@ public class Battle2 {
 
             if(p1WillSwitch==true&&p2WillSwitch==true){
                 if(p1.currentMon.getSpeed()>p2.currentMon.getSpeed()){
-                    p1.switchOut();
-                    p2.switchOut();
+                    //p1.switchOut();
+                    //p2.switchOut();
                 }
                 else if(p2.currentMon.getSpeed()>p1.currentMon.getSpeed()){
-                    p2.switchOut();
-                    p1.switchOut();
+                    //p2.switchOut();
+                    //p1.switchOut();
                 }
                 else{
                     if(Math.random()>0.5){
-                        p1.switchOut();
-                        p2.switchOut();
+                        //p1.switchOut();
+                        //p2.switchOut();
                     }
                     else{
-                        p2.switchOut();
-                        p1.switchOut();
+                        //p2.switchOut();
+                        //p1.switchOut();
                     }
                 }
 
             }
             else if(p1WillSwitch==true){
-                p1.switchOut();
+                //p1.switchOut();
                 p2.fight(p2SelectedMoveIndex);
             }
             else if(p2WillSwitch==true){
-                p2.switchOut();
+                //p2.switchOut();
                 p1.fight(p1SelectedMoveIndex);
             }
             else{
@@ -409,11 +209,11 @@ public class Battle2 {
                 break;
             }
             if(p1.currentMon.getHealth()<=0){
-                p1.switchOut();
+                //p1.switchOut();
                 P1numberOfFaintedMons++;
             }
             if(p2.currentMon.getHealth()<=0){
-                p2.switchOut();
+                //p2.switchOut();
                 P2numberOfFaintedMons++;
             }
         }
@@ -516,397 +316,239 @@ public class Battle2 {
     }
     
     private void swapView() {
-    	System.out.println(SwingUtilities.isEventDispatchThread());
-    	frame.removeAll();
-    	panel.removeAll();
-    	display.removeAll();
-    	movePanel.removeAll();
-    	switchPanel.removeAll();
-    	GridBagConstraints c = new GridBagConstraints();
-    	
     	currPlayer = 3 - currPlayer; // if 1, swap to 2, if 2, swap to 1, another way is % 2 + 1
-    	if(currPlayer == 1) {
-    		name1.setText(p1.getCurrentMon().getName());
-    		name2.setText(p2.getCurrentMon().getName());
-			try {
-				BufferedImage pic = ImageIO.read(new File("Sprites/SpritesBack/" + p1.getCurrentMon().getID() +"-back.gif"));
-				image1 = new JLabel(new ImageIcon(pic));
-				BufferedImage pic2 = ImageIO.read(new File("Sprites/SpritesFront/" + p2.getCurrentMon().getID() + ".gif"));
-				image2 = new JLabel(new ImageIcon(pic2));
-				GroupLayout l = (GroupLayout)display.getLayout();
-				l.setAutoCreateGaps(true);
-				l.setAutoCreateContainerGaps(true);
-				l.setHorizontalGroup(l.createSequentialGroup()
-					.addGroup(l.createParallelGroup(GroupLayout.Alignment.CENTER)
-						.addGap(100)
-						.addComponent(name1)
-						.addComponent(image1))
-					.addGap(200)
-					.addGroup(l.createParallelGroup(GroupLayout.Alignment.CENTER)
-						.addComponent(name2)
-						.addComponent(image2))
-				);
-				l.setVerticalGroup(l.createSequentialGroup()
-					.addComponent(name2)
-					.addComponent(image2)
-					.addGap(100)
-					.addComponent(name1)
-					.addComponent(image1)
-				);
-				l.linkSize(SwingConstants.HORIZONTAL, name1, name2, image1, image2);
-				display.setBackground(Color.LIGHT_GRAY);
-				c.gridx = 0;
-				c.gridy = 0;
-				c.gridwidth = 4;
-				c.gridheight = 3;
-				c.weightx = 0.0;
-				c.weighty = 0.0;
-				c.anchor = GridBagConstraints.FIRST_LINE_START;
-				c.fill = GridBagConstraints.HORIZONTAL;
-				c.insets = new Insets(5, 5, 5, 0);
-				panel.add(display, c);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    	c.gridx = 0;
-	    	c.gridy = 3;
-	    	c.gridwidth = 4;
-	    	c.gridheight = 1;
-	    	c.weightx = 0.0;
-			c.weighty = 0.0;
-	    	c.anchor = GridBagConstraints.FIRST_LINE_START;
-	    	c.fill = GridBagConstraints.HORIZONTAL;
-	    	c.insets = new Insets(0, 10, 0, 0);
-	    	panel.add(attack, c);
-	    	GridLayout l = (GridLayout)movePanel.getLayout();
-	    	for(int move = 0; move < moves.length; move++) {
-	    		moves[move] = new Button2(p1.getCurrentMon().getMoves()[move].getMoveName(), move+1);
-	    		if(p1.getCurrentMon().getMoves()[move].pp == 0) {
-	    			moves[move].setEnabled(false);
-	    		}
-	    		moves[move].addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						int move = ((Button2)e.getSource()).getNum();
-						if(currPlayer == 1) { // p1 fight
-							selection = move;
-						}
-						else { // p2 fight
-							System.out.println("moves: " + selection + " " + p1.getCurrentMon().getMoves()[selection-1].getMoveName() + " " + move + " " + p2.getCurrentMon().getMoves()[move-1].getMoveName());
-							if(selection < 5) { // p1 fight
-								int first = calculator.calculateWhoGoesFirst(p1, p2,
-									p1.getCurrentMon().getMoves()[move-1],
-									p2.getCurrentMon().getMoves()[move-1]);
-								if(first == 1) { // p1 goes first
-									p1.fight(selection-1);  // remember, move is for currPlayer (p2)
-									p2.fight(move-1);
-								}
-								else { // p2 goes first
-									p2.fight(move-1);
-									p1.fight(selection-1);
-								}
-								p1.getCurrentMon().getMoves()[selection-1].pp--;
-							}
-							else { // p1 switch
-								p1.switchOut();
-								p2.fight(move-1);
-							}
-							p2.getCurrentMon().getMoves()[move-1].pp--;
-							selection = 0;
-						}
-						swapView();
-					}
-	    		});
-	    		movePanel.add(moves[move]);
-	    	}
-	    	c.gridx = 0;
-	    	c.gridy = 4;
-	    	c.gridwidth = 4;
-	    	c.gridheight = 1;
-	    	c.weightx = 0.0;
-			c.weighty = 0.0;
-	    	c.anchor = GridBagConstraints.FIRST_LINE_START;
-	    	c.fill = GridBagConstraints.HORIZONTAL;
-	    	c.insets = new Insets(0, 0, 0, 0);
-	    	panel.add(movePanel, c);
-	    	c.gridx = 0;
-	    	c.gridy = 5;
-	    	c.gridwidth = 4;
-	    	c.gridheight = 1;
-	    	c.weightx = 0.0;
-			c.weighty = 0.0;
-	    	c.anchor = GridBagConstraints.FIRST_LINE_START;
-	    	c.fill = GridBagConstraints.HORIZONTAL;
-	    	c.insets = new Insets(0, 10, 0, 0);
-	    	panel.add(switchOut, c);
-	    	l = (GridLayout)switchPanel.getLayout();
-	    	for(int mon = 0; mon < switches.length; mon++) {
-	    		switches[mon] = new Button2(p1.getPokemon()[mon].getName(), mon+1);
-	    		if(p1.getCurrentMon().equals(p1.getPokemon()[mon]) && p1.getCurrentMon().getHealth() <= 0) {
-	    			switches[mon].setEnabled(false);
-	    		}
-	    		switches[mon].addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						int move = ((Button2)e.getSource()).getNum();
-						if(currPlayer == 1) { // p1 switch
-							selection = move+4;
-						}
-						else { // p2 switch
-							if(selection > 4) { // p1 switch
-								if(p1.getCurrentMon().getSpeed()>p2.getCurrentMon().getSpeed()) {
-									p1.switchOut();
-									p2.switchOut();
-								}
-								else if(p2.getCurrentMon().getSpeed()>p1.getCurrentMon().getSpeed()) {
-									p2.switchOut();
-									p1.switchOut();
-				                }
-				                else {
-				                	if(Math.random()>=0.5) {
-				                		p1.switchOut();
-				                		p2.switchOut();
-				                	}
-				                	else {
-				                		p2.switchOut();
-				                		p1.switchOut();
-				                	}
-				                }
-							}
-							else { // p1 fight
-								p2.switchOut();
-								p1.fight(selection-1);
-							}
-							selection = 0;
-						}
-						swapView();
-					}
-	    		});
-	    		switchPanel.add(switches[mon]);
-	    	}
-	    	c.gridx = 0;
-	    	c.gridy = 6;
-	    	c.gridwidth = 4;
-	    	c.gridheight = 1;
-	    	c.weightx = 0.0;
-			c.weighty = 0.0;
-	    	c.anchor = GridBagConstraints.FIRST_LINE_START;
-	    	c.fill = GridBagConstraints.HORIZONTAL;
-	    	c.insets = new Insets(0, 0, 0, 0);
-	    	panel.add(switchPanel, c);
-	    	text = new JTextArea(20, 20);
-	    	text.setText("The match has begun!");
-	    	text.setEditable(false);
-	    	text.setLineWrap(true);
-	    	text.setWrapStyleWord(true);
-	    	JScrollPane pane = new JScrollPane(text,
-	    			ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-	    			ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-	    	c.gridx = 4;
-	    	c.gridy = 0;
-	    	c.gridwidth = 3;
-	    	c.gridheight = 7;
-	    	c.weightx = 0.5;
-			c.weighty = 0.5;
-	    	c.anchor = GridBagConstraints.FIRST_LINE_END;
-	    	c.fill = GridBagConstraints.BOTH;
-	    	c.insets = new Insets(5, 5, 5, 5);
-	    	panel.add(pane, c);
-	    	frame.getContentPane().add(panel);
+    	setupGUI();
+    }
+    
+    private void setupGUI() {
+    	if(frame != null) {
+    		frame.getContentPane().removeAll();
     	}
     	else {
-    		name1.setText(p1.getCurrentMon().getName());
-    		name2.setText(p2.getCurrentMon().getName());
-			try {
-				BufferedImage pic = ImageIO.read(new File("Sprites/SpritesBack/" + p1.getCurrentMon().getID() +"-back.gif"));
-				image1 = new JLabel(new ImageIcon(pic));
-				BufferedImage pic2 = ImageIO.read(new File("Sprites/SpritesFront/" + p2.getCurrentMon().getID() + ".gif"));
-				image2 = new JLabel(new ImageIcon(pic2));
-				GroupLayout l = (GroupLayout)display.getLayout();
-				l.setAutoCreateGaps(true);
-				l.setAutoCreateContainerGaps(true);
-				l.setHorizontalGroup(l.createSequentialGroup()
-					.addGroup(l.createParallelGroup(GroupLayout.Alignment.CENTER)
-						.addGap(100)
-						.addComponent(name1)
-						.addComponent(image1))
-					.addGap(200)
-					.addGroup(l.createParallelGroup(GroupLayout.Alignment.CENTER)
-						.addComponent(name2)
-						.addComponent(image2))
-				);
-				l.setVerticalGroup(l.createSequentialGroup()
-					.addComponent(name2)
-					.addComponent(image2)
-					.addGap(100)
-					.addComponent(name1)
-					.addComponent(image1)
-				);
-				l.linkSize(SwingConstants.HORIZONTAL, name1, name2, image1, image2);
-				display.setBackground(Color.LIGHT_GRAY);
-				c.gridx = 0;
-				c.gridy = 0;
-				c.gridwidth = 4;
-				c.gridheight = 3;
-				c.weightx = 0.0;
-				c.weighty = 0.0;
-				c.anchor = GridBagConstraints.FIRST_LINE_START;
-				c.fill = GridBagConstraints.HORIZONTAL;
-				c.insets = new Insets(5, 5, 5, 0);
-				panel.add(display, c);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    	c.gridx = 0;
-	    	c.gridy = 3;
-	    	c.gridwidth = 4;
-	    	c.gridheight = 1;
-	    	c.weightx = 0.0;
-			c.weighty = 0.0;
-	    	c.anchor = GridBagConstraints.FIRST_LINE_START;
-	    	c.fill = GridBagConstraints.HORIZONTAL;
-	    	c.insets = new Insets(0, 10, 0, 0);
-	    	panel.add(attack, c);
-	    	GridLayout l = (GridLayout)movePanel.getLayout();
-	    	for(int move = 0; move < moves.length; move++) {
-	    		moves[move] = new Button2(p1.getCurrentMon().getMoves()[move].getMoveName(), move+1);
-	    		if(p1.getCurrentMon().getMoves()[move].pp == 0) {
-	    			moves[move].setEnabled(false);
-	    		}
-	    		moves[move].addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						int move = ((Button2)e.getSource()).getNum();
-						if(currPlayer == 1) { // p1 fight
-							selection = move;
-						}
-						else { // p2 fight
-							System.out.println("moves: " + selection + " " + p1.getCurrentMon().getMoves()[selection-1].getMoveName() + " " + move + " " + p2.getCurrentMon().getMoves()[move-1].getMoveName());
-							if(selection < 5) { // p1 fight
-								int first = calculator.calculateWhoGoesFirst(p1, p2,
-									p1.getCurrentMon().getMoves()[move-1],
-									p2.getCurrentMon().getMoves()[move-1]);
-								if(first == 1) { // p1 goes first
-									p1.fight(selection-1);  // remember, move is for currPlayer (p2)
-									p2.fight(move-1);
-								}
-								else { // p2 goes first
-									p2.fight(move-1);
-									p1.fight(selection-1);
-								}
-								p1.getCurrentMon().getMoves()[selection-1].pp--;
-							}
-							else { // p1 switch
-								p1.switchOut();
+    		frame = new JFrame();
+    	}
+    	panel = new JPanel(new GridBagLayout());
+    	display = new JPanel();
+    	movePanel = new JPanel();
+    	switchPanel = new JPanel();
+    	GridBagConstraints c = new GridBagConstraints();
+		if(currPlayer == 1) {
+			name1 = new JLabel(p1.getCurrentMon().getName());
+			name2 = new JLabel(p2.getCurrentMon().getName());
+			ImageIcon pic = new ImageIcon("Sprites/SpritesBack/" + p1.getCurrentMon().getID() +"-back.gif");
+			image1 = new JLabel(pic);
+			ImageIcon pic2 = new ImageIcon("Sprites/SpritesFront/" + p2.getCurrentMon().getID() + ".gif");
+			image2 = new JLabel(pic2);
+		}
+		else {
+			name1 = new JLabel(p2.getCurrentMon().getName());
+			name2 = new JLabel(p1.getCurrentMon().getName());
+			ImageIcon pic = new ImageIcon("Sprites/SpritesBack/" + p2.getCurrentMon().getID() +"-back.gif");
+			image1 = new JLabel(pic);
+			ImageIcon pic2 = new ImageIcon("Sprites/SpritesFront/" + p1.getCurrentMon().getID() + ".gif");
+			image2 = new JLabel(pic2);
+		}
+		GroupLayout l = new GroupLayout(display);
+		display.setLayout(l);
+		l.setAutoCreateGaps(true);
+		l.setAutoCreateContainerGaps(true);
+		l.setHorizontalGroup(l.createSequentialGroup()
+			.addGroup(l.createParallelGroup(GroupLayout.Alignment.CENTER)
+				.addGap(100)
+				.addComponent(name1)
+				.addComponent(image1))
+			.addGap(200)
+			.addGroup(l.createParallelGroup(GroupLayout.Alignment.CENTER)
+				.addComponent(name2)
+				.addComponent(image2))
+		);
+		l.setVerticalGroup(l.createSequentialGroup()
+			.addComponent(name2)
+			.addComponent(image2)
+			.addGap(100)
+			.addComponent(name1)
+			.addComponent(image1)
+		);
+		l.linkSize(SwingConstants.HORIZONTAL, name1, name2, image1, image2);
+		display.setBackground(Color.LIGHT_GRAY);
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridwidth = 4;
+		c.gridheight = 3;
+		c.weightx = 0.0;
+		c.weighty = 0.0;
+		c.anchor = GridBagConstraints.FIRST_LINE_START;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(5, 5, 5, 0);
+		panel.add(display, c);
+    	attack = new JLabel("Attack");
+    	c.gridx = 0;
+    	c.gridy = 3;
+    	c.gridwidth = 4;
+    	c.gridheight = 1;
+    	c.weightx = 0.0;
+		c.weighty = 0.0;
+    	c.anchor = GridBagConstraints.FIRST_LINE_START;
+    	c.fill = GridBagConstraints.HORIZONTAL;
+    	c.insets = new Insets(0, 10, 0, 0);
+    	panel.add(attack, c);
+    	GridLayout gl = new GridLayout(2, 2);
+    	movePanel.setLayout(gl);
+    	for(int move = 0; move < moves.length; move++) {
+    		if(currPlayer == 1) {
+    			moves[move] = new Button2(p1.getCurrentMon().getMoves()[move].getName(), move+1);
+    			if(p1.getCurrentMon().getMoves()[move].getPP() == 0) {
+        			moves[move].setEnabled(false);
+        		}
+    		}
+    		else {
+    			moves[move] = new Button2(p2.getCurrentMon().getMoves()[move].getName(), move+1);
+    			if(p2.getCurrentMon().getMoves()[move].getPP() == 0) {
+        			moves[move].setEnabled(false);
+        		}
+    		}
+    		moves[move].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int move = ((Button2)e.getSource()).getNum();
+					if(currPlayer == 1) { // p1 fight
+						selection = move;
+					}
+					else { // p2 fight
+						if(selection < 5) { // p1 fight
+							int first = calculator.calculateWhoGoesFirst(p1, p2,
+								p1.getCurrentMon().getMoves()[move-1],
+								p2.getCurrentMon().getMoves()[move-1]);
+							if(first == 1) { // p1 goes first
+								p1.fight(selection-1);  // remember, move is for currPlayer (p2)
 								p2.fight(move-1);
 							}
-							p2.getCurrentMon().getMoves()[move-1].pp--;
-							selection = 0;
-						}
-						swapView();
-					}
-	    		});
-	    		movePanel.add(moves[move]);
-	    	}
-	    	c.gridx = 0;
-	    	c.gridy = 4;
-	    	c.gridwidth = 4;
-	    	c.gridheight = 1;
-	    	c.weightx = 0.0;
-			c.weighty = 0.0;
-	    	c.anchor = GridBagConstraints.FIRST_LINE_START;
-	    	c.fill = GridBagConstraints.HORIZONTAL;
-	    	c.insets = new Insets(0, 0, 0, 0);
-	    	panel.add(movePanel, c);
-	    	c.gridx = 0;
-	    	c.gridy = 5;
-	    	c.gridwidth = 4;
-	    	c.gridheight = 1;
-	    	c.weightx = 0.0;
-			c.weighty = 0.0;
-	    	c.anchor = GridBagConstraints.FIRST_LINE_START;
-	    	c.fill = GridBagConstraints.HORIZONTAL;
-	    	c.insets = new Insets(0, 10, 0, 0);
-	    	panel.add(switchOut, c);
-	    	l = (GridLayout)switchPanel.getLayout();
-	    	for(int mon = 0; mon < switches.length; mon++) {
-	    		switches[mon] = new Button2(p1.getPokemon()[mon].getName(), mon+1);
-	    		if(p1.getCurrentMon().equals(p1.getPokemon()[mon]) && p1.getCurrentMon().getHealth() <= 0) {
-	    			switches[mon].setEnabled(false);
-	    		}
-	    		switches[mon].addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						int move = ((Button2)e.getSource()).getNum();
-						if(currPlayer == 1) { // p1 switch
-							selection = move+4;
-						}
-						else { // p2 switch
-							if(selection > 4) { // p1 switch
-								if(p1.getCurrentMon().getSpeed()>p2.getCurrentMon().getSpeed()) {
-									p1.switchOut();
-									p2.switchOut();
-								}
-								else if(p2.getCurrentMon().getSpeed()>p1.getCurrentMon().getSpeed()) {
-									p2.switchOut();
-									p1.switchOut();
-				                }
-				                else {
-				                	if(Math.random()>=0.5) {
-				                		p1.switchOut();
-				                		p2.switchOut();
-				                	}
-				                	else {
-				                		p2.switchOut();
-				                		p1.switchOut();
-				                	}
-				                }
-							}
-							else { // p1 fight
-								p2.switchOut();
+							else { // p2 goes first
+								p2.fight(move-1);
 								p1.fight(selection-1);
 							}
-							selection = 0;
 						}
-						swapView();
+						else { // p1 switch
+							p1.switchOut(selection-1-4);
+							p2.fight(move-1);
+						}
+						selection = 0;
 					}
-	    		});
-	    		switchPanel.add(switches[mon]);
-	    	}
-	    	c.gridx = 0;
-	    	c.gridy = 6;
-	    	c.gridwidth = 4;
-	    	c.gridheight = 1;
-	    	c.weightx = 0.0;
-			c.weighty = 0.0;
-	    	c.anchor = GridBagConstraints.FIRST_LINE_START;
-	    	c.fill = GridBagConstraints.HORIZONTAL;
-	    	c.insets = new Insets(0, 0, 0, 0);
-	    	panel.add(switchPanel, c);
-	    	text = new JTextArea(20, 20);
-	    	text.setText("The match has begun!");
-	    	text.setEditable(false);
-	    	text.setLineWrap(true);
-	    	text.setWrapStyleWord(true);
-	    	JScrollPane pane = new JScrollPane(text,
-	    			ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-	    			ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-	    	c.gridx = 4;
-	    	c.gridy = 0;
-	    	c.gridwidth = 3;
-	    	c.gridheight = 7;
-	    	c.weightx = 0.5;
-			c.weighty = 0.5;
-	    	c.anchor = GridBagConstraints.FIRST_LINE_END;
-	    	c.fill = GridBagConstraints.BOTH;
-	    	c.insets = new Insets(5, 5, 5, 5);
-	    	panel.add(pane, c);
-	    	frame.getContentPane().add(panel);
+					swapView();
+				}
+    		});
+    		movePanel.add(moves[move]);
     	}
-    	frame.validate();
-    	frame.repaint();
+    	c.gridx = 0;
+    	c.gridy = 4;
+    	c.gridwidth = 4;
+    	c.gridheight = 1;
+    	c.weightx = 0.0;
+		c.weighty = 0.0;
+    	c.anchor = GridBagConstraints.FIRST_LINE_START;
+    	c.fill = GridBagConstraints.HORIZONTAL;
+    	c.insets = new Insets(0, 0, 0, 0);
+    	panel.add(movePanel, c);
+    	switchOut = new JLabel("Switch");
+    	c.gridx = 0;
+    	c.gridy = 5;
+    	c.gridwidth = 4;
+    	c.gridheight = 1;
+    	c.weightx = 0.0;
+		c.weighty = 0.0;
+    	c.anchor = GridBagConstraints.FIRST_LINE_START;
+    	c.fill = GridBagConstraints.HORIZONTAL;
+    	c.insets = new Insets(0, 10, 0, 0);
+    	panel.add(switchOut, c);
+    	GridLayout gl2 = new GridLayout(3, 2);
+    	switchPanel.setLayout(gl2);
+    	for(int mon = 0; mon < switches.length; mon++) {
+    		if(currPlayer == 1) {
+    			switches[mon] = new Button2(p1.getPokemon()[mon].getName(), mon+1);
+    			if(p1.getPokemon()[mon].getHealth() <= 0 || p1.getPokemon()[mon] == p1.getCurrentMon()) {
+    				switches[mon].setEnabled(false);
+    			}
+    		}
+    		else {
+    			switches[mon] = new Button2(p2.getPokemon()[mon].getName(), mon+1);
+    			if(p2.getPokemon()[mon].getHealth() <= 0 || p2.getPokemon()[mon] == p2.getCurrentMon()) {
+    				switches[mon].setEnabled(false);
+    			}
+    		}
+    		switches[mon].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int move = ((Button2)e.getSource()).getNum();
+					if(currPlayer == 1) { // p1 switch
+						selection = move+4;
+					}
+					else { // p2 switch
+						if(selection > 4) { // p1 switch
+							if(p1.getCurrentMon().getSpeed() > p2.getCurrentMon().getSpeed()) {
+								p1.switchOut(selection-1-4);
+								p2.switchOut(move-1);
+							}
+							else if(p2.getCurrentMon().getSpeed() > p1.getCurrentMon().getSpeed()) {
+								p2.switchOut(move-1);
+								p1.switchOut(selection-1-4);
+			                }
+			                else {
+			                	if(Math.random()>=0.5) {
+			                		p1.switchOut(selection-1-4);
+			                		p2.switchOut(move-1);
+			                	}
+			                	else {
+			                		p2.switchOut(move-1);
+			                		p1.switchOut(selection-1-4);
+			                	}
+			                }
+						}
+						else { // p1 fight
+							p2.switchOut(move-1);
+							p1.fight(selection-1);
+						}
+						selection = 0;
+					}
+					swapView();
+				}
+    		});
+    		switchPanel.add(switches[mon]);
+    	}
+    	c.gridx = 0;
+    	c.gridy = 6;
+    	c.gridwidth = 4;
+    	c.gridheight = 1;
+    	c.weightx = 0.0;
+		c.weighty = 0.0;
+    	c.anchor = GridBagConstraints.FIRST_LINE_START;
+    	c.fill = GridBagConstraints.HORIZONTAL;
+    	c.insets = new Insets(0, 0, 0, 0);
+    	panel.add(switchPanel, c);
+    	text = new JTextArea(20, 20);
+    	text.setText("The match has begun!");
+    	text.setEditable(false);
+    	text.setLineWrap(true);
+    	text.setWrapStyleWord(true);
+    	JScrollPane pane = new JScrollPane(text,
+    			ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+    			ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    	c.gridx = 4;
+    	c.gridy = 0;
+    	c.gridwidth = 3;
+    	c.gridheight = 7;
+    	c.weightx = 0.5;
+		c.weighty = 0.5;
+    	c.anchor = GridBagConstraints.FIRST_LINE_END;
+    	c.fill = GridBagConstraints.BOTH;
+    	c.insets = new Insets(5, 5, 5, 5);
+    	panel.add(pane, c);
+    	frame.getContentPane().add(panel);
+    	frame.pack();
+    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	frame.setLocation(100, 100);
+    	// frame.setResizable(false);
+    	frame.setTitle("NOT Pokemon");
+    	frame.setVisible(true);
     }
     
     private void log() {

@@ -5,40 +5,40 @@ import java.nio.file.Files;
 import java.io.*;
 
 public class BasicPokemon {
-    Calculator calculator = new Calculator();
+    private Calculator calculator = new Calculator();
     private int dex = 0;
     private String name = "";
-     int baseHealth;
+    private int baseHealth;
     private int health;
     private int baseSpecialDefense;
-    int sleepCounter;
+    private int sleepCounter;
     private int baseDefense;
 
     private int baseAttack;
 
     private int baseSpecialAttack;
-    public String status = "";
+    private String status = "";
     private int baseSpeed;
 
-    BasicMove[] moves = new BasicMove[4];
+    private BasicMove[] moves = new BasicMove[4];
 
     private String type1 = "";
     private String type2 = "";
 
     //    private String status;
 //    private boolean hasStatus;
-    int attackIncrease;
-    int attackDecrease;
-    int specialAttackIncrease;
-    int specialAttackDecrease;
-    int defenseIncrease;
-    int defenseDecrease;
-    int specialDefenseIncrease;
-    int specialDefenseDecrease;
-    int speedIncrease;
-    int speedDecrease;
+    private int attackIncrease;
+    private int attackDecrease;
+    private int specialAttackIncrease;
+    private int specialAttackDecrease;
+    private int defenseIncrease;
+    private int defenseDecrease;
+    private int specialDefenseIncrease;
+    private int specialDefenseDecrease;
+    private int speedIncrease;
+    private int speedDecrease;
 
-    public int convertMmonName(String monName) {
+    public int convertMonName(String monName) {
         int moveNumber = -1;
         String copy = "something went wrong; ";
         try {
@@ -75,7 +75,7 @@ public class BasicPokemon {
 
     public BasicPokemon(String pokeName) {
         name = pokeName;
-        int dexNumber = convertMmonName(pokeName);
+        int dexNumber = convertMonName(pokeName);
         dex = dexNumber;
         for (int i = 0; i < 4; i++) {
             moves[i] = new BasicMove(1);
@@ -128,7 +128,7 @@ public class BasicPokemon {
 ////        statsApplied=true;
 //    }
 
-    public void setStats(int dexNUmber) {
+    public void setStats(int dexNumber) {
 
         String copy = "something went wrong; ";
         try {
@@ -140,7 +140,7 @@ public class BasicPokemon {
         }
         String[] splittedCopy;
         splittedCopy = copy.split("\n");
-        String stats = splittedCopy[dexNUmber - 1];
+        String stats = splittedCopy[dexNumber - 1];
         String[] s = stats.split(";");
         name = s[1];
         type1 = s[2];
@@ -602,4 +602,16 @@ public class BasicPokemon {
         }
         return answer;
     }
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	public int getBaseHealth() {
+		return baseHealth;
+	}
 }

@@ -323,31 +323,31 @@ public class Battle {
             b.selection=0;
             if(p1WillSwitch==true&&p2WillSwitch==true){
                 if(p1.currentMon.getSpeed()>p2.currentMon.getSpeed()){
-                    p1.switchOut();
-                    p2.switchOut();
+                    //p1.switchOut();
+                    //p2.switchOut();
                 }
                 else if(p2.currentMon.getSpeed()>p1.currentMon.getSpeed()){
-                    p2.switchOut();
-                    p1.switchOut();
+                    //p2.switchOut();
+                    //p1.switchOut();
                 }
                 else{
                     if(Math.random()>0.5){
-                        p1.switchOut();
-                        p2.switchOut();
+                        //p1.switchOut();
+                        //p2.switchOut();
                     }
                     else{
-                        p2.switchOut();
-                        p1.switchOut();
+                        //p2.switchOut();
+                        //p1.switchOut();
                     }
                 }
 
             }
             else if(p1WillSwitch==true){
-                p1.switchOut();
+                //p1.switchOut();
                 p2.fight(p2SelectedMoveIndex);
             }
             else if(p2WillSwitch==true){
-                p2.switchOut();
+                //p2.switchOut();
                 p1.fight(p1SelectedMoveIndex);
             }
             else{
@@ -376,11 +376,11 @@ public class Battle {
                 break;
             }
             if(p1.currentMon.getHealth()<=0){
-                p1.switchOut();
+                //p1.switchOut();
                 P1numberOfFaintedMons++;
             }
             if(p2.currentMon.getHealth()<=0){
-                p2.switchOut();
+                //p2.switchOut();
                 P2numberOfFaintedMons++;
             }
         }
