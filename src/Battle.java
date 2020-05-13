@@ -99,11 +99,15 @@ public Battle(){
 			image1.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					JOptionPane leftPokemonInfoPopup=new JOptionPane("P1 current Pokemon info");
-					leftPokemonInfoPopup.showMessageDialog(leftDisplayPanel,
-							p1.getCurrentMon().toString(),"Player 1 Pokemon Info",
-							2,
-							new ImageIcon("Sprites/SpritesFront/"+p1.getCurrentMon().getID()+".gif"));
+					if(SwingUtilities.isRightMouseButton(e)) {
+						JOptionPane leftPokemonInfoPopup = new JOptionPane("P1 current Pokemon info");
+
+						leftPokemonInfoPopup.setBackground(Color.DARK_GRAY);
+						leftPokemonInfoPopup.showMessageDialog(leftDisplayPanel,
+								p1.getCurrentMon().toString(), "Player 1 Pokemon Info",
+								2,
+								new ImageIcon("Sprites/SpritesFront/" + p1.getCurrentMon().getID() + ".gif"));
+					}
 				}
 			});
 //			leftP1Image.setIcon(pic);
@@ -112,14 +116,16 @@ public Battle(){
 			image2.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					JOptionPane leftPokemonInfoPopup=new JOptionPane("P2 current Pokemon info");
-				leftPokemonInfoPopup.showMessageDialog(
-						leftDisplayPanel,
-						p2.getCurrentMon().toString(),
-						"Player 2 Pokemon Info",
-						2,
-						new ImageIcon("Sprites/SpritesFront/"+p2.getCurrentMon().getID()+".gif"));
+					if (SwingUtilities.isRightMouseButton(e)) {
+						JOptionPane leftPokemonInfoPopup = new JOptionPane("P2 current Pokemon info");
+						leftPokemonInfoPopup.showMessageDialog(
+								leftDisplayPanel,
+								p2.getCurrentMon().toString(),
+								"Player 2 Pokemon Info",
+								2,
+								new ImageIcon("Sprites/SpritesFront/" + p2.getCurrentMon().getID() + ".gif"));
 //				rightText.setText(rightText.getText()+p2.getCurrentMon().toString());
+					}
 				}
 			});
 			GroupLayout layout1 = new GroupLayout(leftDisplayPanel);
