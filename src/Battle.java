@@ -94,7 +94,15 @@ public Battle(){
 
     		name1 = new JLabel(p1.getCurrentMon().getName());
     		name2 = new JLabel(p2.getCurrentMon().getName());
-			ImageIcon pic = new ImageIcon("Sprites/SpritesBack/"+p1.getCurrentMon().getID()+"-back.gif");
+			ImageIcon pic =
+//					new ImageIcon
+//					(new ImageIcon(
+//							"Sprites/SpritesFront/" + p1.getCurrentMon().getID() + ".gif")
+//							.getImage().
+//									getScaledInstance(100, 500, Image.SCALE_DEFAULT));
+
+					new ImageIcon("Sprites/SpritesBack/"+p1.getCurrentMon().getID()+"-back.gif");
+		pic =new ImageIcon(pic.getImage().getScaledInstance((int)(pic.getIconWidth() * 4), (int)(pic.getIconHeight() * 4), Image.SCALE_DEFAULT));
 			image1 = new JLabel(pic);
 			image1.addMouseListener(new MouseAdapter() {
 				@Override
@@ -106,6 +114,7 @@ public Battle(){
 						leftPokemonInfoPopup.showMessageDialog(leftDisplayPanel,
 								p1.getCurrentMon().toString(), "Player 1 Pokemon Info",
 								2,
+//								(new ImageIcon (new ImageIcon("Sprites/SpritesFront/" + p1.getCurrentMon().getID() + ".gif").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
 								new ImageIcon("Sprites/SpritesFront/" + p1.getCurrentMon().getID() + ".gif"));
 					}
 				}
