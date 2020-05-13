@@ -1,8 +1,7 @@
+import java.awt.event.*;
 import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Battle {
     public static int P1numberOfFaintedMons=0;
@@ -20,10 +19,11 @@ public class Battle {
 	private Button[] leftMoveButtons = new Button[4],rightMoveButtons=new Button[4];
 	private int p1Selection=-1;
 	private int p2Selection =-1;
-	private JButton p1PokemonButton=new JButton("Get your Pokemon's stats"), p2PokemonButton=new JButton("Get your Pokemon's stats");
+//	private JButton p1PokemonButton=new JButton("Get your Pokemon's stats"), p2PokemonButton=new JButton("Get your Pokemon's stats");
 	private Button[] leftSwitchButtons = new Button[6],rightSwitchButtons = new Button[6];
 	private ButtonGroup leftButtons=new ButtonGroup(),rightButtons=new ButtonGroup();
 	public JTextArea leftText, rightText;
+//	private JButton leftP1Image=new JButton();
 
 
 //	private int playerPerspective=1;
@@ -65,39 +65,63 @@ public Battle(){
 		rightUI.add(rightSwitchPanel);
 		mainPanel.add(leftPanel);
 		mainPanel.add(rightPanel);
-		p1PokemonButton.setVisible(true);
-		p1PokemonButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane leftPokemonInfoPopup=new JOptionPane("P1 current Pokemon info");
-				leftPokemonInfoPopup.showMessageDialog(leftDisplayPanel,
-						p1.currentMon.toString(),"Pokemon Info",
-						2,
-						new ImageIcon("Sprites/SpritesFront/"+p1.currentMon.getID()+".gif"));
-//			leftText.setText(leftText.getText()+p1.currentMon.toString());
-			}
-		});
-		p2PokemonButton.setVisible(true);
-		p2PokemonButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane leftPokemonInfoPopup=new JOptionPane("P2 current Pokemon info");
-				leftPokemonInfoPopup.showMessageDialog(
-						rightDisplayPanel,
-						p2.currentMon.toString(),
-						"Pokemon Info",
-						2,
-						new ImageIcon("Sprites/SpritesFront/"+p2.currentMon.getID()+".gif"));
-//				rightText.setText(rightText.getText()+p2.currentMon.toString());
-			}
-		});
+//		p1PokemonButton.setVisible(true);
+//		p1PokemonButton.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				JOptionPane leftPokemonInfoPopup=new JOptionPane("P1 current Pokemon info");
+//				leftPokemonInfoPopup.showMessageDialog(leftDisplayPanel,
+//						p1.getCurrentMon().toString(),"Pokemon Info",
+//						2,
+//						new ImageIcon("Sprites/SpritesFront/"+p1.getCurrentMon().getID()+".gif"));
+////			leftText.setText(leftText.getText()+p1.getCurrentMon().toString());
+//			}
+//		});
+//		p2PokemonButton.setVisible(true);
+//		p2PokemonButton.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				JOptionPane leftPokemonInfoPopup=new JOptionPane("P2 current Pokemon info");
+//				leftPokemonInfoPopup.showMessageDialog(
+//						rightDisplayPanel,
+//						p2.getCurrentMon().toString(),
+//						"Pokemon Info",
+//						2,
+//						new ImageIcon("Sprites/SpritesFront/"+p2.getCurrentMon().getID()+".gif"));
+////				rightText.setText(rightText.getText()+p2.getCurrentMon().toString());
+//			}
+//		});
 
-    		name1 = new JLabel(p1.currentMon.getName());
-    		name2 = new JLabel(p2.currentMon.getName());
-			ImageIcon pic = new ImageIcon("Sprites/SpritesBack/"+p1.currentMon.getID()+"-back.gif");
+    		name1 = new JLabel(p1.getCurrentMon().getName());
+    		name2 = new JLabel(p2.getCurrentMon().getName());
+			ImageIcon pic = new ImageIcon("Sprites/SpritesBack/"+p1.getCurrentMon().getID()+"-back.gif");
 			image1 = new JLabel(pic);
-			pic = new ImageIcon("Sprites/SpritesFront/"+p2.currentMon.getID()+".gif");
+			image1.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					JOptionPane leftPokemonInfoPopup=new JOptionPane("P1 current Pokemon info");
+					leftPokemonInfoPopup.showMessageDialog(leftDisplayPanel,
+							p1.getCurrentMon().toString(),"Player 1 Pokemon Info",
+							2,
+							new ImageIcon("Sprites/SpritesFront/"+p1.getCurrentMon().getID()+".gif"));
+				}
+			});
+//			leftP1Image.setIcon(pic);
+			pic = new ImageIcon("Sprites/SpritesFront/"+p2.getCurrentMon().getID()+".gif");
 			image2 = new JLabel(pic);
+			image2.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					JOptionPane leftPokemonInfoPopup=new JOptionPane("P2 current Pokemon info");
+				leftPokemonInfoPopup.showMessageDialog(
+						leftDisplayPanel,
+						p2.getCurrentMon().toString(),
+						"Player 2 Pokemon Info",
+						2,
+						new ImageIcon("Sprites/SpritesFront/"+p2.getCurrentMon().getID()+".gif"));
+//				rightText.setText(rightText.getText()+p2.getCurrentMon().toString());
+				}
+			});
 			GroupLayout layout1 = new GroupLayout(leftDisplayPanel);
 			leftDisplayPanel.setLayout(layout1);
 			layout1.setAutoCreateGaps(true);
@@ -106,9 +130,9 @@ public Battle(){
 				.addGroup(layout1.createParallelGroup()
 					.addGap(500)
 					.addComponent(name1)
-						.addComponent(p1PokemonButton)
-						.addComponent(image1))
-
+//						.addComponent(p1PokemonButton)
+					.addComponent(image1))
+//.addComponent(leftP1Image)
 				.addGroup(layout1.createParallelGroup(GroupLayout.Alignment.TRAILING)
 					.addComponent(name2)
 					.addComponent(image2))
@@ -120,9 +144,10 @@ public Battle(){
 				.addGap(200)
 				.addComponent(name1)
 				.addComponent(image1)
-					.addComponent(p1PokemonButton)
+//					.addComponent(leftP1Image)
+//					.addComponent(p1PokemonButton)
 			);
-			layout1.linkSize(SwingConstants.HORIZONTAL, name1, name2, image1, image2,p1PokemonButton);
+			layout1.linkSize(SwingConstants.HORIZONTAL, name1, name2, image1, image2);
 			layout1.linkSize(image1, image2);
 			leftDisplayPanel.setBackground(Color.LIGHT_GRAY);
 			c.gridx = 0;
@@ -150,7 +175,7 @@ public Battle(){
     	GridLayout layout2 = new GridLayout(1, 4);
     	leftMovePanel.setLayout(layout2);
     	for(int i = 0; i < leftMoveButtons.length;i++) {
-    		leftMoveButtons[i] = new Button(p1.currentMon.moves[i].getMoveName(),i);
+    		leftMoveButtons[i] = new Button(p1.getCurrentMon().getMoves()[i].getName(),i);
 //    		leftMoveButtons[i].addActionListener(new ActionListener() {
 //                @Override
 //                public void actionPerformed(ActionEvent e) {
@@ -183,7 +208,7 @@ public Battle(){
     	layout2 = new GridLayout(1, 6);
     	leftSwitchPanel.setLayout(layout2);
     	for(int i = 0; i < leftSwitchButtons.length;i++) {
-    		leftSwitchButtons[i] = new Button(p1.pokemon[i].getName(),i+4);
+    		leftSwitchButtons[i] = new Button(p1.getPokemon()[i].getName(),i+4);
 //    		switches[mon].addActionListener(new ActionListener() {
 //                @Override
 //                public void actionPerformed(ActionEvent e) {
@@ -237,12 +262,36 @@ public Battle(){
 
 
     	GridBagConstraints y = new GridBagConstraints();
-		name3 = new JLabel(p2.currentMon.getName());
-		name4 = new JLabel(p1.currentMon.getName());
-		ImageIcon pic2 = new ImageIcon("Sprites/SpritesBack/"+p2.currentMon.getID()+"-back.gif");
+		name3 = new JLabel(p2.getCurrentMon().getName());
+		name4 = new JLabel(p1.getCurrentMon().getName());
+		ImageIcon pic2 = new ImageIcon("Sprites/SpritesBack/"+p2.getCurrentMon().getID()+"-back.gif");
 		image3 = new JLabel(pic2);
-		pic2 = new ImageIcon("Sprites/SpritesFront/"+p1.currentMon.getID()+".gif");
+		image3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane leftPokemonInfoPopup=new JOptionPane("P2 current Pokemon info");
+				leftPokemonInfoPopup.showMessageDialog(
+						rightDisplayPanel,
+						p2.getCurrentMon().toString(),
+						"Player 2 Pokemon Info",
+						2,
+						new ImageIcon("Sprites/SpritesFront/"+p2.getCurrentMon().getID()+".gif"));
+
+
+			}
+		});
+		pic2 = new ImageIcon("Sprites/SpritesFront/"+p1.getCurrentMon().getID()+".gif");
 		image4 = new JLabel(pic2);
+		image4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane leftPokemonInfoPopup=new JOptionPane("P1 current Pokemon info");
+				leftPokemonInfoPopup.showMessageDialog(rightDisplayPanel,
+						p1.getCurrentMon().toString(),"Player 1 Pokemon Info",
+						2,
+						new ImageIcon("Sprites/SpritesFront/"+p1.getCurrentMon().getID()+".gif"));
+			}
+		});
 		GroupLayout layout4 = new GroupLayout(rightDisplayPanel);
 		rightDisplayPanel.setLayout(layout4);
 		layout4.setAutoCreateGaps(true);
@@ -251,7 +300,7 @@ public Battle(){
 				.addGroup(layout4.createParallelGroup()
 						.addGap(500)
 						.addComponent(name3)
-						.addComponent(p2PokemonButton)
+//						.addComponent(p2PokemonButton)
 						.addComponent(image3))
 
 				.addGroup(layout4.createParallelGroup(GroupLayout.Alignment.TRAILING)
@@ -264,7 +313,7 @@ public Battle(){
 				.addGap(200)
 				.addComponent(name3)
 				.addComponent(image3)
-				.addComponent(p2PokemonButton)
+//				.addComponent(p2PokemonButton)
 		);
 		layout4.linkSize(SwingConstants.HORIZONTAL, name3, name4, image3, image4);
 		layout4.linkSize(image3, image4);
@@ -296,7 +345,7 @@ public Battle(){
 		GridLayout layout3 = new GridLayout(1, 4);
 		rightMovePanel.setLayout(layout3);
 		for(int i = 0; i < rightMoveButtons.length;i++) {
-			rightMoveButtons[i] = new Button(p2.currentMon.moves[i].getMoveName(),i);
+			rightMoveButtons[i] = new Button(p2.getCurrentMon().getMoves()[i].getName(),i);
 //    		rightMoveButtons[i].addActionListener(new ActionListener() {
 //                @Override
 //                public void actionPerformed(ActionEvent e) {
@@ -329,7 +378,7 @@ public Battle(){
 		layout3 = new GridLayout(1, 6);
 		rightSwitchPanel.setLayout(layout3);
 		for(int i = 0; i < rightSwitchButtons.length;i++) {
-			rightSwitchButtons[i] = new Button(p2.pokemon[i].getName(),i+4);
+			rightSwitchButtons[i] = new Button(p2.getPokemon()[i].getName(),i+4);
 //    		switches[mon].addActionListener(new ActionListener() {
 //                @Override
 //                public void actionPerformed(ActionEvent e) {
@@ -393,9 +442,9 @@ public Battle(){
         EaseOfUse ez=new EaseOfUse();
         Scanner kboard=new Scanner(System.in);
         Calculator calc=new Calculator();
-        PlayMusic playMusic = new PlayMusic();
+//        PlayMusic playMusic = new PlayMusic();
         String music = "PokemonTitleScreen.wav";
-        playMusic.playMusic(music);
+//        playMusic.playMusic(music);
         Pokemon[] p1mons=new Pokemon[6];
         Pokemon[] p2mons=new Pokemon[6];
         int[][] givenMoves = new int[6][4];
@@ -491,27 +540,61 @@ public Battle(){
 //            int switchSelection;
             for(int i=0;i<b.leftMoveButtons.length;i++){
 
-            	b.leftMoveButtons[i].addActionListener(new ActionListener() {
+				b.leftMoveButtons[i].addMouseListener(new MouseAdapter() {
 					@Override
-					public void actionPerformed(ActionEvent e) {
-//moveSelection[0] =((Button)e.getSource()).num;
-						b.p1Selection=((Button)e.getSource()).num;
-//						((Button) e.getSource()).setEnabled(false);
-//
+					public void mouseClicked(MouseEvent e) {
+
+						if(SwingUtilities.isRightMouseButton(e)){
+							int x = ((Button)e.getSource()).num;
+							String textInfo=p1.getCurrentMon().getMoves()[x].toString();
+							popup.showMessageDialog(b.leftDisplayPanel,
+									textInfo,
+									"Move Info",
+									2,
+									(new ImageIcon (new ImageIcon("Types/"+p1.getCurrentMon().getMoves()[x].getType()+".png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+
+						}
 
 					}
 				});
+				b.leftMoveButtons[i].addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						b.p1Selection =((Button)e.getSource()).num;
+					}
+				});
             	b.leftButtons.add(b.leftMoveButtons[i]);
+				//					@Override
+//					public void actionPerformed(ActionEvent e) {
+////moveSelection[0] =((Button)e.getSource()).num;
+//
+////						((Button) e.getSource()).setEnabled(false);
+////
+//
+//					}
 			}
 		for(int i=0;i<b.leftSwitchButtons.length;i++){
 
+			b.leftSwitchButtons[i].addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+
+					if(SwingUtilities.isRightMouseButton(e)){
+						int x = ((Button)e.getSource()).num;
+						String textInfo=p1.getPokemon()[x-4].toString();
+						popup.showMessageDialog(b.leftDisplayPanel,
+								textInfo,
+								"Pokemon Switch info",
+								2,
+								new ImageIcon("Sprites/SpritesFront/"+p1.getPokemon()[x-4].getID()+".gif"));
+					}
+
+				}
+			});
 			b.leftSwitchButtons[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-//moveSelection[0] =((Button)e.getSource()).num;
-					b.p1Selection=((Button)e.getSource()).num;
-//					((Button) e.getSource()).setEnabled(false);
-//
+					b.p1Selection =((Button)e.getSource()).num;
 
 				}
 			});
@@ -521,30 +604,74 @@ public Battle(){
 
 		for(int i=0;i<b.rightMoveButtons.length;i++){
 
-			b.rightMoveButtons[i].addActionListener(new ActionListener() {
+			b.rightMoveButtons[i].addMouseListener(new MouseAdapter() {
 				@Override
-				public void actionPerformed(ActionEvent e) {
-//moveSelection[0] =((Button)e.getSource()).num;
-					b.p2Selection =((Button)e.getSource()).num;
-//						((Button) e.getSource()).setEnabled(false);
-//
+				public void mouseClicked(MouseEvent e) {
+
+					if(SwingUtilities.isRightMouseButton(e)){
+						int x = ((Button)e.getSource()).num;
+						String textInfo=p2.getCurrentMon().getMoves()[x].toString();
+						popup.showMessageDialog(b.rightDisplayPanel,
+								textInfo,
+								"Move Info",
+								2,
+								(new ImageIcon (new ImageIcon("Types/"+p2.getCurrentMon().getMoves()[x].getType()+".png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+
+					}
 
 				}
 			});
+			b.rightMoveButtons[i].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					b.p2Selection =((Button)e.getSource()).num;
+				}
+			});
+//				@Override
+//				public void actionPerformed(ActionEvent e) {
+////moveSelection[0] =((Button)e.getSource()).num;
+//					b.p2Selection =((Button)e.getSource()).num;
+////						((Button) e.getSource()).setEnabled(false);
+////
+//
+//				}
+
 			b.rightButtons.add(b.rightMoveButtons[i]);
 		}
 		for(int i=0;i<b.rightSwitchButtons.length;i++){
 
-			b.rightSwitchButtons[i].addActionListener(new ActionListener() {
+			b.rightSwitchButtons[i].addMouseListener(new MouseAdapter() {
 				@Override
-				public void actionPerformed(ActionEvent e) {
-//moveSelection[0] =((Button)e.getSource()).num;
-					b.p2Selection =((Button)e.getSource()).num;
-//					((Button) e.getSource()).setEnabled(false);
-//
+				public void mouseClicked(MouseEvent e) {
+
+					if(SwingUtilities.isRightMouseButton(e)){
+						int x = ((Button)e.getSource()).num;
+						String textInfo=p2.getPokemon()[x-4].toString();
+						popup.showMessageDialog(b.rightDisplayPanel,
+								textInfo,
+								"Pokemon Switch info",
+								2,
+								new ImageIcon("Sprites/SpritesFront/"+p2.getPokemon()[x-4].getID()+".gif"));
+					}
 
 				}
 			});
+			b.rightSwitchButtons[i].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+										b.p2Selection =((Button)e.getSource()).num;
+
+				}
+			});
+//				@Override
+//				public void actionPerformed(ActionEvent e) {
+////moveSelection[0] =((Button)e.getSource()).num;
+//					b.p2Selection =((Button)e.getSource()).num;
+////					((Button) e.getSource()).setEnabled(false);
+////
+
+
+
 			b.rightButtons.add(b.rightSwitchButtons[i]);
 		}
 
@@ -563,7 +690,7 @@ public Battle(){
                 } else if (b.p1Selection <=4 &&b.p1Selection>=0) {
 //                    ez.println("Choose which move you want to use");
 //                    for (int i = 0; i < 4; i++) {
-//                        ez.println((i + 1) + ")" + p1.currentMon.getMoves()[i]);
+//                        ez.println((i + 1) + ")" + p1.getCurrentMon().getMoves()[i]);
 //                    }
 
                     p1SelectedMoveIndex = b.p1Selection;
@@ -592,7 +719,7 @@ public Battle(){
 				} else if (b.p2Selection <=4 &&b.p2Selection>=0) {
 //                    ez.println("Choose which move you want to use");
 //                    for (int i = 0; i < 4; i++) {
-//                        ez.println((i + 1) + ")" + p1.currentMon.getMoves()[i]);
+//                        ez.println((i + 1) + ")" + p1.getCurrentMon().getMoves()[i]);
 //                    }
 
 					p2SelectedMoveIndex = b.p2Selection;
@@ -609,30 +736,39 @@ public Battle(){
             }
 			youShallNotPass=true;
             if(p1WillSwitch && p2WillSwitch){
-                if(p1.currentMon.getSpeed()>p2.currentMon.getSpeed()){
-                    p1.switchOut(p1.pokemon[p1SwitchIn]);
-                    p2.switchOut(p2.pokemon[p2SwitchIn]);
+                if(p1.getCurrentMon().getSpeed()>p2.getCurrentMon().getSpeed()){
+					p1.getCurrentMon().resetBoosts();
+					p2.getCurrentMon().resetBoosts();
+                	p1.switchOut(p1.getPokemon()[p1SwitchIn]);
+                	p2.switchOut(p2.getPokemon()[p2SwitchIn]);
                     p1WillSwitch=false;
                     p2WillSwitch=false;
                 }
-                else if(p2.currentMon.getSpeed()>p1.currentMon.getSpeed()){
-                    p2.switchOut(p2.pokemon[p2SwitchIn]);
-                    p1.switchOut(p1.pokemon[p1SwitchIn]);
+                else if(p2.getCurrentMon().getSpeed()>p1.getCurrentMon().getSpeed()){
+
+					p1.getCurrentMon().resetBoosts();
+					p2.getCurrentMon().resetBoosts();
+                	p2.switchOut(p2.getPokemon()[p2SwitchIn]);
+                    p1.switchOut(p1.getPokemon()[p1SwitchIn]);
                     p1WillSwitch=false;
 					p2WillSwitch=false;
 
 				}
                 else{
                     if(Math.random()>0.5){
-                        p1.switchOut(p1.pokemon[p1SwitchIn]);
-                        p2.switchOut(p2.pokemon[p2SwitchIn]);
+						p1.getCurrentMon().resetBoosts();
+						p2.getCurrentMon().resetBoosts();
+                    	p1.switchOut(p1.getPokemon()[p1SwitchIn]);
+                        p2.switchOut(p2.getPokemon()[p2SwitchIn]);
 						p1WillSwitch=false;
 						p2WillSwitch=false;
 
 					}
                     else{
-                        p2.switchOut(p2.pokemon[p2SwitchIn]);
-                        p1.switchOut(p1.pokemon[p1SwitchIn]);
+						p1.getCurrentMon().resetBoosts();
+						p2.getCurrentMon().resetBoosts();
+                    	p2.switchOut(p2.getPokemon()[p2SwitchIn]);
+                        p1.switchOut(p1.getPokemon()[p1SwitchIn]);
 						p1WillSwitch=false;
 						p2WillSwitch=false;
 
@@ -642,14 +778,18 @@ public Battle(){
             }
 
             else if(p1WillSwitch){
-                p1.switchOut(p1.pokemon[p1SwitchIn]);
+				p1.getCurrentMon().resetBoosts();
+
+            	p1.switchOut(p1.getPokemon()[p1SwitchIn]);
                 p2.fight(p2SelectedMoveIndex);
 				p1WillSwitch=false;
 				p2WillSwitch=false;
 
 			}
             else if(p2WillSwitch){
-                p2.switchOut(p2.pokemon[p2SwitchIn]);
+
+				p2.getCurrentMon().resetBoosts();
+            	p2.switchOut(p2.getPokemon()[p2SwitchIn]);
                 p1.fight(p1SelectedMoveIndex);
 				p1WillSwitch=false;
 				p2WillSwitch=false;
@@ -657,7 +797,7 @@ public Battle(){
 			}
             else{
 
-                int x=calc.calculateWhoGoesFirst(p1,p2,p1.currentMon.getMoves()[p1SelectedMoveIndex],p2.currentMon.getMoves()[p2SelectedMoveIndex]);
+                int x=calc.calculateWhoGoesFirst(p1,p2,p1.getCurrentMon().getMoves()[p1SelectedMoveIndex],p2.getCurrentMon().getMoves()[p2SelectedMoveIndex]);
                 if(x==1){
                     p1.fight(p1SelectedMoveIndex);
                     p2.fight(p2SelectedMoveIndex);
@@ -692,16 +832,16 @@ public Battle(){
 
 				break;
             }
-            if(p1.currentMon.getHealth()<=0){
+            if(p1.getCurrentMon().getHealth()<=0){
 				P1numberOfFaintedMons++;
             	int firstOccurence=-1;
                 String x[]=new String[6-Battle.P1numberOfFaintedMons];
                 int z=0;
-                for (int i =0;i<p1.pokemon.length;i++){
-                	if(p1.pokemon[i].getHealth()<=0){
+                for (int i =0;i<p1.getPokemon().length;i++){
+                	if(p1.getPokemon()[i].getHealth()<=0){
 
 					}
-                	else if(p1.pokemon[i]==p1.currentMon){
+                	else if(p1.getPokemon()[i]==p1.getCurrentMon()){
 
 					}
                 	else{
@@ -709,14 +849,14 @@ public Battle(){
                 			firstOccurence=i;
 						}
 
-                		x[z]=(i+1)+") "+p1.pokemon[i].getName()+"\n";
+                		x[z]=(i+1)+") "+p1.getPokemon()[i].getName()+"\n";
                 		z++;
 
 					}
 				}
 //            	p1SwitchIn=Integer.parseInt(popup.showInputDialog(b.leftDisplayPanel,"Your current Pokemon fainted." +
 //						" The pokemon that you can switch in are"+x+"Please enter the number of the pokemon you want to switch in.","Pokemon defeated",2,new ImageIcon (new ImageIcon("Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
-//				p1.switchOut(p1.pokemon[p1SwitchIn-1]);
+//				p1.switchOut(p1.getPokemon()[p1SwitchIn-1]);
 				String y= (String) popup.showInputDialog(b.leftDisplayPanel,
 						"Your current Pokemon fainted. Please choose which pokemon you want to switch in."
 						,"Pokemon defeated",
@@ -726,27 +866,27 @@ public Battle(){
 						"Please select a Pokemon");
 
 				p1SwitchIn=Integer.parseInt(String.valueOf(y.charAt(0)));
-				p1.switchOut(p1.pokemon[p1SwitchIn-1]);
+				p1.switchOut(p1.getPokemon()[p1SwitchIn-1]);
 
                 p1SwitchIn=-1;
             }
-            if(p2.currentMon.getHealth()<=0){
+            if(p2.getCurrentMon().getHealth()<=0){
 				P2numberOfFaintedMons++;
             	int firstOccurence=-1;
             	int z=0;
 				String [] x = new String[6-Battle.P2numberOfFaintedMons];
-				for (int i =0;i<p2.pokemon.length;i++){
-					if(p2.pokemon[i].getHealth()<=0){
+				for (int i =0;i<p2.getPokemon().length;i++){
+					if(p2.getPokemon()[i].getHealth()<=0){
 
 					}
-					else if(p2.pokemon[i]==p2.currentMon){
+					else if(p2.getPokemon()[i]==p2.getCurrentMon()){
 
 					}
 					else{
 						if (firstOccurence==-1){
 							firstOccurence=i;
 						}
-						x[z]=(i+1)+") "+p2.pokemon[i].getName()+"\n";
+						x[z]=(i+1)+") "+p2.getPokemon()[i].getName()+"\n";
 						z++;
 					}
 				}
@@ -759,7 +899,7 @@ public Battle(){
 						"Please select a Pokemon");
 
 				p2SwitchIn=Integer.parseInt(String.valueOf(y.charAt(0)));
-            	p2.switchOut(p2.pokemon[p2SwitchIn-1]);
+            	p2.switchOut(p2.getPokemon()[p2SwitchIn-1]);
 
 				p2SwitchIn=-1;
             }
@@ -813,10 +953,10 @@ public Battle(){
 //        givenMoves[3][3]=kboard.nextInt();
 
         //        for(int i=0;i<6;i++){
-//            ez.print(p1.pokemon[i].getName());
+//            ez.print(p1.getPokemon()[i].getName());
 //        }
 //        for(int i=0;i<6;i++){
-//            ez.print(p2.pokemon[i].getName());
+//            ez.print(p2.getPokemon()[i].getName());
 //        }
 //        ez.print("Player 1's)Pokemon"+p1);
 //        ez.print(p2);
@@ -860,48 +1000,48 @@ public Battle(){
 //                200,50,200,400,moveSet1,"Water","Dragon");
         // declares an array of integers
 //        p1.setOpposingPlayer(p2);
-//        ez.println(p2.currentMon);
+//        ez.println(p2.getCurrentMon());
 //        p1.fight();
-//        ez.println(p2.currentMon);
+//        ez.println(p2.getCurrentMon());
 //        p2.switchOut();
-//        ez.println(p2.currentMon);
+//        ez.println(p2.getCurrentMon());
 //        p1.fight();
-//        ez.println(p2.currentMon);
+//        ez.println(p2.getCurrentMon());
 //        p2.switchOut();
-//        ez.println(p2.currentMon);
+//        ez.println(p2.getCurrentMon());
 //        p1.fight();
-//        ez.println(p2.currentMon);
+//        ez.println(p2.getCurrentMon());
     }
     public void repaint(Player p1, Player p2) {
 
-			name1.setText(p1.currentMon.getName());
+			name1.setText(p1.getCurrentMon().getName());
 
-			name2 .setText(p2.currentMon.getName());
+			name2 .setText(p2.getCurrentMon().getName());
 			Icon pic = null;
 
 //				pic =
-				image1.setIcon(new ImageIcon("Sprites/SpritesBack/" + p1.currentMon.getID() + "-back.gif"));
+				image1.setIcon(new ImageIcon("Sprites/SpritesBack/" + p1.getCurrentMon().getID() + "-back.gif"));
 
 
 
 //				pic =
-				image2.setIcon(new ImageIcon("Sprites/SpritesFront/" + p2.currentMon.getID() + ".gif"));
+				image2.setIcon(new ImageIcon("Sprites/SpritesFront/" + p2.getCurrentMon().getID() + ".gif"));
 
 
 			for (int i =0;i<leftMoveButtons.length;i++){
-				leftMoveButtons[i].setText(p1.currentMon.moves[i].getMoveName());
+				leftMoveButtons[i].setText(p1.getCurrentMon().getMoves()[i].getName());
 			}
 			for (int i =0;i<leftSwitchButtons.length;i++){
-				if(p1.pokemon[i].getHealth()<=0){
-					leftSwitchButtons[i].setText(p1.pokemon[i].getName());
+				if(p1.getPokemon()[i].getHealth()<=0){
+					leftSwitchButtons[i].setText(p1.getPokemon()[i].getName());
 					leftSwitchButtons[i].setEnabled(false);
 				}
-				else if(p1.pokemon[i]==p1.currentMon){
-					leftSwitchButtons[i].setText(p1.pokemon[i].getName());
+				else if(p1.getPokemon()[i]==p1.getCurrentMon()){
+					leftSwitchButtons[i].setText(p1.getPokemon()[i].getName());
 					leftSwitchButtons[i].setEnabled(false);
 				}
 				else{
-					leftSwitchButtons[i].setText(p1.pokemon[i].getName());
+					leftSwitchButtons[i].setText(p1.getPokemon()[i].getName());
 					leftSwitchButtons[i].setEnabled(true);
 				}
 			}
@@ -909,34 +1049,34 @@ public Battle(){
 
 
 
-		name3.setText(p2.currentMon.getName());
+		name3.setText(p2.getCurrentMon().getName());
 
-		name4 .setText(p1.currentMon.getName());
+		name4 .setText(p1.getCurrentMon().getName());
 		pic = null;
 
 //		pic = ;
-		image3.setIcon(new ImageIcon("Sprites/SpritesBack/" + p2.currentMon.getID() + "-back.gif"));
+		image3.setIcon(new ImageIcon("Sprites/SpritesBack/" + p2.getCurrentMon().getID() + "-back.gif"));
 
 
 
 //		pic = ;
-		image4.setIcon(new ImageIcon("Sprites/SpritesFront/" + p1.currentMon.getID() + ".gif"));
+		image4.setIcon(new ImageIcon("Sprites/SpritesFront/" + p1.getCurrentMon().getID() + ".gif"));
 
 
 		for (int i =0;i<rightMoveButtons.length;i++){
-			rightMoveButtons[i].setText(p2.currentMon.moves[i].getMoveName());
+			rightMoveButtons[i].setText(p2.getCurrentMon().getMoves()[i].getName());
 		}
 		for (int i =0;i<rightSwitchButtons.length;i++){
-			if(p2.pokemon[i].getHealth()<=0){
-				rightSwitchButtons[i].setText(p2.pokemon[i].getName());
+			if(p2.getPokemon()[i].getHealth()<=0){
+				rightSwitchButtons[i].setText(p2.getPokemon()[i].getName());
 				rightSwitchButtons[i].setEnabled(false);
 			}
-			else if(p2.pokemon[i]==p2.currentMon){
-				rightSwitchButtons[i].setText(p2.pokemon[i].getName());
+			else if(p2.getPokemon()[i]==p2.getCurrentMon()){
+				rightSwitchButtons[i].setText(p2.getPokemon()[i].getName());
 				rightSwitchButtons[i].setEnabled(false);
 			}
 			else{
-				rightSwitchButtons[i].setText(p2.pokemon[i].getName());
+				rightSwitchButtons[i].setText(p2.getPokemon()[i].getName());
 				rightSwitchButtons[i].setEnabled(true);
 			}
 		}
@@ -1051,11 +1191,11 @@ public Battle(){
 //		switchPanel = new JPanel();
 //		GridBagConstraints c = new GridBagConstraints();
 //		try {
-//			name1 = new JLabel(p1.currentMon.getName());
-//			name2 = new JLabel(p2.currentMon.getName());
-//			BufferedImage pic = ImageIO.read(new File("Sprites/SpritesBack/"+p1.currentMon.getID()+"-back.gif"));
+//			name1 = new JLabel(p1.getCurrentMon().getName());
+//			name2 = new JLabel(p2.getCurrentMon().getName());
+//			BufferedImage pic = ImageIO.read(new File("Sprites/SpritesBack/"+p1.getCurrentMon().getID()+"-back.gif"));
 //			image1 = new JLabel(new ImageIcon(pic));
-//			pic = ImageIO.read(new File("Sprites/SpritesFront/"+p2.currentMon.getID()+".gif"));
+//			pic = ImageIO.read(new File("Sprites/SpritesFront/"+p2.getCurrentMon().getID()+".gif"));
 //			image2 = new JLabel(new ImageIcon(pic));
 //			GroupLayout l = new GroupLayout(display);
 //			display.setLayout(l);
@@ -1108,7 +1248,7 @@ public Battle(){
 //		GridLayout l = new GridLayout(1, 4);
 //		movePanel.setLayout(l);
 //		for(int move = 0; move < moves.length; move++) {
-//			moves[move] = new Button(p1.currentMon.moves[move].getMoveName(),move);
+//			moves[move] = new Button(p1.getCurrentMon().moves[move].getMoveName(),move);
 ////    		moves[move].addActionListener(new ActionListener() {
 ////                @Override
 ////                public void actionPerformed(ActionEvent e) {
@@ -1141,7 +1281,7 @@ public Battle(){
 //		l = new GridLayout(1, 6);
 //		switchPanel.setLayout(l);
 //		for(int mon = 0; mon < switches.length; mon++) {
-//			switches[mon] = new Button(p1.pokemon[mon].getName(),mon+4);
+//			switches[mon] = new Button(p1.getPokemon()[mon].getName(),mon+4);
 ////    		switches[mon].addActionListener(new ActionListener() {
 ////                @Override
 ////                public void actionPerformed(ActionEvent e) {
@@ -1304,7 +1444,7 @@ public Battle(){
 //				} else if (b.selection <=4 &&b.selection>=0) {
 ////                    ez.println("Choose which move you want to use");
 ////                    for (int i = 0; i < 4; i++) {
-////                        ez.println((i + 1) + ")" + p1.currentMon.getMoves()[i]);
+////                        ez.println((i + 1) + ")" + p1.getCurrentMon().getMoves()[i]);
 ////                    }
 //
 //					p1SelectedMoveIndex = b.selection;
@@ -1330,7 +1470,7 @@ public Battle(){
 //				} else if (b.selection == 2) {
 //					ez.println("Choose which move you want to use");
 //					for (int i = 0; i < 4; i++) {
-//						ez.println((i + 1) + ")" + p2.currentMon.getMoves()[i]);
+//						ez.println((i + 1) + ")" + p2.getCurrentMon().getMoves()[i]);
 //					}
 //					p2SelectedMoveIndex = kboard.nextInt() - 1;
 //					youShallNotPass = false;
@@ -1343,43 +1483,43 @@ public Battle(){
 //			}
 //			b.selection=-1;
 //			if(p1WillSwitch && p2WillSwitch){
-//				if(p1.currentMon.getSpeed()>p2.currentMon.getSpeed()){
-//					p1.switchOut(p1.pokemon[p1SwitchIn]);
-//					p2.switchOut(p2.pokemon[p2SwitchIn]);
+//				if(p1.getCurrentMon().getSpeed()>p2.getCurrentMon().getSpeed()){
+//					p1.switchOut(p1.getPokemon()[p1SwitchIn]);
+//					p2.switchOut(p2.getPokemon()[p2SwitchIn]);
 //					p1WillSwitch=false;
 //				}
-//				else if(p2.currentMon.getSpeed()>p1.currentMon.getSpeed()){
-//					p2.switchOut(p2.pokemon[p2SwitchIn]);
-//					p1.switchOut(p1.pokemon[p1SwitchIn]);
+//				else if(p2.getCurrentMon().getSpeed()>p1.getCurrentMon().getSpeed()){
+//					p2.switchOut(p2.getPokemon()[p2SwitchIn]);
+//					p1.switchOut(p1.getPokemon()[p1SwitchIn]);
 //					p1WillSwitch=false;
 //				}
 //				else{
 //					if(Math.random()>0.5){
-//						p1.switchOut(p1.pokemon[p1SwitchIn]);
-//						p2.switchOut(p2.pokemon[p2SwitchIn]);
+//						p1.switchOut(p1.getPokemon()[p1SwitchIn]);
+//						p2.switchOut(p2.getPokemon()[p2SwitchIn]);
 //						p1WillSwitch=false;
 //					}
 //					else{
-//						p2.switchOut(p2.pokemon[p2SwitchIn]);
-//						p1.switchOut(p1.pokemon[p1SwitchIn]);
+//						p2.switchOut(p2.getPokemon()[p2SwitchIn]);
+//						p1.switchOut(p1.getPokemon()[p1SwitchIn]);
 //						p1WillSwitch=false;
 //					}
 //				}
 //
 //			}
 //			else if(p1WillSwitch){
-//				p1.switchOut(p1.pokemon[p1SwitchIn]);
+//				p1.switchOut(p1.getPokemon()[p1SwitchIn]);
 //				p2.fight(p2SelectedMoveIndex);
 //				p1WillSwitch=false;
 //			}
 //			else if(p2WillSwitch){
-//				p2.switchOut(p2.pokemon[p2SwitchIn]);
+//				p2.switchOut(p2.getPokemon()[p2SwitchIn]);
 //				p1.fight(p1SelectedMoveIndex);
 //				p1WillSwitch=false;
 //			}
 //			else{
 //
-//				int x=calc.calculateWhoGoesFirst(p1,p2,p1.currentMon.getMoves()[p1SelectedMoveIndex],p2.currentMon.getMoves()[p2SelectedMoveIndex]);
+//				int x=calc.calculateWhoGoesFirst(p1,p2,p1.getCurrentMon().getMoves()[p1SelectedMoveIndex],p2.getCurrentMon().getMoves()[p2SelectedMoveIndex]);
 //				if(x==1){
 //					p1.fight(p1SelectedMoveIndex);
 //					p2.fight(p2SelectedMoveIndex);
@@ -1402,12 +1542,12 @@ public Battle(){
 //				gameNotOver=false;
 //				break;
 //			}
-//			if(p1.currentMon.getHealth()<=0){
-//				p1.switchOut(p1.pokemon[p1SwitchIn]);
+//			if(p1.getCurrentMon().getHealth()<=0){
+//				p1.switchOut(p1.getPokemon()[p1SwitchIn]);
 //				P1numberOfFaintedMons++;
 //			}
-//			if(p2.currentMon.getHealth()<=0){
-//				p2.switchOut(p2.pokemon[p2SwitchIn]);
+//			if(p2.getCurrentMon().getHealth()<=0){
+//				p2.switchOut(p2.getPokemon()[p2SwitchIn]);
 //				P2numberOfFaintedMons++;
 //			}
 //			b.repaint(p1,p2);
@@ -1450,10 +1590,10 @@ public Battle(){
 ////        givenMoves[3][3]=kboard.nextInt();
 //
 //		//        for(int i=0;i<6;i++){
-////            ez.print(p1.pokemon[i].getName());
+////            ez.print(p1.getPokemon()[i].getName());
 ////        }
 ////        for(int i=0;i<6;i++){
-////            ez.print(p2.pokemon[i].getName());
+////            ez.print(p2.getPokemon()[i].getName());
 ////        }
 ////        ez.print("Player 1's)Pokemon"+p1);
 ////        ez.print(p2);
@@ -1497,51 +1637,51 @@ public Battle(){
 ////                200,50,200,400,moveSet1,"Water","Dragon");
 //		// declares an array of integers
 ////        p1.setOpposingPlayer(p2);
-////        ez.println(p2.currentMon);
+////        ez.println(p2.getCurrentMon());
 ////        p1.fight();
-////        ez.println(p2.currentMon);
+////        ez.println(p2.getCurrentMon());
 ////        p2.switchOut();
-////        ez.println(p2.currentMon);
+////        ez.println(p2.getCurrentMon());
 ////        p1.fight();
-////        ez.println(p2.currentMon);
+////        ez.println(p2.getCurrentMon());
 ////        p2.switchOut();
-////        ez.println(p2.currentMon);
+////        ez.println(p2.getCurrentMon());
 ////        p1.fight();
-////        ez.println(p2.currentMon);
+////        ez.println(p2.getCurrentMon());
 //	}
 //	public void repaint(Player p1, Player p2) {
 //		if (playerPerspective==1) {
-//			name1.setText(p1.currentMon.getName());
+//			name1.setText(p1.getCurrentMon().getName());
 //
-//			name2 = new JLabel(p2.currentMon.getName());
+//			name2 = new JLabel(p2.getCurrentMon().getName());
 //			BufferedImage pic = null;
 //			try {
-//				pic = ImageIO.read(new File("Sprites/SpritesBack/" + p1.currentMon.getID() + "-back.gif"));
+//				pic = ImageIO.read(new File("Sprites/SpritesBack/" + p1.getCurrentMon().getID() + "-back.gif"));
 //				image1 = new JLabel(new ImageIcon(pic));
 //			} catch (Exception e) {
 //
 //			}
 //			image1.setIcon(new ImageIcon(pic));
 //			try {
-//				pic = ImageIO.read(new File("Sprites/SpritesFront/" + p2.currentMon.getID() + ".gif"));
+//				pic = ImageIO.read(new File("Sprites/SpritesFront/" + p2.getCurrentMon().getID() + ".gif"));
 //			} catch (Exception e) {
 //
 //			}
 //			image2.setIcon(new ImageIcon(pic));
 //			for (int i =0;i<moves.length;i++){
-//				moves[i].setText(p1.currentMon.moves[i].getMoveName());
+//				moves[i].setText(p1.getCurrentMon().getMoves()[i].getMoveName());
 //			}
 //			for (int i =0;i<switches.length;i++){
-//				if(p1.pokemon[i].getHealth()<=0){
-//					switches[i].setText(p1.pokemon[i].getName()+" (Fainted)");
+//				if(p1.getPokemon()[i].getHealth()<=0){
+//					switches[i].setText(p1.getPokemon()[i].getName()+" (Fainted)");
 //					switches[i].setEnabled(false);
 //				}
-//				else if(p1.pokemon[i]==p1.currentMon){
-//					switches[i].setText(p1.pokemon[i].getName()+" (Already in Play)");
+//				else if(p1.getPokemon()[i]==p1.getCurrentMon()){
+//					switches[i].setText(p1.getPokemon()[i].getName()+" (Already in Play)");
 //					switches[i].setEnabled(false);
 //				}
 //				else{
-//					switches[i].setText(p1.pokemon[i].getName());
+//					switches[i].setText(p1.getPokemon()[i].getName());
 //					switches[i].setEnabled(true);
 //				}
 //			}

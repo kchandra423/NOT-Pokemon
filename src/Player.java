@@ -2,12 +2,12 @@
 import java.util.Scanner;
 
 public class Player {
-    Pokemon[] pokemon;
-    EaseOfUse ez = new EaseOfUse();
-    Calculator calculator= new Calculator();
-    Pokemon currentMon;
-    Player opposingPlayer;
-    Scanner kboard = new Scanner(System.in);
+    private Pokemon[] pokemon;
+    private EaseOfUse ez = new EaseOfUse();
+    private Calculator calculator= new Calculator();
+    private Pokemon currentMon;
+    private Player opposingPlayer;
+    private Scanner kboard = new Scanner(System.in);
     public Player(Pokemon[] givenMons, Player other){
         pokemon=givenMons;
         opposingPlayer=other;
@@ -18,7 +18,7 @@ public class Player {
         Move[] hi=new Move[4];
         for (int i=0;i<6;i++){
             for(int k=0;k<4;k++){
-                pokemon[i].moves[k]=new Move(givenMoves[i][k]);
+                pokemon[i].getMoves()[k]=new Move(givenMoves[i][k]);
 
             }
 
@@ -69,10 +69,20 @@ public class Player {
     }
     public void setOpposingPlayer(Player other){
         opposingPlayer=other;
+        other.opposingPlayer = this;
     }
     public void fight(int indexOfMove){
-        if(currentMon.getHealth()<=0){}
-        else if(currentMon.status.equalsIgnoreCase("brn"))
+    	if(currentMon.getMoves()[indexOfMove].getPP() == 0) {
+    		return;
+    	}
+    	else {
+    		currentMon.getMoves()[indexOfMove].usePP();
+    		// System.out.println("There's no PP left for this move!");
+    	}
+        if(currentMon.getHealth()<=0) {
+        	return;
+        }
+        else if(currentMon.getStatus().equalsIgnoreCase("brn"))
         {
             int moveType = calculator.getIntFromType(currentMon.getMoves()[indexOfMove].getType());
             int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
@@ -81,10 +91,10 @@ public class Player {
             ez.print(currentMon.getName() + " did " + damage /2 + " damage to " + opposingPlayer.currentMon.getName());
             System.out.println(calculator.howEffective(moveType, opposingType1, opposingType2));
             opposingPlayer.currentMon.takeDamage(damage/2);
-            currentMon.takeDamage((int)(currentMon.baseHealth * 0.06));
+            currentMon.takeDamage((int)(currentMon.getBaseHealth() * 0.06));
             System.out.println(currentMon.getName() + " was hurt from its burn");
         }
-        else if(currentMon.status.equalsIgnoreCase("par"))
+        else if(currentMon.getStatus().equalsIgnoreCase("par"))
         {
             System.out.println(currentMon.getName() + " has paralysis");
             if(Math.random() < 0.25) {
@@ -101,11 +111,11 @@ public class Player {
                 opposingPlayer.currentMon.takeDamage(damage);
             }
         }
-        else if(currentMon.status.equalsIgnoreCase("frz"))
+        else if(currentMon.getStatus().equalsIgnoreCase("frz"))
         {
             if(Math.random() < 0.2)
             {
-                currentMon.status = "";
+                currentMon.setStatus("");
                 int moveType = calculator.getIntFromType(currentMon.getMoves()[indexOfMove].getType());
                 int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
                 int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
@@ -119,7 +129,7 @@ public class Player {
                 System.out.println(currentMon.getName() + " was Frozen Solid");
             }
         }
-        else if(currentMon.status.equalsIgnoreCase("psn"))
+        else if(currentMon.getStatus().equalsIgnoreCase("psn"))
         {
             int moveType = calculator.getIntFromType(currentMon.getMoves()[indexOfMove].getType());
             int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
@@ -128,15 +138,15 @@ public class Player {
             ez.print(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
             System.out.println(calculator.howEffective(moveType, opposingType1, opposingType2));
             opposingPlayer.currentMon.takeDamage(damage);
-            currentMon.takeDamage((int)(currentMon.baseHealth * 1.0/8));
+            currentMon.takeDamage((int)(currentMon.getBaseHealth() * 1.0/8));
             System.out.println(currentMon.getName() + " was hurt from the poison");
         }
-        else if(currentMon.status.equalsIgnoreCase("slp"))
+        else if(currentMon.getStatus().equalsIgnoreCase("slp"))
         {
             System.out.println(currentMon.getName() + " is fast asleep");
             if(Math.random() < 1.0/3)
             {
-                currentMon.status = "";
+                currentMon.setStatus("");
             }
         }
         else {
@@ -179,7 +189,13 @@ public class Player {
 //        }
         currentMon=switchIn;
     }
-
+    
+    public void switchOut(int switchIn) {
+    	if(pokemon[switchIn].getHealth() > 0 && pokemon[switchIn] != currentMon) {
+    		currentMon = pokemon[switchIn];
+    	}
+    }
+    
     public int indexOfMon(Pokemon mon){
         int answer=-1;
         for(int i=0;i<pokemon.length;i++)
@@ -192,6 +208,14 @@ public class Player {
         return answer;
     }
 
+    public Pokemon[] getPokemon() {
+    	return pokemon;
+    }
+    
+    public Pokemon getCurrentMon() {
+    	return currentMon;
+    }
+    
 //    @Override
     public String toString() {
         String answer="Player)\n" +
