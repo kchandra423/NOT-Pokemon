@@ -366,59 +366,196 @@ public class Pokemon {
 	}
 
 	public void setAttackIncrease(int stages) {
-		attackIncrease += stages;
-		System.out.println(name + "'s attack increased by " + stages + " stages!");
-
+		if(attackIncrease==6){
+			System.out.println(name + "'s attack can't go any higher!");
+		}
+		else {
+			int actualStages=0;
+			while (attackIncrease + 1 < 7 && stages > 0) {
+				attackIncrease++;
+				stages--;
+				actualStages++;
+			}
+//			attackIncrease += stages;
+			System.out.println(name + "'s attack increased by " + actualStages + " stages!");
+		}
 	}
 
 	public void setSpecialAttackIncrease(int stages) {
-		specialAttackIncrease += stages;
-		System.out.println(name + "'s special attack increased by " + stages + " stages!");
+		if(specialAttackIncrease==6){
+			System.out.println(name + "'s special attack can't go any higher!");
+		}
+		else {
+			int actualStages=0;
+			while (specialAttackIncrease + 1 < 7 && stages > 0) {
+				specialAttackIncrease++;
+				stages--;
+				actualStages++;
+			}
+//			specialAttackIncrease += stages;
+			System.out.println(name + "'s special attack increased by " + actualStages + " stages!");
+		}
+//		specialAttackIncrease += stages;
+//		System.out.println(name + "'s special attack increased by " + stages + " stages!");
 	}
 
 	public void setDefenseIncrease(int stages) {
-
-		defenseIncrease += stages;
-		System.out.println(name + "'s defense increased by " + stages + " stages!");
+		if(defenseIncrease==6){
+			System.out.println(name + "'s defense can't go any higher!");
+		}
+		else {
+			int actualStages=0;
+			while (defenseIncrease + 1 < 7 && stages > 0) {
+				defenseIncrease++;
+				stages--;
+				actualStages++;
+			}
+//			defenseIncrease += stages;
+			System.out.println(name + "'s defense increased by " + actualStages + " stages!");
+		}
+//		defenseIncrease += stages;
+//		System.out.println(name + "'s defense increased by " + stages + " stages!");
 	}
 
 	public void setSpecialDefenseIncrease(int stages) {
-		specialDefenseIncrease += stages;
-		System.out.println(name + "'s special defense increased by " + stages + " stage!");
+		if(specialDefenseIncrease==6){
+			System.out.println(name + "'s special defense can't go any higher!");
+		}
+		else {
+			int actualStages=0;
+			while (specialDefenseIncrease + 1 < 7 && stages > 0) {
+				specialDefenseIncrease++;
+				stages--;
+				actualStages++;
+			}
+//			specialDefenseIncrease += stages;
+			System.out.println(name + "'s special defense increased by " + actualStages + " stages!");
+		}
+
+//		specialDefenseIncrease += stages;
+//		System.out.println(name + "'s special defense increased by " + stages + " stage!");
 	}
 
 	public void setSpeedIncrease(int stages) {
-
-		speedIncrease += stages;
-		System.out.println(name + "'s speed increased by " + stages + " stages!");
+		if(speedIncrease==6){
+			System.out.println(name + "'s speed can't go any higher!");
+		}
+		else {
+			int actualStages=0;
+			while (speedIncrease + 1 < 7 && stages > 0) {
+				speedIncrease++;
+				stages--;
+				actualStages++;
+			}
+//			speedIncrease += stages;
+			System.out.println(name + "'s speed increased by " + actualStages + " stages!");
+		}
+//		speedIncrease += stages;
+//		System.out.println(name + "'s speed increased by " + stages + " stages!");
 
 	}
 
 	public void setAttackDecrease(int stages) {
-		attackDecrease += stages;
-		System.out.println(name + "'s attack decreased by " + stages + " stages...");
+		if(attackDecrease==6){
+			System.out.println(name + "'s attack can't go any higher!");
+		}
+		else {
+			int actualStages=0;
+			while (attackDecrease + 1 < 7 && stages > 0) {
+				attackDecrease++;
+				stages--;
+				actualStages++;
+			}
+//			attackDecrease += stages;
+			System.out.println(name + "'s attack Decreased by " + actualStages + " stages!");
+		}
+//		attackDecrease += stages;
+//		System.out.println(name + "'s attack decreased by " + stages + " stages...");
 
 	}
 
 	public void setSpecialAttackDecrease(int stages) {
-		specialAttackDecrease += stages;
-		System.out.println(name + "'s special attack decreased by " + stages + " stages...");
+		if(specialAttackDecrease==6){
+			System.out.println(name + "'s special attack can't go any higher!");
+		}
+		else {
+			int actualStages=0;
+			while (specialAttackDecrease + 1 < 7 && stages > 0) {
+				specialAttackDecrease++;
+				stages--;
+				actualStages++;
+			}
+//			specialAttackDecrease += stages;
+			System.out.println(name + "'s special attack Decreased by " + actualStages + " stages!");
+		}
+//		specialAttackDecrease += stages;
+//		System.out.println(name + "'s special attack decreased by " + stages + " stages...");
 	}
 
 	public void setDefenseDecrease(int stages) {
-		defenseDecrease += stages;
-		System.out.println(name + "'s defense decreased by " + stages + " stages...");
+		if(defenseDecrease==6){
+			System.out.println(name + "'s defense can't go any higher!");
+		}
+		else {
+			int actualStages=0;
+			while (defenseDecrease + 1 < 7 && stages > 0) {
+				defenseDecrease++;
+				stages--;
+				actualStages++;
+			}
+//			defenseDecrease += stages;
+			System.out.println(name + "'s defense Decreased by " + actualStages + " stages!");
+		}
+//		defenseDecrease += stages;
+//		System.out.println(name + "'s defense decreased by " + stages + " stages...");
 	}
 
 	public void setSpecialDefenseDecrease(int stages) {
-		specialDefenseDecrease += stages;
-		System.out.println(name + "'s special defense decreased by " + stages + " stages...");
+		if(specialDefenseDecrease==6){
+			System.out.println(name + "'s special defense can't go any higher!");
+		}
+		else {
+			int actualStages=0;
+			while (specialDefenseDecrease + 1 < 7 && stages > 0) {
+				specialDefenseDecrease++;
+				stages--;
+				actualStages++;
+			}
+//			specialDefenseDecrease += stages;
+			System.out.println(name + "'s special defense Decreased by " + actualStages + " stages!");
+		}
+//		specialDefenseDecrease += stages;
+//		System.out.println(name + "'s special defense decreased by " + stages + " stages...");
 	}
 
 	public void setSpeedDecrease(int stages) {
-
-		speedDecrease += stages;
-		System.out.println(name + "'s speed decreased by " + stages + " stages...");
+		if(speedDecrease==6){
+			System.out.println(name + "'s speed can't go any higher!");
+		}
+		else {
+			int actualStages=0;
+			while (speedDecrease + 1 < 7 && stages > 0) {
+				speedDecrease++;
+				stages--;
+				actualStages++;
+			}
+//			speedDecrease += stages;
+			System.out.println(name + "'s speed Decreased by " + actualStages + " stages!");
+		}
+//		speedDecrease += stages;
+//		System.out.println(name + "'s speed decreased by " + stages + " stages...");
+	}
+	public void resetBoosts(){
+		specialAttackDecrease=0;
+		specialAttackIncrease=0;
+		attackIncrease=0;
+		attackDecrease=0;
+		defenseDecrease=0;
+		defenseIncrease=0;
+		specialDefenseDecrease=0;
+		specialDefenseIncrease=0;
+		speedDecrease=0;
+		speedDecrease=0;
 	}
 //    public void beParalyzed(Pokemon target)
 //    {

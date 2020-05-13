@@ -206,7 +206,7 @@ public class Move {
 				+ "\n" + "Description: " + description
 				+ "\n" + "Boosts: " + boosts
 				+ "\n" + "Status: " + status
-				+ "\n" + "Targets Self: " + self
+				+ "\n" + "Side effects targets self? : " + self
 				+ "\n" + "Type: " + type;
 		return answer;
 	}

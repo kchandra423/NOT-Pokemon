@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class Button extends JRadioButton {
+public class Button extends JButton {
 //    public String name;
     public int num;
 
