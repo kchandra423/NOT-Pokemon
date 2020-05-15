@@ -16,6 +16,7 @@ public class Battle {
 
 	private JLabel name1, name2, image1, image2, name3, name4, image3, image4, attack = new JLabel("Attack"),
 			switchOut = new JLabel("Switch");
+	private HealthBar bar1, bar2, bar3, bar4;
 	private Button[] leftMoveButtons = new Button[4], rightMoveButtons = new Button[4];
 	private int p1Selection = -1;
 	private int p2Selection = -1;
@@ -91,6 +92,10 @@ public class Battle {
 
 		name1 = new JLabel(p1.getCurrentMon().getName());
 		name2 = new JLabel(p2.getCurrentMon().getName());
+		bar1 = new HealthBar(p1.getCurrentMon());
+		bar1.setBackground(Color.LIGHT_GRAY);
+		bar2 = new HealthBar(p2.getCurrentMon());
+		bar2.setBackground(Color.LIGHT_GRAY);
 		ImageIcon pic =
 //					new ImageIcon
 //					(new ImageIcon(
@@ -135,17 +140,21 @@ public class Battle {
 		leftDisplayPanel.setLayout(layout1);
 		layout1.setAutoCreateGaps(true);
 		layout1.setAutoCreateContainerGaps(true);
-		layout1.setHorizontalGroup(
-				layout1.createSequentialGroup().addGroup(layout1.createParallelGroup().addGap(500).addComponent(name1)
-//						.addComponent(p1PokemonButton)
-						.addComponent(image1))
-//.addComponent(leftP1Image)
-						.addGroup(layout1.createParallelGroup(GroupLayout.Alignment.TRAILING).addComponent(name2)
-								.addComponent(image2))
-
+		layout1.setHorizontalGroup(layout1.createSequentialGroup()
+			.addGroup(layout1.createParallelGroup()
+				.addGap(500)
+				.addComponent(name1)
+				.addComponent(bar1)
+//				.addComponent(p1PokemonButton)
+				.addComponent(image1))
+//				.addComponent(leftP1Image)
+			.addGroup(layout1.createParallelGroup(GroupLayout.Alignment.TRAILING)
+				.addComponent(name2)
+				.addComponent(bar2)
+				.addComponent(image2))
 		);
-		layout1.setVerticalGroup(layout1.createSequentialGroup().addComponent(name2).addComponent(image2).addGap(200)
-				.addComponent(name1).addComponent(image1)
+		layout1.setVerticalGroup(layout1.createSequentialGroup().addComponent(name2).addComponent(bar2).addComponent(image2)
+				.addGap(200).addComponent(name1).addComponent(bar1).addComponent(image1)
 //					.addComponent(leftP1Image)
 //					.addComponent(p1PokemonButton)
 		);
@@ -249,6 +258,10 @@ public class Battle {
 		GridBagConstraints y = new GridBagConstraints();
 		name3 = new JLabel(p2.getCurrentMon().getName());
 		name4 = new JLabel(p1.getCurrentMon().getName());
+		bar3 = new HealthBar(p2.getCurrentMon());
+		bar3.setBackground(Color.LIGHT_GRAY);
+		bar4 = new HealthBar(p1.getCurrentMon());
+		bar4.setBackground(Color.LIGHT_GRAY);
 		ImageIcon pic2 = new ImageIcon("Sprites/SpritesBack/" + p2.getCurrentMon().getID() + "-back.gif");
 		image3 = new JLabel(pic2);
 		image3.addMouseListener(new MouseAdapter() {
@@ -278,13 +291,15 @@ public class Battle {
 		layout4.setAutoCreateContainerGaps(true);
 		layout4.setHorizontalGroup(
 				layout4.createSequentialGroup().addGroup(layout4.createParallelGroup().addGap(500).addComponent(name3)
+						.addComponent(bar3)
 //						.addComponent(p2PokemonButton)
 						.addComponent(image3))
 
 						.addGroup(layout4.createParallelGroup(GroupLayout.Alignment.TRAILING).addComponent(name4)
-								.addComponent(image4)));
-		layout4.setVerticalGroup(layout4.createSequentialGroup().addComponent(name4).addComponent(image4).addGap(200)
-				.addComponent(name3).addComponent(image3)
+						.addComponent(bar4).addComponent(image4)));
+		layout4.setVerticalGroup(layout4.createSequentialGroup().addComponent(name4).addComponent(bar4)
+				.addComponent(image4).addGap(200)
+				.addComponent(name3).addComponent(bar3).addComponent(image3)
 //				.addComponent(p2PokemonButton)
 		);
 		layout4.linkSize(SwingConstants.HORIZONTAL, name3, name4, image3, image4);
@@ -951,6 +966,11 @@ public class Battle {
 		name1.setText(p1.getCurrentMon().getName());
 
 		name2.setText(p2.getCurrentMon().getName());
+		
+		bar1.repaint();
+		
+		bar2.repaint();
+		
 		Icon pic = null;
 
 //				pic =
@@ -978,6 +998,11 @@ public class Battle {
 		name3.setText(p2.getCurrentMon().getName());
 
 		name4.setText(p1.getCurrentMon().getName());
+		
+		bar3.repaint();
+		
+		bar4.repaint();
+		
 		pic = null;
 
 //		pic = ;

@@ -12,6 +12,7 @@ public class Battle2 {
     private JFrame frame;
     private JPanel panel, display, movePanel, switchPanel;
     private JLabel name1, name2, image1, image2, attack, switchOut;
+    private HealthBar bar1, bar2;
     private Button[] moves = new Button[4];
     private Button[] switches = new Button[6];
     private JTextArea text;
@@ -94,7 +95,12 @@ public class Battle2 {
         Player p2=new Player(p2mons,givenMoves);
         p1.setOpposingPlayer(p2);
         
-        new Battle2(p1, p2);
+        SwingUtilities.invokeLater(new Runnable() {
+        	@Override
+        	public void run() {
+        		new Battle2(p1, p2);
+        	}
+        });
         
         System.out.println("The match has begun!");
         boolean gameNotOver=true;
@@ -331,6 +337,8 @@ public class Battle2 {
 		if(currPlayer == 1 || selection == 11) {
 			name1 = new JLabel(p1.getCurrentMon().getName());
 			name2 = new JLabel(p2.getCurrentMon().getName());
+			bar1 = new HealthBar(p1.getCurrentMon());
+			bar2 = new HealthBar(p2.getCurrentMon());
 			ImageIcon pic = new ImageIcon("Sprites/SpritesBack/" + p1.getCurrentMon().getID() +"-back.gif");
 			image1 = new JLabel(pic);
 			image1.setToolTipText(toToolTipText(p1.getCurrentMon().toString()));
@@ -341,6 +349,8 @@ public class Battle2 {
 		else {
 			name1 = new JLabel(p2.getCurrentMon().getName());
 			name2 = new JLabel(p1.getCurrentMon().getName());
+			bar1 = new HealthBar(p2.getCurrentMon());
+			bar2 = new HealthBar(p1.getCurrentMon());
 			ImageIcon pic = new ImageIcon("Sprites/SpritesBack/" + p2.getCurrentMon().getID() +"-back.gif");
 			image1 = new JLabel(pic);
 			image1.setToolTipText(toToolTipText(p2.getCurrentMon().toString()));
@@ -354,19 +364,23 @@ public class Battle2 {
 		l.setAutoCreateContainerGaps(true);
 		l.setHorizontalGroup(l.createSequentialGroup()
 			.addGroup(l.createParallelGroup(GroupLayout.Alignment.CENTER)
-				.addGap(50)
+				.addGap(100)
 				.addComponent(name1)
+				.addComponent(bar1)
 				.addComponent(image1))
 			.addGap(200)
 			.addGroup(l.createParallelGroup(GroupLayout.Alignment.CENTER)
 				.addComponent(name2)
+				.addComponent(bar2)
 				.addComponent(image2))
 		);
 		l.setVerticalGroup(l.createSequentialGroup()
 			.addComponent(name2)
+			.addComponent(bar2)
 			.addComponent(image2)
 			.addGap(100)
 			.addComponent(name1)
+			.addComponent(bar1)
 			.addComponent(image1)
 		);
 		// l.linkSize(SwingConstants.HORIZONTAL, name1, image1);
