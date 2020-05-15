@@ -53,9 +53,4 @@ public class HealthBar extends JPanel {
 		g2.fillRect(28, 2, 2, 8);
 		g2.fillRect(135, 2, 2, 8);
 	}
-	
-	@Override
-	public Dimension getPreferredSize() {
-		return new Dimension(142, 14);
-	}
 }
