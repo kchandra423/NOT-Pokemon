@@ -12,8 +12,9 @@ public class Battle2 {
     private JFrame frame;
     private JPanel panel, display, movePanel, switchPanel;
     private JLabel name1, name2, image1, image2, attack, switchOut;
-    private Button2[] moves = new Button2[4];
-    private Button2[] switches = new Button2[6];
+    private HealthBar bar1, bar2;
+    private Button[] moves = new Button[4];
+    private Button[] switches = new Button[6];
     private JTextArea text;
     
     private Calculator calculator;
@@ -94,7 +95,12 @@ public class Battle2 {
         Player p2=new Player(p2mons,givenMoves);
         p1.setOpposingPlayer(p2);
         
-        new Battle2(p1, p2);
+        SwingUtilities.invokeLater(new Runnable() {
+        	@Override
+        	public void run() {
+        		new Battle2(p1, p2);
+        	}
+        });
         
         System.out.println("The match has begun!");
         boolean gameNotOver=true;
@@ -328,21 +334,29 @@ public class Battle2 {
     	movePanel = new JPanel();
     	switchPanel = new JPanel();
     	GridBagConstraints c = new GridBagConstraints();
-		if(currPlayer == 1) {
+		if(currPlayer == 1 || selection == 11) {
 			name1 = new JLabel(p1.getCurrentMon().getName());
 			name2 = new JLabel(p2.getCurrentMon().getName());
+			bar1 = new HealthBar(p1.getCurrentMon());
+			bar2 = new HealthBar(p2.getCurrentMon());
 			ImageIcon pic = new ImageIcon("Sprites/SpritesBack/" + p1.getCurrentMon().getID() +"-back.gif");
 			image1 = new JLabel(pic);
+			image1.setToolTipText(toToolTipText(p1.getCurrentMon().toString()));
 			ImageIcon pic2 = new ImageIcon("Sprites/SpritesFront/" + p2.getCurrentMon().getID() + ".gif");
 			image2 = new JLabel(pic2);
+			image2.setToolTipText("You can only see your own pokemon's stats!");
 		}
 		else {
 			name1 = new JLabel(p2.getCurrentMon().getName());
 			name2 = new JLabel(p1.getCurrentMon().getName());
+			bar1 = new HealthBar(p2.getCurrentMon());
+			bar2 = new HealthBar(p1.getCurrentMon());
 			ImageIcon pic = new ImageIcon("Sprites/SpritesBack/" + p2.getCurrentMon().getID() +"-back.gif");
 			image1 = new JLabel(pic);
+			image1.setToolTipText(toToolTipText(p2.getCurrentMon().toString()));
 			ImageIcon pic2 = new ImageIcon("Sprites/SpritesFront/" + p1.getCurrentMon().getID() + ".gif");
 			image2 = new JLabel(pic2);
+			image2.setToolTipText("You can only see your own pokemon's stats!");
 		}
 		GroupLayout l = new GroupLayout(display);
 		display.setLayout(l);
@@ -352,20 +366,25 @@ public class Battle2 {
 			.addGroup(l.createParallelGroup(GroupLayout.Alignment.CENTER)
 				.addGap(100)
 				.addComponent(name1)
+				.addComponent(bar1)
 				.addComponent(image1))
 			.addGap(200)
 			.addGroup(l.createParallelGroup(GroupLayout.Alignment.CENTER)
 				.addComponent(name2)
+				.addComponent(bar2)
 				.addComponent(image2))
 		);
 		l.setVerticalGroup(l.createSequentialGroup()
 			.addComponent(name2)
+			.addComponent(bar2)
 			.addComponent(image2)
 			.addGap(100)
 			.addComponent(name1)
+			.addComponent(bar1)
 			.addComponent(image1)
 		);
-		l.linkSize(SwingConstants.HORIZONTAL, name1, name2, image1, image2);
+		// l.linkSize(SwingConstants.HORIZONTAL, name1, image1);
+		// l.linkSize(SwingConstants.HORIZONTAL, name2, image2);
 		display.setBackground(Color.LIGHT_GRAY);
 		c.gridx = 0;
 		c.gridy = 0;
@@ -391,22 +410,24 @@ public class Battle2 {
     	GridLayout gl = new GridLayout(2, 2);
     	movePanel.setLayout(gl);
     	for(int move = 0; move < moves.length; move++) {
-    		if(currPlayer == 1) {
-    			moves[move] = new Button2(p1.getCurrentMon().getMoves()[move].getName(), move+1);
-    			if(p1.getCurrentMon().getMoves()[move].getPP() == 0) {
+    		if(currPlayer == 1 || selection == 11) {
+    			moves[move] = new Button(p1.getCurrentMon().getMoves()[move].getName(), move+1);
+    			moves[move].setToolTipText(toToolTipText(p1.getCurrentMon().getMoves()[move].toString()));
+    			if(p1.getCurrentMon().getHealth() <= 0 || p1.getCurrentMon().getMoves()[move].getPP() == 0) {
         			moves[move].setEnabled(false);
         		}
     		}
     		else {
-    			moves[move] = new Button2(p2.getCurrentMon().getMoves()[move].getName(), move+1);
-    			if(p2.getCurrentMon().getMoves()[move].getPP() == 0) {
+    			moves[move] = new Button(p2.getCurrentMon().getMoves()[move].getName(), move+1);
+    			moves[move].setToolTipText(toToolTipText(p2.getCurrentMon().getMoves()[move].toString()));
+    			if(p2.getCurrentMon().getHealth() <= 0 || p2.getCurrentMon().getMoves()[move].getPP() == 0) {
         			moves[move].setEnabled(false);
         		}
     		}
     		moves[move].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					int move = ((Button2)e.getSource()).getNum();
+					int move = ((Button)e.getSource()).getNum();
 					if(currPlayer == 1) { // p1 fight
 						selection = move;
 					}
@@ -425,12 +446,35 @@ public class Battle2 {
 							}
 						}
 						else { // p1 switch
-							p1.switchOut(selection-1-4);
+							p1.switchOut(selection-4-1);
 							p2.fight(move-1);
 						}
 						selection = 0;
 					}
-					swapView();
+					if(p1.isDefeated() || p2.isDefeated()) {
+						if(p1.isDefeated() && !p2.isDefeated()) {
+							log("Player 2 is the winner!");
+						}
+						else if(p2.isDefeated() && !p1.isDefeated()) {
+							log("Player 1 is the winner!");
+						}
+						else {
+							log("The match was a tie!");
+						}
+						setupGUI();
+					}
+					if(p1.getCurrentMon().getHealth() <= 0 ^ p2.getCurrentMon().getHealth() <= 0) {
+						if(p1.getCurrentMon().getHealth() <= 0 && p2.getCurrentMon().getHealth() > 0) {
+							selection = 11;
+						}
+						else if(p2.getCurrentMon().getHealth() <= 0 && p1.getCurrentMon().getHealth() > 0) {
+							selection = 12;
+						}
+						setupGUI();
+					}
+					else {
+						swapView();
+					}
 				}
     		});
     		movePanel.add(moves[move]);
@@ -459,14 +503,16 @@ public class Battle2 {
     	GridLayout gl2 = new GridLayout(3, 2);
     	switchPanel.setLayout(gl2);
     	for(int mon = 0; mon < switches.length; mon++) {
-    		if(currPlayer == 1) {
-    			switches[mon] = new Button2(p1.getPokemon()[mon].getName(), mon+1);
+    		if(currPlayer == 1 || selection == 11) {
+    			switches[mon] = new Button(p1.getPokemon()[mon].getName(), mon+1);
+    			switches[mon].setToolTipText(toToolTipText(p1.getPokemon()[mon].toString()));
     			if(p1.getPokemon()[mon].getHealth() <= 0 || p1.getPokemon()[mon] == p1.getCurrentMon()) {
     				switches[mon].setEnabled(false);
     			}
     		}
     		else {
-    			switches[mon] = new Button2(p2.getPokemon()[mon].getName(), mon+1);
+    			switches[mon] = new Button(p2.getPokemon()[mon].getName(), mon+1);
+    			switches[mon].setToolTipText(toToolTipText(p2.getPokemon()[mon].toString()));
     			if(p2.getPokemon()[mon].getHealth() <= 0 || p2.getPokemon()[mon] == p2.getCurrentMon()) {
     				switches[mon].setEnabled(false);
     			}
@@ -474,28 +520,37 @@ public class Battle2 {
     		switches[mon].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					int move = ((Button2)e.getSource()).getNum();
-					if(currPlayer == 1) { // p1 switch
+					int move = ((Button)e.getSource()).getNum();
+					if(selection > 10) {
+						if(selection == 11) {
+							p1.switchOut(move-1);
+						}
+						else if(selection == 12) {
+							p2.switchOut(move-1);
+						}
+						selection = 0;
+					}
+					else if(currPlayer == 1) { // p1 switch
 						selection = move+4;
 					}
 					else { // p2 switch
 						if(selection > 4) { // p1 switch
 							if(p1.getCurrentMon().getSpeed() > p2.getCurrentMon().getSpeed()) {
-								p1.switchOut(selection-1-4);
+								p1.switchOut(selection-4-1);
 								p2.switchOut(move-1);
 							}
 							else if(p2.getCurrentMon().getSpeed() > p1.getCurrentMon().getSpeed()) {
 								p2.switchOut(move-1);
-								p1.switchOut(selection-1-4);
+								p1.switchOut(selection-4-1);
 			                }
 			                else {
 			                	if(Math.random()>=0.5) {
-			                		p1.switchOut(selection-1-4);
+			                		p1.switchOut(selection-4-1);
 			                		p2.switchOut(move-1);
 			                	}
 			                	else {
 			                		p2.switchOut(move-1);
-			                		p1.switchOut(selection-1-4);
+			                		p1.switchOut(selection-4-1);
 			                	}
 			                }
 						}
@@ -505,7 +560,18 @@ public class Battle2 {
 						}
 						selection = 0;
 					}
-					swapView();
+					if(p1.getCurrentMon().getHealth() <= 0 ^ p2.getCurrentMon().getHealth() <= 0) {
+						if(p1.getCurrentMon().getHealth() <= 0 && p2.getCurrentMon().getHealth() > 0) {
+							selection = 11;
+						}
+						else if(p2.getCurrentMon().getHealth() <= 0 && p1.getCurrentMon().getHealth() > 0) {
+							selection = 12;
+						}
+						setupGUI();
+					}
+					else {
+						swapView();
+					}
 				}
     		});
     		switchPanel.add(switches[mon]);
@@ -520,11 +586,13 @@ public class Battle2 {
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.insets = new Insets(0, 0, 0, 0);
     	panel.add(switchPanel, c);
-    	text = new JTextArea(20, 20);
-    	text.setText("The match has begun!");
-    	text.setEditable(false);
-    	text.setLineWrap(true);
-    	text.setWrapStyleWord(true);
+    	if(text == null) {
+	    	text = new JTextArea(20, 20);
+	    	text.setText("The match has begun!");
+	    	text.setEditable(false);
+	    	text.setLineWrap(true);
+	    	text.setWrapStyleWord(true);
+    	}
     	JScrollPane pane = new JScrollPane(text,
     			ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
     			ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -547,7 +615,11 @@ public class Battle2 {
     	frame.setVisible(true);
     }
     
-    private void log() {
-    	
+    private void log(String s) {
+    	text.setText(text.getText() + "\n" + s);
+    }
+    
+    private String toToolTipText(String s) {
+    	return "<html>" + s.trim().replace("\n", "<br>") + "</html>";
     }
 }
