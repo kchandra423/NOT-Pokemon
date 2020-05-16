@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c409674a-022d-407e-a93f-62a2b7549e75" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/QuestionMark.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/HealthBar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/EaseOfUse.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NOT Pokemon/EaseOfUse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NOT Pokemon/Player.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Battle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Battle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Battle2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Battle2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Button.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EaseOfUse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EaseOfUse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Move.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Button2.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pokemon.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -216,28 +213,23 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>188</line>
+          <line>267</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>189</line>
+          <line>268</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>199</line>
+          <line>277</line>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>201</line>
+          <line>279</line>
           <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>198</line>
-          <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>jar:///Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/src.zip!/javax/swing/JLabel.java</url>
@@ -246,22 +238,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>138</line>
+          <line>174</line>
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>317</line>
+          <line>481</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>192</line>
+          <line>272</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>200</line>
+          <line>281</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
