@@ -241,13 +241,14 @@ P2.setCurrentMon();
 			layout1.setAutoCreateContainerGaps(true);
 			layout1.setHorizontalGroup(layout1.createSequentialGroup()
 							.addGroup(layout1.createParallelGroup(GroupLayout.Alignment.CENTER)
-									.addGap(500)
+
 									.addComponent(name1)
 
 //						.addComponent(p1PokemonButton)
 									.addComponent(image1))
 //.addComponent(leftP1Image)
-//					.addGap(200)
+//					.addGap(400)
+		.addGap(450)
 							.addGroup(layout1.createParallelGroup(GroupLayout.Alignment.CENTER)
 
 									.addComponent(name2)
@@ -401,11 +402,11 @@ P2.setCurrentMon();
 			layout4.setAutoCreateContainerGaps(true);
 			layout4.setHorizontalGroup(layout4.createSequentialGroup()
 							.addGroup(layout4.createParallelGroup()
-									.addGap(500)
+
 									.addComponent(name3)
 //						.addComponent(p2PokemonButton)
 									.addComponent(image3))
-
+					.addGap(450)
 							.addGroup(layout4.createParallelGroup(GroupLayout.Alignment.TRAILING)
 									.addComponent(name4)
 									.addComponent(image4))
@@ -413,13 +414,13 @@ P2.setCurrentMon();
 			layout4.setVerticalGroup(layout4.createSequentialGroup()
 							.addComponent(name4)
 							.addComponent(image4)
-							.addGap(200)
+							.addGap(100)
 							.addComponent(name3)
 							.addComponent(image3)
 //				.addComponent(p2PokemonButton)
 			);
 			layout4.linkSize(SwingConstants.HORIZONTAL, name3, name4, image3, image4);
-			layout4.linkSize(image3, image4);
+//			layout4.linkSize(image3, image4);
 			rightDisplayPanel.setBackground(Color.LIGHT_GRAY);
 			y.gridx = 0;
 			y.gridy = 0;
