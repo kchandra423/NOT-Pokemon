@@ -946,13 +946,15 @@ P2=new Player(p2mons,givenMoves2);
 					}
 				}
 
-				String y= (String) popup.showInputDialog(b.leftDisplayPanel,
+				String y;
+						do {y= (String) popup.showInputDialog(b.leftDisplayPanel,
 						"Your current Pokemon fainted. Please choose which pokemon you want to switch in."
 						,"Pokemon defeated",
 						2,
 						new ImageIcon (new ImageIcon("Images/Skull.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
 						x,
-						"Please select a Pokemon");
+						"Please select a Pokemon");}
+						while(y==null);
 
 				p1SwitchIn=Integer.parseInt(String.valueOf(y.charAt(0)));
 				p1.switchOut(p1.getPokemon()[p1SwitchIn-1]);
@@ -979,13 +981,15 @@ P2=new Player(p2mons,givenMoves2);
 						z++;
 					}
 				}
-				String y= (String) popup.showInputDialog(b.rightDisplayPanel,
+				String y;
+						do{y= (String) popup.showInputDialog(b.rightDisplayPanel,
 						"Your current Pokemon fainted. Please choose which pokemon you want to switch in."
 						,"Pokemon defeated",
 						2,
 						new ImageIcon (new ImageIcon("Images/Skull.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
 						x,
-						"Please select a Pokemon");
+						"Please select a Pokemon");}
+						while(y==null);
 
 				p2SwitchIn=Integer.parseInt(String.valueOf(y.charAt(0)));
             	p2.switchOut(p2.getPokemon()[p2SwitchIn-1]);
