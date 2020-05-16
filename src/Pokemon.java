@@ -340,6 +340,7 @@ public class Pokemon {
 		}
 	}
 
+
 	public void setMoves(Move[] givenMoves) {
 		moves = givenMoves;
 	}

@@ -41,13 +41,17 @@ public class Move {
 		this.number = number;
 		setStats(number);
 	}
-
-	public Move(String name, int number, int power, String type) {
-		this.number = number;
-		this.name = name;
-		this.power = power;
-		this.type = type;
+	public Move(String name){
+		int x=convertName(name);
+		number=x;
+		setStats(x);
 	}
+//	public Move(String name, int number, int power, String type) {
+//		this.number = number;
+//		this.name = name;
+//		this.power = power;
+//		this.type = type;
+//	}
 
 	public int convertName(String name) {
 		int number = -1;
