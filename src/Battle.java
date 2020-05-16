@@ -36,9 +36,58 @@ public Battle(){
 }
 	public Battle(Player p1, Player p2) {
 
-        String filepath = "PokemonTitleScreen.wav";
+        String filepath1 = "PokemonTitleScreen.wav";
+        String filepath2 = "BattleVsWildPokemon.wav";
+        String filepath3 = "BattleVsTrainer.wav";
+        String filepath4 = "BillsLighthouse.wav";
+        String filepath5 = "PaletteTown.wav";
+        String filepath6 = "PewterCity.wav";
+        String filepath7 = "PokemonGym.wav";
+        String filepath8 = "RivalAppears.wav";
+        String filepath9 = "TeamRocketHideout.wav";
+        String filepath10 = "ViridianForest.wav";
         PlayMusic musicObject = new PlayMusic();
-        musicObject.playMusic(filepath);
+        int random = (int) (Math.random()*10);
+        if(random <= 1)
+        {
+        	musicObject.playMusic(filepath1);
+        }
+        else if(random <= 2)
+        {
+        	musicObject.playMusic(filepath2);
+        }
+        else if(random <= 3)
+        {
+        	musicObject.playMusic(filepath3);
+        }
+        else if(random <= 4)
+        {
+        	musicObject.playMusic(filepath4);
+        }
+        else if(random <= 5)
+        {
+        	musicObject.playMusic(filepath5);
+        }
+        else if(random <= 6)
+        {
+        	musicObject.playMusic(filepath6);
+        }
+        else if(random <= 7)
+        {
+        	musicObject.playMusic(filepath7);
+        }
+        else if(random <= 8)
+        {
+        	musicObject.playMusic(filepath8);
+        }
+        else if(random <= 9)
+        {
+        	musicObject.playMusic(filepath9);
+        }
+        else if(random <= 10)
+        {
+        	musicObject.playMusic(filepath10);
+        }
         frame = new JFrame();
 //    	panel = new JPanel(new GridBagLayout());
 //    	display = new JPanel();
