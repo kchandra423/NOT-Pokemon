@@ -340,6 +340,7 @@ public class Pokemon {
 		}
 	}
 
+
 	public void setMoves(Move[] givenMoves) {
 		moves = givenMoves;
 	}
@@ -363,6 +364,9 @@ public class Pokemon {
 	public void takeDamage(int damage) {
 
 		health -= damage;
+		if(health < 0) {
+			health = 0;
+		}
 	}
 
 	public void setAttackIncrease(int stages) {

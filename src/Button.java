@@ -9,4 +9,7 @@ public class Button extends JButton {
         num=nu;
 
     }
+    public int getNum(){
+        return num;
+    }
 }

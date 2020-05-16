@@ -67,6 +67,9 @@ public class Player {
             return false;
         }
     }
+    public void setCurrentMon(){
+        currentMon=pokemon[0];
+    }
     public void setOpposingPlayer(Player other){
         opposingPlayer=other;
         other.opposingPlayer = this;
