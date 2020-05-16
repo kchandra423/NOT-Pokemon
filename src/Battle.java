@@ -24,6 +24,7 @@ public class Battle {
 	private Button[] leftSwitchButtons = new Button[6], rightSwitchButtons = new Button[6];
 	private ButtonGroup leftButtons = new ButtonGroup(), rightButtons = new ButtonGroup();
 	public JTextArea leftText, rightText;
+	private Timer timer;
 //	private JButton leftP1Image=new JButton();
 
 //	private int playerPerspective=1;
@@ -774,6 +775,7 @@ public class Battle {
 					}
 				}
 			}
+			b.repaint(p1, p2);
 			if (p1.isDefeated()) {
 				gameNotOver = false;
 				popup.showMessageDialog(b.mainPanel, "Player 2 Won the game!", "Game Finished", 2, (new ImageIcon(
@@ -811,17 +813,21 @@ public class Battle {
 //            	p1SwitchIn=Integer.parseInt(popup.showInputDialog(b.leftDisplayPanel,"Your current Pokemon fainted." +
 //						" The pokemon that you can switch in are"+x+"Please enter the number of the pokemon you want to switch in.","Pokemon defeated",2,new ImageIcon (new ImageIcon("Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
 //				p1.switchOut(p1.getPokemon()[p1SwitchIn-1]);
-				String y = (String) popup.showInputDialog(b.leftDisplayPanel,
-						"Your current Pokemon fainted. Please choose which pokemon you want to switch in.",
-						"Pokemon defeated", 2,
-						new ImageIcon(
-								new ImageIcon("Skull.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
-						x, "Please select a Pokemon");
-
+				String y;
+				do {
+					y = (String) popup.showInputDialog(b.leftDisplayPanel,
+							"Your current Pokemon fainted. Please choose which pokemon you want to switch in.",
+							"Pokemon defeated", 2,
+							new ImageIcon(
+									new ImageIcon("Skull.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
+							x, "Please select a Pokemon");
+				} while(y == null);
+				
 				p1SwitchIn = Integer.parseInt(String.valueOf(y.charAt(0)));
 				p1.switchOut(p1.getPokemon()[p1SwitchIn - 1]);
 
 				p1SwitchIn = -1;
+				b.repaint(p1, p2);
 			}
 			if (p2.getCurrentMon().getHealth() <= 0) {
 				P2numberOfFaintedMons++;
@@ -841,24 +847,27 @@ public class Battle {
 						z++;
 					}
 				}
-				String y = (String) popup.showInputDialog(b.rightDisplayPanel,
-						"Your current Pokemon fainted. Please choose which pokemon you want to switch in.",
-						"Pokemon defeated", 2,
-						new ImageIcon(
-								new ImageIcon("Skull.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
-						x, "Please select a Pokemon");
-
+				String y;
+				do {
+					y = (String) popup.showInputDialog(b.rightDisplayPanel,
+							"Your current Pokemon fainted. Please choose which pokemon you want to switch in.",
+							"Pokemon defeated", 2,
+							new ImageIcon(
+									new ImageIcon("Skull.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
+							x, "Please select a Pokemon");
+				} while(y == null);
+				
 				p2SwitchIn = Integer.parseInt(String.valueOf(y.charAt(0)));
 				p2.switchOut(p2.getPokemon()[p2SwitchIn - 1]);
 
 				p2SwitchIn = -1;
+				b.repaint(p1, p2);
 			}
 //			ez.println(b.leftText.getBounds().height);
 //			ez.println(b.leftText.getBounds().width);
 //			ez.println(b.rightText.getBounds().height);
 //			ez.println(b.rightText.getBounds().width);
 //			ez.println(b..getWidth());
-			b.repaint(p1, p2);
 //            ez.println(b.image4.getWidth());
 //			ez.println(b.leftText.getBounds().height);
 //			ez.println(b.leftText.getBounds().width);
@@ -967,8 +976,14 @@ public class Battle {
 
 		name2.setText(p2.getCurrentMon().getName());
 		
+		if(bar1.getPokemon() != p1.getCurrentMon()) {
+			bar1.setPokemon(p1.getCurrentMon());
+		}
 		bar1.repaint();
 		
+		if(bar2.getPokemon() != p2.getCurrentMon()) {
+			bar2.setPokemon(p2.getCurrentMon());
+		}
 		bar2.repaint();
 		
 		Icon pic = null;
@@ -999,8 +1014,14 @@ public class Battle {
 
 		name4.setText(p1.getCurrentMon().getName());
 		
+		if(bar3.getPokemon() != p2.getCurrentMon()) {
+			bar3.setPokemon(p2.getCurrentMon());
+		}
 		bar3.repaint();
 		
+		if(bar4.getPokemon() != p1.getCurrentMon()) {
+			bar4.setPokemon(p1.getCurrentMon());
+		}
 		bar4.repaint();
 		
 		pic = null;
@@ -1026,9 +1047,34 @@ public class Battle {
 				rightSwitchButtons[i].setEnabled(true);
 			}
 		}
-
+		animateHPChange();
 	}
 
+	private void animateHPChange() {
+    	timer = new Timer(25, new ActionListener() {
+    		@Override
+    		public void actionPerformed(ActionEvent e) {
+    			if(!bar1.isChanging() && !bar2.isChanging()
+    					&& !bar3.isChanging() && !bar4.isChanging()) {
+    				timer.stop();
+    			}
+    			if(bar1.isChanging()) {
+    				bar1.repaint();
+    			}
+    			if(bar2.isChanging()) {
+    				bar2.repaint();
+    			}
+    			if(bar3.isChanging()) {
+    				bar3.repaint();
+    			}
+    			if(bar4.isChanging()) {
+    				bar4.repaint();
+    			}
+    		}
+    	});
+    	timer.setInitialDelay(500);
+    	timer.start();
+    }
 }
 
 //import java.io.*;

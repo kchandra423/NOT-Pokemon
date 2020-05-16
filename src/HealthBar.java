@@ -3,6 +3,8 @@ import java.awt.*;
 
 public class HealthBar extends JPanel {
 	private Pokemon pokemon;
+	private int hpOnScreen;
+	private boolean changing;
 	private Color background = new Color(46, 46, 46);
 	private Color border = new Color(151, 159, 134);
 	private Color hpText = new Color(247, 61, 46);
@@ -16,6 +18,8 @@ public class HealthBar extends JPanel {
 	public HealthBar(Pokemon pokemon) {
 		super();
 		this.pokemon = pokemon;
+		hpOnScreen = pokemon.getHealth();
+		changing = false;
 	}
 	
 	@Override
@@ -28,34 +32,59 @@ public class HealthBar extends JPanel {
 		g2.setColor(hpText);
 		g2.setFont(g2.getFont().deriveFont(10f));
 		g2.drawString("HP", 8, 10);
-		if(pokemon.getHealth() > pokemon.getBaseHealth()/2.0) {
+		if(hpOnScreen > pokemon.getBaseHealth()/2.0) {
 			g2.setColor(lightGreen);
-			g2.fillRect(30, 2, (int)((double)pokemon.getHealth()/pokemon.getBaseHealth()*105), 8);
+			g2.fillRect(30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 8);
 			g2.setColor(darkGreen);
-			g2.fillRect(30, 2, (int)((double)pokemon.getHealth()/pokemon.getBaseHealth()*105), 2);
-			g2.fillRect(30, 8, (int)((double)pokemon.getHealth()/pokemon.getBaseHealth()*105), 2);
+			g2.fillRect(30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
+			g2.fillRect(30, 8, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
 		}
-		else if(pokemon.getHealth() >= pokemon.getBaseHealth()/5.0) {
+		else if(hpOnScreen >= pokemon.getBaseHealth()/5.0) {
 			g2.setColor(lightYellow);
-			g2.fillRect(30, 2, (int)((double)pokemon.getHealth()/pokemon.getBaseHealth()*105), 8);
+			g2.fillRect(30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 8);
 			g2.setColor(darkYellow);
-			g2.fillRect(30, 2, (int)((double)pokemon.getHealth()/pokemon.getBaseHealth()*105), 2);
-			g2.fillRect(30, 8, (int)((double)pokemon.getHealth()/pokemon.getBaseHealth()*105), 2);
+			g2.fillRect(30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
+			g2.fillRect(30, 8, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
 		}
 		else {
 			g2.setColor(lightRed);
-			g2.fillRect(30, 2, (int)((double)pokemon.getHealth()/pokemon.getBaseHealth()*105), 8);
+			g2.fillRect(30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 8);
 			g2.setColor(darkRed);
-			g2.fillRect(30, 2, (int)((double)pokemon.getHealth()/pokemon.getBaseHealth()*105), 2);
-			g2.fillRect(30, 8, (int)((double)pokemon.getHealth()/pokemon.getBaseHealth()*105), 2);
+			g2.fillRect(30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
+			g2.fillRect(30, 8, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
 		}
 		g2.setColor(border);
 		g2.fillRect(28, 2, 2, 8);
 		g2.fillRect(135, 2, 2, 8);
+		if(hpOnScreen > pokemon.getHealth()) {
+			hpOnScreen--;
+			changing = true;
+		}
+		else {
+			changing = false;
+		}
 	}
 	
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(142, 14);
+	}
+
+	public void setPokemon(Pokemon pokemon) {
+		this.pokemon = pokemon;
+		hpOnScreen = pokemon.getHealth();
+		changing = false;
+	}
+	
+	public Pokemon getPokemon() {
+		return pokemon;
+	}
+	
+	public int getHPOnScreen() {
+		return hpOnScreen;
+	}
+	
+	public boolean isChanging() {
+		return changing;
 	}
 }

@@ -619,7 +619,7 @@ public class Battle2 {
     	text.setText(text.getText() + "\n" + s);
     }
     
-    public String toToolTipText(String s) {
+    private String toToolTipText(String s) {
     	return "<html>" + s.trim().replace("\n", "<br>") + "</html>";
     }
 }
