@@ -64,7 +64,7 @@ public class Calculator {
 		String copy = "something went wrong; ";
 		try {
 //			copy = Files.readString(Paths.get("Stats.txt"));
-			byte[] file = Files.readAllBytes(Paths.get("Learnsets.txt"));
+			byte[] file = Files.readAllBytes(Paths.get("Text/Learnsets.txt"));
 			copy = new String(file);
 		} catch (IOException e) {
 			e.printStackTrace();

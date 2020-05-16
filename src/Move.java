@@ -57,8 +57,8 @@ public class Move {
 		int number = -1;
 		String copy = "something went wrong; ";
 		try {
-//			copy = Files.readString(Paths.get("Moves.txt"));
-			byte[] file = Files.readAllBytes(Paths.get("Moves.txt"));
+//			copy = Files.readString(Paths.get("Text/Moves.txt"));
+			byte[] file = Files.readAllBytes(Paths.get("Text/Moves.txt"));
 			copy = new String(file);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -84,8 +84,8 @@ public class Move {
 		// code way to set all the stats;
 		String copy = "something went wrong; ";
 		try {
-//			copy = Files.readString(Paths.get("Moves.txt"));
-			byte[] file = Files.readAllBytes(Paths.get("Moves.txt"));
+//			copy = Files.readString(Paths.get("Text/Moves.txt"));
+			byte[] file = Files.readAllBytes(Paths.get("Text/Moves.txt"));
 			copy = new String(file);
 		} catch (IOException e) {
 			e.printStackTrace();

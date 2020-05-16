@@ -339,10 +339,10 @@ public class Battle2 {
 			name2 = new JLabel(p2.getCurrentMon().getName());
 			bar1 = new HealthBar(p1.getCurrentMon());
 			bar2 = new HealthBar(p2.getCurrentMon());
-			ImageIcon pic = new ImageIcon("Sprites/SpritesBack/" + p1.getCurrentMon().getID() +"-back.gif");
+			ImageIcon pic = new ImageIcon("Images/Sprites/SpritesBack/" + p1.getCurrentMon().getID() +"-back.gif");
 			image1 = new JLabel(pic);
 			image1.setToolTipText(toToolTipText(p1.getCurrentMon().toString()));
-			ImageIcon pic2 = new ImageIcon("Sprites/SpritesFront/" + p2.getCurrentMon().getID() + ".gif");
+			ImageIcon pic2 = new ImageIcon("Images/Sprites/SpritesFront/" + p2.getCurrentMon().getID() + ".gif");
 			image2 = new JLabel(pic2);
 			image2.setToolTipText("You can only see your own pokemon's stats!");
 		}
@@ -351,10 +351,10 @@ public class Battle2 {
 			name2 = new JLabel(p1.getCurrentMon().getName());
 			bar1 = new HealthBar(p2.getCurrentMon());
 			bar2 = new HealthBar(p1.getCurrentMon());
-			ImageIcon pic = new ImageIcon("Sprites/SpritesBack/" + p2.getCurrentMon().getID() +"-back.gif");
+			ImageIcon pic = new ImageIcon("Images/Sprites/SpritesBack/" + p2.getCurrentMon().getID() +"-back.gif");
 			image1 = new JLabel(pic);
 			image1.setToolTipText(toToolTipText(p2.getCurrentMon().toString()));
-			ImageIcon pic2 = new ImageIcon("Sprites/SpritesFront/" + p1.getCurrentMon().getID() + ".gif");
+			ImageIcon pic2 = new ImageIcon("Images/Sprites/SpritesFront/" + p1.getCurrentMon().getID() + ".gif");
 			image2 = new JLabel(pic2);
 			image2.setToolTipText("You can only see your own pokemon's stats!");
 		}
