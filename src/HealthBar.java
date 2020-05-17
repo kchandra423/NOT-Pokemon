@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class HealthBar extends JPanel {
+public class HealthBar extends JLabel {
 	private Pokemon pokemon;
 	private int xOffset;
 	private int hpOnScreen;

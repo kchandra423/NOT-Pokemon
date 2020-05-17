@@ -192,9 +192,9 @@ public class Battle {
 //		});
 P1.setCurrentMon();
 P2.setCurrentMon();
-			name1 = new JLabel(P1.getCurrentMon().getName());
+			name1 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
 //			System.out.println(P2.getCurrentMon().getName());
-			name2 = new JLabel(P2.getCurrentMon().getName());
+			name2 = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
 			bar1 = new HealthBar(P1.getCurrentMon());
 			bar1.setBackground(Color.LIGHT_GRAY);
 			bar1.setXOffset(true);
@@ -244,38 +244,30 @@ P2.setCurrentMon();
 					}
 				}
 			});
-			GroupLayout layout1 = new GroupLayout(leftDisplayPanel);
-			leftDisplayPanel.setLayout(layout1);
-			layout1.setAutoCreateGaps(true);
-			System.out.println(name2);
-			System.out.println(name1);
-			layout1.setAutoCreateContainerGaps(true);
-			layout1.setHorizontalGroup(layout1.createSequentialGroup()
-				.addGroup(layout1.createParallelGroup(GroupLayout.Alignment.CENTER)
-					.addGap(100)
-					.addComponent(name1)
-					.addComponent(bar1)
-//					.addComponent(p1PokemonButton)
-					.addComponent(image1))
-//					.addComponent(leftP1Image)
-				.addGap(200)
-				.addGroup(layout1.createParallelGroup(GroupLayout.Alignment.CENTER)
-					.addComponent(name2)
-					.addComponent(bar2)
-					.addComponent(image2))
-			);
-
-			layout1.setVerticalGroup(layout1.createSequentialGroup()
-					.addComponent(name2)
-					.addComponent(bar2)
-					.addComponent(image2)
-					.addGap(100)
-					.addComponent(name1)
-					.addComponent(bar1)
-					.addComponent(image1)
-//					.addComponent(leftP1Image)
-//					.addComponent(p1PokemonButton)
-			);
+			leftDisplayPanel.setLayout(new GridBagLayout());
+			GridBagConstraints c2 = new GridBagConstraints();
+			c2.gridx = 0;
+			c2.gridy = 3;
+			c2.fill = GridBagConstraints.HORIZONTAL;
+			c2.insets = new Insets(55, 5, 5, 5);
+			c2.anchor = GridBagConstraints.LAST_LINE_START;
+			c2.weightx = 0.5;
+			c2.weighty = 0.5;
+			leftDisplayPanel.add(name1, c2);
+			c2.gridy = 4;
+			c2.insets = new Insets(5, 5, 5, 5);
+			leftDisplayPanel.add(bar1, c2);
+			c2.gridy = 5;
+			leftDisplayPanel.add(image1, c2);
+			c2.gridx = 1;
+			c2.gridy = 0;
+			c2.insets = new Insets(5, 105, 5, 5);
+			c2.anchor = GridBagConstraints.FIRST_LINE_END;
+			leftDisplayPanel.add(name2, c2);
+			c2.gridy = 1;
+			leftDisplayPanel.add(bar2, c2);
+			c2.gridy = 2;
+			leftDisplayPanel.add(image2, c2);
 			leftDisplayPanel.setBackground(Color.LIGHT_GRAY);
 			c.gridx = 0;
 			c.gridy = 0;
@@ -374,9 +366,9 @@ P2.setCurrentMon();
 
 
 			GridBagConstraints y = new GridBagConstraints();
-			name3 = new JLabel(P2.getCurrentMon().getName());
+			name3 = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
 			
-			name4 = new JLabel(P1.getCurrentMon().getName());
+			name4 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
 			bar3 = new HealthBar(P2.getCurrentMon());
 			bar3.setBackground(Color.LIGHT_GRAY);
 			bar3.setXOffset(true);
@@ -411,34 +403,30 @@ P2.setCurrentMon();
 							new ImageIcon("Images/Sprites/SpritesFront/" + P1.getCurrentMon().getID() + ".gif"));
 				}
 			});
-			GroupLayout layout4 = new GroupLayout(rightDisplayPanel);
-			rightDisplayPanel.setLayout(layout4);
-			layout4.setAutoCreateGaps(true);
-			layout4.setAutoCreateContainerGaps(true);
-			layout4.setHorizontalGroup(layout4.createSequentialGroup()
-					.addGroup(layout4.createParallelGroup(GroupLayout.Alignment.CENTER)
-						.addGap(100)
-						.addComponent(name3)
-						.addComponent(bar3)
-//						.addComponent(p2PokemonButton)
-						.addComponent(image3))
-					.addGap(200)
-					.addGroup(layout4.createParallelGroup(GroupLayout.Alignment.CENTER)
-						.addComponent(name4)
-						.addComponent(bar4)
-						.addComponent(image4))
-				);
-
-				layout4.setVerticalGroup(layout4.createSequentialGroup()
-						.addComponent(name4)
-						.addComponent(bar4)
-						.addComponent(image4)
-						.addGap(100)
-						.addComponent(name3)
-						.addComponent(bar3)
-						.addComponent(image3)
-//						.addComponent(p2PokemonButton)
-				);
+			rightDisplayPanel.setLayout(new GridBagLayout());
+			GridBagConstraints y2 = new GridBagConstraints();
+			y2.gridx = 0;
+			y2.gridy = 3;
+			y2.fill = GridBagConstraints.HORIZONTAL;
+			y2.insets = new Insets(55, 5, 5, 5);
+			y2.anchor = GridBagConstraints.LAST_LINE_START;
+			y2.weightx = 0.5;
+			y2.weighty = 0.5;
+			rightDisplayPanel.add(name3, y2);
+			y2.gridy = 4;
+			y2.insets = new Insets(5, 5, 5, 5);
+			rightDisplayPanel.add(bar3, y2);
+			y2.gridy = 5;
+			rightDisplayPanel.add(image3, y2);
+			y2.gridx = 1;
+			y2.gridy = 0;
+			y2.insets = new Insets(5, 155, 5, 5);
+			y2.anchor = GridBagConstraints.FIRST_LINE_END;
+			rightDisplayPanel.add(name4, y2);
+			y2.gridy = 1;
+			rightDisplayPanel.add(bar4, y2);
+			y2.gridy = 2;
+			rightDisplayPanel.add(image4, y2);
 			rightDisplayPanel.setBackground(Color.LIGHT_GRAY);
 			y.gridx = 0;
 			y.gridy = 0;
