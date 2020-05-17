@@ -110,7 +110,6 @@ public class Calculator {
 
 	public int calculateBasicDamage(Pokemon user, Pokemon target, Move move) {
 		// code way to calculate damage
-		move.usePP();
 		if (move.getAccuracy() == 101) {
 
 		} else if (Math.random() > (double) move.getAccuracy() / 100) {
