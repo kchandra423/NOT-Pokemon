@@ -7,7 +7,7 @@ public class Move {
 	// Num, accuracy, power, category, desc, name, pp , priority, flags, chance,
 	// self, boosts,
 	// crit ratio, drain, heal,status,target, type
-//    private boolean isSpecial;
+
 	private int number;
 	private int accuracy;
 	private int power;
@@ -19,7 +19,7 @@ public class Move {
 	private int priority;
 	private String flags;
 	private int chance;
-	private boolean self;//true if the effeccts target the user
+	private boolean self;//true if the efeccts target the user
 	private String boosts;
 	private double critical;
 	private Ratio drain;
@@ -28,14 +28,8 @@ public class Move {
 	private boolean target;//true if the target is the user
 	private String type;
 	private String id;
+	//more info about each stat in the calculate basic damage method of calculator
 
-//    HashMap<String,Object> stats=new HashMap<String, Object>();
-	// private String status;
-//    private int statusChance;
-//    private String modifier;
-//    private int modifierMagnitude;
-//    private int modifierChance;
-//    private int priority;
 	public Move(int number) {
 
 		this.number = number;
@@ -46,14 +40,9 @@ public class Move {
 		number=x;
 		setStats(x);
 	}
-//	public Move(String name, int number, int power, String type) {
-//		this.number = number;
-//		this.name = name;
-//		this.power = power;
-//		this.type = type;
-//	}
 
-	public int convertName(String name) {
+
+	public int convertName(String name) {//takes a moves name and gives its corresponding move number
 		int number = -1;
 		String copy = "something went wrong; ";
 		try {
@@ -80,8 +69,8 @@ public class Move {
 		return number;
 	}
 
-	private void setStats(int number) {
-		// code way to set all the stats;
+	private void setStats(int number) {//takes a its move  number and sets its stats using the MOves txt file
+
 		String copy = "something went wrong; ";
 		try {
 //			copy = Files.readString(Paths.get("Text/Moves.txt"));
@@ -95,12 +84,7 @@ public class Move {
 		String stopdoingthat = splittedCopy[number - 1];
 		String[] s = stopdoingthat.split("#");
 		number = Integer.parseInt(s[0]);
-		// Num, accuracy, power, category, desc, name, pp , priority, flags, chance,
-		// self, boosts,
-		// crit ratio, drain, heal,status,target, type
-//        for(int i = 0;i<s.length;i++) {
-//            System.out.println(s[i]);
-//        }
+
 		accuracy = (s[1].equalsIgnoreCase("true")) ? 101 : Integer.parseInt(s[1]);
 		power = Integer.parseInt(s[2]);
 		category = s[3];
@@ -136,74 +120,28 @@ public class Move {
 		target = (s[16].equalsIgnoreCase("null")) ? false : true;
 		type = s[17];
 		id = s[18];
-//        stats.put("accuracy",accuracy);
-//        stats.put("power",power);
-//        stats.put("category",category);
-//        stats.put("description",description);
-//        stats.put("name",name);
-//        stats.put("pp",pp);
-//        stats.put("priority",priority);
-//        stats.put("flags",flags);
 
-//        for(int i =0;i<s.length;i++){
-//
-//        }
-//        name=s[1];
-//        type1=s[2];
-//        type2=s[3];
-//        health=Integer.parseInt(s[4]);
-//        attack=Integer.parseInt(s[5]);
-//        defense=Integer.parseInt(s[6]);
-//        speed=Integer.parseInt(s[9]);
 	}
 
 	public String getName() {
 		return name;
-	}
+	}//self explanatory
 
 	public int getNumber() {
 		return number;
-	}
+	}//self explanatory
 
 	public int getPower() {
 		return power;
-	}
+	}//self explanatory
 
-//    public int getStatusChance() {
-//        return statusChance;
-//    }
-//
-//
-//
-//    public String getStatus() {
-//        return status;
-//    }
 
 	public String getType() {
 		return type;
 	}
+//self explanatory
 
-//    public int getModifierChance() {
-//        return modifierChance;
-//    }
-//
-//    public int getModifierMagnitude() {
-//        return modifierMagnitude;
-//    }
-////
-////    public String getModifier() {
-////        return modifier;
-////    }
-////
-////    public boolean isSpecial() {
-////        return isSpecial;
-////    }
-//
-//    public int getPriority() {
-//        return priority;
-//    }
-
-	public String toString() {
+	public String toString() {//self explanatory
 		String answer = "\n" + "Name: " + name
 				+ "\n" + "Power: " + power
 				+ "\n" + "Accuracy: " + accuracy
@@ -215,19 +153,19 @@ public class Move {
 		return answer;
 	}
 
-	public boolean isSelf() {
+	public boolean isSelf() {//self explanatory
 		return self;
 		//true if the boosts targets self
 	}
 
 	public int getAccuracy() {
 		return accuracy;
-	}
+	}//self explanatory
 
 	public String getCategory() {
 		return category;
 	}
-
+	//self explanatory
 	public boolean isTarget() {
 		return target;
 		//true if damage and or boosts target self
@@ -236,19 +174,19 @@ public class Move {
 	public String getId() {
 		return id;
 	}
-
+	//self explanatory
 	public String getBoosts() {
 		return boosts;
 	}
 
 	public int getChance() {
 		return chance;
-	}
+	}//self explanatory
 
 	public String getStatus() {
 		return status;
 	}
-
+	//self explanatory
 	public int getBasePP() {
 		return basePP;
 	}
@@ -260,17 +198,17 @@ public class Move {
 	public void usePP() {
 		pp--;
 	}
-
+	//self explanatory
 	public double getCritical() {
 		return critical;
 	}
 
 	public int getPriority() {
 		return priority;
-	}
+	}//self explanatory
 	public double getDrain(){
 		return (double)drain.getFirst()/(double)drain.getSecond();
-	}
+	}//self explanatory
 	public double getHeal(){
 		return (double)heal.getFirst()/(double)heal.getSecond();
 	}

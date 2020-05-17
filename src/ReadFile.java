@@ -5,8 +5,8 @@ import java.nio.file.Paths;
 public class ReadFile {
     //17
 //Num, accuracy, power, category, desc, name, pp , priority, flags, chance, self, boosts, crit ratio, drain, heal,status,type
-    public static void main(String[] args){
-            ReadFile read = new ReadFile();
+    public static void main(String[] args) {
+        ReadFile read = new ReadFile();
         String copy = "something went wrong; ";
         try {
 //			copy = Files.readString(Paths.get("Stats.txt"));
@@ -15,11 +15,14 @@ public class ReadFile {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    System.out.println(
+        System.out.println(
 //            read.orderMoves(
-            (read.orderMoves(copy)));
+                (read.orderMoves(copy)));
     }
+
     public String formatShowDownMovesets(String s) {
+        //takes a string of the showdown movesets txt file and returns a string with
+        // each move neccesary stats seperated by # and each move seperated by a \n
         String masterString = "";
         String[] chunks;
         chunks = s.split("ENDLINE");
@@ -35,9 +38,7 @@ public class ReadFile {
             for (int k = 0; k < lines.length; k++) {
                 currentLine = lines[k];
 
-//                if(currentLine.contains("Recover")){
-//                    int x =5;
-//                }
+//
                 if (currentLine.contains("num: ")) {
 
                     currentChunksLines[0] = currentLine.substring
@@ -112,37 +113,33 @@ public class ReadFile {
                             + "#";
                 } else if (currentLine.contains("\ttarget: \"self\"")) {
                     System.out.println("hjjjhhjj");
-                    currentChunksLines[16] ="true#";
+                    currentChunksLines[16] = "true#";
 
 //                            currentLine.substring
 //                            (currentLine.indexOf("target: ") + 8, currentLine.indexOf("\""))
 //                            + "#";
-                }
-                else if (currentLine.contains("\ttarget: \"adjacentAllyOrSelf\"")) {
+                } else if (currentLine.contains("\ttarget: \"adjacentAllyOrSelf\"")) {
                     System.out.println("hjjjhhjj");
-                    currentChunksLines[16] ="true#";
+                    currentChunksLines[16] = "true#";
 
 //                            currentLine.substring
 //                            (currentLine.indexOf("target: ") + 8, currentLine.indexOf("\""))
 //                            + "#";
-                }
-                else if (currentLine.contains("\ttarget: \"allyTeam\"")) {
+                } else if (currentLine.contains("\ttarget: \"allyTeam\"")) {
                     System.out.println("hjjjhhjj");
-                    currentChunksLines[16] ="true#";
+                    currentChunksLines[16] = "true#";
 
 //                            currentLine.substring
 //                            (currentLine.indexOf("target: ") + 8, currentLine.indexOf("\""))
 //                            + "#";
-                }
-                else if (currentLine.contains("\ttarget: \"adjacentAlly\"")) {
+                } else if (currentLine.contains("\ttarget: \"adjacentAlly\"")) {
                     System.out.println("hjjjhhjj");
-                    currentChunksLines[16] ="true#";
+                    currentChunksLines[16] = "true#";
 
 //                            currentLine.substring
 //                            (currentLine.indexOf("target: ") + 8, currentLine.indexOf("\""))
 //                            + "#";
-                }
-                else if (currentLine.contains("\tself: {")) {
+                } else if (currentLine.contains("\tself: {")) {
 
                     currentChunksLines[10] = "true"
                             + "#";
@@ -151,28 +148,20 @@ public class ReadFile {
                     currentChunksLines[9] = currentLine.substring
                             (currentLine.indexOf("chance: ") + 8, currentLine.indexOf(","))
                             + "#";
-                }
-            else if (currentLine.contains("\tid: ")) {
+                } else if (currentLine.contains("\tid: ")) {
 
-                currentChunksLines[18] = currentLine.substring
-                        (currentLine.indexOf("id: ") + 4, currentLine.indexOf(","))
-                        + "\n";
-            }
-                else if (currentLine.indexOf("\tboosts: ") != -1) {
+                    currentChunksLines[18] = currentLine.substring
+                            (currentLine.indexOf("id: ") + 4, currentLine.indexOf(","))
+                            + "\n";
+                } else if (currentLine.indexOf("\tboosts: ") != -1) {
                     currentChunksLines[11] = "";
                     for (int z = 1; !lines[k + z].equalsIgnoreCase("NOTLINEEND"); z++) {
                         currentChunksLines[11] += lines[k + z];
                     }
                     currentChunksLines[11] += "#";
-//                    String Icantthinkofaname="";
-//                    while(!(Icantthinkofaname.equalsIgnoreCase("NOTLINEEND")) {
-//                            Icantthinkofaname=lines
-//                        currentChunksLines[11] =
-//                    }
+
                 }
-//            else{
-//                System.out.println("what");
-//            }
+
 
             }
             for (int a = 0; a < currentChunksLines.length; a++) {
@@ -185,56 +174,29 @@ public class ReadFile {
 //Num, accuracy, power, category, desc, name, pp , priority, flags, chance, self, boosts, crit ratio, drain, heal,status,target, type, id
     //self= boosts target self
     // target= everything targets self
-//
-//            if(currentLine.contains("status: "))
-//            {
-//                currentChunk+=currentLine;
-//            }
-//           if(currentLine.contains("chance: "))
-//            {
-//                currentChunk+=currentLine;
-//            }
-//            if(currentLine.contains("boosts: "))
-//            {
-//                currentChunk+=currentLine;
-//            }
-//            if(currentLine.contains("self:")||currentLine.contains("self\""))
-//            {
-//                currentChunk+=currentLine;
-//            }
 
-    public String orderMoves(String s) {
+    public String orderMoves(String s) {//orders a txt files move from first to last
         String masterString = "";
-        String [] neu= new String [719];
-        String [] old =s.split("\n");
-        int num=0;
-        for(int i =0; i<old.length;i++){
-            String firstPartOfOLd=old[i].split("#")[0];
-            try{
+        String[] neu = new String[719];
+        String[] old = s.split("\n");
+        int num = 0;
+        for (int i = 0; i < old.length; i++) {
+            String firstPartOfOLd = old[i].split("#")[0];
+            try {
                 num = Integer.parseInt(firstPartOfOLd);
-            }
-            catch (Exception e){
+            } catch (Exception e) {
 
             }
-            neu[num-1]=old[i];
+            neu[num - 1] = old[i];
         }
-//    String[] hi = new String[719];
-//    String[] otherString = s.split("\n");
-//    String[] more = new String[701];
-//    String[] makeitstop = new String[701];
-//    int num;
-//    for (int i = 0; i < 701; i++) {
-//        makeitstop = otherString[i].split("#");
-//        more = makeitstop;
-//        num = Integer.parseInt(more[0]);
-//        hi[num - 1] = otherString[i];
-//    }
+
         for (int i = 0; i < 719; i++) {
 
             masterString += neu[i] + "\n";
         }
         return masterString;
     }
+
     public String formatShowDownLearnSets(String s) {
         String masterString = "";
         String[] chunks;
@@ -242,106 +204,19 @@ public class ReadFile {
         String[] lines;
 
         String currentLine = "";
-for(int i=0;i< chunks.length;i++){
-    lines=chunks[i].split("\n");
+        for (int i = 0; i < chunks.length; i++) {
+            lines = chunks[i].split("\n");
 //    System.out.println(chunks[i]);
-    for(int k=0;k<lines.length;k++){
-currentLine=lines[k];
-//System.out.println(currentLine);
+            for (int k = 0; k < lines.length; k++) {
+                currentLine = lines[k];
 
 
-        masterString+=currentLine.substring(0,currentLine.indexOf(":"))+"#";
-    }
-    masterString+="\n";
-}
+                masterString += currentLine.substring(0, currentLine.indexOf(":")) + "#";
+            }
+            masterString += "\n";
+        }
 
 
         return masterString;
     }
-//        masterString.replace("num: ", "");
-//        masterString.replace(",accuracy: ", "#");
-//        masterString.replace(",basePower ", "#");
-//        masterString.replace(",category", "#");
-//        masterString.replace(",desc: ", "#");
-//        masterString.replace(",name: ", "#");
-//        masterString.replace(",pp: ", "#");
-//        masterString.replace(",priority: ", "#");
-//        masterString.replace(",flags: ", "#");
-//        masterString.replace(",type: ", "#");
-//        masterString.replace("\"", "");
-//        masterString.replace("\'", "");
-//        masterString.replace(",\n", "\n");
-//        String[] line = s.split("\n");
-//        for (int i = 0; i < line.length; i++) {
-//
-//            if(line[i].contains("num: "))
-//            {
-//              masterString+=line[i];
-//            }
-//            else if(line[i].contains("accuracy: "))
-//            {
-//                masterString+=line[i];
-//            }
-//
-//            else if(line[i].contains("basePower: "))
-//            {
-//                masterString+=line[i];
-//            }
-//            else if(line[i].contains("category: "))
-//            {
-//                masterString+=line[i];
-//            }
-//            else if(line[i].contains("desc: "))
-//            {
-//                masterString+=line[i];
-//            }
-//            else if(line[i].contains("name: "))
-//            {
-//                masterString+=line[i];
-//            }
-//            else if(line[i].contains("pp: "))
-//            {
-//                masterString+=line[i];
-//            }
-//            else if(line[i].contains("priority: "))
-//            {
-//                masterString+=line[i];
-//            }
-//            else if(line[i].contains("flags: "))
-//            {
-//                masterString+=line[i];
-//            }
-//            else if(line[i].contains("type: "))
-//            {
-//                masterString+=line[i];
-//            }
-//            else if(line[i].contains("status: "))
-//            {
-//                masterString+=line[i];
-//            }
-//            else if(line[i].contains("chance: "))
-//            {
-//                masterString+=line[i];
-//            }
-//            else if(line[i].contains("boosts: "))
-//            {
-//                masterString+=line[i];
-//            }
-//            else if(line[i].contains("self:")||line[i].contains("self\""))
-//            {
-//                masterString+=line[i];
-//            }
-//            else if(line[i].contains("ENDLINE"))
-//            {
-//                masterString+="\n";
-//            }
-//
-//        }
-
-//
-//
-//    }
-
 }
-//                "Moves: "+moves[0].getMoveName()+" "+moves[1].getMoveName()+" "+moves[2].getMoveName()+" "+moves[3].getMoveName()
-//                +"\n"+
