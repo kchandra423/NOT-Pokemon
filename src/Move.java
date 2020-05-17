@@ -1,3 +1,14 @@
+//
+//  Author: Kumar Chandra
+//  Revised: Kumar Chandra
+//           5/10/20
+//
+//  Notes:
+//       An immutable object that holds data about a move.
+//
+//  Bugs:
+//      unknown
+//
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
