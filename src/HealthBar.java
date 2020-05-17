@@ -58,8 +58,13 @@ public class HealthBar extends JPanel {
 		g2.setColor(border);
 		g2.fillRect(xOffset+28, 2, 2, 8);
 		g2.fillRect(xOffset+135, 2, 2, 8);
-		if(hpOnScreen > pokemon.getHealth()) {
-			hpOnScreen--;
+		if(hpOnScreen != pokemon.getHealth()) {
+			if(hpOnScreen > pokemon.getHealth()) {
+				hpOnScreen--;
+			}
+			else {
+				hpOnScreen++;
+			}
 			changing = true;
 		}
 		else {
