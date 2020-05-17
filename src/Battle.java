@@ -15,6 +15,7 @@ public class Battle {
 
 	private static JLabel name1, name2, image1, image2,name3, name4, image3, image4,
 			attack = new JLabel("Attack"), switchOut = new JLabel("Switch");
+	private HealthBar bar1, bar2, bar3, bar4;
 	private Button[] leftMoveButtons = new Button[4],rightMoveButtons=new Button[4];
 	private int p1Selection=-1;
 	private int p2Selection =-1;
@@ -22,6 +23,7 @@ public class Battle {
 	private Button[] leftSwitchButtons = new Button[6],rightSwitchButtons = new Button[6];
 	private ButtonGroup leftButtons=new ButtonGroup(),rightButtons=new ButtonGroup();
 	public JTextArea leftText, rightText;
+	private Timer timer;
 	boolean confirm1=false,confirm2=false;//i hate action performed not being able to access things like a normal method
 //	boolean wait3=true;
 	static Player P1, P2;
@@ -190,6 +192,12 @@ P2.setCurrentMon();
 			name1 = new JLabel(P1.getCurrentMon().getName());
 //			System.out.println(P2.getCurrentMon().getName());
 			name2 = new JLabel(P2.getCurrentMon().getName());
+			bar1 = new HealthBar(P1.getCurrentMon());
+			bar1.setBackground(Color.LIGHT_GRAY);
+			bar1.setXOffset(true);
+			bar2 = new HealthBar(P2.getCurrentMon());
+			bar2.setBackground(Color.LIGHT_GRAY);
+			bar2.setXOffset(false);
 			ImageIcon pic =
 //					new ImageIcon
 //					(new ImageIcon(
@@ -198,7 +206,7 @@ P2.setCurrentMon();
 //									getScaledInstance(100, 500, Image.SCALE_DEFAULT));
 
 					new ImageIcon("Images/Sprites/SpritesBack/" + P1.getCurrentMon().getID() + "-back.gif");
-			pic = new ImageIcon(pic.getImage().getScaledInstance((int) (pic.getIconWidth() * 4), (int) (pic.getIconHeight() * 4), Image.SCALE_DEFAULT));
+			//pic = new ImageIcon(pic.getImage().getScaledInstance((int) (pic.getIconWidth() * 4), (int) (pic.getIconHeight() * 4), Image.SCALE_DEFAULT));
 			image1 = new JLabel(pic);
 			image1.addMouseListener(new MouseAdapter() {
 				@Override
@@ -240,39 +248,37 @@ P2.setCurrentMon();
 			System.out.println(name1);
 			layout1.setAutoCreateContainerGaps(true);
 			layout1.setHorizontalGroup(layout1.createSequentialGroup()
-							.addGroup(layout1.createParallelGroup(GroupLayout.Alignment.CENTER)
-
-									.addComponent(name1)
-
-//						.addComponent(p1PokemonButton)
-									.addComponent(image1))
-//.addComponent(leftP1Image)
-//					.addGap(400)
-		.addGap(450)
-							.addGroup(layout1.createParallelGroup(GroupLayout.Alignment.CENTER)
-
-									.addComponent(name2)
-									.addComponent(image2))
-
+				.addGroup(layout1.createParallelGroup(GroupLayout.Alignment.CENTER)
+					.addGap(100)
+					.addComponent(name1)
+					.addComponent(bar1)
+//					.addComponent(p1PokemonButton)
+					.addComponent(image1))
+//					.addComponent(leftP1Image)
+				.addGap(200)
+				.addGroup(layout1.createParallelGroup(GroupLayout.Alignment.CENTER)
+					.addComponent(name2)
+					.addComponent(bar2)
+					.addComponent(image2))
 			);
 
 			layout1.setVerticalGroup(layout1.createSequentialGroup()
-							.addComponent(name2)
-							.addComponent(image2)
-							.addGap(100)
-							.addComponent(name1)
-							.addComponent(image1)
+					.addComponent(name2)
+					.addComponent(bar2)
+					.addComponent(image2)
+					.addGap(100)
+					.addComponent(name1)
+					.addComponent(bar1)
+					.addComponent(image1)
 //					.addComponent(leftP1Image)
 //					.addComponent(p1PokemonButton)
 			);
-			layout1.linkSize(SwingConstants.HORIZONTAL, name1, name2, image1, image2);
-//			layout1.linkSize(image1, image2);
 			leftDisplayPanel.setBackground(Color.LIGHT_GRAY);
 			c.gridx = 0;
 			c.gridy = 0;
 			c.gridwidth = 4;
 			c.gridheight = 3;
-			c.weightx = 0.5;
+			c.weightx = 0.0;
 			c.weighty = 0.0;
 			c.anchor = GridBagConstraints.FIRST_LINE_START;
 			c.fill = GridBagConstraints.HORIZONTAL;
@@ -290,7 +296,7 @@ P2.setCurrentMon();
 			c.fill = GridBagConstraints.HORIZONTAL;
 			c.insets = new Insets(0, 10, 0, 0);
 			leftPanel.add(attack, c);
-			GridLayout layout2 = new GridLayout(1, 4);
+			GridLayout layout2 = new GridLayout(2, 2);
 			leftMovePanel.setLayout(layout2);
 			for (int i = 0; i < leftMoveButtons.length; i++) {
 				leftMoveButtons[i] = new Button(P1.getCurrentMon().getMoves()[i].getName(), i);
@@ -323,7 +329,7 @@ P2.setCurrentMon();
 			c.fill = GridBagConstraints.HORIZONTAL;
 			c.insets = new Insets(0, 10, 0, 0);
 			leftPanel.add(switchOut, c);
-			layout2 = new GridLayout(1, 6);
+			layout2 = new GridLayout(3, 2);
 			leftSwitchPanel.setLayout(layout2);
 			for (int i = 0; i < leftSwitchButtons.length; i++) {
 				leftSwitchButtons[i] = new Button(P1.getPokemon()[i].getName(), i + 4);
@@ -368,6 +374,12 @@ P2.setCurrentMon();
 			name3 = new JLabel(P2.getCurrentMon().getName());
 			
 			name4 = new JLabel(P1.getCurrentMon().getName());
+			bar3 = new HealthBar(P2.getCurrentMon());
+			bar3.setBackground(Color.LIGHT_GRAY);
+			bar3.setXOffset(true);
+			bar4 = new HealthBar(P1.getCurrentMon());
+			bar4.setBackground(Color.LIGHT_GRAY);
+			bar4.setXOffset(false);
 			ImageIcon pic2 = new ImageIcon("Images/Sprites/SpritesBack/" + P2.getCurrentMon().getID() + "-back.gif");
 			image3 = new JLabel(pic2);
 			image3.addMouseListener(new MouseAdapter() {
@@ -401,32 +413,35 @@ P2.setCurrentMon();
 			layout4.setAutoCreateGaps(true);
 			layout4.setAutoCreateContainerGaps(true);
 			layout4.setHorizontalGroup(layout4.createSequentialGroup()
-							.addGroup(layout4.createParallelGroup(GroupLayout.Alignment.CENTER)
-									.addGap(500)
-									.addComponent(name3)
+					.addGroup(layout4.createParallelGroup(GroupLayout.Alignment.CENTER)
+						.addGap(100)
+						.addComponent(name3)
+						.addComponent(bar3)
 //						.addComponent(p2PokemonButton)
-									.addComponent(image3))
+						.addComponent(image3))
+					.addGap(200)
+					.addGroup(layout4.createParallelGroup(GroupLayout.Alignment.CENTER)
+						.addComponent(name4)
+						.addComponent(bar4)
+						.addComponent(image4))
+				);
 
-							.addGroup(layout4.createParallelGroup(GroupLayout.Alignment.CENTER)
-									.addComponent(name4)
-									.addComponent(image4))
-			);
-			layout4.setVerticalGroup(layout4.createSequentialGroup()
-							.addComponent(name4)
-							.addComponent(image4)
-							.addGap(100)
-							.addComponent(name3)
-							.addComponent(image3)
-//				.addComponent(p2PokemonButton)
-			);
-			layout4.linkSize(SwingConstants.HORIZONTAL, name3, name4, image3, image4);
-//			layout4.linkSize(image3, image4);
+				layout4.setVerticalGroup(layout4.createSequentialGroup()
+						.addComponent(name4)
+						.addComponent(bar4)
+						.addComponent(image4)
+						.addGap(100)
+						.addComponent(name3)
+						.addComponent(bar3)
+						.addComponent(image3)
+//						.addComponent(p2PokemonButton)
+				);
 			rightDisplayPanel.setBackground(Color.LIGHT_GRAY);
 			y.gridx = 0;
 			y.gridy = 0;
 			y.gridwidth = 4;
 			y.gridheight = 3;
-			y.weightx = 0.5;
+			y.weightx = 0.0;
 			y.weighty = 0.0;
 			y.anchor = GridBagConstraints.FIRST_LINE_START;
 			y.fill = GridBagConstraints.HORIZONTAL;
@@ -445,7 +460,7 @@ P2.setCurrentMon();
 			y.fill = GridBagConstraints.HORIZONTAL;
 			y.insets = new Insets(0, 10, 0, 0);
 			rightPanel.add(attack, y);
-			GridLayout layout3 = new GridLayout(1, 4);
+			GridLayout layout3 = new GridLayout(2, 2);
 			rightMovePanel.setLayout(layout3);
 			for (int i = 0; i < rightMoveButtons.length; i++) {
 				rightMoveButtons[i] = new Button(P2.getCurrentMon().getMoves()[i].getName(), i);
@@ -478,7 +493,7 @@ P2.setCurrentMon();
 			y.fill = GridBagConstraints.HORIZONTAL;
 			y.insets = new Insets(0, 10, 0, 0);
 			rightPanel.add(switchOut, y);
-			layout3 = new GridLayout(1, 6);
+			layout3 = new GridLayout(3, 2);
 			rightSwitchPanel.setLayout(layout3);
 			for (int i = 0; i < rightSwitchButtons.length; i++) {
 				rightSwitchButtons[i] = new Button(P2.getPokemon()[i].getName(), i + 4);
@@ -617,7 +632,6 @@ P2=new Player(p2mons,givenMoves2);
 				Player p1=b.P1;
 
 		        Player p2=b.P2;
-		p2.setOpposingPlayer(p1);
 		p1.setOpposingPlayer(p2);
 
         b.leftText.setText("The match has begun!");
@@ -903,6 +917,7 @@ P2=new Player(p2mons,givenMoves2);
                     }
                 }
             }
+            b.repaint(p1, p2);
             if(p1.isDefeated()){
                 gameNotOver=false;
 				popup.showMessageDialog(b.mainPanel,
@@ -960,6 +975,7 @@ P2=new Player(p2mons,givenMoves2);
 				p1.switchOut(p1.getPokemon()[p1SwitchIn-1]);
 
                 p1SwitchIn=-1;
+                b.repaint(p1, p2);
             }
             if(p2.getCurrentMon().getHealth()<=0){
 				P2numberOfFaintedMons++;
@@ -995,9 +1011,8 @@ P2=new Player(p2mons,givenMoves2);
             	p2.switchOut(p2.getPokemon()[p2SwitchIn-1]);
 
 				p2SwitchIn=-1;
+				b.repaint(p1, p2);
             }
-
-            b.repaint(p1,p2);
 
         }
 
@@ -1007,6 +1022,17 @@ P2=new Player(p2mons,givenMoves2);
 			name1.setText(p1.getCurrentMon().getName());
 
 			name2 .setText(p2.getCurrentMon().getName());
+			
+			if(bar1.getPokemon() != p1.getCurrentMon()) {
+				bar1.setPokemon(p1.getCurrentMon());
+			}
+			bar1.repaint();
+			
+			if(bar2.getPokemon() != p2.getCurrentMon()) {
+				bar2.setPokemon(p2.getCurrentMon());
+			}
+			bar2.repaint();
+			
 			Icon pic = null;
 
 //				pic =
@@ -1042,6 +1068,17 @@ P2=new Player(p2mons,givenMoves2);
 		name3.setText(p2.getCurrentMon().getName());
 
 		name4 .setText(p1.getCurrentMon().getName());
+		
+		if(bar3.getPokemon() != p2.getCurrentMon()) {
+			bar3.setPokemon(p2.getCurrentMon());
+		}
+		bar3.repaint();
+		
+		if(bar4.getPokemon() != p1.getCurrentMon()) {
+			bar4.setPokemon(p1.getCurrentMon());
+		}
+		bar4.repaint();
+		
 		pic = null;
 
 //		pic = ;
@@ -1070,7 +1107,35 @@ P2=new Player(p2mons,givenMoves2);
 				rightSwitchButtons[i].setEnabled(true);
 			}
 		}
+		animateHPChange();
 	}
+    
+    private void animateHPChange() {
+    	timer = new Timer(25, new ActionListener() {
+    		@Override
+    		public void actionPerformed(ActionEvent e) {
+    			if(!bar1.isChanging() && !bar2.isChanging()
+    					&& !bar3.isChanging() && !bar4.isChanging()) {
+    				timer.stop();
+    			}
+    			if(bar1.isChanging()) {
+    				bar1.repaint();
+    			}
+    			if(bar2.isChanging()) {
+    				bar2.repaint();
+    			}
+    			if(bar3.isChanging()) {
+    				bar3.repaint();
+    			}
+    			if(bar4.isChanging()) {
+    				bar4.repaint();
+    			}
+    		}
+    	});
+    	timer.setInitialDelay(500);
+    	timer.start();
+    }
+    
 	private void teamBuilder(){
 //		JFrame frame = new JFrame("Teambuilder");
 //		JPanel mainPanel=new JPanel(new GridLayout(1,2));

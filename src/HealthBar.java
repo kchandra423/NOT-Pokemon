@@ -3,6 +3,7 @@ import java.awt.*;
 
 public class HealthBar extends JPanel {
 	private Pokemon pokemon;
+	private int xOffset;
 	private int hpOnScreen;
 	private boolean changing;
 	private Color background = new Color(46, 46, 46);
@@ -18,6 +19,7 @@ public class HealthBar extends JPanel {
 	public HealthBar(Pokemon pokemon) {
 		super();
 		this.pokemon = pokemon;
+		xOffset = 0;
 		hpOnScreen = pokemon.getHealth();
 		changing = false;
 	}
@@ -26,36 +28,36 @@ public class HealthBar extends JPanel {
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setColor(border);
-		g2.fillRoundRect(2, 2, 140, 12, 2, 2);
+		g2.fillRoundRect(xOffset+2, 2, 140, 12, 2, 2);
 		g2.setColor(background);
-		g2.fillRoundRect(0, 0, 140, 12, 2, 2);
+		g2.fillRoundRect(xOffset, 0, 140, 12, 2, 2);
 		g2.setColor(hpText);
 		g2.setFont(g2.getFont().deriveFont(10f));
-		g2.drawString("HP", 8, 10);
+		g2.drawString("HP", xOffset+8, 10);
 		if(hpOnScreen > pokemon.getBaseHealth()/2.0) {
 			g2.setColor(lightGreen);
-			g2.fillRect(30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 8);
+			g2.fillRect(xOffset+30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 8);
 			g2.setColor(darkGreen);
-			g2.fillRect(30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
-			g2.fillRect(30, 8, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
+			g2.fillRect(xOffset+30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
+			g2.fillRect(xOffset+30, 8, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
 		}
 		else if(hpOnScreen >= pokemon.getBaseHealth()/5.0) {
 			g2.setColor(lightYellow);
-			g2.fillRect(30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 8);
+			g2.fillRect(xOffset+30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 8);
 			g2.setColor(darkYellow);
-			g2.fillRect(30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
-			g2.fillRect(30, 8, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
+			g2.fillRect(xOffset+30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
+			g2.fillRect(xOffset+30, 8, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
 		}
 		else {
 			g2.setColor(lightRed);
-			g2.fillRect(30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 8);
+			g2.fillRect(xOffset+30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 8);
 			g2.setColor(darkRed);
-			g2.fillRect(30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
-			g2.fillRect(30, 8, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
+			g2.fillRect(xOffset+30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
+			g2.fillRect(xOffset+30, 8, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
 		}
 		g2.setColor(border);
-		g2.fillRect(28, 2, 2, 8);
-		g2.fillRect(135, 2, 2, 8);
+		g2.fillRect(xOffset+28, 2, 2, 8);
+		g2.fillRect(xOffset+135, 2, 2, 8);
 		if(hpOnScreen > pokemon.getHealth()) {
 			hpOnScreen--;
 			changing = true;
@@ -74,6 +76,19 @@ public class HealthBar extends JPanel {
 		this.pokemon = pokemon;
 		hpOnScreen = pokemon.getHealth();
 		changing = false;
+	}
+	
+	public void setXOffset(boolean backSide) {
+		ImageIcon sprite;
+		if(backSide) {
+			sprite = new ImageIcon("Images/Sprites/SpritesBack/" + pokemon.getID() + "-back.gif");
+		}
+		else {
+			sprite = new ImageIcon("Images/Sprites/SpritesFront/" + pokemon.getID() + ".gif");
+		}
+		if(sprite.getIconWidth() > 140) {
+			xOffset = (sprite.getIconWidth()-140)/2;
+		}
 	}
 	
 	public Pokemon getPokemon() {

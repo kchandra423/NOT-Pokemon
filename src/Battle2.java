@@ -355,6 +355,8 @@ public class Battle2 {
 			image2 = new JLabel(pic2);
 			image2.setToolTipText("You can only see your own pokemon's stats!");
 		}
+		bar1.setXOffset(true);
+		bar2.setXOffset(false);
 		GroupLayout l = new GroupLayout(display);
 		display.setLayout(l);
 		l.setAutoCreateGaps(true);
