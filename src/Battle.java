@@ -12,6 +12,7 @@
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Battle {
     public static int P1numberOfFaintedMons=0;//self explanatory
@@ -109,6 +110,7 @@ public class Battle {
 //		mainPanel=new JPanel();
 //		frame.add(mainPanel);
 //				frame.getContentPane().add(rightPanel);
+
 		frame.setBounds(100, 100, 3000, 750);
 		frame.setVisible(true);
 		 frame.setResizable(false);
