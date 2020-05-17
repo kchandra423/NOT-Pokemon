@@ -1,3 +1,14 @@
+//
+//  Author: Kumar Chandra
+//  Revised: Kumar Chandra
+//           5/10/20
+//
+//  Notes:
+//       Holds all the GUI for the project and houses the main. Uses almost every other class to run a game of Pokemon.
+//
+//  Bugs:
+//      Lots Probably. Will be listed all be listed at the end of the project
+//
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
@@ -19,29 +30,19 @@ public class Battle {
 	private Button[] leftMoveButtons = new Button[4],rightMoveButtons=new Button[4];
 	private int p1Selection=-1;
 	private int p2Selection =-1;
-//	private JButton p1PokemonButton=new JButton("Get your Pokemon's stats"), p2PokemonButton=new JButton("Get your Pokemon's stats");
 	private Button[] leftSwitchButtons = new Button[6],rightSwitchButtons = new Button[6];
 	private ButtonGroup leftButtons=new ButtonGroup(),rightButtons=new ButtonGroup();
 	public JTextArea leftText, rightText;
 	private Timer timer;
 	boolean confirm1=false,confirm2=false;//i hate action performed not being able to access things like a normal method
-//	boolean wait3=true;
 	static Player P1, P2;
 	private static Object myObject1 =new Object(), myObject2=new Object(), myObject3=new Object();
-//	JPanel leftPanelTB,rightPanelTB;
-
-
-//	private JButton leftP1Image=new JButton();
-
-
-//	private int playerPerspective=1;
 
 
 
 
-//public Battle(boolean){
-//
-//}
+
+
 	public Battle() {
 
         String filepath1 = "Music/PokemonTitleScreen.wav";

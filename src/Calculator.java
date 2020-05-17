@@ -1,3 +1,14 @@
+//
+//  Author: Kumar Chandra
+//  Revised: Kumar Chandra
+//           5/17/20
+//
+//  Notes:
+//       Calculates things(obviously). Can calculate damage, if a String is a valid move, who goes first, etc
+//
+//  Bugs:
+//      unknown
+//
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

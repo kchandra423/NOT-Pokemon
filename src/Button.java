@@ -1,3 +1,15 @@
+//
+//  Author: Kumar Chandra and Eric Chang
+//  Revised: Kumar Chandra
+//           5/17/20
+//
+//  Notes:
+//      A JButton but it has a number identifying itself and a boolean that specifies whether
+//      the column of info it represents has a problem
+//
+//  Bugs:
+//      none
+//
 import javax.swing.*;
 
 public class Button extends JButton {

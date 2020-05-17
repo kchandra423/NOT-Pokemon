@@ -1,3 +1,14 @@
+//
+//  Author: Eric Chang
+//  Revised: Eric Chang
+//			5/17/20
+//  Notes:
+//         An alternate way of playing the game where player perspective
+//         is switched instead of having both players on the same screen at once.
+//         Not really our priority at this point, but more of a cool feature
+//  Bugs:
+//       There probably are some bugs, but we don't test this class as we mainly focus on the Battle class
+//
 import java.io.*;
 import java.nio.file.*;
 import java.util.Scanner;

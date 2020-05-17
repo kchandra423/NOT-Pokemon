@@ -1,3 +1,15 @@
+//
+//  Author: Kumar Chandra
+//  Revised: Kumar Chandra
+//           5/3/20
+//
+//  Notes:
+//      This class creates Pokemon, which have 4 moves, and numerous different stats.
+//      This class stores info about a pokemon, and keeps track of any status conditions or modifiers it may have
+//
+//  Bugs:
+//    none
+//
 import java.io.*;
 import java.nio.file.Paths;
 import java.nio.file.Files;

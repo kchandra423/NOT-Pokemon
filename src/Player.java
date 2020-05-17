@@ -1,4 +1,17 @@
-
+//
+//  Author: Kumar Chandra
+//  Revised: Kumar Chandra
+//           5/10/20
+//
+//  Notes:
+//       The way this class works is that it has 6 pokemon,
+//       and a currentMon, which is the pokemon it currently has in place
+//       It can also fight, or switch out, where it changes its currentMon.
+//       It also has access to the opposing player, to attack them
+//
+//  Bugs:
+//      unknown
+//
 public class Player {
     private Pokemon[] pokemon;//has 6 pokemon
     private EaseOfUse ez = new EaseOfUse();

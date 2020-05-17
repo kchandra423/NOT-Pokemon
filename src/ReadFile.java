@@ -1,3 +1,13 @@
+//
+//  Author: Kumar Chandra
+//  Revised: Kumar Chandra
+//           5/10/20
+//
+//  Notes:
+//      This class is exclsuively used to create our text files from the Showdown text files
+//  Bugs:
+//    none
+//
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
