@@ -5,6 +5,20 @@ import java.nio.file.Paths;
 public class ReadFile {
     //17
 //Num, accuracy, power, category, desc, name, pp , priority, flags, chance, self, boosts, crit ratio, drain, heal,status,type
+    public static void main(String[] args){
+            ReadFile read = new ReadFile();
+        String copy = "something went wrong; ";
+        try {
+//			copy = Files.readString(Paths.get("Stats.txt"));
+            byte[] file = Files.readAllBytes(Paths.get(""));
+            copy = new String(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    System.out.println(
+//            read.orderMoves(
+            (read.orderMoves(copy)));
+    }
     public String formatShowDownMovesets(String s) {
         String masterString = "";
         String[] chunks;
@@ -21,7 +35,9 @@ public class ReadFile {
             for (int k = 0; k < lines.length; k++) {
                 currentLine = lines[k];
 
-
+                if(currentLine.contains("Recover")){
+                    int x =5;
+                }
                 if (currentLine.contains("num: ")) {
 
                     currentChunksLines[0] = currentLine.substring
@@ -89,7 +105,7 @@ public class ReadFile {
                     currentChunksLines[15] = currentLine.substring
                             (currentLine.indexOf("status: ") + 8, currentLine.indexOf(","))
                             + "#";
-                } else if (currentLine.contains("\theal ")) {
+                } else if (currentLine.contains("\theal: ")) {
 
                     currentChunksLines[14] = currentLine.substring
                             (currentLine.indexOf("heal: ") + 6, currentLine.indexOf("],") + 1)

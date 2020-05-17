@@ -265,10 +265,7 @@ public class Battle2 {
 //        ez.print("Player 1's)Pokemon"+p1);
 //        ez.print(p2);
 
-        //        Pokemon test = new Pokemon(1);
-//    System.out.println(test);
-//    Move anothertest =new Move(1);
-//        System.out.println(anothertest);
+
 
 //        Pokemon[] p1Pokemon={p11,p12,p13,p14,p15,p16};
 //        Pokemon[] p2Pokemon={p21,p22,p23,p24,p25,p26};

@@ -368,6 +368,15 @@ public class Pokemon {
 			health = 0;
 		}
 	}
+	public void heal(int heal) {
+
+		if(heal+health>=baseHealth){
+			health=baseHealth;
+		}
+		else{
+			health+=heal;
+		}
+	}
 
 	public void setAttackIncrease(int stages) {
 		if(attackIncrease==6){
