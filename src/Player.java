@@ -83,6 +83,7 @@ public class Player {
     		// System.out.println("There's no PP left for this move!");
     	}
         if(currentMon.getHealth()<=0) {
+        	
         }
         else if(currentMon.getStatus().equalsIgnoreCase("brn"))
         {

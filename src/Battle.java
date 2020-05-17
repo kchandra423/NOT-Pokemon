@@ -1064,18 +1064,19 @@ P2.setCurrentMon();
 
 			for (int i =0;i<leftMoveButtons.length;i++){
 				leftMoveButtons[i].setText(p1.getCurrentMon().getMoves()[i].getName());
+				if(p1.getCurrentMon().getMoves()[i].getPP() == 0) {
+					leftMoveButtons[i].setEnabled(false);
+				}
+				else {
+					leftMoveButtons[i].setEnabled(true);
+				}
 			}
 			for (int i =0;i<leftSwitchButtons.length;i++){
-				if(p1.getPokemon()[i].getHealth()<=0){
-					leftSwitchButtons[i].setText(p1.getPokemon()[i].getName());
-					leftSwitchButtons[i].setEnabled(false);
-				}
-				else if(p1.getPokemon()[i]==p1.getCurrentMon()){
-					leftSwitchButtons[i].setText(p1.getPokemon()[i].getName());
+				leftSwitchButtons[i].setText(p1.getPokemon()[i].getName());
+				if(p1.getPokemon()[i].getHealth() <= 0 || p1.getPokemon()[i] == p1.getCurrentMon()) {
 					leftSwitchButtons[i].setEnabled(false);
 				}
 				else{
-					leftSwitchButtons[i].setText(p1.getPokemon()[i].getName());
 					leftSwitchButtons[i].setEnabled(true);
 				}
 			}
@@ -1110,18 +1111,19 @@ P2.setCurrentMon();
 
 		for (int i =0;i<rightMoveButtons.length;i++){
 			rightMoveButtons[i].setText(p2.getCurrentMon().getMoves()[i].getName());
+			if(p2.getCurrentMon().getMoves()[i].getPP() == 0) {
+				rightMoveButtons[i].setEnabled(false);
+			}
+			else {
+				rightMoveButtons[i].setEnabled(true);
+			}
 		}
 		for (int i =0;i<rightSwitchButtons.length;i++){
-			if(p2.getPokemon()[i].getHealth()<=0){
-				rightSwitchButtons[i].setText(p2.getPokemon()[i].getName());
-				rightSwitchButtons[i].setEnabled(false);
-			}
-			else if(p2.getPokemon()[i]==p2.getCurrentMon()){
-				rightSwitchButtons[i].setText(p2.getPokemon()[i].getName());
+			rightSwitchButtons[i].setText(p2.getPokemon()[i].getName());
+			if(p2.getPokemon()[i].getHealth() <= 0 || p2.getPokemon()[i] == p2.getCurrentMon()) {
 				rightSwitchButtons[i].setEnabled(false);
 			}
 			else{
-				rightSwitchButtons[i].setText(p2.getPokemon()[i].getName());
 				rightSwitchButtons[i].setEnabled(true);
 			}
 		}

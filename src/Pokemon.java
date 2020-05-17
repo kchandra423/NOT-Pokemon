@@ -368,13 +368,12 @@ public class Pokemon {
 			health = 0;
 		}
 	}
+	
 	public void heal(int heal) {
 
-		if(heal+health>=baseHealth){
-			health=baseHealth;
-		}
-		else{
-			health+=heal;
+		health += heal;
+		if(health > baseHealth) {
+			health = baseHealth;
 		}
 	}
 
