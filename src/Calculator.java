@@ -29,6 +29,32 @@ public class Calculator {
 			electric, psychic, ice, dragon, dark, fairy };
 
 //nathan eel did that
+	public boolean isMove(String moveName){
+		boolean answer = false;
+		String copy = "something went wrong; ";
+		try {
+//			copy = Files.readString(Paths.get("Stats.txt"));
+			byte[] file = Files.readAllBytes(Paths.get("Text/Moves.txt"));
+			copy = new String(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String[] lines = copy.split("\n");
+
+		String currentLine = "";
+		for (int i = 0; i < lines.length; i++) {
+			currentLine = lines[i];
+			try{String name=currentLine.split("#")[5];
+
+			if (moveName.equalsIgnoreCase(name)){
+				answer=true;
+			}}
+				catch(Exception e){
+
+				}
+		}
+		return answer;
+	}
 	public int getIntFromType(String type) {
 		int answer = -1;
 
@@ -84,6 +110,7 @@ public class Calculator {
 
 	public int calculateBasicDamage(Pokemon user, Pokemon target, Move move) {
 		// code way to calculate damage
+		move.usePP();
 		if (move.getAccuracy() == 101) {
 
 		} else if (Math.random() > (double) move.getAccuracy() / 100) {

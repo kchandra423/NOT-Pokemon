@@ -35,9 +35,9 @@ public class ReadFile {
             for (int k = 0; k < lines.length; k++) {
                 currentLine = lines[k];
 
-                if(currentLine.contains("Recover")){
-                    int x =5;
-                }
+//                if(currentLine.contains("Recover")){
+//                    int x =5;
+//                }
                 if (currentLine.contains("num: ")) {
 
                     currentChunksLines[0] = currentLine.substring

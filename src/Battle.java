@@ -27,8 +27,8 @@ public class Battle {
 	boolean confirm1=false,confirm2=false;//i hate action performed not being able to access things like a normal method
 //	boolean wait3=true;
 	static Player P1, P2;
-	Object myObject=new Object();
-	JPanel leftPanelTB,rightPanelTB;
+	private static Object myObject1 =new Object(), myObject2=new Object(), myObject3=new Object();
+//	JPanel leftPanelTB,rightPanelTB;
 
 
 //	private JButton leftP1Image=new JButton();
@@ -127,8 +127,8 @@ public class Battle {
 
 //		mainPanel.wait();
 		try{
-		synchronized(myObject){
-			myObject.wait();
+		synchronized(myObject1){
+			myObject1.wait();
 		}}
 		catch (Exception e){
 			e.printStackTrace();
@@ -552,15 +552,15 @@ P2.setCurrentMon();
 //    ez.println(
 ////            read.orderMoves(
 //            (read.formatShowDownLearnSets(copy).replace("\t","")));
-        EaseOfUse ez=new EaseOfUse();
+		EaseOfUse ez = new EaseOfUse();
 //        Scanner kboard=new Scanner(System.in);
-        Calculator calc=new Calculator();
+		Calculator calc = new Calculator();
 //        PlayMusic playMusic = new PlayMusic();
-        String music = "PokemonTitleScreen.wav";
+		String music = "PokemonTitleScreen.wav";
 //        playMusic.playMusic(music);
-        Pokemon[] p1mons=new Pokemon[6];
-        Pokemon[] p2mons=new Pokemon[6];
-        int[][] givenMoves = new int[6][4];
+		Pokemon[] p1mons = new Pokemon[6];
+		Pokemon[] p2mons = new Pokemon[6];
+		int[][] givenMoves = new int[6][4];
 		int[][] givenMoves2 = new int[6][4];
 //
 //
@@ -593,88 +593,93 @@ P2.setCurrentMon();
 ////        p2mons[4]=new Pokemon(kboard.nextInt());
 ////        ez.print("P2) Select your sixth pokemon's dex number");
 ////        p2mons[5]=new Pokemon(kboard.nextInt());
-		p1mons[0]=new Pokemon(130);
-		p1mons[1]=new Pokemon(143);
-		p1mons[2]=new Pokemon(150);
-		p1mons[3]=new Pokemon(384);
-		p1mons[4]=new Pokemon(493);
-		p1mons[5]=new Pokemon(487);
+		p1mons[0] = new Pokemon(130);
+		p1mons[1] = new Pokemon(143);
+		p1mons[2] = new Pokemon(150);
+		p1mons[3] = new Pokemon(384);
+		p1mons[4] = new Pokemon(493);
+		p1mons[5] = new Pokemon(487);
 
-		p2mons[0]=new Pokemon(700);
-		p2mons[1]=new Pokemon(802);
-		p2mons[2]=new Pokemon(801);
-		p2mons[3]=new Pokemon(800);
-		p2mons[4]=new Pokemon(798);
-		p2mons[5]=new Pokemon(791);
+		p2mons[0] = new Pokemon(700);
+		p2mons[1] = new Pokemon(802);
+		p2mons[2] = new Pokemon(801);
+		p2mons[3] = new Pokemon(800);
+		p2mons[4] = new Pokemon(798);
+		p2mons[5] = new Pokemon(791);
 //
 //
-		givenMoves[0]= new int[]{14,370,609,26};
-        givenMoves[1]= new int[]{53,56,59,76};
-        givenMoves[2]= new int[]{85,89,94,98};
-		givenMoves[3]= new int[]{14,370,609,26};
-		givenMoves[4]= new int[]{53,56,59,76};
-		givenMoves[5]= new int[]{85,89,94,98};
+		givenMoves[0] = new int[]{14, 370, 609, 26};
+		givenMoves[1] = new int[]{53, 56, 59, 76};
+		givenMoves[2] = new int[]{85, 89, 94, 98};
+		givenMoves[3] = new int[]{14, 370, 609, 26};
+		givenMoves[4] = new int[]{53, 56, 59, 76};
+		givenMoves[5] = new int[]{85, 89, 94, 98};
 //
 //
 //
-		givenMoves2[0]=new int[]{22,23,24,25};
-		givenMoves2[1]= new int[]{14,370,609,1};
-		givenMoves2[2]= new int[]{6,7,8,9};
-		givenMoves2[3]= new int[]{10,11,12,13};
-		givenMoves2[4]= new int[]{14,15,16,17};
-		givenMoves2[5]= new int[]{18,19,20,21};
+		givenMoves2[0] = new int[]{22, 23, 24, 25};
+		givenMoves2[1] = new int[]{14, 370, 609, 1};
+		givenMoves2[2] = new int[]{6, 7, 8, 9};
+		givenMoves2[3] = new int[]{10, 11, 12, 13};
+		givenMoves2[4] = new int[]{14, 15, 16, 17};
+		givenMoves2[5] = new int[]{18, 19, 20, 21};
 
 //		Player[] players =teamBuilder();
-P1=new Player(p1mons,givenMoves);
-P2=new Player(p2mons,givenMoves2);
+		P1 = new Player(p1mons, givenMoves);
+		P2 = new Player(p2mons, givenMoves2);
 
-		Battle b= new Battle();
-				Player p1=b.P1;
+		Battle b = new Battle();
+		Player p1 = b.P1;
 
-		        Player p2=b.P2;
+		Player p2 = b.P2;
 		p1.setOpposingPlayer(p2);
 
-        b.leftText.setText("The match has begun!");
+		b.leftText.setText("The match has begun!");
 		b.rightText.setText("The match has begun!");
-        boolean gameNotOver=true;
-		boolean p1WillSwitch=false;
-            boolean p2WillSwitch=false;
-            int p1SelectedMoveIndex=-1;
-            int p2SelectedMoveIndex=-1;
-            int p1SwitchIn=-1;
-            int p2SwitchIn=-1;
-            JOptionPane popup=new JOptionPane("All your pokemon have fainted");
-            popup.setIcon(new ImageIcon (new ImageIcon("icon.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
+		boolean gameNotOver = true;
+		boolean p1WillSwitch = false;
+		boolean p2WillSwitch = false;
+		int p1SelectedMoveIndex = -1;
+		int p2SelectedMoveIndex = -1;
+		int p1SwitchIn = -1;
+		int p2SwitchIn = -1;
+		JOptionPane popup = new JOptionPane("All your pokemon have fainted");
+		popup.setIcon(new ImageIcon(new ImageIcon("icon.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
 //		final int[] moveSelection = new int[1];
 
 //            int switchSelection;
-            for(int i=0;i<b.leftMoveButtons.length;i++){
+		for (int i = 0; i < b.leftMoveButtons.length; i++) {
 
-				b.leftMoveButtons[i].addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
+			b.leftMoveButtons[i].addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
 
-						if(SwingUtilities.isRightMouseButton(e)){
-							int x = ((Button)e.getSource()).getNum();
-							String textInfo=p1.getCurrentMon().getMoves()[x].toString();
-							popup.showMessageDialog(b.leftDisplayPanel,
-									textInfo,
-									"Move Info",
-									2,
-									(new ImageIcon (new ImageIcon("Images/Types/"+p1.getCurrentMon().getMoves()[x].getType()+".png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
-
-						}
+					if (SwingUtilities.isRightMouseButton(e)) {
+						int x = ((Button) e.getSource()).getNum();
+						String textInfo = p1.getCurrentMon().getMoves()[x].toString();
+						popup.showMessageDialog(b.leftDisplayPanel,
+								textInfo,
+								"Move Info",
+								2,
+								(new ImageIcon(new ImageIcon("Images/Types/" + p1.getCurrentMon().getMoves()[x].getType() + ".png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
 
 					}
-				});
-				b.leftMoveButtons[i].addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						b.p1Selection =((Button)e.getSource()).getNum();
+
+				}
+			});
+			b.leftMoveButtons[i].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+
+
+					b.p1Selection = ((Button) e.getSource()).getNum();
+					synchronized (myObject2) {
+						myObject2.notify();
 					}
-				});
-            	b.leftButtons.add(b.leftMoveButtons[i]);
-				//					@Override
+				}
+			});
+			b.leftButtons.add(b.leftMoveButtons[i]);
+			//					@Override
 //					public void actionPerformed(ActionEvent e) {
 ////moveSelection[0] =((Button)e.getSource()).getNum();
 //
@@ -682,21 +687,21 @@ P2=new Player(p2mons,givenMoves2);
 ////
 //
 //					}
-			}
-		for(int i=0;i<b.leftSwitchButtons.length;i++){
+		}
+		for (int i = 0; i < b.leftSwitchButtons.length; i++) {
 
 			b.leftSwitchButtons[i].addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 
-					if(SwingUtilities.isRightMouseButton(e)){
-						int x = ((Button)e.getSource()).getNum();
-						String textInfo=p1.getPokemon()[x-4].toString();
+					if (SwingUtilities.isRightMouseButton(e)) {
+						int x = ((Button) e.getSource()).getNum();
+						String textInfo = p1.getPokemon()[x - 4].toString();
 						popup.showMessageDialog(b.leftDisplayPanel,
 								textInfo,
 								"Pokemon Switch info",
 								2,
-								new ImageIcon("Images/Sprites/SpritesFront/"+p1.getPokemon()[x-4].getID()+".gif"));
+								new ImageIcon("Images/Sprites/SpritesFront/" + p1.getPokemon()[x - 4].getID() + ".gif"));
 					}
 
 				}
@@ -704,7 +709,11 @@ P2=new Player(p2mons,givenMoves2);
 			b.leftSwitchButtons[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					b.p1Selection =((Button)e.getSource()).getNum();
+
+					b.p1Selection = ((Button) e.getSource()).getNum();
+					synchronized (myObject2) {
+						myObject2.notify();
+					}
 
 				}
 			});
@@ -712,20 +721,20 @@ P2=new Player(p2mons,givenMoves2);
 		}
 
 
-		for(int i=0;i<b.rightMoveButtons.length;i++){
+		for (int i = 0; i < b.rightMoveButtons.length; i++) {
 
 			b.rightMoveButtons[i].addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 
-					if(SwingUtilities.isRightMouseButton(e)){
-						int x = ((Button)e.getSource()).getNum();
-						String textInfo=p2.getCurrentMon().getMoves()[x].toString();
+					if (SwingUtilities.isRightMouseButton(e)) {
+						int x = ((Button) e.getSource()).getNum();
+						String textInfo = p2.getCurrentMon().getMoves()[x].toString();
 						popup.showMessageDialog(b.rightDisplayPanel,
 								textInfo,
 								"Move Info",
 								2,
-								(new ImageIcon (new ImageIcon("Images/Types/"+p2.getCurrentMon().getMoves()[x].getType()+".png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+								(new ImageIcon(new ImageIcon("Images/Types/" + p2.getCurrentMon().getMoves()[x].getType() + ".png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
 
 					}
 
@@ -734,7 +743,11 @@ P2=new Player(p2mons,givenMoves2);
 			b.rightMoveButtons[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					b.p2Selection =((Button)e.getSource()).getNum();
+
+					b.p2Selection = ((Button) e.getSource()).getNum();
+					synchronized (myObject3) {
+						myObject3.notify();
+					}
 				}
 			});
 //				@Override
@@ -748,20 +761,20 @@ P2=new Player(p2mons,givenMoves2);
 
 			b.rightButtons.add(b.rightMoveButtons[i]);
 		}
-		for(int i=0;i<b.rightSwitchButtons.length;i++){
+		for (int i = 0; i < b.rightSwitchButtons.length; i++) {
 
 			b.rightSwitchButtons[i].addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 
-					if(SwingUtilities.isRightMouseButton(e)){
-						int x = ((Button)e.getSource()).getNum();
-						String textInfo=p2.getPokemon()[x-4].toString();
+					if (SwingUtilities.isRightMouseButton(e)) {
+						int x = ((Button) e.getSource()).getNum();
+						String textInfo = p2.getPokemon()[x - 4].toString();
 						popup.showMessageDialog(b.rightDisplayPanel,
 								textInfo,
 								"Pokemon Switch info",
 								2,
-								new ImageIcon("Images/Sprites/SpritesFront/"+p2.getPokemon()[x-4].getID()+".gif"));
+								new ImageIcon("Images/Sprites/SpritesFront/" + p2.getPokemon()[x - 4].getID() + ".gif"));
 					}
 
 				}
@@ -769,214 +782,219 @@ P2=new Player(p2mons,givenMoves2);
 			b.rightSwitchButtons[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-										b.p2Selection =((Button)e.getSource()).getNum();
+
+					b.p2Selection = ((Button) e.getSource()).getNum();
+					synchronized (myObject3) {
+						myObject3.notify();
+					}
 
 				}
 			});
 
 
-
-
 			b.rightButtons.add(b.rightSwitchButtons[i]);
 		}
 
-        while(gameNotOver) {
+		while (gameNotOver) {
 
 
-            boolean youShallNotPass = true;
-            while (youShallNotPass) {
+			try {
+				synchronized (myObject2) {
+					myObject2.wait();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 //                ez.println("Player1 what would you like to do\n1)Switch out\n2)Fight");
 //                selection = kboard.nextInt();
-                if (b.p1Selection >=5&&P1numberOfFaintedMons<5) {
-					p1WillSwitch = true;
-					p1SwitchIn=b.p1Selection-4;
-					youShallNotPass = false;
-					b.p1Selection=-1;
-                } else if (b.p1Selection <=4 &&b.p1Selection>=0) {
+			if (b.p1Selection >= 5 && P1numberOfFaintedMons < 5) {
+				p1WillSwitch = true;
+				p1SwitchIn = b.p1Selection - 4;
+//					youShallNotPass = false;
+				b.p1Selection = -1;
+			} else if (b.p1Selection <= 4 && b.p1Selection >= 0) {
 //                    ez.println("Choose which move you want to use");
 //                    for (int i = 0; i < 4; i++) {
 //                        ez.println((i + 1) + ")" + p1.getCurrentMon().getMoves()[i]);
 //                    }
 
-                    p1SelectedMoveIndex = b.p1Selection;
-                    youShallNotPass = false;
-                    b.p1Selection=-1;
-                }
+				p1SelectedMoveIndex = b.p1Selection;
+//                    youShallNotPass = false;
+				b.p1Selection = -1;
+			}
 //                else if(b.selection >=5 &&P1numberOfFaintedMons>=5)
 ////				{
 ////                    ez.print("You have no available pokemon to switch in, because every other Pokemon has fainted");
 ////                }
-                else {
-                    System.out.print("");
-                }
-            }
 
-			youShallNotPass=true;
 
-            while(youShallNotPass) {
+
+
+//			youShallNotPass=true;
+		try {
+			synchronized (myObject3) {
+				myObject3.wait();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+//            while(youShallNotPass) {
 //                ez.println("Player2 what would you like to do\n1)Switch out\n2)Fight");
 //                b.p1Selection = kboard.nextInt();
-				if (b.p2Selection >=5&&P2numberOfFaintedMons<5) {
-					p2WillSwitch = true;
-					p2SwitchIn=b.p2Selection-4;
-					youShallNotPass = false;
-					b.p2Selection=-1;
-				} else if (b.p2Selection <=4 &&b.p2Selection>=0) {
+		if (b.p2Selection >= 5 && P2numberOfFaintedMons < 5) {
+			p2WillSwitch = true;
+			p2SwitchIn = b.p2Selection - 4;
+//					youShallNotPass = false;
+			b.p2Selection = -1;
+		} else if (b.p2Selection <= 4 && b.p2Selection >= 0) {
 //                    ez.println("Choose which move you want to use");
 //                    for (int i = 0; i < 4; i++) {
 //                        ez.println((i + 1) + ")" + p1.getCurrentMon().getMoves()[i]);
 //                    }
 
-					p2SelectedMoveIndex = b.p2Selection;
-					youShallNotPass = false;
-					b.p2Selection=-1;
-				}
+			p2SelectedMoveIndex = b.p2Selection;
+//					youShallNotPass = false;
+			b.p2Selection = -1;
+		}
 //                else if(b.selection >=5 &&P1numberOfFaintedMons>=5)
 ////				{
 ////                    ez.print("You have no available pokemon to switch in, because every other Pokemon has fainted");
 ////                }
-				else {
-					System.out.print("");
-				}
-            }
-			youShallNotPass=true;
-            if(p1WillSwitch && p2WillSwitch){
-                if(p1.getCurrentMon().getSpeed()>p2.getCurrentMon().getSpeed()){
-					p1.getCurrentMon().resetBoosts();
-					p2.getCurrentMon().resetBoosts();
-                	p1.switchOut(p1.getPokemon()[p1SwitchIn]);
-                	p2.switchOut(p2.getPokemon()[p2SwitchIn]);
-                    p1WillSwitch=false;
-                    p2WillSwitch=false;
-                }
-                else if(p2.getCurrentMon().getSpeed()>p1.getCurrentMon().getSpeed()){
 
-					p1.getCurrentMon().resetBoosts();
-					p2.getCurrentMon().resetBoosts();
-                	p2.switchOut(p2.getPokemon()[p2SwitchIn]);
-                    p1.switchOut(p1.getPokemon()[p1SwitchIn]);
-                    p1WillSwitch=false;
-					p2WillSwitch=false;
 
-				}
-                else{
-                    if(Math.random()>0.5){
-						p1.getCurrentMon().resetBoosts();
-						p2.getCurrentMon().resetBoosts();
-                    	p1.switchOut(p1.getPokemon()[p1SwitchIn]);
-                        p2.switchOut(p2.getPokemon()[p2SwitchIn]);
-						p1WillSwitch=false;
-						p2WillSwitch=false;
-
-					}
-                    else{
-						p1.getCurrentMon().resetBoosts();
-						p2.getCurrentMon().resetBoosts();
-                    	p2.switchOut(p2.getPokemon()[p2SwitchIn]);
-                        p1.switchOut(p1.getPokemon()[p1SwitchIn]);
-						p1WillSwitch=false;
-						p2WillSwitch=false;
-
-					}
-                }
-
-            }
-
-            else if(p1WillSwitch){
+//            }
+//			youShallNotPass=true;
+		if (p1WillSwitch && p2WillSwitch) {
+			if (p1.getCurrentMon().getSpeed() > p2.getCurrentMon().getSpeed()) {
 				p1.getCurrentMon().resetBoosts();
-
-            	p1.switchOut(p1.getPokemon()[p1SwitchIn]);
-                p2.fight(p2SelectedMoveIndex);
-				p1WillSwitch=false;
-				p2WillSwitch=false;
-
-			}
-            else if(p2WillSwitch){
-
 				p2.getCurrentMon().resetBoosts();
-            	p2.switchOut(p2.getPokemon()[p2SwitchIn]);
-                p1.fight(p1SelectedMoveIndex);
-				p1WillSwitch=false;
-				p2WillSwitch=false;
+				p1.switchOut(p1.getPokemon()[p1SwitchIn]);
+				p2.switchOut(p2.getPokemon()[p2SwitchIn]);
+				p1WillSwitch = false;
+				p2WillSwitch = false;
+			} else if (p2.getCurrentMon().getSpeed() > p1.getCurrentMon().getSpeed()) {
 
-			}
-            else{
+				p1.getCurrentMon().resetBoosts();
+				p2.getCurrentMon().resetBoosts();
+				p2.switchOut(p2.getPokemon()[p2SwitchIn]);
+				p1.switchOut(p1.getPokemon()[p1SwitchIn]);
+				p1WillSwitch = false;
+				p2WillSwitch = false;
 
-                int x=calc.calculateWhoGoesFirst(p1,p2,p1.getCurrentMon().getMoves()[p1SelectedMoveIndex],p2.getCurrentMon().getMoves()[p2SelectedMoveIndex]);
-                if(x==1){
-                    p1.fight(p1SelectedMoveIndex);
-                    p2.fight(p2SelectedMoveIndex);
-                }
-                else if(x==2){
-                    p2.fight(p2SelectedMoveIndex);
-                    p1.fight(p1SelectedMoveIndex);
-                }
-                else{
-                    while(true) {
-                        ez.print("Something went wrong");
-                    }
-                }
-            }
-            b.repaint(p1, p2);
-            if(p1.isDefeated()){
-                gameNotOver=false;
-				popup.showMessageDialog(b.mainPanel,
-						"Player 2 Won the game!",
-						"Game Finished",
-						2,
-						(new ImageIcon (new ImageIcon("Images/Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
-                break;
-            }
-            if(p2.isDefeated()){
-                gameNotOver=false;
-//				popup.showMessageDialog(b.mainPanel,"Player 1 Won the game!");
-				popup.showMessageDialog(b.mainPanel,
-						"Player 1 Won the game!",
-						"Game Finished",
-						2,
-						(new ImageIcon (new ImageIcon("Images/Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+			} else {
+				if (Math.random() > 0.5) {
+					p1.getCurrentMon().resetBoosts();
+					p2.getCurrentMon().resetBoosts();
+					p1.switchOut(p1.getPokemon()[p1SwitchIn]);
+					p2.switchOut(p2.getPokemon()[p2SwitchIn]);
+					p1WillSwitch = false;
+					p2WillSwitch = false;
 
-				break;
-            }
-            if(p1.getCurrentMon().getHealth()<=0){
-				P1numberOfFaintedMons++;
-            	int firstOccurence=-1;
-                String x[]=new String[6-b.P1numberOfFaintedMons];
-                int z=0;
-                for (int i =0;i<p1.getPokemon().length;i++){
-                	if(p1.getPokemon()[i].getHealth()<=0){
+				} else {
+					p1.getCurrentMon().resetBoosts();
+					p2.getCurrentMon().resetBoosts();
+					p2.switchOut(p2.getPokemon()[p2SwitchIn]);
+					p1.switchOut(p1.getPokemon()[p1SwitchIn]);
+					p1WillSwitch = false;
+					p2WillSwitch = false;
 
-					}
-                	else if(p1.getPokemon()[i]==p1.getCurrentMon()){
-
-					}
-                	else{
-                		if (firstOccurence==-1){
-                			firstOccurence=i;
-						}
-
-                		x[z]=(i+1)+") "+p1.getPokemon()[i].getName()+"\n";
-                		z++;
-
-					}
 				}
+			}
 
-				String y;
-						do {y= (String) popup.showInputDialog(b.leftDisplayPanel,
+		} else if (p1WillSwitch) {
+			p1.getCurrentMon().resetBoosts();
+
+			p1.switchOut(p1.getPokemon()[p1SwitchIn]);
+			p2.fight(p2SelectedMoveIndex);
+			p1WillSwitch = false;
+			p2WillSwitch = false;
+
+		} else if (p2WillSwitch) {
+
+			p2.getCurrentMon().resetBoosts();
+			p2.switchOut(p2.getPokemon()[p2SwitchIn]);
+			p1.fight(p1SelectedMoveIndex);
+			p1WillSwitch = false;
+			p2WillSwitch = false;
+
+		} else {
+
+			int x = calc.calculateWhoGoesFirst(p1, p2, p1.getCurrentMon().getMoves()[p1SelectedMoveIndex], p2.getCurrentMon().getMoves()[p2SelectedMoveIndex]);
+			if (x == 1) {
+				p1.fight(p1SelectedMoveIndex);
+				p2.fight(p2SelectedMoveIndex);
+			} else if (x == 2) {
+				p2.fight(p2SelectedMoveIndex);
+				p1.fight(p1SelectedMoveIndex);
+			} else {
+				while (true) {
+					ez.print("Something went wrong");
+				}
+			}
+		}
+
+		b.repaint(p1, p2);
+		if (p1.isDefeated()) {
+			gameNotOver = false;
+			popup.showMessageDialog(b.mainPanel,
+					"Player 2 Won the game!",
+					"Game Finished",
+					2,
+					(new ImageIcon(new ImageIcon("Images/Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+			break;
+		}
+		if (p2.isDefeated()) {
+			gameNotOver = false;
+//				popup.showMessageDialog(b.mainPanel,"Player 1 Won the game!");
+			popup.showMessageDialog(b.mainPanel,
+					"Player 1 Won the game!",
+					"Game Finished",
+					2,
+					(new ImageIcon(new ImageIcon("Images/Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+
+			break;
+		}
+		if (p1.getCurrentMon().getHealth() <= 0) {
+			P1numberOfFaintedMons++;
+			int firstOccurence = -1;
+			String x[] = new String[6 - b.P1numberOfFaintedMons];
+			int z = 0;
+			for (int i = 0; i < p1.getPokemon().length; i++) {
+				if (p1.getPokemon()[i].getHealth() <= 0) {
+
+				} else if (p1.getPokemon()[i] == p1.getCurrentMon()) {
+
+				} else {
+					if (firstOccurence == -1) {
+						firstOccurence = i;
+					}
+
+					x[z] = (i + 1) + ") " + p1.getPokemon()[i].getName() + "\n";
+					z++;
+
+				}
+			}
+
+			String y;
+			do {
+				y = (String) popup.showInputDialog(b.leftDisplayPanel,
 						"Your current Pokemon fainted. Please choose which pokemon you want to switch in."
-						,"Pokemon defeated",
+						, "Pokemon defeated",
 						2,
-						new ImageIcon (new ImageIcon("Images/Skull.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
+						new ImageIcon(new ImageIcon("Images/Skull.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
 						x,
-						"Please select a Pokemon");}
-						while(y==null);
+						"Please select a Pokemon");
+			}
+			while (y == null);
 
-				p1SwitchIn=Integer.parseInt(String.valueOf(y.charAt(0)));
-				p1.switchOut(p1.getPokemon()[p1SwitchIn-1]);
+			p1SwitchIn = Integer.parseInt(String.valueOf(y.charAt(0)));
+			p1.switchOut(p1.getPokemon()[p1SwitchIn - 1]);
 
-                p1SwitchIn=-1;
-                b.repaint(p1, p2);
-            }
+			p1SwitchIn = -1;
+			b.repaint(p1, p2);
+		}
+
             if(p2.getCurrentMon().getHealth()<=0){
 				P2numberOfFaintedMons++;
             	int firstOccurence=-1;
@@ -1140,12 +1158,12 @@ P2=new Player(p2mons,givenMoves2);
 //		JFrame frame = new JFrame("Teambuilder");
 //		JPanel mainPanel=new JPanel(new GridLayout(1,2));
 //		frame.add(mainPanel);
-
+Calculator calc= new Calculator();
 		JPanel mainPanelTB=new JPanel();
 		mainPanelTB.setLayout(new GridLayout(1,2));
 		frame.add(mainPanelTB);
-		 leftPanelTB=new JPanel(new GridLayout(2,1));
-		 rightPanelTB=new JPanel(new GridLayout(2,1));
+		 JPanel leftPanelTB=new JPanel(new GridLayout(2,1));
+		 JPanel rightPanelTB=new JPanel(new GridLayout(2,1));
 		JPanel leftDisplay=new JPanel(new GridLayout(1,6)),rightDisplay=new JPanel(new GridLayout(1,6));
 		mainPanelTB.add(leftPanelTB);
 		mainPanelTB.add(rightPanelTB);
@@ -1220,15 +1238,36 @@ P2=new Player(p2mons,givenMoves2);
 			leftConfirmationButtons[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+
 					int x = ((Button) e.getSource()).getNum();//x is the column its from
-					Pokemon pokemon = new Pokemon(leftPokemonInputs[x].getText());//get the text from the pokemon input at column x
-					Move[] moves = new Move[4];
-					for (int i = 0; i < moves.length; i++) {//length is 4
-						moves[i] = new Move(leftMoveInputs[x][i].getText());
+					boolean validMove=true;
+					for (int i = 0; i <4; i++) {//length is 4
+						if(calc.isMove(leftMoveInputs[x][i].getText())){
+
+						}
+						else{
+							leftConfirmationButtons[x].setProblem(true);
+							validMove=false;
+							JOptionPane.showMessageDialog(leftDisplay,
+									"Your move in the "+(x+1)+"th column and "+(i+1)+"th row is not a valid move",
+									"Invalid Move",
+									2,
+									(new ImageIcon(new ImageIcon("Images/Exclamation.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+
+
+						}
 					}
-					pokemon.setMoves(moves);
-					p1Pokemon[x] = pokemon;
-					leftPanelImages[x].setIcon(new ImageIcon("Images/Sprites/SpritesFront/" + pokemon.getID() + ".gif"));
+					if(validMove) {
+						leftConfirmationButtons[x].setProblem(false);
+						Pokemon pokemon = new Pokemon(leftPokemonInputs[x].getText());//get the text from the pokemon input at column x
+						Move[] moves = new Move[4];
+						for (int i = 0; i < moves.length; i++) {//length is 4
+							moves[i] = new Move(leftMoveInputs[x][i].getText());
+						}
+						pokemon.setMoves(moves);
+						p1Pokemon[x] = pokemon;
+						leftPanelImages[x].setIcon(new ImageIcon("Images/Sprites/SpritesFront/" + pokemon.getID() + ".gif"));
+					}
 				}
 			});
 			constraints.gridx = i;//the column you are on
@@ -1255,23 +1294,38 @@ P2=new Player(p2mons,givenMoves2);
 		leftValidationButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				boolean problem=false;
 				for (int i = 0; i < leftConfirmationButtons.length; i++) {
 					leftConfirmationButtons[i].doClick();
-					leftConfirmationButtons[i].setEnabled(false);
-					leftPokemonInputs[i].setEnabled(false);
-					for (int k = 0; k < leftMoveInputs[i].length; k++) {
+					if(leftConfirmationButtons[i].hasProblem()){
+							problem=true;
+					}
+					else {
 
-						leftMoveInputs[i][k].setEnabled(false);
+						leftConfirmationButtons[i].setEnabled(false);
+						leftPokemonInputs[i].setEnabled(false);
+						for (int k = 0; k < leftMoveInputs[i].length; k++) {
+
+							leftMoveInputs[i][k].setEnabled(false);
+						}
+
 					}
 
 				}
+				if(problem==false){
+					synchronized (myObject1){
+						if(confirm2==true){
+						myObject1.notify();
+					}else{
+						confirm1 =true;
+					}
+					}
 
-				synchronized (myObject){if(confirm2==true){
-					myObject.notify();
-				}else{
-					confirm1 =true;
-				}
-			}}
+			}
+
+
+
+			}
 		});
 		leftUI.add(leftValidationButton, constraints);
 
@@ -1318,15 +1372,37 @@ P2=new Player(p2mons,givenMoves2);
 		rightConfirmationButtons[i].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int x = ((Button) e.getSource()).getNum();//x is the column its from
-				Pokemon pokemon = new Pokemon(rightPokemonInputs[x].getText());//get the text from the pokemon input at column x
-				Move[] moves = new Move[4];
-				for (int i = 0; i < moves.length; i++) {//length is 4
-					moves[i] = new Move(rightMoveInputs[x][i].getText());
+				{
+
+					int x = ((Button) e.getSource()).getNum();//x is the column its from
+					boolean validMove = true;
+					for (int i = 0; i < 4; i++) {//length is 4
+						if (calc.isMove(rightMoveInputs[x][i].getText())) {
+
+						} else {
+							rightConfirmationButtons[x].setProblem(true);
+							validMove = false;
+							JOptionPane.showMessageDialog(rightDisplay,
+									"Your move in the " + (x + 1) + "th column and " + (i + 1) + "th row is not a valid move",
+									"Invalid Move",
+									2,
+									(new ImageIcon(new ImageIcon("Images/Exclamation.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+
+
+						}
+					}
+					if (validMove) {
+						rightConfirmationButtons[x].setProblem(false);
+						Pokemon pokemon = new Pokemon(rightPokemonInputs[x].getText());//get the text from the pokemon input at column x
+						Move[] moves = new Move[4];
+						for (int i = 0; i < moves.length; i++) {//length is 4
+							moves[i] = new Move(rightMoveInputs[x][i].getText());
+						}
+						pokemon.setMoves(moves);
+						p2Pokemon[x] = pokemon;
+						rightPanelImages[x].setIcon(new ImageIcon("Images/Sprites/SpritesFront/" + pokemon.getID() + ".gif"));
+					}
 				}
-				pokemon.setMoves(moves);
-				p2Pokemon[x] = pokemon;
-				rightPanelImages[x].setIcon(new ImageIcon("Images/Sprites/SpritesFront/" + pokemon.getID() + ".gif"));
 			}
 		});
 		constraints.gridx = i;//the column you are on
@@ -1353,23 +1429,32 @@ P2=new Player(p2mons,givenMoves2);
 	rightValidationButton.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			boolean problem=false;
 			for (int i = 0; i < rightConfirmationButtons.length; i++) {
 				rightConfirmationButtons[i].doClick();
-				rightConfirmationButtons[i].setEnabled(false);
-				rightPokemonInputs[i].setEnabled(false);
-				for (int k = 0; k < rightMoveInputs[i].length; k++) {
-
-					rightMoveInputs[i][k].setEnabled(false);
+				if(rightConfirmationButtons[i].hasProblem()){
+					problem=true;
 				}
+				else {
 
-			}
-			synchronized (myObject){if(confirm1==true){
-				myObject.notify();
+					rightConfirmationButtons[i].setEnabled(false);
+					rightPokemonInputs[i].setEnabled(false);
+					for (int k = 0; k < rightMoveInputs[i].length; k++) {
+
+						rightMoveInputs[i][k].setEnabled(false);
+					}
+
+
+				}}
+			if(problem==false){
+			synchronized (myObject1){if(confirm1==true){
+				myObject1.notify();
 			}else{
 				confirm2 =true;
+			}
 			}}
 		}
-	});
+			});
 	rightUI.add(rightValidationButton, constraints);
 	leftPanelTB.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	rightPanelTB.setBorder(BorderFactory.createLineBorder(Color.BLACK));
