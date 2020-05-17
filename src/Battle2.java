@@ -1,3 +1,14 @@
+//
+//  Author: Eric Chang
+//  Revised: Eric Chang
+//			5/17/20
+//  Notes:
+//         An alternate way of playing the game where player perspective
+//         is switched instead of having both players on the same screen at once.
+//         Not really our priority at this point, but more of a cool feature
+//  Bugs:
+//       There probably are some bugs, but we don't test this class as we mainly focus on the Battle class
+//
 import java.io.*;
 import java.nio.file.*;
 import java.util.Scanner;
@@ -223,95 +234,7 @@ public class Battle2 {
 
 
 
-//        ez.print("P1) Select your first pokemon's first move");
-//        givenMoves[0][0]=kboard.nextInt();
-//        ez.print("P1) Select your first pokemon's second move");
-//        givenMoves[0][1]=kboard.nextInt();
-//        ez.print("P1) Select your first pokemon's third move");
-//        givenMoves[0][2]=kboard.nextInt();
-//        ez.print("P1) Select your first pokemon's fourth move");
-//        givenMoves[0][3]=kboard.nextInt();
-//        ez.print("P1) Select your second pokemon's first move");
-//        givenMoves[1][0]=kboard.nextInt();
-//        ez.print("P1) Select your second pokemon's second move");
-//        givenMoves[1][1]=kboard.nextInt();
-//        ez.print("P1) Select your second pokemon's third move");
-//        givenMoves[1][2]=kboard.nextInt();
-//        ez.print("P1) Select your second pokemon's fourth move");
-//        givenMoves[1][3]=kboard.nextInt();
-//        ez.print("P1) Select your third pokemon's first move");
-//        givenMoves[2][0]=kboard.nextInt();
-//        ez.print("P1) Select your third pokemon's second move");
-//        givenMoves[2][1]=kboard.nextInt();
-//        ez.print("P1) Select your third pokemon's third move");
-//        givenMoves[2][2]=kboard.nextInt();
-//        ez.print("P1) Select your third pokemon's fourth move");
-//        givenMoves[2][3]=kboard.nextInt();
-//        ez.print("P1) Select your fourth pokemon's first move");
-//        givenMoves[3][0]=kboard.nextInt();
-//        ez.print("P1) Select your fourth pokemon's second move");
-//        givenMoves[3][1]=kboard.nextInt();
-//        ez.print("P1) Select your fourth pokemon's third move");
-//        givenMoves[3][2]=kboard.nextInt();
-//        ez.print("P1) Select your fourth pokemon's fourth move");
-//        givenMoves[3][3]=kboard.nextInt();
 
-        //        for(int i=0;i<6;i++){
-//            ez.print(p1.getPokemon()[i].getName());
-//        }
-//        for(int i=0;i<6;i++){
-//            ez.print(p2.getPokemon()[i].getName());
-//        }
-//        ez.print("Player 1's)Pokemon"+p1);
-//        ez.print(p2);
-
-
-
-//        Pokemon[] p1Pokemon={p11,p12,p13,p14,p15,p16};
-//        Pokemon[] p2Pokemon={p21,p22,p23,p24,p25,p26};
-
-        //        Move move1=new Move("Move1",1,100,"Fire");
-//        Move move2=new Move("Move2",2,50,"Water");
-//        Move move3=new Move("Move3",3,150,"Dragon");
-//        Move move4=new Move("Move4",4,50,"Fairy");
-//        Move[] moveSet1= {move1,move2,move3,move4};
-//        Pokemon p11=new Pokemon(1,"P1 mon1",
-//                500,100,20,69,moveSet1,"Fighting","Grass");
-//        Pokemon p12=new Pokemon(1,"P1 mon2",
-//                500,100,20,69,moveSet1,"Fighting","Grass");
-//        Pokemon p13=new Pokemon(1,"P1 mon3",
-//                500,100,20,69,moveSet1,"Fighting","Grass");
-//        Pokemon p14=new Pokemon(1,"P1 mon3",
-//                500,100,20,69,moveSet1,"Fighting","Grass");
-//        Pokemon p15=new Pokemon(1,"P1 mon5",
-//                500,100,20,69,moveSet1,"Fighting","Grass");
-//        Pokemon p16=new Pokemon(1,"P1 mon6",
-//                500,100,20,69,moveSet1,"Fighting","Grass");
-//        Pokemon p21=new Pokemon(2,"P2 mon1",
-//                200,50,200,400,moveSet1,"Water","Dragon");
-//        Pokemon p22=new Pokemon(2,"P2 mon2",
-//                200,50,200,400,moveSet1,"Water","Dragon");
-//        Pokemon p23=new Pokemon(2,"P2 mon3",
-//                200,50,200,400,moveSet1,"Water","Dragon");
-//        Pokemon p24=new Pokemon(2,"P2 mon4",
-//                200,50,200,400,moveSet1,"Water","Dragon");
-//        Pokemon p25=new Pokemon(2,"P2 mon5",
-//                200,50,200,400,moveSet1,"Water","Dragon");
-//        Pokemon p26=new Pokemon(2,"P2 mon6",
-//                200,50,200,400,moveSet1,"Water","Dragon");
-        // declares an array of integers
-//        p1.setOpposingPlayer(p2);
-//        System.out.println(p2.getCurrentMon());
-//        p1.fight();
-//        System.out.println(p2.getCurrentMon());
-//        p2.switchOut();
-//        System.out.println(p2.getCurrentMon());
-//        p1.fight();
-//        System.out.println(p2.getCurrentMon());
-//        p2.switchOut();
-//        System.out.println(p2.getCurrentMon());
-//        p1.fight();
-//        System.out.println(p2.getCurrentMon());
     }
     
     private void swapView() {
