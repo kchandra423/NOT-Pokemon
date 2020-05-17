@@ -1,15 +1,14 @@
 import javax.swing.*;
 
 public class Button extends JButton {
-//    public String name;
-    public int num;
+	private int num;
 
-    Button(String name,int nu){
-        super(name);
-        num=nu;
+	public Button(String name, int num) {
+		super(name);
+		this.num = num;
+	}
 
-    }
-    public int getNum(){
-        return num;
-    }
+	public int getNum() {
+		return num;
+	}
 }

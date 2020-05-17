@@ -265,10 +265,7 @@ public class Battle2 {
 //        ez.print("Player 1's)Pokemon"+p1);
 //        ez.print(p2);
 
-        //        Pokemon test = new Pokemon(1);
-//    System.out.println(test);
-//    Move anothertest =new Move(1);
-//        System.out.println(anothertest);
+
 
 //        Pokemon[] p1Pokemon={p11,p12,p13,p14,p15,p16};
 //        Pokemon[] p2Pokemon={p21,p22,p23,p24,p25,p26};
@@ -339,10 +336,10 @@ public class Battle2 {
 			name2 = new JLabel(p2.getCurrentMon().getName());
 			bar1 = new HealthBar(p1.getCurrentMon());
 			bar2 = new HealthBar(p2.getCurrentMon());
-			ImageIcon pic = new ImageIcon("Sprites/SpritesBack/" + p1.getCurrentMon().getID() +"-back.gif");
+			ImageIcon pic = new ImageIcon("Images/Sprites/SpritesBack/" + p1.getCurrentMon().getID() +"-back.gif");
 			image1 = new JLabel(pic);
 			image1.setToolTipText(toToolTipText(p1.getCurrentMon().toString()));
-			ImageIcon pic2 = new ImageIcon("Sprites/SpritesFront/" + p2.getCurrentMon().getID() + ".gif");
+			ImageIcon pic2 = new ImageIcon("Images/Sprites/SpritesFront/" + p2.getCurrentMon().getID() + ".gif");
 			image2 = new JLabel(pic2);
 			image2.setToolTipText("You can only see your own pokemon's stats!");
 		}
@@ -351,13 +348,15 @@ public class Battle2 {
 			name2 = new JLabel(p1.getCurrentMon().getName());
 			bar1 = new HealthBar(p2.getCurrentMon());
 			bar2 = new HealthBar(p1.getCurrentMon());
-			ImageIcon pic = new ImageIcon("Sprites/SpritesBack/" + p2.getCurrentMon().getID() +"-back.gif");
+			ImageIcon pic = new ImageIcon("Images/Sprites/SpritesBack/" + p2.getCurrentMon().getID() +"-back.gif");
 			image1 = new JLabel(pic);
 			image1.setToolTipText(toToolTipText(p2.getCurrentMon().toString()));
-			ImageIcon pic2 = new ImageIcon("Sprites/SpritesFront/" + p1.getCurrentMon().getID() + ".gif");
+			ImageIcon pic2 = new ImageIcon("Images/Sprites/SpritesFront/" + p1.getCurrentMon().getID() + ".gif");
 			image2 = new JLabel(pic2);
 			image2.setToolTipText("You can only see your own pokemon's stats!");
 		}
+		bar1.setXOffset(true);
+		bar2.setXOffset(false);
 		GroupLayout l = new GroupLayout(display);
 		display.setLayout(l);
 		l.setAutoCreateGaps(true);

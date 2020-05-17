@@ -19,13 +19,13 @@ public class Move {
 	private int priority;
 	private String flags;
 	private int chance;
-	private boolean self;
+	private boolean self;//true if the effeccts target the user
 	private String boosts;
 	private double critical;
 	private Ratio drain;
 	private Ratio heal;
 	private String status;
-	private boolean target;
+	private boolean target;//true if the target is the user
 	private String type;
 	private String id;
 
@@ -57,8 +57,8 @@ public class Move {
 		int number = -1;
 		String copy = "something went wrong; ";
 		try {
-//			copy = Files.readString(Paths.get("Moves.txt"));
-			byte[] file = Files.readAllBytes(Paths.get("Moves.txt"));
+//			copy = Files.readString(Paths.get("Text/Moves.txt"));
+			byte[] file = Files.readAllBytes(Paths.get("Text/Moves.txt"));
 			copy = new String(file);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -84,8 +84,8 @@ public class Move {
 		// code way to set all the stats;
 		String copy = "something went wrong; ";
 		try {
-//			copy = Files.readString(Paths.get("Moves.txt"));
-			byte[] file = Files.readAllBytes(Paths.get("Moves.txt"));
+//			copy = Files.readString(Paths.get("Text/Moves.txt"));
+			byte[] file = Files.readAllBytes(Paths.get("Text/Moves.txt"));
 			copy = new String(file);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -217,6 +217,7 @@ public class Move {
 
 	public boolean isSelf() {
 		return self;
+		//true if the boosts targets self
 	}
 
 	public int getAccuracy() {
@@ -229,6 +230,7 @@ public class Move {
 
 	public boolean isTarget() {
 		return target;
+		//true if damage and or boosts target self
 	}
 
 	public String getId() {
@@ -266,4 +268,12 @@ public class Move {
 	public int getPriority() {
 		return priority;
 	}
+	public double getDrain(){
+		return (double)drain.getFirst()/(double)drain.getSecond();
+	}
+	public double getHeal(){
+		return (double)heal.getFirst()/(double)heal.getSecond();
+	}
+
+
 }

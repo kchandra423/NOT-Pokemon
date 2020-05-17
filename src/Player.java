@@ -76,14 +76,13 @@ public class Player {
     }
     public void fight(int indexOfMove){
     	if(currentMon.getMoves()[indexOfMove].getPP() == 0) {
-    		return;
+
     	}
     	else {
     		currentMon.getMoves()[indexOfMove].usePP();
     		// System.out.println("There's no PP left for this move!");
     	}
         if(currentMon.getHealth()<=0) {
-        	return;
         }
         else if(currentMon.getStatus().equalsIgnoreCase("brn"))
         {

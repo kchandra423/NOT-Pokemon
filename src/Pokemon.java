@@ -39,8 +39,8 @@ public class Pokemon {
 		int moveNumber = -1;
 		String copy = "something went wrong; ";
 		try {
-//			copy = Files.readString(Paths.get("Stats.txt"));
-			byte[] file = Files.readAllBytes(Paths.get("Stats.txt"));
+//			copy = Files.readString(Paths.get("Text/Stats.txt"));
+			byte[] file = Files.readAllBytes(Paths.get("Text/Stats.txt"));
 			copy = new String(file);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -129,8 +129,8 @@ public class Pokemon {
 
 		String copy = "something went wrong; ";
 		try {
-//			copy = Files.readString(Paths.get("Stats.txt"));
-			byte[] file = Files.readAllBytes(Paths.get("Stats.txt"));
+//			copy = Files.readString(Paths.get("Text/Stats.txt"));
+			byte[] file = Files.readAllBytes(Paths.get("Text/Stats.txt"));
 			copy = new String(file);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -149,11 +149,11 @@ public class Pokemon {
 		baseSpecialAttack = Integer.parseInt(s[7]);
 		baseSpecialDefense = Integer.parseInt(s[8]);
 		baseSpeed = Integer.parseInt(s[9]);
-//        String content = Files.readString(Paths.get("Stats.txt"));
-//        File f = new File("Stats.txt");
+//        String content = Files.readString(Paths.get("Text/Stats.txt"));
+//        File f = new File("Text/Stats.txt");
 //        List<String> copy;
 //        try {
-//            copy=Files.readAllLines(new File("Stats.txt"));
+//            copy=Files.readAllLines(new File("Text/Stats.txt"));
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
@@ -366,6 +366,15 @@ public class Pokemon {
 		health -= damage;
 		if(health < 0) {
 			health = 0;
+		}
+	}
+	public void heal(int heal) {
+
+		if(heal+health>=baseHealth){
+			health=baseHealth;
+		}
+		else{
+			health+=heal;
 		}
 	}
 
