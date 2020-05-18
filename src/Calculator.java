@@ -7,7 +7,8 @@
 //       Calculates things(obviously). Can calculate damage, if a String is a valid move, who goes first, etc
 //
 //  Bugs:
-//      unknown
+//			Many moves don't work. This is because they work specially, which requires them to be hardcoded specificaly.
+//			Were not willind to do that given the time restraint
 //
 import java.io.IOException;
 import java.nio.file.Files;

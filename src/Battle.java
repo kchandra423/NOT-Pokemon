@@ -213,6 +213,7 @@ public class Battle {
 P1.setCurrentMon();
 P2.setCurrentMon();
 			name1 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+
 //			System.out.println(P2.getCurrentMon().getName());
 			name2 = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
 			bar1 = new HealthBar(P1.getCurrentMon());
@@ -273,7 +274,9 @@ P2.setCurrentMon();
 			c2.anchor = GridBagConstraints.LAST_LINE_START;
 			c2.weightx = 0.5;
 			c2.weighty = 0.5;
+//			c2.ipadx=-200000;
 			leftDisplayPanel.add(name1, c2);
+//			c2.ipadx=0;
 			c2.gridy = 4;
 			leftDisplayPanel.add(bar1, c2);
 			c2.gridy = 5;
@@ -542,6 +545,18 @@ P2.setCurrentMon();
 			y.insets = new Insets(5, 5, 5, 5);
 			rightPanel.add(pane2, y);
 
+		name1.setOpaque(true);
+			name1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		name1.setBackground(Color.lightGray);
+		name2.setOpaque(true);
+		name2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		name2.setBackground(Color.lightGray);
+		name3.setOpaque(true);
+		name3.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		name3.setBackground(Color.lightGray);
+		name4.setOpaque(true);
+		name4.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		name4.setBackground(Color.lightGray);
 			leftPanel.updateUI();
 			rightPanel.updateUI();
 			repaint(P1, P2);
