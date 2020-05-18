@@ -1,19 +1,29 @@
-
-import java.util.Scanner;
-
+//
+//  Author: Kumar Chandra
+//  Revised: Kumar Chandra
+//           5/10/20
+//
+//  Notes:
+//       The way this class works is that it has 6 pokemon,
+//       and a currentMon, which is the pokemon it currently has in place
+//       It can also fight, or switch out, where it changes its currentMon.
+//       It also has access to the opposing player, to attack them
+//
+//  Bugs:
+//      unknown
+//
 public class Player {
-    private Pokemon[] pokemon;
+    private Pokemon[] pokemon;//has 6 pokemon
     private EaseOfUse ez = new EaseOfUse();
-    private Calculator calculator= new Calculator();
-    private Pokemon currentMon;
-    private Player opposingPlayer;
-    private Scanner kboard = new Scanner(System.in);
-    public Player(Pokemon[] givenMons, Player other){
+    private Calculator calculator= new Calculator();//self explanatory
+    private Pokemon currentMon;// your current pokemon that is in play
+    private Player opposingPlayer;// the opponent
+    public Player(Pokemon[] givenMons, Player other){//sets pokemon and opponent
         pokemon=givenMons;
         opposingPlayer=other;
         currentMon=givenMons[0];
     }
-    public Player(Pokemon[] givenMons, int[][] givenMoves, Player other){
+    public Player(Pokemon[] givenMons, int[][] givenMoves, Player other){//sets pokemon and moves
         pokemon=givenMons;
         Move[] hi=new Move[4];
         for (int i=0;i<6;i++){
@@ -28,37 +38,34 @@ public class Player {
         opposingPlayer=other;
         currentMon=givenMons[0];
     }
-    public Player(Pokemon[] givenMons, int[][] givenMoves){
+    public Player(Pokemon[] givenMons, int[][] givenMoves){//sets mons and moves but not opponent
         pokemon=givenMons;
         for (int i=0;i<givenMons.length;i++){
-//            for(int k=0;k<4;i++){
+
                 pokemon[i].setMoves(givenMoves[i]);
-//            }
+
         }
 
         currentMon=givenMons[0];
     }
-    public Player(Pokemon[] givenMons){
+    public Player(Pokemon[] givenMons){//just sets mons
         pokemon=givenMons;
         currentMon=givenMons[0];
 
     }
-    public Player(int[] givenMons,int[][] givenMoves,Player other){
-        for (int i=0;i<givenMons.length;i++){
-            pokemon[i]=new Pokemon(givenMons[i]);
+    public Player(int[] givenMons,int[][] givenMoves,Player other) {//sets mons and moves, but as an int array that it converts into pokemon
+        for (int i = 0; i < givenMons.length; i++) {
+            pokemon[i] = new Pokemon(givenMons[i]);
         }
-        for (int i=0;i<givenMons.length;i++){
-//            for(int k=0;k<pokemon[i].getMoves().length;i++){
-                pokemon[i].setMoves(givenMoves[i]);
-//            }
+        for (int i = 0; i < givenMons.length; i++) {
+
+            pokemon[i].setMoves(givenMoves[i]);
+
         }
-        opposingPlayer=other;
-        currentMon=pokemon[0];
+        opposingPlayer = other;
+        currentMon = pokemon[0];
     }
-//    public Player(Int[] givenMons){
-//        pokemon=givenMons;
-//  }
-    public boolean isDefeated(){
+    public boolean isDefeated(){//self explanatory
         if(pokemon[0].getHealth()<=0&&pokemon[1].getHealth()<=0&&pokemon[2].getHealth()<=0&&
                 pokemon[3].getHealth()<=0&&pokemon[4].getHealth()<=0&&pokemon[5].getHealth()<=0){
             return true;}
@@ -67,10 +74,10 @@ public class Player {
             return false;
         }
     }
-    public void setCurrentMon(){
+    public void setCurrentMon(){//self explanatory
         currentMon=pokemon[0];
     }
-    public void setOpposingPlayer(Player other){
+    public void setOpposingPlayer(Player other){//self explanatory
         opposingPlayer=other;
         other.opposingPlayer = this;
     }
@@ -83,6 +90,7 @@ public class Player {
     		// System.out.println("There's no PP left for this move!");
     	}
         if(currentMon.getHealth()<=0) {
+        	
         }
         else if(currentMon.getStatus().equalsIgnoreCase("brn"))
         {
@@ -162,43 +170,20 @@ public class Player {
         }
     }
 
-    public void switchOut(Pokemon switchIn){
-//        System.out.println("Choose which pokemon you want to switch in");
-//        int y = indexOfMon(currentMon);
-//        int x=y;
-//
-//
-//        boolean z= true;
-//        while(z) {
-//            for (int i = 0; i < 6; i++) {
-//                if (i == y) {
-//                    System.out.println((i + 1) + ")" + pokemon[i].getName() + " (Already in play)");
-//                }
-//                else if(pokemon[i].getHealth()<=0){
-//                    System.out.println((i + 1) + ")" + pokemon[i].getName() + " (Fainted)");
-//                }
-//                else {
-//                    System.out.println((i + 1) + ")" + pokemon[i].getName());
-//                }
-//            }
-//             x = kboard.nextInt() - 1;
-//            if (x==y||x<0||pokemon[x].getHealth()<=0){
-//                ez.print("That wasn't a valid input");
-//            }
-//            else{
-//                z=false;
-//            }
-//        }
-        currentMon=switchIn;
+    public void switchOut(Pokemon switchIn){//self explanatory
+       if(switchIn.getHealth()>0) {
+           currentMon = switchIn;
+       }
     }
     
-    public void switchOut(int switchIn) {
+    public void switchOut(int switchIn) {//self explanatory, but it turns the int into a number, where the int is the
+        // index of the pokemon in the pokemon array
     	if(pokemon[switchIn].getHealth() > 0 && pokemon[switchIn] != currentMon) {
     		currentMon = pokemon[switchIn];
     	}
     }
     
-    public int indexOfMon(Pokemon mon){
+    public int indexOfMon(Pokemon mon){//finds the index of a pokemon in your array of pokemon
         int answer=-1;
         for(int i=0;i<pokemon.length;i++)
         {
@@ -210,21 +195,21 @@ public class Player {
         return answer;
     }
 
-    public Pokemon[] getPokemon() {
+    public Pokemon[] getPokemon() {//self explanatory
     	return pokemon;
     }
     
-    public Pokemon getCurrentMon() {
+    public Pokemon getCurrentMon() {//self explanatory
     	return currentMon;
     }
     
-//    @Override
-    public String toString() {
+
+    public String toString() {//self explanatory
         String answer="Player)\n" +
                 "pokemon: " +pokemon[0].getName()+" " +pokemon[1].getName()+" "+pokemon[2].getName()+" " +pokemon[3].getName()+" " +pokemon[4].getName()+" "+ pokemon[5].getName()+
 
                 "\ncurrentMon=" + currentMon.getName()
-//                ", opposingPlayer=" + opposingPlayer +
+
 
                 ;
         return answer;

@@ -1,3 +1,14 @@
+//
+//  Author: Eric Chang
+//  Revised: Eric Chang
+//           5/5/20
+//
+//  Notes:
+//      This class is a ratio with two ints
+//
+//  Bugs:
+//      none
+//
 public class Ratio {
     private final int first;
     private final int second;

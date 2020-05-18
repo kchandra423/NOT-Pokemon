@@ -1,17 +1,31 @@
+//
+//  Author: Kumar Chandra
+//  Revised: Kumar Chandra
+//           5/10/20
+//
+//  Notes:
+//       Holds all the GUI for the project and houses the main. Uses almost every other class to run a game of Pokemon.
+//
+//  Bugs:
+//      Lots Probably. Will be listed all be listed at the end of the project
+//
 import java.awt.event.*;
+import java.io.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Battle {
-    public static int P1numberOfFaintedMons=0;
-    public static int P2numberOfFaintedMons=0;
+    public static int P1numberOfFaintedMons=0;//self explanatory
+    public static int P2numberOfFaintedMons=0;//self explanatory
 
-	private JFrame frame=new JFrame();
-	private JPanel mainPanel;
-	private JPanel leftPanel, rightPanel, leftDisplayPanel, rightDisplayPanel;
-	private JPanel leftUI, rightUI;
-	private JPanel leftMovePanel=new JPanel(),rightMovePanel = new JPanel();
-	private JPanel leftSwitchPanel= new JPanel(),rightSwitchPanel=new JPanel();
+	private JFrame frame=new JFrame();//self explanatory
+	private JPanel mainPanel;//self explanatory
+	private JPanel leftPanel, rightPanel, leftDisplayPanel, rightDisplayPanel;//the display shown to the user
+	private JPanel leftUI, rightUI;//the users interface
+	private JPanel leftMovePanel=new JPanel(),rightMovePanel = new JPanel();//move options
+	private JPanel leftSwitchPanel= new JPanel(),rightSwitchPanel=new JPanel();//switch options
 
 	private static JLabel name1, name2, image1, image2,name3, name4, image3, image4,
 			attack = new JLabel("Attack"), switchOut = new JLabel("Switch");
@@ -19,29 +33,19 @@ public class Battle {
 	private Button[] leftMoveButtons = new Button[4],rightMoveButtons=new Button[4];
 	private int p1Selection=-1;
 	private int p2Selection =-1;
-//	private JButton p1PokemonButton=new JButton("Get your Pokemon's stats"), p2PokemonButton=new JButton("Get your Pokemon's stats");
 	private Button[] leftSwitchButtons = new Button[6],rightSwitchButtons = new Button[6];
 	private ButtonGroup leftButtons=new ButtonGroup(),rightButtons=new ButtonGroup();
 	public JTextArea leftText, rightText;
 	private Timer timer;
 	boolean confirm1=false,confirm2=false;//i hate action performed not being able to access things like a normal method
-//	boolean wait3=true;
 	static Player P1, P2;
-	Object myObject=new Object();
-	JPanel leftPanelTB,rightPanelTB;
-
-
-//	private JButton leftP1Image=new JButton();
-
-
-//	private int playerPerspective=1;
+	private static Object myObject1 =new Object(), myObject2=new Object(), myObject3=new Object();
 
 
 
 
-//public Battle(boolean){
-//
-//}
+
+
 	public Battle() {
 
         String filepath1 = "Music/PokemonTitleScreen.wav";
@@ -55,7 +59,7 @@ public class Battle {
         String filepath9 = "Music/TeamRocketHideout.wav";
         String filepath10 = "Music/ViridianForest.wav";
         PlayMusic musicObject = new PlayMusic();
-
+//self explanatory
         int random = (int) (Math.random()*10);
 //        if(random < 1)
 //        {
@@ -98,6 +102,13 @@ public class Battle {
 //        	musicObject.playMusic(filepath10);
 //        }
         frame = new JFrame();
+        BufferedImage icon;
+        try {
+			icon = ImageIO.read(new File("Images/Pokeball.png"));
+	        frame.setIconImage(icon);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 
 
 //    	panel = new JPanel(new GridBagLayout());
@@ -108,6 +119,7 @@ public class Battle {
 //		mainPanel=new JPanel();
 //		frame.add(mainPanel);
 //				frame.getContentPane().add(rightPanel);
+
 		frame.setBounds(100, 100, 3000, 750);
 		frame.setVisible(true);
 		 frame.setResizable(false);
@@ -127,8 +139,8 @@ public class Battle {
 
 //		mainPanel.wait();
 		try{
-		synchronized(myObject){
-			myObject.wait();
+		synchronized(myObject1){
+			myObject1.wait();
 		}}
 		catch (Exception e){
 			e.printStackTrace();
@@ -145,9 +157,20 @@ public class Battle {
 		frame.add(mainPanel);
 			leftPanel = new JPanel(new GridBagLayout());
 			rightPanel = new JPanel(new GridBagLayout());
-			leftDisplayPanel = new JPanel();
+			int backgroundNumber;
+			do {
+				backgroundNumber = (int)(Math.random()*18)+1;
+			} while(backgroundNumber == 9 || backgroundNumber == 12);
+			BufferedImage background;
+			try {
+				background = ImageIO.read(new File("Images/Backgrounds/BattleBackground"
+						+ backgroundNumber + ".png"));
+				leftDisplayPanel = new BackgroundPanel(background);
+				rightDisplayPanel = new BackgroundPanel(background);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			leftPanel.add(leftDisplayPanel);
-			rightDisplayPanel = new JPanel();
 			rightPanel.add(rightDisplayPanel);
 			leftUI = new JPanel(new GridLayout(2, 1));
 			rightUI = new JPanel(new GridLayout(2, 1));
@@ -189,9 +212,9 @@ public class Battle {
 //		});
 P1.setCurrentMon();
 P2.setCurrentMon();
-			name1 = new JLabel(P1.getCurrentMon().getName());
+			name1 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
 //			System.out.println(P2.getCurrentMon().getName());
-			name2 = new JLabel(P2.getCurrentMon().getName());
+			name2 = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
 			bar1 = new HealthBar(P1.getCurrentMon());
 			bar1.setBackground(Color.LIGHT_GRAY);
 			bar1.setXOffset(true);
@@ -241,38 +264,29 @@ P2.setCurrentMon();
 					}
 				}
 			});
-			GroupLayout layout1 = new GroupLayout(leftDisplayPanel);
-			leftDisplayPanel.setLayout(layout1);
-			layout1.setAutoCreateGaps(true);
-			System.out.println(name2);
-			System.out.println(name1);
-			layout1.setAutoCreateContainerGaps(true);
-			layout1.setHorizontalGroup(layout1.createSequentialGroup()
-				.addGroup(layout1.createParallelGroup(GroupLayout.Alignment.CENTER)
-					.addGap(100)
-					.addComponent(name1)
-					.addComponent(bar1)
-//					.addComponent(p1PokemonButton)
-					.addComponent(image1))
-//					.addComponent(leftP1Image)
-				.addGap(200)
-				.addGroup(layout1.createParallelGroup(GroupLayout.Alignment.CENTER)
-					.addComponent(name2)
-					.addComponent(bar2)
-					.addComponent(image2))
-			);
-
-			layout1.setVerticalGroup(layout1.createSequentialGroup()
-					.addComponent(name2)
-					.addComponent(bar2)
-					.addComponent(image2)
-					.addGap(100)
-					.addComponent(name1)
-					.addComponent(bar1)
-					.addComponent(image1)
-//					.addComponent(leftP1Image)
-//					.addComponent(p1PokemonButton)
-			);
+			leftDisplayPanel.setLayout(new GridBagLayout());
+			GridBagConstraints c2 = new GridBagConstraints();
+			c2.gridx = 0;
+			c2.gridy = 3;
+			c2.fill = GridBagConstraints.HORIZONTAL;
+			c2.insets = new Insets(5, 5, 5, 5);
+			c2.anchor = GridBagConstraints.LAST_LINE_START;
+			c2.weightx = 0.5;
+			c2.weighty = 0.5;
+			leftDisplayPanel.add(name1, c2);
+			c2.gridy = 4;
+			leftDisplayPanel.add(bar1, c2);
+			c2.gridy = 5;
+			leftDisplayPanel.add(image1, c2);
+			c2.gridx = 1;
+			c2.gridy = 0;
+			c2.insets = new Insets(5, 105, 5, 5);
+			c2.anchor = GridBagConstraints.FIRST_LINE_END;
+			leftDisplayPanel.add(name2, c2);
+			c2.gridy = 1;
+			leftDisplayPanel.add(bar2, c2);
+			c2.gridy = 2;
+			leftDisplayPanel.add(image2, c2);
 			leftDisplayPanel.setBackground(Color.LIGHT_GRAY);
 			c.gridx = 0;
 			c.gridy = 0;
@@ -371,9 +385,9 @@ P2.setCurrentMon();
 
 
 			GridBagConstraints y = new GridBagConstraints();
-			name3 = new JLabel(P2.getCurrentMon().getName());
+			name3 = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
 			
-			name4 = new JLabel(P1.getCurrentMon().getName());
+			name4 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
 			bar3 = new HealthBar(P2.getCurrentMon());
 			bar3.setBackground(Color.LIGHT_GRAY);
 			bar3.setXOffset(true);
@@ -408,34 +422,29 @@ P2.setCurrentMon();
 							new ImageIcon("Images/Sprites/SpritesFront/" + P1.getCurrentMon().getID() + ".gif"));
 				}
 			});
-			GroupLayout layout4 = new GroupLayout(rightDisplayPanel);
-			rightDisplayPanel.setLayout(layout4);
-			layout4.setAutoCreateGaps(true);
-			layout4.setAutoCreateContainerGaps(true);
-			layout4.setHorizontalGroup(layout4.createSequentialGroup()
-					.addGroup(layout4.createParallelGroup(GroupLayout.Alignment.CENTER)
-						.addGap(100)
-						.addComponent(name3)
-						.addComponent(bar3)
-//						.addComponent(p2PokemonButton)
-						.addComponent(image3))
-					.addGap(200)
-					.addGroup(layout4.createParallelGroup(GroupLayout.Alignment.CENTER)
-						.addComponent(name4)
-						.addComponent(bar4)
-						.addComponent(image4))
-				);
-
-				layout4.setVerticalGroup(layout4.createSequentialGroup()
-						.addComponent(name4)
-						.addComponent(bar4)
-						.addComponent(image4)
-						.addGap(100)
-						.addComponent(name3)
-						.addComponent(bar3)
-						.addComponent(image3)
-//						.addComponent(p2PokemonButton)
-				);
+			rightDisplayPanel.setLayout(new GridBagLayout());
+			GridBagConstraints y2 = new GridBagConstraints();
+			y2.gridx = 0;
+			y2.gridy = 3;
+			y2.fill = GridBagConstraints.HORIZONTAL;
+			y2.insets = new Insets(5, 5, 5, 5);
+			y2.anchor = GridBagConstraints.LAST_LINE_START;
+			y2.weightx = 0.5;
+			y2.weighty = 0.5;
+			rightDisplayPanel.add(name3, y2);
+			y2.gridy = 4;
+			rightDisplayPanel.add(bar3, y2);
+			y2.gridy = 5;
+			rightDisplayPanel.add(image3, y2);
+			y2.gridx = 1;
+			y2.gridy = 0;
+			y2.insets = new Insets(5, 105, 5, 5);
+			y2.anchor = GridBagConstraints.FIRST_LINE_END;
+			rightDisplayPanel.add(name4, y2);
+			y2.gridy = 1;
+			rightDisplayPanel.add(bar4, y2);
+			y2.gridy = 2;
+			rightDisplayPanel.add(image4, y2);
 			rightDisplayPanel.setBackground(Color.LIGHT_GRAY);
 			y.gridx = 0;
 			y.gridy = 0;
@@ -538,165 +547,119 @@ P2.setCurrentMon();
 			repaint(P1, P2);
 
     }
-
+//the main, where everything happens
     public static void main (String[] args) {
-//    ReadFile read = new ReadFile();
-//        String copy = "something went wrong; ";
-//        try {
-////			copy = Files.readString(Paths.get("Stats.txt"));
-//            byte[] file = Files.readAllBytes(Paths.get("ShowdownLearnsets.txt"));
-//            copy = new String(file);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    ez.println(
-////            read.orderMoves(
-//            (read.formatShowDownLearnSets(copy).replace("\t","")));
-        EaseOfUse ez=new EaseOfUse();
-//        Scanner kboard=new Scanner(System.in);
-        Calculator calc=new Calculator();
-//        PlayMusic playMusic = new PlayMusic();
-        String music = "PokemonTitleScreen.wav";
-//        playMusic.playMusic(music);
-        Pokemon[] p1mons=new Pokemon[6];
-        Pokemon[] p2mons=new Pokemon[6];
-        int[][] givenMoves = new int[6][4];
+
+		EaseOfUse ez = new EaseOfUse();
+
+		Calculator calc = new Calculator();
+		Pokemon[] p1mons = new Pokemon[6];
+		Pokemon[] p2mons = new Pokemon[6];
+		int[][] givenMoves = new int[6][4];
 		int[][] givenMoves2 = new int[6][4];
-//
-//
-//
-//
-////        ez.print("P1) Select your first pokemon's dex number");
-////        p1mons[0]=new Pokemon(kboard.nextInt());
-////
-////        ez.print("P1) Select your second pokemon's dex number");
-////        p1mons[1]=new Pokemon(kboard.nextInt());
-////        ez.print("P1) Select your third pokemon's dex number");
-////        p1mons[2]=new Pokemon(kboard.nextInt());
-////        ez.print("P1) Select your fourth pokemon's dex number");
-////        p1mons[3]=new Pokemon(kboard.nextInt());
-////        ez.print("P1) Select your fifth pokemon's dex number");
-////        p1mons[4]=new Pokemon(kboard.nextInt());
-////        ez.print("P1) Select your sixth pokemon's dex number");
-////        p1mons[5]=new Pokemon(kboard.nextInt());
-////
-////
-////        ez.print("P2) Select your first pokemon's dex number");
-////        p2mons[0]=new Pokemon(kboard.nextInt());
-////        ez.print("P2) Select your second pokemon's dex number");
-////        p2mons[1]=new Pokemon(kboard.nextInt());
-////        ez.print("P2) Select your third pokemon's dex number");
-////        p2mons[2]=new Pokemon(kboard.nextInt());
-////        ez.print("P2) Select your fourth pokemon's dex number");
-////        p2mons[3]=new Pokemon(kboard.nextInt());
-////        ez.print("P2) Select your fifth pokemon's dex number");
-////        p2mons[4]=new Pokemon(kboard.nextInt());
-////        ez.print("P2) Select your sixth pokemon's dex number");
-////        p2mons[5]=new Pokemon(kboard.nextInt());
-		p1mons[0]=new Pokemon(130);
-		p1mons[1]=new Pokemon(143);
-		p1mons[2]=new Pokemon(150);
-		p1mons[3]=new Pokemon(384);
-		p1mons[4]=new Pokemon(493);
-		p1mons[5]=new Pokemon(487);
 
-		p2mons[0]=new Pokemon(700);
-		p2mons[1]=new Pokemon(802);
-		p2mons[2]=new Pokemon(801);
-		p2mons[3]=new Pokemon(800);
-		p2mons[4]=new Pokemon(798);
-		p2mons[5]=new Pokemon(791);
-//
-//
-		givenMoves[0]= new int[]{14,370,609,26};
-        givenMoves[1]= new int[]{53,56,59,76};
-        givenMoves[2]= new int[]{85,89,94,98};
-		givenMoves[3]= new int[]{14,370,609,26};
-		givenMoves[4]= new int[]{53,56,59,76};
-		givenMoves[5]= new int[]{85,89,94,98};
-//
-//
-//
-		givenMoves2[0]=new int[]{22,23,24,25};
-		givenMoves2[1]= new int[]{14,370,609,1};
-		givenMoves2[2]= new int[]{6,7,8,9};
-		givenMoves2[3]= new int[]{10,11,12,13};
-		givenMoves2[4]= new int[]{14,15,16,17};
-		givenMoves2[5]= new int[]{18,19,20,21};
+		p1mons[0] = new Pokemon(130);
+		p1mons[1] = new Pokemon(143);
+		p1mons[2] = new Pokemon(150);
+		p1mons[3] = new Pokemon(384);
+		p1mons[4] = new Pokemon(493);
+		p1mons[5] = new Pokemon(487);
 
-//		Player[] players =teamBuilder();
-P1=new Player(p1mons,givenMoves);
-P2=new Player(p2mons,givenMoves2);
+		p2mons[0] = new Pokemon(700);
+		p2mons[1] = new Pokemon(802);
+		p2mons[2] = new Pokemon(801);
+		p2mons[3] = new Pokemon(800);
+		p2mons[4] = new Pokemon(798);
+		p2mons[5] = new Pokemon(791);
+//
+//
+		givenMoves[0] = new int[]{14, 370, 609, 26};
+		givenMoves[1] = new int[]{53, 56, 59, 76};
+		givenMoves[2] = new int[]{85, 89, 94, 98};
+		givenMoves[3] = new int[]{14, 370, 609, 26};
+		givenMoves[4] = new int[]{53, 56, 59, 76};
+		givenMoves[5] = new int[]{85, 89, 94, 98};
+//
+//
+//
+		givenMoves2[0] = new int[]{22, 23, 24, 25};
+		givenMoves2[1] = new int[]{14, 370, 609, 1};
+		givenMoves2[2] = new int[]{6, 7, 8, 9};
+		givenMoves2[3] = new int[]{10, 11, 12, 13};
+		givenMoves2[4] = new int[]{14, 15, 16, 17};
+		givenMoves2[5] = new int[]{18, 19, 20, 21};
+		P1 = new Player(p1mons, givenMoves);//default teams, not used for anything now that we have the teambuilder
+		P2 = new Player(p2mons, givenMoves2);
 
-		Battle b= new Battle();
-				Player p1=b.P1;
+		Battle b = new Battle();// calls the constructor, which sets up the gui
+		Player p1 = b.P1;// doesn't use the global variables because this was created before we had GUI
 
-		        Player p2=b.P2;
+		Player p2 = b.P2;
 		p1.setOpposingPlayer(p2);
 
-        b.leftText.setText("The match has begun!");
-		b.rightText.setText("The match has begun!");
-        boolean gameNotOver=true;
-		boolean p1WillSwitch=false;
-            boolean p2WillSwitch=false;
-            int p1SelectedMoveIndex=-1;
-            int p2SelectedMoveIndex=-1;
-            int p1SwitchIn=-1;
-            int p2SwitchIn=-1;
-            JOptionPane popup=new JOptionPane("All your pokemon have fainted");
-            popup.setIcon(new ImageIcon (new ImageIcon("icon.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
-//		final int[] moveSelection = new int[1];
+		b.leftText.setText("The match has begun!");//self explanatory
+		b.rightText.setText("The match has begun!");//self explanatory
+		boolean gameNotOver = true;//self explanatory
+		boolean p1WillSwitch = false;//self explanatory
+		boolean p2WillSwitch = false;//self explanatory
+		int p1SelectedMoveIndex = -1;//the move a player is selecting
+		int p2SelectedMoveIndex = -1;
+		int p1SwitchIn = -1;
+		int p2SwitchIn = -1;
+		JOptionPane popup = new JOptionPane("");//the joption pane used to get input or show feedback
+		popup.setIcon(new ImageIcon(new ImageIcon("icon.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT)));//self explanatory
 
-//            int switchSelection;
-            for(int i=0;i<b.leftMoveButtons.length;i++){
+		for (int i = 0; i < b.leftMoveButtons.length; i++) {
 
-				b.leftMoveButtons[i].addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
+			b.leftMoveButtons[i].addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {//mouse listener for right click, doesnt select anything
 
-						if(SwingUtilities.isRightMouseButton(e)){
-							int x = ((Button)e.getSource()).getNum();
-							String textInfo=p1.getCurrentMon().getMoves()[x].toString();
-							popup.showMessageDialog(b.leftDisplayPanel,
-									textInfo,
-									"Move Info",
-									2,
-									(new ImageIcon (new ImageIcon("Images/Types/"+p1.getCurrentMon().getMoves()[x].getType()+".png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
 
-						}
+					if (SwingUtilities.isRightMouseButton(e)) {
+						int x = ((Button) e.getSource()).getNum();
+						String textInfo = p1.getCurrentMon().getMoves()[x].toString();//gets the info about the move this button represents
+						popup.showMessageDialog(b.leftDisplayPanel,//in the left display panel
+								textInfo,//see above
+								"Move Info",//self explanatory
+								2,//self explanatory
+								(new ImageIcon(new ImageIcon("Images/Types/" + //the icon depends on the type of the move
+										p1.getCurrentMon().getMoves()[x].getType() + ".png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
 
 					}
-				});
-				b.leftMoveButtons[i].addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						b.p1Selection =((Button)e.getSource()).getNum();
+
+				}
+			});
+			b.leftMoveButtons[i].addActionListener(new ActionListener() {//for left clicks
+				//the reason we used a mouse and action listener is because mouslistener has weird specifications for a left click
+				//and makes it feel weird to click it on a trackpad, although it would proably be fine on a mouse
+				@Override
+				public void actionPerformed(ActionEvent e) {
+
+
+					b.p1Selection = ((Button) e.getSource()).getNum();//sets the selection
+					synchronized (myObject2) {//notifies the object
+						myObject2.notify();
 					}
-				});
-            	b.leftButtons.add(b.leftMoveButtons[i]);
-				//					@Override
-//					public void actionPerformed(ActionEvent e) {
-////moveSelection[0] =((Button)e.getSource()).getNum();
-//
-////						((Button) e.getSource()).setEnabled(false);
-////
-//
-//					}
-			}
-		for(int i=0;i<b.leftSwitchButtons.length;i++){
+				}
+			});
+			b.leftButtons.add(b.leftMoveButtons[i]);//adds it to the button group
+
+		}
+		for (int i = 0; i < b.leftSwitchButtons.length; i++) {//same things as move buttons but its for switches
 
 			b.leftSwitchButtons[i].addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 
-					if(SwingUtilities.isRightMouseButton(e)){
-						int x = ((Button)e.getSource()).getNum();
-						String textInfo=p1.getPokemon()[x-4].toString();
+					if (SwingUtilities.isRightMouseButton(e)) {
+						int x = ((Button) e.getSource()).getNum();
+						String textInfo = p1.getPokemon()[x - 4].toString();
 						popup.showMessageDialog(b.leftDisplayPanel,
 								textInfo,
 								"Pokemon Switch info",
 								2,
-								new ImageIcon("Images/Sprites/SpritesFront/"+p1.getPokemon()[x-4].getID()+".gif"));
+								new ImageIcon("Images/Sprites/SpritesFront/" + p1.getPokemon()[x - 4].getID() + ".gif"));
 					}
 
 				}
@@ -704,7 +667,11 @@ P2=new Player(p2mons,givenMoves2);
 			b.leftSwitchButtons[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					b.p1Selection =((Button)e.getSource()).getNum();
+
+					b.p1Selection = ((Button) e.getSource()).getNum();
+					synchronized (myObject2) {
+						myObject2.notify();
+					}
 
 				}
 			});
@@ -712,20 +679,20 @@ P2=new Player(p2mons,givenMoves2);
 		}
 
 
-		for(int i=0;i<b.rightMoveButtons.length;i++){
+		for (int i = 0; i < b.rightMoveButtons.length; i++) {//same thing as for the left move buttons, see above comments
 
 			b.rightMoveButtons[i].addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 
-					if(SwingUtilities.isRightMouseButton(e)){
-						int x = ((Button)e.getSource()).getNum();
-						String textInfo=p2.getCurrentMon().getMoves()[x].toString();
+					if (SwingUtilities.isRightMouseButton(e)) {
+						int x = ((Button) e.getSource()).getNum();
+						String textInfo = p2.getCurrentMon().getMoves()[x].toString();
 						popup.showMessageDialog(b.rightDisplayPanel,
 								textInfo,
 								"Move Info",
 								2,
-								(new ImageIcon (new ImageIcon("Images/Types/"+p2.getCurrentMon().getMoves()[x].getType()+".png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+								(new ImageIcon(new ImageIcon("Images/Types/" + p2.getCurrentMon().getMoves()[x].getType() + ".png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
 
 					}
 
@@ -734,34 +701,31 @@ P2=new Player(p2mons,givenMoves2);
 			b.rightMoveButtons[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					b.p2Selection =((Button)e.getSource()).getNum();
+
+					b.p2Selection = ((Button) e.getSource()).getNum();
+					synchronized (myObject3) {
+						myObject3.notify();
+					}
 				}
 			});
-//				@Override
-//				public void actionPerformed(ActionEvent e) {
-////moveSelection[0] =((Button)e.getSource()).getNum();
-//					b.p2Selection =((Button)e.getSource()).getNum();
-////						((Button) e.getSource()).setEnabled(false);
-////
-//
-//				}
+
 
 			b.rightButtons.add(b.rightMoveButtons[i]);
 		}
-		for(int i=0;i<b.rightSwitchButtons.length;i++){
+		for (int i = 0; i < b.rightSwitchButtons.length; i++) {//same things as for the left switch buttons, see above
 
 			b.rightSwitchButtons[i].addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 
-					if(SwingUtilities.isRightMouseButton(e)){
-						int x = ((Button)e.getSource()).getNum();
-						String textInfo=p2.getPokemon()[x-4].toString();
+					if (SwingUtilities.isRightMouseButton(e)) {
+						int x = ((Button) e.getSource()).getNum();
+						String textInfo = p2.getPokemon()[x - 4].toString();
 						popup.showMessageDialog(b.rightDisplayPanel,
 								textInfo,
 								"Pokemon Switch info",
 								2,
-								new ImageIcon("Images/Sprites/SpritesFront/"+p2.getPokemon()[x-4].getID()+".gif"));
+								new ImageIcon("Images/Sprites/SpritesFront/" + p2.getPokemon()[x - 4].getID() + ".gif"));
 					}
 
 				}
@@ -769,215 +733,203 @@ P2=new Player(p2mons,givenMoves2);
 			b.rightSwitchButtons[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-										b.p2Selection =((Button)e.getSource()).getNum();
+
+					b.p2Selection = ((Button) e.getSource()).getNum();
+					synchronized (myObject3) {
+						myObject3.notify();
+					}
 
 				}
 			});
 
 
-
-
 			b.rightButtons.add(b.rightSwitchButtons[i]);
 		}
 
-        while(gameNotOver) {
+		while (gameNotOver) {
 
-
-            boolean youShallNotPass = true;
-            while (youShallNotPass) {
-//                ez.println("Player1 what would you like to do\n1)Switch out\n2)Fight");
-//                selection = kboard.nextInt();
-                if (b.p1Selection >=5&&P1numberOfFaintedMons<5) {
-					p1WillSwitch = true;
-					p1SwitchIn=b.p1Selection-4;
-					youShallNotPass = false;
-					b.p1Selection=-1;
-                } else if (b.p1Selection <=4 &&b.p1Selection>=0) {
-//                    ez.println("Choose which move you want to use");
-//                    for (int i = 0; i < 4; i++) {
-//                        ez.println((i + 1) + ")" + p1.getCurrentMon().getMoves()[i]);
-//                    }
-
-                    p1SelectedMoveIndex = b.p1Selection;
-                    youShallNotPass = false;
-                    b.p1Selection=-1;
-                }
-//                else if(b.selection >=5 &&P1numberOfFaintedMons>=5)
-////				{
-////                    ez.print("You have no available pokemon to switch in, because every other Pokemon has fainted");
-////                }
-                else {
-                    System.out.print("");
-                }
-            }
-
-			youShallNotPass=true;
-
-            while(youShallNotPass) {
-//                ez.println("Player2 what would you like to do\n1)Switch out\n2)Fight");
-//                b.p1Selection = kboard.nextInt();
-				if (b.p2Selection >=5&&P2numberOfFaintedMons<5) {
-					p2WillSwitch = true;
-					p2SwitchIn=b.p2Selection-4;
-					youShallNotPass = false;
-					b.p2Selection=-1;
-				} else if (b.p2Selection <=4 &&b.p2Selection>=0) {
-//                    ez.println("Choose which move you want to use");
-//                    for (int i = 0; i < 4; i++) {
-//                        ez.println((i + 1) + ")" + p1.getCurrentMon().getMoves()[i]);
-//                    }
-
-					p2SelectedMoveIndex = b.p2Selection;
-					youShallNotPass = false;
-					b.p2Selection=-1;
+//**for p1***
+			try {
+				synchronized (myObject2) {
+					myObject2.wait();//waits until it is notified by a button
 				}
-//                else if(b.selection >=5 &&P1numberOfFaintedMons>=5)
-////				{
-////                    ez.print("You have no available pokemon to switch in, because every other Pokemon has fainted");
-////                }
-				else {
-					System.out.print("");
-				}
-            }
-			youShallNotPass=true;
-            if(p1WillSwitch && p2WillSwitch){
-                if(p1.getCurrentMon().getSpeed()>p2.getCurrentMon().getSpeed()){
-					p1.getCurrentMon().resetBoosts();
-					p2.getCurrentMon().resetBoosts();
-                	p1.switchOut(p1.getPokemon()[p1SwitchIn]);
-                	p2.switchOut(p2.getPokemon()[p2SwitchIn]);
-                    p1WillSwitch=false;
-                    p2WillSwitch=false;
-                }
-                else if(p2.getCurrentMon().getSpeed()>p1.getCurrentMon().getSpeed()){
-
-					p1.getCurrentMon().resetBoosts();
-					p2.getCurrentMon().resetBoosts();
-                	p2.switchOut(p2.getPokemon()[p2SwitchIn]);
-                    p1.switchOut(p1.getPokemon()[p1SwitchIn]);
-                    p1WillSwitch=false;
-					p2WillSwitch=false;
-
-				}
-                else{
-                    if(Math.random()>0.5){
-						p1.getCurrentMon().resetBoosts();
-						p2.getCurrentMon().resetBoosts();
-                    	p1.switchOut(p1.getPokemon()[p1SwitchIn]);
-                        p2.switchOut(p2.getPokemon()[p2SwitchIn]);
-						p1WillSwitch=false;
-						p2WillSwitch=false;
-
-					}
-                    else{
-						p1.getCurrentMon().resetBoosts();
-						p2.getCurrentMon().resetBoosts();
-                    	p2.switchOut(p2.getPokemon()[p2SwitchIn]);
-                        p1.switchOut(p1.getPokemon()[p1SwitchIn]);
-						p1WillSwitch=false;
-						p2WillSwitch=false;
-
-					}
-                }
-
-            }
-
-            else if(p1WillSwitch){
-				p1.getCurrentMon().resetBoosts();
-
-            	p1.switchOut(p1.getPokemon()[p1SwitchIn]);
-                p2.fight(p2SelectedMoveIndex);
-				p1WillSwitch=false;
-				p2WillSwitch=false;
-
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-            else if(p2WillSwitch){
 
+//buttons betweens 0 and 4 are for moves, buttons between 4 and 8 are for switches
+			if (b.p1Selection >= 5 && P1numberOfFaintedMons < 5) {
+				p1WillSwitch = true;
+				p1SwitchIn = b.p1Selection - 4;
+
+				b.p1Selection = -1;
+			} else if (b.p1Selection <= 4 && b.p1Selection >= 0) {
+
+
+				p1SelectedMoveIndex = b.p1Selection;
+
+				b.p1Selection = -1;
+			}
+
+
+
+//**for p2**
+//same thing as p1
+
+
+			try {
+			synchronized (myObject3) {
+				myObject3.wait();//waits until it is notified by a button
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (b.p2Selection >= 5 && P2numberOfFaintedMons < 5) {
+			p2WillSwitch = true;
+			p2SwitchIn = b.p2Selection - 4;
+
+			b.p2Selection = -1;
+		} else if (b.p2Selection <= 4 && b.p2Selection >= 0) {
+
+
+			p2SelectedMoveIndex = b.p2Selection;
+
+			b.p2Selection = -1;
+		}
+
+		if (p1WillSwitch && p2WillSwitch) {//calculates who switches first based on whos faster
+			//kind of useless since you cant see it and use the information it gives you since there are no
+			//animations but, good to have implemented incase we add them
+			if (p1.getCurrentMon().getSpeed() > p2.getCurrentMon().getSpeed()) {//self explanatory
+				p1.getCurrentMon().resetBoosts();//you reset your boosts when you switch out
 				p2.getCurrentMon().resetBoosts();
-            	p2.switchOut(p2.getPokemon()[p2SwitchIn]);
-                p1.fight(p1SelectedMoveIndex);
-				p1WillSwitch=false;
-				p2WillSwitch=false;
+				p1.switchOut(p1.getPokemon()[p1SwitchIn]);
+				p2.switchOut(p2.getPokemon()[p2SwitchIn]);
+				p1WillSwitch = false;
+				p2WillSwitch = false;
+			} else if (p2.getCurrentMon().getSpeed() > p1.getCurrentMon().getSpeed()) {//self explanatory
 
-			}
-            else{
+				p1.getCurrentMon().resetBoosts();
+				p2.getCurrentMon().resetBoosts();
+				p2.switchOut(p2.getPokemon()[p2SwitchIn]);
+				p1.switchOut(p1.getPokemon()[p1SwitchIn]);
+				p1WillSwitch = false;
+				p2WillSwitch = false;
+//self explanatory
+			} else {
+				if (Math.random() > 0.5) {
+					p1.getCurrentMon().resetBoosts();
+					p2.getCurrentMon().resetBoosts();
+					p1.switchOut(p1.getPokemon()[p1SwitchIn]);
+					p2.switchOut(p2.getPokemon()[p2SwitchIn]);
+					p1WillSwitch = false;
+					p2WillSwitch = false;
+//self explanatory
+				} else {
+					p1.getCurrentMon().resetBoosts();
+					p2.getCurrentMon().resetBoosts();
+					p2.switchOut(p2.getPokemon()[p2SwitchIn]);
+					p1.switchOut(p1.getPokemon()[p1SwitchIn]);
+					p1WillSwitch = false;
+					p2WillSwitch = false;
 
-                int x=calc.calculateWhoGoesFirst(p1,p2,p1.getCurrentMon().getMoves()[p1SelectedMoveIndex],p2.getCurrentMon().getMoves()[p2SelectedMoveIndex]);
-                if(x==1){
-                    p1.fight(p1SelectedMoveIndex);
-                    p2.fight(p2SelectedMoveIndex);
-                }
-                else if(x==2){
-                    p2.fight(p2SelectedMoveIndex);
-                    p1.fight(p1SelectedMoveIndex);
-                }
-                else{
-                    while(true) {
-                        ez.print("Something went wrong");
-                    }
-                }
-            }
-            b.repaint(p1, p2);
-            if(p1.isDefeated()){
-                gameNotOver=false;
-				popup.showMessageDialog(b.mainPanel,
-						"Player 2 Won the game!",
-						"Game Finished",
-						2,
-						(new ImageIcon (new ImageIcon("Images/Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
-                break;
-            }
-            if(p2.isDefeated()){
-                gameNotOver=false;
-//				popup.showMessageDialog(b.mainPanel,"Player 1 Won the game!");
-				popup.showMessageDialog(b.mainPanel,
-						"Player 1 Won the game!",
-						"Game Finished",
-						2,
-						(new ImageIcon (new ImageIcon("Images/Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
-
-				break;
-            }
-            if(p1.getCurrentMon().getHealth()<=0){
-				P1numberOfFaintedMons++;
-            	int firstOccurence=-1;
-                String x[]=new String[6-b.P1numberOfFaintedMons];
-                int z=0;
-                for (int i =0;i<p1.getPokemon().length;i++){
-                	if(p1.getPokemon()[i].getHealth()<=0){
-
-					}
-                	else if(p1.getPokemon()[i]==p1.getCurrentMon()){
-
-					}
-                	else{
-                		if (firstOccurence==-1){
-                			firstOccurence=i;
-						}
-
-                		x[z]=(i+1)+") "+p1.getPokemon()[i].getName()+"\n";
-                		z++;
-
-					}
 				}
+			}
+//self explanatory
+		} else if (p1WillSwitch) {
+			p1.getCurrentMon().resetBoosts();
+//switching always outspeeds anything else
+			p1.switchOut(p1.getPokemon()[p1SwitchIn]);
+			b.repaint(p1, p2);//repaints the display
+			p2.fight(p2SelectedMoveIndex);
+			p1WillSwitch = false;
+			p2WillSwitch = false;
 
-				String y;
-						do {y= (String) popup.showInputDialog(b.leftDisplayPanel,
-						"Your current Pokemon fainted. Please choose which pokemon you want to switch in."
-						,"Pokemon defeated",
+		} else if (p2WillSwitch) {
+
+			p2.getCurrentMon().resetBoosts();
+			p2.switchOut(p2.getPokemon()[p2SwitchIn]);
+			b.repaint(p1, p2);//repaints the display
+			p1.fight(p1SelectedMoveIndex);
+			p1WillSwitch = false;
+			p2WillSwitch = false;
+
+		} else {
+//self explanatory
+			int x = calc.calculateWhoGoesFirst(p1, p2, p1.getCurrentMon().getMoves()[p1SelectedMoveIndex], p2.getCurrentMon().getMoves()[p2SelectedMoveIndex]);
+			if (x == 1) {
+				p1.fight(p1SelectedMoveIndex);
+				p2.fight(p2SelectedMoveIndex);
+			} else if (x == 2) {
+				p2.fight(p2SelectedMoveIndex);
+				p1.fight(p1SelectedMoveIndex);
+			} else {
+				while (true) {
+					ez.print("Something went wrong");//questioinable style, but gets your attention when it happens, and we have never had it happen
+				}
+			}
+		}
+
+		b.repaint(p1, p2);//repaints the display
+		if (p1.isDefeated()) {//self explanatory
+			gameNotOver = false;
+			popup.showMessageDialog(b.mainPanel,
+					"Player 2 Won the game!",
+					"Game Finished",
+					2,
+					(new ImageIcon(new ImageIcon("Images/Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+			break;
+		}
+		if (p2.isDefeated()) {//self explanatory
+			gameNotOver = false;
+//				popup.showMessageDialog(b.mainPanel,"Player 1 Won the game!");
+			popup.showMessageDialog(b.mainPanel,
+					"Player 1 Won the game!",
+					"Game Finished",
+					2,
+					(new ImageIcon(new ImageIcon("Images/Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+
+			break;
+		}
+		if (p1.getCurrentMon().getHealth() <= 0) {//self explanatory
+			P1numberOfFaintedMons++;
+
+			String x[] = new String[6 - b.P1numberOfFaintedMons];
+			int z = 0;
+			for (int i = 0; i < p1.getPokemon().length; i++) {
+				if (p1.getPokemon()[i].getHealth() <= 0) {//doesnt add to list if dead
+
+				} else if (p1.getPokemon()[i] == p1.getCurrentMon()) {//doesnt add to list if already in play(would be dead anyway)
+
+				} else {
+
+
+					x[z] = (i + 1) + ") " + p1.getPokemon()[i].getName() + "\n";//adds to list
+					z++;
+
+				}
+			}
+
+			String y;
+			do {
+				y = (String) popup.showInputDialog(b.leftDisplayPanel,
+						"Your current Pokemon fainted. Please choose which pokemon you want to switch in."//self explanatory
+						, "Pokemon defeated",
 						2,
-						new ImageIcon (new ImageIcon("Images/Skull.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
+						new ImageIcon(new ImageIcon("Images/Skull.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
 						x,
-						"Please select a Pokemon");}
-						while(y==null);
+						"Please select a Pokemon");
+			}
+			while (y == null);//prevents you from exiting without giving an answer
 
-				p1SwitchIn=Integer.parseInt(String.valueOf(y.charAt(0)));
-				p1.switchOut(p1.getPokemon()[p1SwitchIn-1]);
+			p1SwitchIn = Integer.parseInt(String.valueOf(y.charAt(0)));//gets the first character, which is  its number in your team
+			p1.switchOut(p1.getPokemon()[p1SwitchIn - 1]);//switches in your selection
 
-                p1SwitchIn=-1;
-                b.repaint(p1, p2);
-            }
-            if(p2.getCurrentMon().getHealth()<=0){
+			p1SwitchIn = -1;//resets selection
+			b.repaint(p1, p2);
+		}
+
+            if(p2.getCurrentMon().getHealth()<=0){//same thing as for p1
 				P2numberOfFaintedMons++;
             	int firstOccurence=-1;
             	int z=0;
@@ -1019,45 +971,45 @@ P2=new Player(p2mons,givenMoves2);
     }
     public void repaint(Player p1, Player p2) {
 
-			name1.setText(p1.getCurrentMon().getName());
+			name1.setText(p1.getCurrentMon().getName());//self explanatory
 
-			name2 .setText(p2.getCurrentMon().getName());
+			name2 .setText(p2.getCurrentMon().getName());//self explanatory
 			
-			if(bar1.getPokemon() != p1.getCurrentMon()) {
+			if(bar1.getPokemon() != p1.getCurrentMon()) {//self explanatory
 				bar1.setPokemon(p1.getCurrentMon());
 			}
 			bar1.repaint();
 			
-			if(bar2.getPokemon() != p2.getCurrentMon()) {
+			if(bar2.getPokemon() != p2.getCurrentMon()) {//self explanatory
 				bar2.setPokemon(p2.getCurrentMon());
 			}
 			bar2.repaint();
 			
 			Icon pic = null;
 
-//				pic =
-				image1.setIcon(new ImageIcon("Images/Sprites/SpritesBack/" + p1.getCurrentMon().getID() + "-back.gif"));
+
+				image1.setIcon(new ImageIcon("Images/Sprites/SpritesBack/" + p1.getCurrentMon().getID() + "-back.gif"));//self explanatory
 
 
 
-//				pic =
-				image2.setIcon(new ImageIcon("Images/Sprites/SpritesFront/" + p2.getCurrentMon().getID() + ".gif"));
+				image2.setIcon(new ImageIcon("Images/Sprites/SpritesFront/" + p2.getCurrentMon().getID() + ".gif"));//self explanatory
 
 
 			for (int i =0;i<leftMoveButtons.length;i++){
-				leftMoveButtons[i].setText(p1.getCurrentMon().getMoves()[i].getName());
+				leftMoveButtons[i].setText(p1.getCurrentMon().getMoves()[i].getName());//self explanatory
+				if(p1.getCurrentMon().getMoves()[i].getPP() == 0) {
+					leftMoveButtons[i].setEnabled(false);
+				}
+				else {
+					leftMoveButtons[i].setEnabled(true);
+				}
 			}
 			for (int i =0;i<leftSwitchButtons.length;i++){
-				if(p1.getPokemon()[i].getHealth()<=0){
-					leftSwitchButtons[i].setText(p1.getPokemon()[i].getName());
-					leftSwitchButtons[i].setEnabled(false);
-				}
-				else if(p1.getPokemon()[i]==p1.getCurrentMon()){
-					leftSwitchButtons[i].setText(p1.getPokemon()[i].getName());
+				leftSwitchButtons[i].setText(p1.getPokemon()[i].getName());
+				if(p1.getPokemon()[i].getHealth() <= 0 || p1.getPokemon()[i] == p1.getCurrentMon()) {//self explanatory
 					leftSwitchButtons[i].setEnabled(false);
 				}
 				else{
-					leftSwitchButtons[i].setText(p1.getPokemon()[i].getName());
 					leftSwitchButtons[i].setEnabled(true);
 				}
 			}
@@ -1065,18 +1017,18 @@ P2=new Player(p2mons,givenMoves2);
 
 
 
-		name3.setText(p2.getCurrentMon().getName());
+		name3.setText(p2.getCurrentMon().getName());//self explanatory
 
-		name4 .setText(p1.getCurrentMon().getName());
+		name4 .setText(p1.getCurrentMon().getName());//self explanatory
 		
 		if(bar3.getPokemon() != p2.getCurrentMon()) {
-			bar3.setPokemon(p2.getCurrentMon());
+			bar3.setPokemon(p2.getCurrentMon());//self explanatory
 		}
 		bar3.repaint();
 		
 		if(bar4.getPokemon() != p1.getCurrentMon()) {
 			bar4.setPokemon(p1.getCurrentMon());
-		}
+		}//self explanatory
 		bar4.repaint();
 		
 		pic = null;
@@ -1090,20 +1042,21 @@ P2=new Player(p2mons,givenMoves2);
 		image4.setIcon(new ImageIcon("Images/Sprites/SpritesFront/" + p1.getCurrentMon().getID() + ".gif"));
 
 
-		for (int i =0;i<rightMoveButtons.length;i++){
+		for (int i =0;i<rightMoveButtons.length;i++){//self explanatory
 			rightMoveButtons[i].setText(p2.getCurrentMon().getMoves()[i].getName());
+			if(p2.getCurrentMon().getMoves()[i].getPP() == 0) {
+				rightMoveButtons[i].setEnabled(false);
+			}
+			else {
+				rightMoveButtons[i].setEnabled(true);
+			}
 		}
 		for (int i =0;i<rightSwitchButtons.length;i++){
-			if(p2.getPokemon()[i].getHealth()<=0){
-				rightSwitchButtons[i].setText(p2.getPokemon()[i].getName());
-				rightSwitchButtons[i].setEnabled(false);
-			}
-			else if(p2.getPokemon()[i]==p2.getCurrentMon()){
-				rightSwitchButtons[i].setText(p2.getPokemon()[i].getName());
+			rightSwitchButtons[i].setText(p2.getPokemon()[i].getName());//self explanatory
+			if(p2.getPokemon()[i].getHealth() <= 0 || p2.getPokemon()[i] == p2.getCurrentMon()) {
 				rightSwitchButtons[i].setEnabled(false);
 			}
 			else{
-				rightSwitchButtons[i].setText(p2.getPokemon()[i].getName());
 				rightSwitchButtons[i].setEnabled(true);
 			}
 		}
@@ -1135,61 +1088,52 @@ P2=new Player(p2mons,givenMoves2);
     	timer.setInitialDelay(500);
     	timer.start();
     }
-    
+    // This method lets you choose your pokemon and their moves
 	private void teamBuilder(){
-//		JFrame frame = new JFrame("Teambuilder");
-//		JPanel mainPanel=new JPanel(new GridLayout(1,2));
-//		frame.add(mainPanel);
-
-		JPanel mainPanelTB=new JPanel();
+		Calculator calc= new Calculator();
+		JPanel mainPanelTB=new JPanel();// the main panel with all of the the components inside
 		mainPanelTB.setLayout(new GridLayout(1,2));
-		frame.add(mainPanelTB);
-		 leftPanelTB=new JPanel(new GridLayout(2,1));
-		 rightPanelTB=new JPanel(new GridLayout(2,1));
-		JPanel leftDisplay=new JPanel(new GridLayout(1,6)),rightDisplay=new JPanel(new GridLayout(1,6));
+		frame.add(mainPanelTB);//using the frame from the field so as not to use multiple Jframes
+		 JPanel leftPanelTB=new JPanel(new GridLayout(2,1));// the panel for P1
+		 JPanel rightPanelTB=new JPanel(new GridLayout(2,1));// the panel for P2
+		JPanel leftDisplay=new JPanel(new GridLayout(1,6)),rightDisplay=new JPanel(new GridLayout(1,6));// the display of the pokemon when you choose them
 		mainPanelTB.add(leftPanelTB);
 		mainPanelTB.add(rightPanelTB);
 		leftPanelTB.add(leftDisplay);
 		rightPanelTB.add(rightDisplay);
-		JPanel leftUI=new JPanel(new GridBagLayout()), rightUI=new JPanel(new GridBagLayout());
+		JPanel leftUI=new JPanel(new GridBagLayout()), rightUI=new JPanel(new GridBagLayout());// the panel for all the user input
 		leftPanelTB.add(leftUI);
 		rightPanelTB.add(rightUI);
-		GridBagConstraints constraints=new GridBagConstraints();
-		JLabel[] leftPanelImages=new JLabel[6], rightPanelImages=new JLabel[6];
-		JTextArea[] rightPokemonInputs=new JTextArea[6], leftPokemonInputs=new JTextArea[6];
-		JTextField[][] rightMoveInputs=new JTextField[6][4],leftMoveInputs=new JTextField[6][4];
-		Button[] rightConfirmationButtons=new Button[6],leftConfirmationButtons=new Button[6];
-		JButton rightValidationButton=new JButton("Confirm Team"),leftValidationButton=new JButton("ConfirmText");
-//		Player[] players=new Player[2];
-		Pokemon[] p1Pokemon=new Pokemon[6],p2Pokemon=new Pokemon[6];
-		JButton leftRandomButton=new JButton("Random!"),rightRandomButton=new JButton("Random!");
+		GridBagConstraints constraints=new GridBagConstraints();//we used a  grid bag layout for the UI
+		JLabel[] leftPanelImages=new JLabel[6], rightPanelImages=new JLabel[6];//self explanatory
+		JTextArea[] rightPokemonInputs=new JTextArea[6], leftPokemonInputs=new JTextArea[6];//self explanatory
+		JTextField[][] rightMoveInputs=new JTextField[6][4],leftMoveInputs=new JTextField[6][4];//self explanatory
+		Button[] rightConfirmationButtons=new Button[6],leftConfirmationButtons=new Button[6];//confirms a pokemon
+		JButton rightValidationButton=new JButton("Confirm Team"),leftValidationButton=new JButton("Confirm Team");//confirms the entire team
 
-
-
-//		Move[][] p1Moves=new Move[6][4],p2Moves=new Move[6][4];
-
+		Pokemon[] p1Pokemon=new Pokemon[6],p2Pokemon=new Pokemon[6];//self explanatory
+		JButton leftRandomButton=new JButton("Random!"),rightRandomButton=new JButton("Random!");//buttons to create a random team will be implemented soon
 
 	for (int i = 0; i < leftPanelImages.length; i++) {
 
-		ImageIcon pic = new ImageIcon("Images/QuestionMark.png");
-			pic = new ImageIcon((pic).getImage().getScaledInstance((int)(pic.getIconWidth() * 0.1), (int)(pic.getIconHeight() * 0.1), Image.SCALE_DEFAULT));
-		leftPanelImages[i] = new JLabel( pic);
-		leftDisplay.add(leftPanelImages[i]);
+		ImageIcon pic = new ImageIcon("Images/QuestionMark.png");//self explanatory
+			pic = new ImageIcon((pic).getImage().getScaledInstance((int)(pic.getIconWidth() * 0.1), (int)(pic.getIconHeight() * 0.1), Image.SCALE_DEFAULT));//self explanatory
+		leftPanelImages[i] = new JLabel( pic);//self explanatory
+		leftDisplay.add(leftPanelImages[i]);//adding the image to the display
 	}
 	for (int i = 0; i < rightPanelImages.length; i++) {
 
-		ImageIcon pic = new ImageIcon("Images/QuestionMark.png");
-		pic = new ImageIcon((pic).getImage().getScaledInstance((int)(pic.getIconWidth() * 0.1), (int)(pic.getIconHeight() * 0.1), Image.SCALE_DEFAULT));
-		rightPanelImages[i] = new JLabel(pic);
-		rightDisplay.add(rightPanelImages[i]);
+		ImageIcon pic = new ImageIcon("Images/QuestionMark.png");//self explanatory
+		pic = new ImageIcon((pic).getImage().getScaledInstance((int)(pic.getIconWidth() * 0.1), (int)(pic.getIconHeight() * 0.1), Image.SCALE_DEFAULT));//self explanatory
+		rightPanelImages[i] = new JLabel(pic);//self explanatory
+		rightDisplay.add(rightPanelImages[i]);//adding the image to the display
 	}
-		for (int i = 0; i < leftPokemonInputs.length; i++) {
+		for (int i = 0; i < leftPokemonInputs.length; i++) {//i is the column you are on
 
-
-			leftPokemonInputs[i] = new JTextArea("Charizard");
+			leftPokemonInputs[i] = new JTextArea("Charizard");//default pokemon for player 1 is charizard
 			leftPokemonInputs[i].setRows(3);
-			constraints.gridx = i;
-			constraints.gridy = 0;
+			constraints.gridx = i;//your current column
+			constraints.gridy = 0;//1st row
 			constraints.gridwidth = 1;
 			constraints.gridheight = 1;
 			constraints.weightx = 0.5;
@@ -1197,13 +1141,12 @@ P2=new Player(p2mons,givenMoves2);
 			constraints.anchor = GridBagConstraints.PAGE_START;
 			constraints.fill = GridBagConstraints.HORIZONTAL;
 			constraints.insets = new Insets(5, 5, 5, 0);
-
-			leftUI.add(leftPokemonInputs[i], constraints);
+			leftUI.add(leftPokemonInputs[i], constraints);//adding to the ui
 		}
 		for (int i = 0; i < 6; i++) {//keeps track of the column you are on
 
 			for (int k = 0; k < 4; k++) {//keeps track of the row
-				leftMoveInputs[i][k] = new JTextField("Pound");
+				leftMoveInputs[i][k] = new JTextField("Pound");//pound is the default move
 				constraints.gridx = i;//the column you are on
 				constraints.gridy = k + 1;//row+1 because the pokemon input are in the first row
 				constraints.gridwidth = 1;
@@ -1213,22 +1156,43 @@ P2=new Player(p2mons,givenMoves2);
 				constraints.anchor = GridBagConstraints.PAGE_START;
 				constraints.fill = GridBagConstraints.HORIZONTAL;
 				constraints.insets = new Insets(5, 5, 5, 0);
-
 				leftUI.add(leftMoveInputs[i][k], constraints);
 			}
 			leftConfirmationButtons[i] = new Button("Confirm", i);
 			leftConfirmationButtons[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+
 					int x = ((Button) e.getSource()).getNum();//x is the column its from
-					Pokemon pokemon = new Pokemon(leftPokemonInputs[x].getText());//get the text from the pokemon input at column x
-					Move[] moves = new Move[4];
-					for (int i = 0; i < moves.length; i++) {//length is 4
-						moves[i] = new Move(leftMoveInputs[x][i].getText());
+					boolean validMove=true;//if the user chooses a move that is valid
+					for (int i = 0; i <4; i++) {//length is 4
+						if(calc.isMove(leftMoveInputs[x][i].getText())){
+
+						}
+						else{//if the input is not a move, do this
+							leftConfirmationButtons[x].setProblem(true);
+							validMove=false;
+							JOptionPane.showMessageDialog(leftDisplay,
+									"Your move in the "+(x+1)+"th column and "+(i+1)+"th row is not a valid move",//yes I know this doesnt work for 1 2 and 3,
+									// but its really not a big deal, you get the point
+									"Invalid Move",//self explanatory
+									2,//self explanatory
+									(new ImageIcon(new ImageIcon("Images/Exclamation.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));//self explanatory
+
+
+						}
 					}
-					pokemon.setMoves(moves);
-					p1Pokemon[x] = pokemon;
-					leftPanelImages[x].setIcon(new ImageIcon("Images/Sprites/SpritesFront/" + pokemon.getID() + ".gif"));
+					if(validMove) {//do this if the move is valid
+						leftConfirmationButtons[x].setProblem(false);
+						Pokemon pokemon = new Pokemon(leftPokemonInputs[x].getText());//get the text from the pokemon input at column x
+						Move[] moves = new Move[4];
+						for (int i = 0; i < moves.length; i++) {//length is 4
+							moves[i] = new Move(leftMoveInputs[x][i].getText());
+						}
+						pokemon.setMoves(moves);
+						p1Pokemon[x] = pokemon;
+						leftPanelImages[x].setIcon(new ImageIcon("Images/Sprites/SpritesFront/" + pokemon.getID() + ".gif"));
+					}
 				}
 			});
 			constraints.gridx = i;//the column you are on
@@ -1241,7 +1205,7 @@ P2=new Player(p2mons,givenMoves2);
 			constraints.fill = GridBagConstraints.HORIZONTAL;
 			constraints.insets = new Insets(50, 0, 5, 0);
 
-			leftUI.add(leftConfirmationButtons[i], constraints);
+			leftUI.add(leftConfirmationButtons[i], constraints);//adding to the ui with these constraitns
 		}
 		constraints.gridx = 0;//the column you are on
 		constraints.gridy = 6;//should be the 6th row of things in this column
@@ -1255,25 +1219,47 @@ P2=new Player(p2mons,givenMoves2);
 		leftValidationButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				boolean problem=false;
 				for (int i = 0; i < leftConfirmationButtons.length; i++) {
-					leftConfirmationButtons[i].doClick();
-					leftConfirmationButtons[i].setEnabled(false);
-					leftPokemonInputs[i].setEnabled(false);
-					for (int k = 0; k < leftMoveInputs[i].length; k++) {
+					leftConfirmationButtons[i].doClick();//clicks everybutton
+					if(leftConfirmationButtons[i].hasProblem()){
+							problem=true;//if there is a problem
+					}
+					else {
+//if theres isnt a problem, turn off all the buttons for htis player
+						leftConfirmationButtons[i].setEnabled(false);
+						leftPokemonInputs[i].setEnabled(false);
+						for (int k = 0; k < leftMoveInputs[i].length; k++) {
 
-						leftMoveInputs[i][k].setEnabled(false);
+							leftMoveInputs[i][k].setEnabled(false);
+						}
+
 					}
 
-				}
-
-				synchronized (myObject){if(confirm2==true){
-					myObject.notify();
-				}else{
-					confirm1 =true;
-				}
-			}}
+				}//if there isn't a problem
+				if(problem==false){
+					synchronized (myObject1){
+						if(confirm2==true){//notifys the object in main if the other player has selected
+						myObject1.notify();
+					}else{
+						confirm1 =true;//if the other player hasn't confirmed, confirms your own
+					}
+					}
+			}
+			}
 		});
-		leftUI.add(leftValidationButton, constraints);
+		leftUI.add(leftValidationButton, constraints);//adds to UI
+
+
+
+
+
+
+
+		//**********PLAYER 2******************//
+		//this isn't really any different from player 1, except its on the right side, so i wont be commenting this
+		//they are practically identical so just look at it for player 1
+
 
 
 
@@ -1282,9 +1268,7 @@ P2=new Player(p2mons,givenMoves2);
 
 
 		for (int i = 0; i < rightPokemonInputs.length; i++) {
-
-
-		rightPokemonInputs[i] = new JTextArea("Blastoise");
+		rightPokemonInputs[i] = new JTextArea("Blastoise");//P2 pokemon default is blastoise
 		rightPokemonInputs[i].setRows(3);
 		constraints.gridx = i;
 		constraints.gridy = 0;
@@ -1318,15 +1302,37 @@ P2=new Player(p2mons,givenMoves2);
 		rightConfirmationButtons[i].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int x = ((Button) e.getSource()).getNum();//x is the column its from
-				Pokemon pokemon = new Pokemon(rightPokemonInputs[x].getText());//get the text from the pokemon input at column x
-				Move[] moves = new Move[4];
-				for (int i = 0; i < moves.length; i++) {//length is 4
-					moves[i] = new Move(rightMoveInputs[x][i].getText());
+				{
+
+					int x = ((Button) e.getSource()).getNum();//x is the column its from
+					boolean validMove = true;
+					for (int i = 0; i < 4; i++) {//length is 4
+						if (calc.isMove(rightMoveInputs[x][i].getText())) {
+
+						} else {
+							rightConfirmationButtons[x].setProblem(true);
+							validMove = false;
+							JOptionPane.showMessageDialog(rightDisplay,
+									"Your move in the " + (x + 1) + "th column and " + (i + 1) + "th row is not a valid move",
+									"Invalid Move",
+									2,
+									(new ImageIcon(new ImageIcon("Images/Exclamation.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+
+
+						}
+					}
+					if (validMove) {
+						rightConfirmationButtons[x].setProblem(false);
+						Pokemon pokemon = new Pokemon(rightPokemonInputs[x].getText());//get the text from the pokemon input at column x
+						Move[] moves = new Move[4];
+						for (int i = 0; i < moves.length; i++) {//length is 4
+							moves[i] = new Move(rightMoveInputs[x][i].getText());
+						}
+						pokemon.setMoves(moves);
+						p2Pokemon[x] = pokemon;
+						rightPanelImages[x].setIcon(new ImageIcon("Images/Sprites/SpritesFront/" + pokemon.getID() + ".gif"));
+					}
 				}
-				pokemon.setMoves(moves);
-				p2Pokemon[x] = pokemon;
-				rightPanelImages[x].setIcon(new ImageIcon("Images/Sprites/SpritesFront/" + pokemon.getID() + ".gif"));
 			}
 		});
 		constraints.gridx = i;//the column you are on
@@ -1353,110 +1359,42 @@ P2=new Player(p2mons,givenMoves2);
 	rightValidationButton.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			boolean problem=false;
 			for (int i = 0; i < rightConfirmationButtons.length; i++) {
 				rightConfirmationButtons[i].doClick();
-				rightConfirmationButtons[i].setEnabled(false);
-				rightPokemonInputs[i].setEnabled(false);
-				for (int k = 0; k < rightMoveInputs[i].length; k++) {
-
-					rightMoveInputs[i][k].setEnabled(false);
+				if(rightConfirmationButtons[i].hasProblem()){
+					problem=true;
 				}
+				else {
 
-			}
-			synchronized (myObject){if(confirm1==true){
-				myObject.notify();
+					rightConfirmationButtons[i].setEnabled(false);
+					rightPokemonInputs[i].setEnabled(false);
+					for (int k = 0; k < rightMoveInputs[i].length; k++) {
+
+						rightMoveInputs[i][k].setEnabled(false);
+					}
+
+
+				}}
+			if(problem==false){
+			synchronized (myObject1){if(confirm1==true){
+				myObject1.notify();
 			}else{
 				confirm2 =true;
+			}
 			}}
 		}
-	});
-	rightUI.add(rightValidationButton, constraints);
-	leftPanelTB.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-	rightPanelTB.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-	rightDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-	leftDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-//		constraints.gridx = 5;//the column you are on
-//		constraints.gridy = 6;//should be the 6th row of things in this column
-////		constraints.gridwidth = 1;
-////		constraints.gridheight = 1;
-////		constraints.weightx = 0.5;
-////		constraints.weighty = 0.0;
-//		constraints.anchor = GridBagConstraints.PAGE_START;
-//		constraints.fill = GridBagConstraints.HORIZONTAL;
-//		constraints.insets = new Insets(50, 0, 5, 0);
-//	leftRandomButton.addActionListener(new ActionListener() {
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//			Player player1= new Player(new Pokemon[]{new Pokemon((int) (Math.random() * 803)),
-//					new Pokemon((int) (Math.random() * 803)),
-//					new Pokemon((int) (Math.random() * 803)),
-//					new Pokemon((int) (Math.random() * 803)),
-//					new Pokemon((int) (Math.random() * 803)),
-//					new Pokemon((int) (Math.random() * 803))});
-//			for (int k=0;k<6;k++) {
-//
-//					int[] givenMoves = new int[]{(int)(Math.random()*719),
-//							(int)(Math.random()*719),
-//							(int)(Math.random()*719),
-//							(int)(Math.random()*719),
-//					}	;
-//					player1.getPokemon()[k].setMoves(givenMoves);
-//
-//			}
-//			P1=player1;
-//		}
-//	});
-//	leftUI.add(leftRandomButton,constraints);
-//		constraints.gridx = 5;//the column you are on
-//		constraints.gridy = 6;//should be the 6th row of things in this column
-////		constraints.gridwidth = 1;
-////		constraints.gridheight = 1;
-////		constraints.weightx = 0.5;
-////		constraints.weighty = 0.0;
-//		constraints.anchor = GridBagConstraints.PAGE_START;
-//		constraints.fill = GridBagConstraints.HORIZONTAL;
-//		constraints.insets = new Insets(50, 0, 5, 0);
-//		rightRandomButton.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				Player player2= new Player(new Pokemon[]{new Pokemon((int) (Math.random() * 803)),
-//						new Pokemon((int) (Math.random() * 803)),
-//						new Pokemon((int) (Math.random() * 803)),
-//						new Pokemon((int) (Math.random() * 803)),
-//						new Pokemon((int) (Math.random() * 803)),
-//						new Pokemon((int) (Math.random() * 803))});
-//				for (int k=0;k<6;k++) {
-//
-//					int[] givenMoves = new int[]{(int)(Math.random()*720),
-//							(int)(Math.random()*720),
-//							(int)(Math.random()*720),
-//							(int)(Math.random()*720),
-//					}	;
-//					player2.getPokemon()[k].setMoves(givenMoves);
-//
-//				}
-//				P2=player2;
-//			}
-//		});
-//		rightUI.add(rightRandomButton,constraints);
-//	frame.setBounds(100, 100, 3000, 1000);
+			});
+	rightUI.add(rightValidationButton, constraints);//self explanatory
+	leftPanelTB.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
+	rightPanelTB.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
+	rightDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
+	leftDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
 
-//	leftPanel.updateUI();
-//	rightPanel.updateUI();
-//		frame.setVisible(true);
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		if((wait2=false)&&(wait1=false)){
-//			wait3=false;
-//		}
 		P1=new Player(p1Pokemon);
-//		P1.setCurrentMon();
+// set the pokemon chosen to the fields
 		P2=new Player(p2Pokemon);
-//		P2.setCurrentMon();
-//mainPanelTB.removeAll();
 
-
-
-//	return mainPanelTB;
 }
 
 
