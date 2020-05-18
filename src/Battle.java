@@ -61,46 +61,46 @@ public class Battle {
         PlayMusic musicObject = new PlayMusic();
 //self explanatory
         int random = (int) (Math.random()*10);
-        if(random < 1)
-        {
-        	musicObject.playMusic(filepath1);
-        }
-        else if(random < 2)
-        {
-        	musicObject.playMusic(filepath2);
-        }
-        else if(random < 3)
-        {
-        	musicObject.playMusic(filepath3);
-        }
-        else if(random < 4)
-        {
-        	musicObject.playMusic(filepath4);
-        }
-        else if(random < 5)
-        {
-        	musicObject.playMusic(filepath5);
-        }
-        else if(random < 6)
-        {
-        	musicObject.playMusic(filepath6);
-        }
-        else if(random < 7)
-        {
-        	musicObject.playMusic(filepath7);
-        }
-        else if(random < 8)
-        {
-        	musicObject.playMusic(filepath8);
-        }
-        else if(random < 9)
-        {
-        	musicObject.playMusic(filepath9);
-        }
-        else if(random < 10)
-        {
-        	musicObject.playMusic(filepath10);
-        }
+//        if(random < 1)
+//        {
+//        	musicObject.playMusic(filepath1);
+//        }
+//        else if(random < 2)
+//        {
+//        	musicObject.playMusic(filepath2);
+//        }
+//        else if(random < 3)
+//        {
+//        	musicObject.playMusic(filepath3);
+//        }
+//        else if(random < 4)
+//        {
+//        	musicObject.playMusic(filepath4);
+//        }
+//        else if(random < 5)
+//        {
+//        	musicObject.playMusic(filepath5);
+//        }
+//        else if(random < 6)
+//        {
+//        	musicObject.playMusic(filepath6);
+//        }
+//        else if(random < 7)
+//        {
+//        	musicObject.playMusic(filepath7);
+//        }
+//        else if(random < 8)
+//        {
+//        	musicObject.playMusic(filepath8);
+//        }
+//        else if(random < 9)
+//        {
+//        	musicObject.playMusic(filepath9);
+//        }
+//        else if(random < 10)
+//        {
+//        	musicObject.playMusic(filepath10);
+//        }
         frame = new JFrame();
         BufferedImage icon;
         try {
