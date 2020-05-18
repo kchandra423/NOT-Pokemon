@@ -10,6 +10,8 @@
 //      Lots Probably. Will be listed all be listed at the end of the project
 //
 import java.awt.event.*;
+import java.io.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -100,6 +102,13 @@ public class Battle {
         	musicObject.playMusic(filepath10);
         }
         frame = new JFrame();
+        BufferedImage icon;
+        try {
+			icon = ImageIO.read(new File("Images/Pokeball.png"));
+	        frame.setIconImage(icon);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 
 
 //    	panel = new JPanel(new GridBagLayout());
@@ -148,9 +157,20 @@ public class Battle {
 		frame.add(mainPanel);
 			leftPanel = new JPanel(new GridBagLayout());
 			rightPanel = new JPanel(new GridBagLayout());
-			leftDisplayPanel = new JPanel();
+			int backgroundNumber;
+			do {
+				backgroundNumber = (int)(Math.random()*18)+1;
+			} while(backgroundNumber == 9 || backgroundNumber == 12);
+			BufferedImage background;
+			try {
+				background = ImageIO.read(new File("Images/Backgrounds/BattleBackground"
+						+ backgroundNumber + ".png"));
+				leftDisplayPanel = new BackgroundPanel(background);
+				rightDisplayPanel = new BackgroundPanel(background);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			leftPanel.add(leftDisplayPanel);
-			rightDisplayPanel = new JPanel();
 			rightPanel.add(rightDisplayPanel);
 			leftUI = new JPanel(new GridLayout(2, 1));
 			rightUI = new JPanel(new GridLayout(2, 1));
@@ -249,13 +269,12 @@ P2.setCurrentMon();
 			c2.gridx = 0;
 			c2.gridy = 3;
 			c2.fill = GridBagConstraints.HORIZONTAL;
-			c2.insets = new Insets(55, 5, 5, 5);
+			c2.insets = new Insets(5, 5, 5, 5);
 			c2.anchor = GridBagConstraints.LAST_LINE_START;
 			c2.weightx = 0.5;
 			c2.weighty = 0.5;
 			leftDisplayPanel.add(name1, c2);
 			c2.gridy = 4;
-			c2.insets = new Insets(5, 5, 5, 5);
 			leftDisplayPanel.add(bar1, c2);
 			c2.gridy = 5;
 			leftDisplayPanel.add(image1, c2);
@@ -408,19 +427,18 @@ P2.setCurrentMon();
 			y2.gridx = 0;
 			y2.gridy = 3;
 			y2.fill = GridBagConstraints.HORIZONTAL;
-			y2.insets = new Insets(55, 5, 5, 5);
+			y2.insets = new Insets(5, 5, 5, 5);
 			y2.anchor = GridBagConstraints.LAST_LINE_START;
 			y2.weightx = 0.5;
 			y2.weighty = 0.5;
 			rightDisplayPanel.add(name3, y2);
 			y2.gridy = 4;
-			y2.insets = new Insets(5, 5, 5, 5);
 			rightDisplayPanel.add(bar3, y2);
 			y2.gridy = 5;
 			rightDisplayPanel.add(image3, y2);
 			y2.gridx = 1;
 			y2.gridy = 0;
-			y2.insets = new Insets(5, 155, 5, 5);
+			y2.insets = new Insets(5, 105, 5, 5);
 			y2.anchor = GridBagConstraints.FIRST_LINE_END;
 			rightDisplayPanel.add(name4, y2);
 			y2.gridy = 1;
