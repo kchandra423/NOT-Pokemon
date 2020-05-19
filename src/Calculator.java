@@ -180,6 +180,7 @@ public class Calculator {
 			boostsTarget=target;
 		}
 
+
 		if (category.equalsIgnoreCase("Physical")) {
 			attack = user.getAttack();
 			defense = target.getDefense();
@@ -247,10 +248,16 @@ public class Calculator {
 				&& (target.getType1().equalsIgnoreCase("Poison") || target.getType2().equalsIgnoreCase("Poison"))) {
 
 		} else if (!(status.equalsIgnoreCase("null"))) {//self explanatory
+			if(category.equalsIgnoreCase("status")){
+				if ((boostsTarget.getStatus().equalsIgnoreCase("") || boostsTarget.getStatus().equalsIgnoreCase("null"))) {
+					boostsTarget.setStatus(move.getStatus());
+				}
+			}
 			if (Math.random() <= (double) move.getChance() / 100
 					&& (boostsTarget.getStatus().equalsIgnoreCase("") || boostsTarget.getStatus().equalsIgnoreCase("null"))) {
 				boostsTarget.setStatus(move.getStatus());
 			}
+
 		}
 		if (!(boosts.equalsIgnoreCase("null"))) {//self explanatory
 			if (boosts.contains("atk")) {
