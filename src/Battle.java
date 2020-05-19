@@ -160,6 +160,7 @@ public class Battle {
 P1.setCurrentMon();
 P2.setCurrentMon();
 			name1 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+
 //			System.out.println(P2.getCurrentMon().getName());
 			name2 = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
 			bar1 = new HealthBar(P1.getCurrentMon());
@@ -220,7 +221,9 @@ P2.setCurrentMon();
 			c2.anchor = GridBagConstraints.LAST_LINE_START;
 			c2.weightx = 0.5;
 			c2.weighty = 0.5;
+//			c2.ipadx=-200000;
 			leftDisplayPanel.add(name1, c2);
+//			c2.ipadx=0;
 			c2.gridy = 4;
 			leftDisplayPanel.add(bar1, c2);
 			c2.gridy = 5;
@@ -489,6 +492,18 @@ P2.setCurrentMon();
 			y.insets = new Insets(5, 5, 5, 5);
 			rightPanel.add(pane2, y);
 
+		name1.setOpaque(true);
+			name1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		name1.setBackground(Color.lightGray);
+		name2.setOpaque(true);
+		name2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		name2.setBackground(Color.lightGray);
+		name3.setOpaque(true);
+		name3.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		name3.setBackground(Color.lightGray);
+		name4.setOpaque(true);
+		name4.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		name4.setBackground(Color.lightGray);
 			leftPanel.updateUI();
 			rightPanel.updateUI();
 			repaint(P1, P2);
@@ -1120,7 +1135,7 @@ P2.setCurrentMon();
 		JButton rightValidationButton=new JButton("Confirm Team"),leftValidationButton=new JButton("Confirm Team");//confirms the entire team
 
 		Pokemon[] p1Pokemon=new Pokemon[6],p2Pokemon=new Pokemon[6];//self explanatory
-		JButton leftRandomButton=new JButton("Random!"),rightRandomButton=new JButton("Random!");//buttons to create a random team will be implemented soon
+		JButton leftRandomPresetTeam=new JButton("Random team!"),rightRandomButton=new JButton("Random!");//buttons to create a random team will be implemented soon
 
 	for (int i = 0; i < leftPanelImages.length; i++) {
 
@@ -1217,7 +1232,7 @@ P2.setCurrentMon();
 		}
 		constraints.gridx = 0;//the column you are on
 		constraints.gridy = 6;//should be the 6th row of things in this column
-		constraints.gridwidth = 5;
+		constraints.gridwidth = 6;
 		constraints.gridheight = 1;
 		constraints.weightx = 0.5;
 		constraints.weighty = 0.0;
@@ -1257,6 +1272,27 @@ P2.setCurrentMon();
 			}
 		});
 		leftUI.add(leftValidationButton, constraints);//adds to UI
+		leftRandomPresetTeam.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				leftPokemonInputs[0].setText("Metagross");
+				leftPokemonInputs[1].setText("Tapu-Fini");
+				leftPokemonInputs[2].setText("MetaGross");
+				leftPokemonInputs[3].setText("MetaGross");
+				leftPokemonInputs[4].setText("MetaGross");
+				leftPokemonInputs[5].setText("MetaGross");
+			}
+		});
+		constraints.gridx = 0;
+		constraints.gridy = 6;
+		constraints.gridwidth = 2;
+		constraints.gridheight = 1;
+		constraints.weightx = 0.5;
+		constraints.weighty = 0;
+		constraints.anchor = GridBagConstraints.PAGE_START;
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		constraints.insets = new Insets(5, 5, 5, 0);
+		leftUI.add(leftRandomPresetTeam, constraints);//adds to UI
 
 
 
@@ -1393,6 +1429,7 @@ P2.setCurrentMon();
 			}}
 		}
 			});
+
 	rightUI.add(rightValidationButton, constraints);//self explanatory
 	leftPanelTB.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
 	rightPanelTB.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
