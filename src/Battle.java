@@ -22,7 +22,8 @@ public class Battle {
 
 	private JFrame frame=new JFrame();//self explanatory
 	private JPanel mainPanel;//self explanatory
-	private JPanel leftPanel, rightPanel, leftDisplayPanel, rightDisplayPanel;//the display shown to the user
+	private JPanel leftPanel, rightPanel;
+	private BackgroundPanel leftDisplayPanel, rightDisplayPanel;//the display shown to the user
 	private JPanel leftUI, rightUI;//the users interface
 	private JPanel leftMovePanel=new JPanel(),rightMovePanel = new JPanel();//move options
 	private JPanel leftSwitchPanel= new JPanel(),rightSwitchPanel=new JPanel();//switch options
