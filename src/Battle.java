@@ -19,13 +19,14 @@ import java.awt.image.BufferedImage;
 public class Battle {
     public static int P1numberOfFaintedMons=0;//self explanatory
     public static int P2numberOfFaintedMons=0;//self explanatory
-	private final String[] MUSIC_OPTIOINS= new String[]{"Music/Battle! (Brendan_May).wav", "Music/Battle! Rival Hugh.wav","Music/BattleVsTrainer.wav","Music/BattleVsWildPokemon.wav","Music/BillsLighthouse.wav",
+	private final String[] MUSIC_OPTIONS= new String[]{"Music/Battle! (Brendan_May).wav", "Music/Battle! Rival Hugh.wav","Music/BattleVsTrainer.wav","Music/BattleVsWildPokemon.wav","Music/BillsLighthouse.wav",
 	"Music/bw2-kanto-gym-leader.wav","Music/bw-subway-trainer.wav","Music/PaletteTown.wav","Music/PewterCity.wav","Music/PokemonBattleMusic.wav","Music/PokemonGym.wav","Music/PokemonTitleScreen.wav","Music/PokemonThemeSong.wav",
-	"Music/PokemonThemeSong.wav","Music/RivalAppears.wav","Music/TeamRocketHideout.wav","Music/ViridianForest.wav"};//16 music options
+	"Music/RivalAppears.wav","Music/TeamRocketHideout.wav","Music/ViridianForest.wav"};//16 music options
 
 	private JFrame frame=new JFrame();//self explanatory
 	private JPanel mainPanel;//self explanatory
-	private JPanel leftPanel, rightPanel, leftDisplayPanel, rightDisplayPanel;//the display shown to the user
+	private JPanel leftPanel, rightPanel;
+	private BackgroundPanel leftDisplayPanel, rightDisplayPanel;//the display shown to the user
 	private JPanel leftUI, rightUI;//the users interface
 	private JPanel leftMovePanel=new JPanel(),rightMovePanel = new JPanel();//move options
 	private JPanel leftSwitchPanel= new JPanel(),rightSwitchPanel=new JPanel();//switch options
@@ -37,7 +38,6 @@ public class Battle {
 	private int p1Selection=-1;
 	private int p2Selection =-1;
 	private Button[] leftSwitchButtons = new Button[6],rightSwitchButtons = new Button[6];
-	private ButtonGroup leftButtons=new ButtonGroup(),rightButtons=new ButtonGroup();
 	public JTextArea leftText, rightText;
 	private Timer timer;
 	boolean confirm1=false,confirm2=false;//i hate action performed not being able to access things like a normal method
@@ -51,7 +51,6 @@ public class Battle {
 
 
 	public Battle() {
-
         frame = new JFrame();
         BufferedImage icon;
         try {
@@ -101,7 +100,7 @@ public class Battle {
 //		mainPanel.removeAll();
 		musicPlayer.stop();
 		int random=(int)(Math.random()*16);
-		musicPlayer.play(MUSIC_OPTIOINS[random]);
+		musicPlayer.play(MUSIC_OPTIONS[random]);
 		frame.getContentPane().removeAll();
 		mainPanel=new JPanel();
 			P1.setOpposingPlayer(P2);
@@ -167,9 +166,15 @@ public class Battle {
 P1.setCurrentMon();
 P2.setCurrentMon();
 			name1 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
-
+			name1.setOpaque(true);
+			name1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			name1.setBackground(Color.LIGHT_GRAY);
 //			System.out.println(P2.getCurrentMon().getName());
 			name2 = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
+		name2 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+		name2.setOpaque(true);
+		name2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		name2.setBackground(Color.LIGHT_GRAY);
 			bar1 = new HealthBar(P1.getCurrentMon());
 			bar1.setBackground(Color.LIGHT_GRAY);
 			bar1.setXOffset(true);
@@ -228,9 +233,7 @@ P2.setCurrentMon();
 			c2.anchor = GridBagConstraints.LAST_LINE_START;
 			c2.weightx = 0.5;
 			c2.weighty = 0.5;
-//			c2.ipadx=-200000;
 			leftDisplayPanel.add(name1, c2);
-//			c2.ipadx=0;
 			c2.gridy = 4;
 			leftDisplayPanel.add(bar1, c2);
 			c2.gridy = 5;
@@ -343,8 +346,15 @@ P2.setCurrentMon();
 
 			GridBagConstraints y = new GridBagConstraints();
 			name3 = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
-			
+		name3 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+		name3.setOpaque(true);
+		name3.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		name3.setBackground(Color.LIGHT_GRAY);
 			name4 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+		name4 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+		name4.setOpaque(true);
+		name4.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		name4.setBackground(Color.LIGHT_GRAY);
 			bar3 = new HealthBar(P2.getCurrentMon());
 			bar3.setBackground(Color.LIGHT_GRAY);
 			bar3.setXOffset(true);
@@ -499,18 +509,6 @@ P2.setCurrentMon();
 			y.insets = new Insets(5, 5, 5, 5);
 			rightPanel.add(pane2, y);
 
-		name1.setOpaque(true);
-			name1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		name1.setBackground(Color.lightGray);
-		name2.setOpaque(true);
-		name2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		name2.setBackground(Color.lightGray);
-		name3.setOpaque(true);
-		name3.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		name3.setBackground(Color.lightGray);
-		name4.setOpaque(true);
-		name4.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		name4.setBackground(Color.lightGray);
 			leftPanel.updateUI();
 			rightPanel.updateUI();
 			repaint(P1, P2);
@@ -526,9 +524,6 @@ P2.setCurrentMon();
 		Pokemon[] p2mons = new Pokemon[6];
 		int[][] givenMoves = new int[6][4];
 		int[][] givenMoves2 = new int[6][4];
-
-
-
 
 		p1mons[0] = new Pokemon(130);
 		p1mons[1] = new Pokemon(143);
@@ -568,52 +563,6 @@ P2.setCurrentMon();
 
 		Player p2 = b.P2;
 		p1.setOpposingPlayer(p2);
-
-
-//			PlayMusic musicObject = new PlayMusic();
-//			//self explanatory
-//			int random = (int) (Math.random()*10);
-//			random=9;
-//			if(random < 1)
-//			{
-//				musicObject.play(filepath1);
-//			}
-//			else if(random < 2)
-//			{
-//				musicObject.play(filepath2);
-//			}
-//			else if(random < 3)
-//			{
-//				musicObject.play(filepath3);
-//			}
-//			else if(random < 4)
-//			{
-//				musicObject.play(filepath4);
-//			}
-//			else if(random < 5)
-//			{
-//				musicObject.play(filepath5);
-//			}
-//			else if(random < 6)
-//			{
-//				musicObject.play(filepath6);
-//			}
-//			else if(random < 7)
-//			{
-//				musicObject.play(filepath7);
-//			}
-//			else if(random < 8)
-//			{
-//				musicObject.play(filepath8);
-//			}
-//			else if(random < 9)
-//			{
-//				musicObject.play(filepath9);
-//			}
-//			else if(random < 10)
-//			{
-//				musicObject.play(filepath10);
-//			}
 
 		b.leftText.setText("The match has begun!");//self explanatory
 		b.rightText.setText("The match has begun!");//self explanatory
@@ -661,7 +610,6 @@ P2.setCurrentMon();
 					}
 				}
 			});
-			b.leftButtons.add(b.leftMoveButtons[i]);//adds it to the button group
 
 		}
 		for (int i = 0; i < b.leftSwitchButtons.length; i++) {//same things as move buttons but its for switches
@@ -693,7 +641,6 @@ P2.setCurrentMon();
 
 				}
 			});
-			b.leftButtons.add(b.leftSwitchButtons[i]);
 		}
 
 
@@ -728,7 +675,6 @@ P2.setCurrentMon();
 			});
 
 
-			b.rightButtons.add(b.rightMoveButtons[i]);
 		}
 		for (int i = 0; i < b.rightSwitchButtons.length; i++) {//same things as for the left switch buttons, see above
 
@@ -761,7 +707,6 @@ P2.setCurrentMon();
 			});
 
 
-			b.rightButtons.add(b.rightSwitchButtons[i]);
 		}
 
 		while (gameNotOver) {
@@ -992,17 +937,17 @@ P2.setCurrentMon();
 			name1.setText(p1.getCurrentMon().getName());//self explanatory
 
 			name2 .setText(p2.getCurrentMon().getName());//self explanatory
-			
+
 			if(bar1.getPokemon() != p1.getCurrentMon()) {//self explanatory
 				bar1.setPokemon(p1.getCurrentMon());
 			}
 			bar1.repaint();
-			
+
 			if(bar2.getPokemon() != p2.getCurrentMon()) {//self explanatory
 				bar2.setPokemon(p2.getCurrentMon());
 			}
 			bar2.repaint();
-			
+
 			Icon pic = null;
 
 
@@ -1038,17 +983,17 @@ P2.setCurrentMon();
 		name3.setText(p2.getCurrentMon().getName());//self explanatory
 
 		name4 .setText(p1.getCurrentMon().getName());//self explanatory
-		
+
 		if(bar3.getPokemon() != p2.getCurrentMon()) {
 			bar3.setPokemon(p2.getCurrentMon());//self explanatory
 		}
 		bar3.repaint();
-		
+
 		if(bar4.getPokemon() != p1.getCurrentMon()) {
 			bar4.setPokemon(p1.getCurrentMon());
 		}//self explanatory
 		bar4.repaint();
-		
+
 		pic = null;
 
 //		pic = ;
@@ -1080,7 +1025,7 @@ P2.setCurrentMon();
 		}
 		animateHPChange();
 	}
-    
+
     private void animateHPChange() {
     	timer = new Timer(25, new ActionListener() {
     		@Override
@@ -1110,7 +1055,7 @@ P2.setCurrentMon();
 	private void teamBuilder(){
 
 		int random=(int)(Math.random()*16);
-		musicPlayer.play(MUSIC_OPTIOINS[random]);
+		musicPlayer.play(MUSIC_OPTIONS[random]);
 		Calculator calc= new Calculator();
 		JPanel mainPanelTB=new JPanel();// the main panel with all of the the components inside
 		mainPanelTB.setLayout(new GridLayout(1,2));
@@ -1133,6 +1078,7 @@ P2.setCurrentMon();
 		JButton rightValidationButton=new JButton("Confirm Team"),leftValidationButton=new JButton("Confirm Team");//confirms the entire team
 
 		Pokemon[] p1Pokemon=new Pokemon[6],p2Pokemon=new Pokemon[6];//self explanatory
+		JButton leftRandomButton=new JButton("Random!"),rightRandomButton=new JButton("Random!");//buttons to create a random team will be implemented soon
 		JButton leftPresetTeam1=new JButton("Preset Team 1"), leftPresetTeam2=new JButton("Preset Team 2"),leftPresetTeam3=new JButton("Preset Team 3"),
 				rightPresetTeam1=new JButton("Preset Team 4"),rightPresetTeam2=new JButton("Preset Team 5"),rightPresetTeam3=new JButton("Preset Team 6");
 
@@ -1153,7 +1099,7 @@ P2.setCurrentMon();
 		for (int i = 0; i < leftPokemonInputs.length; i++) {//i is the column you are on
 
 			leftPokemonInputs[i] = new JTextArea("Charizard");//default pokemon for player 1 is charizard
-			leftPokemonInputs[i].setRows(1);
+			leftPokemonInputs[i].setRows(3);
 			constraints.gridx = i;//your current column
 			constraints.gridy = 0;//1st row
 			constraints.gridwidth = 1;
@@ -1460,6 +1406,7 @@ P2.setCurrentMon();
 
 
 
+
 		//**********PLAYER 2******************//
 		//this isn't really any different from player 1, except its on the right side, so i wont be commenting this
 		//they are practically identical so just look at it for player 1
@@ -1473,7 +1420,7 @@ P2.setCurrentMon();
 
 		for (int i = 0; i < rightPokemonInputs.length; i++) {
 		rightPokemonInputs[i] = new JTextArea("Blastoise");//P2 pokemon default is blastoise
-		rightPokemonInputs[i].setRows(1);
+		rightPokemonInputs[i].setRows(3);
 		constraints.gridx = i;
 		constraints.gridy = 0;
 		constraints.gridwidth = 1;
@@ -1551,44 +1498,44 @@ P2.setCurrentMon();
 
 		rightUI.add(rightConfirmationButtons[i], constraints);
 	}
-	constraints.gridx = 0;//the column you are on
-	constraints.gridy = 6;//should be the 6th row of things in this column
-	constraints.gridwidth = 6;
-	constraints.gridheight = 1;
-	constraints.weightx = 0.5;
-	constraints.weighty = 0.0;
-	constraints.anchor = GridBagConstraints.PAGE_START;
-	constraints.fill = GridBagConstraints.HORIZONTAL;
-	constraints.insets = new Insets(50, 0, 5, 0);
-	rightValidationButton.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			boolean problem=false;
-			for (int i = 0; i < rightConfirmationButtons.length; i++) {
-				rightConfirmationButtons[i].doClick();
-				if(rightConfirmationButtons[i].hasProblem()){
-					problem=true;
-				}
-				else {
-
-					rightConfirmationButtons[i].setEnabled(false);
-					rightPokemonInputs[i].setEnabled(false);
-					for (int k = 0; k < rightMoveInputs[i].length; k++) {
-
-						rightMoveInputs[i][k].setEnabled(false);
+		constraints.gridx = 0;//the column you are on
+		constraints.gridy = 6;//should be the 6th row of things in this column
+		constraints.gridwidth = 6;
+		constraints.gridheight = 1;
+		constraints.weightx = 0.5;
+		constraints.weighty = 0.0;
+		constraints.anchor = GridBagConstraints.PAGE_START;
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		constraints.insets = new Insets(50, 0, 5, 0);
+		rightValidationButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				boolean problem=false;
+				for (int i = 0; i < rightConfirmationButtons.length; i++) {
+					rightConfirmationButtons[i].doClick();
+					if(rightConfirmationButtons[i].hasProblem()){
+						problem=true;
 					}
+					else {
+
+						rightConfirmationButtons[i].setEnabled(false);
+						rightPokemonInputs[i].setEnabled(false);
+						for (int k = 0; k < rightMoveInputs[i].length; k++) {
+
+							rightMoveInputs[i][k].setEnabled(false);
+						}
 
 
-				}}
-			if(problem==false){
-			synchronized (myObject1){if(confirm1==true){
-				myObject1.notify();
-			}else{
-				confirm2 =true;
+					}}
+				if(problem==false){
+					synchronized (myObject1){if(confirm1==true){
+						myObject1.notify();
+					}else{
+						confirm2 =true;
+					}
+					}}
 			}
-			}}
-		}
-			});
+		});
 		rightUI.add(rightValidationButton, constraints);//self explanatory
 
 		rightPresetTeam1.addActionListener(new ActionListener() {
@@ -1775,14 +1722,6 @@ P2.setCurrentMon();
 		constraints.fill = GridBagConstraints.HORIZONTAL;
 		constraints.insets = new Insets(5, 5, 5, 0);
 		rightUI.add(rightPresetTeam3, constraints);//adds to UI
-
-
-
-
-
-
-
-
 	leftPanelTB.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
 	rightPanelTB.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
 	rightDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
