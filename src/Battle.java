@@ -19,13 +19,14 @@ import java.awt.image.BufferedImage;
 public class Battle {
     public static int P1numberOfFaintedMons=0;//self explanatory
     public static int P2numberOfFaintedMons=0;//self explanatory
-	private final String[] MUSIC_OPTIOINS= new String[]{"Music/Battle! (Brendan_May).wav", "Music/Battle! Rival Hugh.wav","Music/BattleVsTrainer.wav","Music/BattleVsWildPokemon.wav","Music/BillsLighthouse.wav",
+	private final String[] MUSIC_OPTIONS= new String[]{"Music/Battle! (Brendan_May).wav", "Music/Battle! Rival Hugh.wav","Music/BattleVsTrainer.wav","Music/BattleVsWildPokemon.wav","Music/BillsLighthouse.wav",
 	"Music/bw2-kanto-gym-leader.wav","Music/bw-subway-trainer.wav","Music/PaletteTown.wav","Music/PewterCity.wav","Music/PokemonBattleMusic.wav","Music/PokemonGym.wav","Music/PokemonTitleScreen.wav","Music/PokemonThemeSong.wav",
 	"Music/PokemonThemeSong.wav","Music/RivalAppears.wav","Music/TeamRocketHideout.wav","Music/ViridianForest.wav"};//16 music options
 
 	private JFrame frame=new JFrame();//self explanatory
 	private JPanel mainPanel;//self explanatory
-	private JPanel leftPanel, rightPanel, leftDisplayPanel, rightDisplayPanel;//the display shown to the user
+	private JPanel leftPanel, rightPanel;
+	private BackgroundPanel leftDisplayPanel, rightDisplayPanel;//the display shown to the user
 	private JPanel leftUI, rightUI;//the users interface
 	private JPanel leftMovePanel=new JPanel(),rightMovePanel = new JPanel();//move options
 	private JPanel leftSwitchPanel= new JPanel(),rightSwitchPanel=new JPanel();//switch options
@@ -37,7 +38,6 @@ public class Battle {
 	private int p1Selection=-1;
 	private int p2Selection =-1;
 	private Button[] leftSwitchButtons = new Button[6],rightSwitchButtons = new Button[6];
-	private ButtonGroup leftButtons=new ButtonGroup(),rightButtons=new ButtonGroup();
 	public JTextArea leftText, rightText;
 	private Timer timer;
 	boolean confirm1=false,confirm2=false;//i hate action performed not being able to access things like a normal method
@@ -51,7 +51,6 @@ public class Battle {
 
 
 	public Battle() {
-
         frame = new JFrame();
         BufferedImage icon;
         try {
@@ -101,7 +100,7 @@ public class Battle {
 //		mainPanel.removeAll();
 		musicPlayer.stop();
 		int random=(int)(Math.random()*16);
-		musicPlayer.play(MUSIC_OPTIOINS[random]);
+		musicPlayer.play(MUSIC_OPTIONS[random]);
 		frame.getContentPane().removeAll();
 		mainPanel=new JPanel();
 			P1.setOpposingPlayer(P2);
@@ -167,7 +166,6 @@ public class Battle {
 P1.setCurrentMon();
 P2.setCurrentMon();
 			name1 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
-
 //			System.out.println(P2.getCurrentMon().getName());
 			name2 = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
 			bar1 = new HealthBar(P1.getCurrentMon());
@@ -228,9 +226,7 @@ P2.setCurrentMon();
 			c2.anchor = GridBagConstraints.LAST_LINE_START;
 			c2.weightx = 0.5;
 			c2.weighty = 0.5;
-//			c2.ipadx=-200000;
 			leftDisplayPanel.add(name1, c2);
-//			c2.ipadx=0;
 			c2.gridy = 4;
 			leftDisplayPanel.add(bar1, c2);
 			c2.gridy = 5;
@@ -499,18 +495,6 @@ P2.setCurrentMon();
 			y.insets = new Insets(5, 5, 5, 5);
 			rightPanel.add(pane2, y);
 
-		name1.setOpaque(true);
-			name1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		name1.setBackground(Color.lightGray);
-		name2.setOpaque(true);
-		name2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		name2.setBackground(Color.lightGray);
-		name3.setOpaque(true);
-		name3.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		name3.setBackground(Color.lightGray);
-		name4.setOpaque(true);
-		name4.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		name4.setBackground(Color.lightGray);
 			leftPanel.updateUI();
 			rightPanel.updateUI();
 			repaint(P1, P2);
@@ -526,9 +510,6 @@ P2.setCurrentMon();
 		Pokemon[] p2mons = new Pokemon[6];
 		int[][] givenMoves = new int[6][4];
 		int[][] givenMoves2 = new int[6][4];
-
-
-
 
 		p1mons[0] = new Pokemon(130);
 		p1mons[1] = new Pokemon(143);
@@ -568,52 +549,6 @@ P2.setCurrentMon();
 
 		Player p2 = b.P2;
 		p1.setOpposingPlayer(p2);
-
-
-//			PlayMusic musicObject = new PlayMusic();
-//			//self explanatory
-//			int random = (int) (Math.random()*10);
-//			random=9;
-//			if(random < 1)
-//			{
-//				musicObject.play(filepath1);
-//			}
-//			else if(random < 2)
-//			{
-//				musicObject.play(filepath2);
-//			}
-//			else if(random < 3)
-//			{
-//				musicObject.play(filepath3);
-//			}
-//			else if(random < 4)
-//			{
-//				musicObject.play(filepath4);
-//			}
-//			else if(random < 5)
-//			{
-//				musicObject.play(filepath5);
-//			}
-//			else if(random < 6)
-//			{
-//				musicObject.play(filepath6);
-//			}
-//			else if(random < 7)
-//			{
-//				musicObject.play(filepath7);
-//			}
-//			else if(random < 8)
-//			{
-//				musicObject.play(filepath8);
-//			}
-//			else if(random < 9)
-//			{
-//				musicObject.play(filepath9);
-//			}
-//			else if(random < 10)
-//			{
-//				musicObject.play(filepath10);
-//			}
 
 		b.leftText.setText("The match has begun!");//self explanatory
 		b.rightText.setText("The match has begun!");//self explanatory
@@ -661,7 +596,6 @@ P2.setCurrentMon();
 					}
 				}
 			});
-			b.leftButtons.add(b.leftMoveButtons[i]);//adds it to the button group
 
 		}
 		for (int i = 0; i < b.leftSwitchButtons.length; i++) {//same things as move buttons but its for switches
@@ -693,7 +627,6 @@ P2.setCurrentMon();
 
 				}
 			});
-			b.leftButtons.add(b.leftSwitchButtons[i]);
 		}
 
 
@@ -728,7 +661,6 @@ P2.setCurrentMon();
 			});
 
 
-			b.rightButtons.add(b.rightMoveButtons[i]);
 		}
 		for (int i = 0; i < b.rightSwitchButtons.length; i++) {//same things as for the left switch buttons, see above
 
@@ -761,7 +693,6 @@ P2.setCurrentMon();
 			});
 
 
-			b.rightButtons.add(b.rightSwitchButtons[i]);
 		}
 
 		while (gameNotOver) {
@@ -1110,7 +1041,7 @@ P2.setCurrentMon();
 	private void teamBuilder(){
 
 		int random=(int)(Math.random()*16);
-		musicPlayer.play(MUSIC_OPTIOINS[random]);
+		musicPlayer.play(MUSIC_OPTIONS[random]);
 		Calculator calc= new Calculator();
 		JPanel mainPanelTB=new JPanel();// the main panel with all of the the components inside
 		mainPanelTB.setLayout(new GridLayout(1,2));
@@ -1133,8 +1064,7 @@ P2.setCurrentMon();
 		JButton rightValidationButton=new JButton("Confirm Team"),leftValidationButton=new JButton("Confirm Team");//confirms the entire team
 
 		Pokemon[] p1Pokemon=new Pokemon[6],p2Pokemon=new Pokemon[6];//self explanatory
-		JButton leftPresetTeam1=new JButton("Preset Team 1"), leftPresetTeam2=new JButton("Preset Team 2"),leftPresetTeam3=new JButton("Preset Team 3"),
-				rightPresetTeam1=new JButton("Preset Team 4"),rightPresetTeam2=new JButton("Preset Team 5"),rightPresetTeam3=new JButton("Preset Team 6");
+		JButton leftRandomButton=new JButton("Random!"),rightRandomButton=new JButton("Random!");//buttons to create a random team will be implemented soon
 
 	for (int i = 0; i < leftPanelImages.length; i++) {
 
@@ -1153,7 +1083,7 @@ P2.setCurrentMon();
 		for (int i = 0; i < leftPokemonInputs.length; i++) {//i is the column you are on
 
 			leftPokemonInputs[i] = new JTextArea("Charizard");//default pokemon for player 1 is charizard
-			leftPokemonInputs[i].setRows(1);
+			leftPokemonInputs[i].setRows(3);
 			constraints.gridx = i;//your current column
 			constraints.gridy = 0;//1st row
 			constraints.gridwidth = 1;
@@ -1231,7 +1161,7 @@ P2.setCurrentMon();
 		}
 		constraints.gridx = 0;//the column you are on
 		constraints.gridy = 6;//should be the 6th row of things in this column
-		constraints.gridwidth = 6;
+		constraints.gridwidth = 5;
 		constraints.gridheight = 1;
 		constraints.weightx = 0.5;
 		constraints.weighty = 0.0;
@@ -1271,190 +1201,8 @@ P2.setCurrentMon();
 			}
 		});
 		leftUI.add(leftValidationButton, constraints);//adds to UI
-		leftPresetTeam1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				leftPokemonInputs[0].setText("Landorus");
-				leftMoveInputs[0][0].setText("Earthquake");
-				leftMoveInputs[0][1].setText("Rock Tomb");
-				leftMoveInputs[0][2].setText("Swords Dance");
-				leftMoveInputs[0][3].setText("Ice Beam");
 
 
-				leftPokemonInputs[1].setText("Volcarona");
-				leftMoveInputs[1][0].setText("Quiver Dance");
-				leftMoveInputs[1][1].setText("Fire Blast");
-				leftMoveInputs[1][2].setText("Bug Buzz");
-				leftMoveInputs[1][3].setText("Earthquake");
-
-
-				leftPokemonInputs[2].setText("Dragonite");
-				leftMoveInputs[2][0].setText("Earthquake");
-				leftMoveInputs[2][1].setText("Recover");
-				leftMoveInputs[2][2].setText("Air Slash");
-				leftMoveInputs[2][3].setText("Dragon Dance");
-
-
-				leftPokemonInputs[3].setText("Hydreigon");
-				leftMoveInputs[3][0].setText("Dark Pulse");
-				leftMoveInputs[3][1].setText("Earthquake");
-				leftMoveInputs[3][2].setText("Flash Cannon");
-				leftMoveInputs[3][3].setText("Recover");
-
-				leftPokemonInputs[4].setText("Magearna");
-				leftMoveInputs[4][0].setText("Shift Gear");
-				leftMoveInputs[4][1].setText("Thunderbolt");
-				leftMoveInputs[4][2].setText("Ice Beam");
-				leftMoveInputs[4][3].setText("Focus Blast");
-
-				leftPokemonInputs[5].setText("Tapu Bulu");
-				leftMoveInputs[5][0].setText("Wood Hammer");
-				leftMoveInputs[5][1].setText("Horn Leech");
-				leftMoveInputs[5][2].setText("Superpower");
-				leftMoveInputs[5][3].setText("Stone Edge");
-				leftConfirmationButtons[0].doClick();
-				leftConfirmationButtons[1].doClick();
-				leftConfirmationButtons[2].doClick();
-				leftConfirmationButtons[3].doClick();
-				leftConfirmationButtons[4].doClick();
-				leftConfirmationButtons[5].doClick();
-			}
-		});
-		constraints.gridx = 0;
-		constraints.gridy = 6;
-		constraints.gridwidth = 2;
-		constraints.gridheight = 1;
-		constraints.weightx = 0.5;
-		constraints.weighty = 0;
-		constraints.anchor = GridBagConstraints.PAGE_START;
-		constraints.fill = GridBagConstraints.HORIZONTAL;
-		constraints.insets = new Insets(5, 5, 5, 0);
-		leftUI.add(leftPresetTeam1, constraints);//adds to UI
-
-		leftPresetTeam2.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				leftPokemonInputs[0].setText("Kommo-o");
-				leftMoveInputs[0][0].setText("Dragon Dance");
-				leftMoveInputs[0][1].setText("Dragon Claw");
-				leftMoveInputs[0][2].setText("Earthquake");
-				leftMoveInputs[0][3].setText("Sky Uppercut");
-
-
-				leftPokemonInputs[1].setText("Salazzle");
-				leftMoveInputs[1][0].setText("Nasty Plot");
-				leftMoveInputs[1][1].setText("Sludge Wave");
-				leftMoveInputs[1][2].setText("Flamethrower");
-				leftMoveInputs[1][3].setText("Grass Knot");
-
-
-				leftPokemonInputs[2].setText("Xurkitree");
-				leftMoveInputs[2][0].setText("Thunderbolt");
-				leftMoveInputs[2][1].setText("Energy Ball");
-				leftMoveInputs[2][2].setText("Air Slash");
-				leftMoveInputs[2][3].setText("Icicle Crash");
-
-
-				leftPokemonInputs[3].setText("Scizor");
-				leftMoveInputs[3][0].setText("Swords Dance");
-				leftMoveInputs[3][1].setText("Bullet Punch");
-				leftMoveInputs[3][2].setText("Megahorn");
-				leftMoveInputs[3][3].setText("Recover");
-
-				leftPokemonInputs[4].setText("Tapu Fini");
-				leftMoveInputs[4][0].setText("Scald");
-				leftMoveInputs[4][1].setText("Moonblast");
-				leftMoveInputs[4][2].setText("Calm Mind");
-				leftMoveInputs[4][3].setText("Ice Beam");
-
-				leftPokemonInputs[5].setText("Lycanroc");
-				leftMoveInputs[5][0].setText("Accelerock");
-				leftMoveInputs[5][1].setText("Stone Edge");
-				leftMoveInputs[5][2].setText("Crunch");
-				leftMoveInputs[5][3].setText("Fire Fang");
-
-
-
-				leftConfirmationButtons[0].doClick();
-				leftConfirmationButtons[1].doClick();
-				leftConfirmationButtons[2].doClick();
-				leftConfirmationButtons[3].doClick();
-				leftConfirmationButtons[4].doClick();
-				leftConfirmationButtons[5].doClick();
-			}
-		});
-		constraints.gridx = 2;
-		constraints.gridy = 6;
-		constraints.gridwidth = 2;
-		constraints.gridheight = 1;
-		constraints.weightx = 0.5;
-		constraints.weighty = 0;
-		constraints.anchor = GridBagConstraints.PAGE_START;
-		constraints.fill = GridBagConstraints.HORIZONTAL;
-		constraints.insets = new Insets(5, 5, 5, 0);
-		leftUI.add(leftPresetTeam2, constraints);//adds to UI
-
-		leftPresetTeam3.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				leftPokemonInputs[0].setText("Azelf");
-				leftMoveInputs[0][0].setText("Nuzzle");
-				leftMoveInputs[0][1].setText("Poison Powder");
-				leftMoveInputs[0][2].setText("Will-O-Wisp");
-				leftMoveInputs[0][3].setText("Sleep Powder");
-
-
-				leftPokemonInputs[1].setText("Gyarados");
-				leftMoveInputs[1][0].setText("Crunch");
-				leftMoveInputs[1][1].setText("Earthquake");
-				leftMoveInputs[1][2].setText("Hydro Pump");
-				leftMoveInputs[1][3].setText("Dragon Dance");
-
-
-				leftPokemonInputs[2].setText("Kartana");
-				leftMoveInputs[2][0].setText("Leaf Blade");
-				leftMoveInputs[2][1].setText("Smart Strike");
-				leftMoveInputs[2][2].setText("Night Slash");
-				leftMoveInputs[2][3].setText("Swords Dance");
-
-
-				leftPokemonInputs[3].setText("Volcarona");
-				leftMoveInputs[3][0].setText("Fiery Dance");
-				leftMoveInputs[3][1].setText("Bug Buzz");
-				leftMoveInputs[3][2].setText("Giga Drain");
-				leftMoveInputs[3][3].setText("Quiver Dance");
-
-				leftPokemonInputs[4].setText("Magnezone");
-				leftMoveInputs[4][0].setText("Thunderbolt");
-				leftMoveInputs[4][1].setText("Nuzzle");
-				leftMoveInputs[4][2].setText("Flash Cannon");
-				leftMoveInputs[4][3].setText("Ice Beam");
-
-				leftPokemonInputs[5].setText("Excadrill");
-				leftMoveInputs[5][0].setText("Earthquake");
-				leftMoveInputs[5][1].setText("Iron Head");
-				leftMoveInputs[5][2].setText("Rock Slide");
-				leftMoveInputs[5][3].setText("Poison Powder");
-
-
-				leftConfirmationButtons[0].doClick();
-				leftConfirmationButtons[1].doClick();
-				leftConfirmationButtons[2].doClick();
-				leftConfirmationButtons[3].doClick();
-				leftConfirmationButtons[4].doClick();
-				leftConfirmationButtons[5].doClick();
-			}
-		});
-		constraints.gridx = 4;
-		constraints.gridy = 6;
-		constraints.gridwidth = 2;
-		constraints.gridheight = 1;
-		constraints.weightx = 0.5;
-		constraints.weighty = 0;
-		constraints.anchor = GridBagConstraints.PAGE_START;
-		constraints.fill = GridBagConstraints.HORIZONTAL;
-		constraints.insets = new Insets(5, 5, 5, 0);
-		leftUI.add(leftPresetTeam3, constraints);//adds to UI
 
 
 
@@ -1473,7 +1221,7 @@ P2.setCurrentMon();
 
 		for (int i = 0; i < rightPokemonInputs.length; i++) {
 		rightPokemonInputs[i] = new JTextArea("Blastoise");//P2 pokemon default is blastoise
-		rightPokemonInputs[i].setRows(1);
+		rightPokemonInputs[i].setRows(3);
 		constraints.gridx = i;
 		constraints.gridy = 0;
 		constraints.gridwidth = 1;
@@ -1553,7 +1301,7 @@ P2.setCurrentMon();
 	}
 	constraints.gridx = 0;//the column you are on
 	constraints.gridy = 6;//should be the 6th row of things in this column
-	constraints.gridwidth = 6;
+	constraints.gridwidth = 5;
 	constraints.gridheight = 1;
 	constraints.weightx = 0.5;
 	constraints.weighty = 0.0;
@@ -1589,200 +1337,7 @@ P2.setCurrentMon();
 			}}
 		}
 			});
-		rightUI.add(rightValidationButton, constraints);//self explanatory
-
-		rightPresetTeam1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				rightPokemonInputs[0].setText("Garchomp");
-				rightMoveInputs[0][0].setText("Earthquake");
-				rightMoveInputs[0][1].setText("Dragon Claw");
-				rightMoveInputs[0][2].setText("Fire Blast");
-				rightMoveInputs[0][3].setText("Dragon Dance");
-
-
-				rightPokemonInputs[1].setText("Deoxys");
-				rightMoveInputs[1][0].setText("Psycho Boost");
-				rightMoveInputs[1][1].setText("Fire Blast");
-				rightMoveInputs[1][2].setText("Nuzzle");
-				rightMoveInputs[1][3].setText("Poison Powder");
-
-
-				rightPokemonInputs[2].setText("Genesect");
-				rightMoveInputs[2][0].setText("Bug Buzz");
-				rightMoveInputs[2][1].setText("Flamethrower");
-				rightMoveInputs[2][2].setText("Ice Beam");
-				rightMoveInputs[2][3].setText("Iron Head");
-
-
-				rightPokemonInputs[3].setText("Terrakion");
-				rightMoveInputs[3][0].setText("Close Combat");
-				rightMoveInputs[3][1].setText("Stone Edge");
-				rightMoveInputs[3][2].setText("Earthquake");
-				rightMoveInputs[3][3].setText("Quick Attack");
-
-				rightPokemonInputs[4].setText("Politoed");
-				rightMoveInputs[4][0].setText("Hydro Pump");
-				rightMoveInputs[4][1].setText("Surf");
-				rightMoveInputs[4][2].setText("Ice Beam");
-				rightMoveInputs[4][3].setText("Sleep Powder");
-
-				rightPokemonInputs[5].setText("Staraptor");
-				rightMoveInputs[5][0].setText("Brave Bird");
-				rightMoveInputs[5][1].setText("Double-Edge");
-				rightMoveInputs[5][2].setText("Close Combat");
-				rightMoveInputs[5][3].setText("Recover");
-				rightConfirmationButtons[0].doClick();
-				rightConfirmationButtons[1].doClick();
-				rightConfirmationButtons[2].doClick();
-				rightConfirmationButtons[3].doClick();
-				rightConfirmationButtons[4].doClick();
-				rightConfirmationButtons[5].doClick();
-			}
-		});
-		constraints.gridx = 0;
-		constraints.gridy = 6;
-		constraints.gridwidth = 2;
-		constraints.gridheight = 1;
-		constraints.weightx = 0.5;
-		constraints.weighty = 0;
-		constraints.anchor = GridBagConstraints.PAGE_START;
-		constraints.fill = GridBagConstraints.HORIZONTAL;
-		constraints.insets = new Insets(5, 5, 5, 0);
-		rightUI.add(rightPresetTeam1, constraints);//adds to UI
-
-		rightPresetTeam2.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				rightPokemonInputs[0].setText("Tapu Fini");
-				rightMoveInputs[0][0].setText("Surf");
-				rightMoveInputs[0][1].setText("Moonblast");
-				rightMoveInputs[0][2].setText("Nuzzle");
-				rightMoveInputs[0][3].setText("Calm Mind");
-
-
-				rightPokemonInputs[1].setText("Charizard");
-				rightMoveInputs[1][0].setText("Dragon Claw");
-				rightMoveInputs[1][1].setText("Flare Blitz");
-				rightMoveInputs[1][2].setText("Dragon Dance");
-				rightMoveInputs[1][3].setText("Recover");
-
-
-				rightPokemonInputs[2].setText("Gliscor");
-				rightMoveInputs[2][0].setText("Poison Powder");
-				rightMoveInputs[2][1].setText("Earthquake");
-				rightMoveInputs[2][2].setText("Recover");
-				rightMoveInputs[2][3].setText("Crunch");
-
-
-				rightPokemonInputs[3].setText("Raikou");
-				rightMoveInputs[3][0].setText("Thunderbolt");
-				rightMoveInputs[3][1].setText("Calm Mind");
-				rightMoveInputs[3][2].setText("Shadow Ball");
-				rightMoveInputs[3][3].setText("Ice Beam");
-
-				rightPokemonInputs[4].setText("Weavile");
-				rightMoveInputs[4][0].setText("Ice Punch");
-				rightMoveInputs[4][1].setText("Ice Shard");
-				rightMoveInputs[4][2].setText("Low Kick");
-				rightMoveInputs[4][3].setText("Knock Off");
-
-				rightPokemonInputs[5].setText("Tapu Lele");
-				rightMoveInputs[5][0].setText("Psyshock");
-				rightMoveInputs[5][1].setText("Moonblast");
-				rightMoveInputs[5][2].setText("Shadow Ball");
-				rightMoveInputs[5][3].setText("Focus Blast");
-
-
-
-				rightConfirmationButtons[0].doClick();
-				rightConfirmationButtons[1].doClick();
-				rightConfirmationButtons[2].doClick();
-				rightConfirmationButtons[3].doClick();
-				rightConfirmationButtons[4].doClick();
-				rightConfirmationButtons[5].doClick();
-			}
-		});
-		constraints.gridx = 2;
-		constraints.gridy = 6;
-		constraints.gridwidth = 2;
-		constraints.gridheight = 1;
-		constraints.weightx = 0.5;
-		constraints.weighty = 0;
-		constraints.anchor = GridBagConstraints.PAGE_START;
-		constraints.fill = GridBagConstraints.HORIZONTAL;
-		constraints.insets = new Insets(5, 5, 5, 0);
-		rightUI.add(rightPresetTeam2, constraints);//adds to UI
-
-		rightPresetTeam3.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				rightPokemonInputs[0].setText("Garchomp");
-				rightMoveInputs[0][0].setText("Stone Edge");
-				rightMoveInputs[0][1].setText("Fire Blast");
-				rightMoveInputs[0][2].setText("Draco Meteor");
-				rightMoveInputs[0][3].setText("Earthquake");
-
-
-				rightPokemonInputs[1].setText("Araquanid");
-				rightMoveInputs[1][0].setText("Liquidation");
-				rightMoveInputs[1][1].setText("Poison Powder");
-				rightMoveInputs[1][2].setText("Leech Life");
-				rightMoveInputs[1][3].setText("Recover");
-
-
-				rightPokemonInputs[2].setText("Tapu Lele");
-				rightMoveInputs[2][0].setText("Psychic");
-				rightMoveInputs[2][1].setText("Psyshock");
-				rightMoveInputs[2][2].setText("Moonblast");
-				rightMoveInputs[2][3].setText("Focus Blast");
-
-
-				rightPokemonInputs[3].setText("Hawlucha");
-				rightMoveInputs[3][0].setText("High Jump Kick");
-				rightMoveInputs[3][1].setText("Stone Edge");
-				rightMoveInputs[3][2].setText("Acrobatics");
-				rightMoveInputs[3][3].setText("Swords Dance");
-
-				rightPokemonInputs[4].setText("Tapu Bulu");
-				rightMoveInputs[4][0].setText("Glare");
-				rightMoveInputs[4][1].setText("Recover");
-				rightMoveInputs[4][2].setText("Ember");
-				rightMoveInputs[4][3].setText("Wood Hammer");
-
-				rightPokemonInputs[5].setText("Chandelure");
-				rightMoveInputs[5][0].setText("Recover");
-				rightMoveInputs[5][1].setText("Shadow Ball");
-				rightMoveInputs[5][2].setText("Recover");
-				rightMoveInputs[5][3].setText("Flamethrower");
-
-
-				rightConfirmationButtons[0].doClick();
-				rightConfirmationButtons[1].doClick();
-				rightConfirmationButtons[2].doClick();
-				rightConfirmationButtons[3].doClick();
-				rightConfirmationButtons[4].doClick();
-				rightConfirmationButtons[5].doClick();
-			}
-		});
-		constraints.gridx = 4;
-		constraints.gridy = 6;
-		constraints.gridwidth = 2;
-		constraints.gridheight = 1;
-		constraints.weightx = 0.5;
-		constraints.weighty = 0;
-		constraints.anchor = GridBagConstraints.PAGE_START;
-		constraints.fill = GridBagConstraints.HORIZONTAL;
-		constraints.insets = new Insets(5, 5, 5, 0);
-		rightUI.add(rightPresetTeam3, constraints);//adds to UI
-
-
-
-
-
-
-
-
+	rightUI.add(rightValidationButton, constraints);//self explanatory
 	leftPanelTB.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
 	rightPanelTB.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
 	rightDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
