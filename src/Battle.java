@@ -21,7 +21,7 @@ public class Battle {
     public static int P2numberOfFaintedMons=0;//self explanatory
 	private final String[] MUSIC_OPTIONS= new String[]{"Music/Battle! (Brendan_May).wav", "Music/Battle! Rival Hugh.wav","Music/BattleVsTrainer.wav","Music/BattleVsWildPokemon.wav","Music/BillsLighthouse.wav",
 	"Music/bw2-kanto-gym-leader.wav","Music/bw-subway-trainer.wav","Music/PaletteTown.wav","Music/PewterCity.wav","Music/PokemonBattleMusic.wav","Music/PokemonGym.wav","Music/PokemonTitleScreen.wav","Music/PokemonThemeSong.wav",
-	"Music/PokemonThemeSong.wav","Music/RivalAppears.wav","Music/TeamRocketHideout.wav","Music/ViridianForest.wav"};//16 music options
+	"Music/RivalAppears.wav","Music/TeamRocketHideout.wav","Music/ViridianForest.wav"};//16 music options
 
 	private JFrame frame=new JFrame();//self explanatory
 	private JPanel mainPanel;//self explanatory
@@ -166,8 +166,15 @@ public class Battle {
 P1.setCurrentMon();
 P2.setCurrentMon();
 			name1 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+			name1.setOpaque(true);
+			name1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			name1.setBackground(Color.LIGHT_GRAY);
 //			System.out.println(P2.getCurrentMon().getName());
 			name2 = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
+		name2 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+		name2.setOpaque(true);
+		name2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		name2.setBackground(Color.LIGHT_GRAY);
 			bar1 = new HealthBar(P1.getCurrentMon());
 			bar1.setBackground(Color.LIGHT_GRAY);
 			bar1.setXOffset(true);
@@ -339,8 +346,15 @@ P2.setCurrentMon();
 
 			GridBagConstraints y = new GridBagConstraints();
 			name3 = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
-
+		name3 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+		name3.setOpaque(true);
+		name3.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		name3.setBackground(Color.LIGHT_GRAY);
 			name4 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+		name4 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+		name4.setOpaque(true);
+		name4.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		name4.setBackground(Color.LIGHT_GRAY);
 			bar3 = new HealthBar(P2.getCurrentMon());
 			bar3.setBackground(Color.LIGHT_GRAY);
 			bar3.setXOffset(true);
@@ -1163,7 +1177,7 @@ P2.setCurrentMon();
 		}
 		constraints.gridx = 0;//the column you are on
 		constraints.gridy = 6;//should be the 6th row of things in this column
-		constraints.gridwidth = 5;
+		constraints.gridwidth = 6;
 		constraints.gridheight = 1;
 		constraints.weightx = 0.5;
 		constraints.weighty = 0.0;
