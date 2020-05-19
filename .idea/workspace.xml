@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c409674a-022d-407e-a93f-62a2b7549e75" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Music/bw-subway-trainer.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Music/bw2-kanto-gym-leader.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Text/Moves.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Text/Moves.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NOT Pokemon/Calculator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Battle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Battle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,26 +145,26 @@
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state x="2119" y="844" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.3840.2057@0.23.3840.2057" timestamp="1589841259306" />
-    <state width="2479" height="276" key="GridCell.Tab.0.bottom" timestamp="1589872542805">
+    <state width="2479" height="276" key="GridCell.Tab.0.bottom" timestamp="1589876416486">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.bottom/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286148" />
-    <state width="2479" height="276" key="GridCell.Tab.0.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1589872542805" />
-    <state width="2479" height="276" key="GridCell.Tab.0.center" timestamp="1589872542804">
+    <state width="2479" height="276" key="GridCell.Tab.0.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1589876416486" />
+    <state width="2479" height="276" key="GridCell.Tab.0.center" timestamp="1589876416485">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.center/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286147" />
-    <state width="2479" height="276" key="GridCell.Tab.0.center/0.23.3840.2057@0.23.3840.2057" timestamp="1589872542804" />
-    <state width="2479" height="276" key="GridCell.Tab.0.left" timestamp="1589872542803">
+    <state width="2479" height="276" key="GridCell.Tab.0.center/0.23.3840.2057@0.23.3840.2057" timestamp="1589876416485" />
+    <state width="2479" height="276" key="GridCell.Tab.0.left" timestamp="1589876416485">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.left/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286145" />
-    <state width="2479" height="276" key="GridCell.Tab.0.left/0.23.3840.2057@0.23.3840.2057" timestamp="1589872542803" />
-    <state width="2479" height="276" key="GridCell.Tab.0.right" timestamp="1589872542804">
+    <state width="2479" height="276" key="GridCell.Tab.0.left/0.23.3840.2057@0.23.3840.2057" timestamp="1589876416485" />
+    <state width="2479" height="276" key="GridCell.Tab.0.right" timestamp="1589876416486">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.right/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286148" />
-    <state width="2479" height="276" key="GridCell.Tab.0.right/0.23.3840.2057@0.23.3840.2057" timestamp="1589872542804" />
+    <state width="2479" height="276" key="GridCell.Tab.0.right/0.23.3840.2057@0.23.3840.2057" timestamp="1589876416486" />
     <state width="2170" height="715" key="GridCell.Tab.1.bottom" timestamp="1589795194820">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
@@ -243,67 +244,67 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>1437</line>
+          <line>1448</line>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>1201</line>
+          <line>1212</line>
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>1199</line>
+          <line>1210</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>174</line>
+          <line>178</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>175</line>
+          <line>179</line>
           <option name="timeStamp" value="62" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>879</line>
+          <line>890</line>
           <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>789</line>
+          <line>800</line>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>815</line>
+          <line>826</line>
           <option name="timeStamp" value="66" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>791</line>
+          <line>802</line>
           <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>817</line>
+          <line>828</line>
           <option name="timeStamp" value="68" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>802</line>
+          <line>813</line>
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>774</line>
+          <line>785</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Calculator.java</url>
-          <line>391</line>
+          <line>396</line>
           <option name="timeStamp" value="71" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

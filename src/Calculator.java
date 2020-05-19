@@ -246,7 +246,12 @@ public class Calculator {
 				&& (target.getType1().equalsIgnoreCase("Poison") || target.getType2().equalsIgnoreCase("Poison"))) {
 
 		} else if (!(status.equalsIgnoreCase("null"))) {//self explanatory
-			if (Math.random() <= (double) move.getChance() / 100
+			if(move.getCategory().equalsIgnoreCase("status")){
+				if ((boostsTarget.getStatus().equalsIgnoreCase("") || boostsTarget.getStatus().equalsIgnoreCase("null"))) {
+					boostsTarget.setStatus(move.getStatus());
+				}
+			}
+			else if (Math.random() <= (double) move.getChance() / 100
 					&& (boostsTarget.getStatus().equalsIgnoreCase("") || boostsTarget.getStatus().equalsIgnoreCase("null"))) {
 				boostsTarget.setStatus(move.getStatus());
 			}

@@ -1243,7 +1243,7 @@ P2.setCurrentMon();
 
 				leftPokemonInputs[3].setText("Hydreigon");
 				leftMoveInputs[3][0].setText("Dark Pulse");
-				leftMoveInputs[3][1].setText("Earthquake");
+				leftMoveInputs[3][1].setText("Draco Meteor");
 				leftMoveInputs[3][2].setText("Flash Cannon");
 				leftMoveInputs[3][3].setText("Recover");
 
