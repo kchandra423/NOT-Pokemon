@@ -157,6 +157,14 @@ public class Player {
             if(Math.random() < 1.0/3)
             {
                 currentMon.setStatus("");
+                System.out.println(currentMon.getName() + " woke up!");
+                int moveType = calculator.getIntFromType(currentMon.getMoves()[indexOfMove].getType());
+                int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
+                int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
+                int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
+                ez.print(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
+                System.out.println(calculator.howEffective(moveType, opposingType1, opposingType2));
+                opposingPlayer.currentMon.takeDamage(damage);
             }
         }
         else {

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c409674a-022d-407e-a93f-62a2b7549e75" name="Default Changelist" comment="" />
+    <list default="true" id="c409674a-022d-407e-a93f-62a2b7549e75" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Music/bw-subway-trainer.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Music/bw2-kanto-gym-leader.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Battle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Battle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PlayMusic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlayMusic.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,9 +55,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Music" />
+      <recent name="$PROJECT_DIR$/Music/Wav" />
+      <recent name="$PROJECT_DIR$/Music/TitleScreen" />
       <recent name="$PROJECT_DIR$/Images" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Battle">
@@ -134,42 +142,46 @@
       <screen x="0" y="0" width="3840" height="2160" />
     </state>
     <state x="1632" y="762" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/0.0.3840.2160@0.0.3840.2160" timestamp="1586982822785" />
-    <state width="2170" height="715" key="GridCell.Tab.0.bottom" timestamp="1589701578794">
+    <state x="2119" y="844" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1589841259306">
+      <screen x="0" y="23" width="3840" height="2057" />
+    </state>
+    <state x="2119" y="844" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.3840.2057@0.23.3840.2057" timestamp="1589841259306" />
+    <state width="2170" height="641" key="GridCell.Tab.0.bottom" timestamp="1589860388843">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.bottom/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286148" />
-    <state width="2170" height="715" key="GridCell.Tab.0.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1589701578794" />
-    <state width="2170" height="715" key="GridCell.Tab.0.center" timestamp="1589701578794">
+    <state width="2170" height="641" key="GridCell.Tab.0.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1589860388843" />
+    <state width="2170" height="641" key="GridCell.Tab.0.center" timestamp="1589860388843">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.center/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286147" />
-    <state width="2170" height="715" key="GridCell.Tab.0.center/0.23.3840.2057@0.23.3840.2057" timestamp="1589701578794" />
-    <state width="2170" height="715" key="GridCell.Tab.0.left" timestamp="1589701578793">
+    <state width="2170" height="641" key="GridCell.Tab.0.center/0.23.3840.2057@0.23.3840.2057" timestamp="1589860388843" />
+    <state width="2170" height="641" key="GridCell.Tab.0.left" timestamp="1589860388843">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.left/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286145" />
-    <state width="2170" height="715" key="GridCell.Tab.0.left/0.23.3840.2057@0.23.3840.2057" timestamp="1589701578793" />
-    <state width="2170" height="715" key="GridCell.Tab.0.right" timestamp="1589701578794">
+    <state width="2170" height="641" key="GridCell.Tab.0.left/0.23.3840.2057@0.23.3840.2057" timestamp="1589860388843" />
+    <state width="2170" height="641" key="GridCell.Tab.0.right" timestamp="1589860388843">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.right/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286148" />
-    <state width="2170" height="715" key="GridCell.Tab.0.right/0.23.3840.2057@0.23.3840.2057" timestamp="1589701578794" />
-    <state width="2170" height="715" key="GridCell.Tab.1.bottom" timestamp="1589701578795">
+    <state width="2170" height="641" key="GridCell.Tab.0.right/0.23.3840.2057@0.23.3840.2057" timestamp="1589860388843" />
+    <state width="2170" height="715" key="GridCell.Tab.1.bottom" timestamp="1589795194820">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
-    <state width="2170" height="715" key="GridCell.Tab.1.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1589701578795" />
-    <state width="2170" height="715" key="GridCell.Tab.1.center" timestamp="1589701578794">
+    <state width="2170" height="715" key="GridCell.Tab.1.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1589795194820" />
+    <state width="2170" height="715" key="GridCell.Tab.1.center" timestamp="1589795194820">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
-    <state width="2170" height="715" key="GridCell.Tab.1.center/0.23.3840.2057@0.23.3840.2057" timestamp="1589701578794" />
-    <state width="2170" height="715" key="GridCell.Tab.1.left" timestamp="1589701578794">
+    <state width="2170" height="715" key="GridCell.Tab.1.center/0.23.3840.2057@0.23.3840.2057" timestamp="1589795194820" />
+    <state width="2170" height="715" key="GridCell.Tab.1.left" timestamp="1589795194819">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
-    <state width="2170" height="715" key="GridCell.Tab.1.left/0.23.3840.2057@0.23.3840.2057" timestamp="1589701578794" />
-    <state width="2170" height="715" key="GridCell.Tab.1.right" timestamp="1589701578794">
+    <state width="2170" height="715" key="GridCell.Tab.1.left/0.23.3840.2057@0.23.3840.2057" timestamp="1589795194819" />
+    <state width="2170" height="715" key="GridCell.Tab.1.right" timestamp="1589795194820">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
-    <state width="2170" height="715" key="GridCell.Tab.1.right/0.23.3840.2057@0.23.3840.2057" timestamp="1589701578794" />
+    <state width="2170" height="715" key="GridCell.Tab.1.right/0.23.3840.2057@0.23.3840.2057" timestamp="1589795194820" />
     <state x="570" y="817" width="994" height="598" key="NewModule_or_Project.wizard" timestamp="1586930440906">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
@@ -179,10 +191,10 @@
     </state>
     <state x="2248" y="603" key="SettingsEditor/0.0.3840.2160@0.0.3840.2160" timestamp="1589009089999" />
     <state x="1294" y="474" key="SettingsEditor/0.23.3840.2057@0.23.3840.2057" timestamp="1589600511072" />
-    <state width="1039" height="1001" key="XDebugger.FullValuePopup" timestamp="1589404867451">
+    <state width="1039" height="1001" key="XDebugger.FullValuePopup" timestamp="1589794492238">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
-    <state width="1039" height="1001" key="XDebugger.FullValuePopup/0.23.3840.2057@0.23.3840.2057" timestamp="1589404867451" />
+    <state width="1039" height="1001" key="XDebugger.FullValuePopup/0.23.3840.2057@0.23.3840.2057" timestamp="1589794492238" />
     <state x="2068" y="817" key="com.intellij.ide.util.TipDialog" timestamp="1588840101871">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
@@ -233,73 +245,116 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>1221</line>
+          <line>1249</line>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>1168</line>
+          <line>1196</line>
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>1166</line>
+          <line>1194</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>196</line>
+          <line>164</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>197</line>
+          <line>165</line>
           <option name="timeStamp" value="62" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>852</line>
+          <line>879</line>
           <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>762</line>
+          <line>789</line>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>788</line>
+          <line>815</line>
           <option name="timeStamp" value="66" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>764</line>
+          <line>791</line>
           <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>790</line>
+          <line>817</line>
           <option name="timeStamp" value="68" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>775</line>
+          <line>802</line>
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>747</line>
+          <line>774</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Calculator.java</url>
-          <line>391</line>
+          <line>392</line>
           <option name="timeStamp" value="71" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>139</line>
+          <line>95</line>
           <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Pokemon.java</url>
+          <line>86</line>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Pokemon.java</url>
+          <line>85</line>
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Pokemon.java</url>
+          <line>90</line>
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Pokemon.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Pokemon.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Pokemon.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Pokemon.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/Pokemon.java</url>
+          <line>43</line>
+          <properties class="Pokemon" method="convertMonName">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="75" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

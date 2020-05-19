@@ -54,7 +54,10 @@ public class Pokemon {
 		}
 		String[] splittedCopy;
 		splittedCopy = copy.split("\n");//splits it by line
-		for (int i = 0; i < 719; i++) {
+		for (int i = 0; i < 802; i++) {
+			if(i==785){
+				int k=0;
+			}
 			String stats = splittedCopy[i];
 			String[] s = stats.split(";");//splits by semicolon,
 			// just look at the stats.txt file and youll understand

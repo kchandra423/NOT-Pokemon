@@ -7,7 +7,8 @@
 //       Calculates things(obviously). Can calculate damage, if a String is a valid move, who goes first, etc
 //
 //  Bugs:
-//      unknown
+//			Many moves don't work. This is because they work specially, which requires them to be hardcoded specificaly.
+//			Were not willind to do that given the time restraint
 //
 import java.io.IOException;
 import java.nio.file.Files;
@@ -179,6 +180,7 @@ public class Calculator {
 			boostsTarget=target;
 		}
 
+
 		if (category.equalsIgnoreCase("Physical")) {
 			attack = user.getAttack();
 			defense = target.getDefense();
@@ -246,10 +248,16 @@ public class Calculator {
 				&& (target.getType1().equalsIgnoreCase("Poison") || target.getType2().equalsIgnoreCase("Poison"))) {
 
 		} else if (!(status.equalsIgnoreCase("null"))) {//self explanatory
+			if(category.equalsIgnoreCase("status")){
+				if ((boostsTarget.getStatus().equalsIgnoreCase("") || boostsTarget.getStatus().equalsIgnoreCase("null"))) {
+					boostsTarget.setStatus(move.getStatus());
+				}
+			}
 			if (Math.random() <= (double) move.getChance() / 100
 					&& (boostsTarget.getStatus().equalsIgnoreCase("") || boostsTarget.getStatus().equalsIgnoreCase("null"))) {
 				boostsTarget.setStatus(move.getStatus());
 			}
+
 		}
 		if (!(boosts.equalsIgnoreCase("null"))) {//self explanatory
 			if (boosts.contains("atk")) {
