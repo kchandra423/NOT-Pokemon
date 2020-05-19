@@ -48,59 +48,6 @@ public class Battle {
 
 	public Battle() {
 
-        String filepath1 = "Music/PokemonTitleScreen.wav";
-        String filepath2 = "Music/BattleVsWildPokemon.wav";
-        String filepath3 = "Music/BattleVsTrainer.wav";
-        String filepath4 = "Music/BillsLighthouse.wav";
-        String filepath5 = "Music/PaletteTown.wav";
-        String filepath6 = "Music/PewterCity.wav";
-        String filepath7 = "Music/PokemonGym.wav";
-        String filepath8 = "Music/RivalAppears.wav";
-        String filepath9 = "Music/TeamRocketHideout.wav";
-        String filepath10 = "Music/ViridianForest.wav";
-        PlayMusic musicObject = new PlayMusic();
-//self explanatory
-        int random = (int) (Math.random()*10);
-//        if(random < 1)
-//        {
-//        	musicObject.playMusic(filepath1);
-//        }
-//        else if(random < 2)
-//        {
-//        	musicObject.playMusic(filepath2);
-//        }
-//        else if(random < 3)
-//        {
-//        	musicObject.playMusic(filepath3);
-//        }
-//        else if(random < 4)
-//        {
-//        	musicObject.playMusic(filepath4);
-//        }
-//        else if(random < 5)
-//        {
-//        	musicObject.playMusic(filepath5);
-//        }
-//        else if(random < 6)
-//        {
-//        	musicObject.playMusic(filepath6);
-//        }
-//        else if(random < 7)
-//        {
-//        	musicObject.playMusic(filepath7);
-//        }
-//        else if(random < 8)
-//        {
-//        	musicObject.playMusic(filepath8);
-//        }
-//        else if(random < 9)
-//        {
-//        	musicObject.playMusic(filepath9);
-//        }
-//        else if(random < 10)
-//        {
-//        	musicObject.playMusic(filepath10);
-//        }
         frame = new JFrame();
         BufferedImage icon;
         try {
@@ -572,6 +519,67 @@ P2.setCurrentMon();
 		Pokemon[] p2mons = new Pokemon[6];
 		int[][] givenMoves = new int[6][4];
 		int[][] givenMoves2 = new int[6][4];
+
+
+		String[] options = new String[] {"Yes", "No"};
+		int response = JOptionPane.showOptionDialog(null, "Would you like to pause?", null, JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION, null, options, options[0]);
+		 
+		if(response == 0)
+		{
+			String filepath1 = "Music/PokemonTitleScreen.wav";
+			String filepath2 = "Music/BattleVsWildPokemon.wav";
+			String filepath3 = "Music/BattleVsTrainer.wav";
+			String filepath4 = "Music/BillsLighthouse.wav";
+			String filepath5 = "Music/PaletteTown.wav";
+			String filepath6 = "Music/PewterCity.wav";
+			String filepath7 = "Music/PokemonGym.wav";
+			String filepath8 = "Music/RivalAppears.wav";
+			String filepath9 = "Music/TeamRocketHideout.wav";
+			String filepath10 = "Music/ViridianForest.wav";
+			PlayMusic musicObject = new PlayMusic();
+			//self explanatory
+			int random = (int) (Math.random()*10);
+			if(random < 1)
+			{
+				musicObject.playMusic(filepath1);
+			}
+			else if(random < 2)
+			{
+				musicObject.playMusic(filepath2);
+			}
+			else if(random < 3)
+			{
+				musicObject.playMusic(filepath3);
+			}
+			else if(random < 4)
+			{
+				musicObject.playMusic(filepath4);
+			}
+			else if(random < 5)
+			{
+				musicObject.playMusic(filepath5);
+			}
+			else if(random < 6)
+			{
+				musicObject.playMusic(filepath6);
+			}
+			else if(random < 7)
+			{
+				musicObject.playMusic(filepath7);
+			}
+			else if(random < 8)
+			{
+				musicObject.playMusic(filepath8);
+			}
+			else if(random < 9)
+			{
+				musicObject.playMusic(filepath9);
+			}
+			else if(random < 10)
+			{
+				musicObject.playMusic(filepath10);
+			}
+		}
 
 		p1mons[0] = new Pokemon(130);
 		p1mons[1] = new Pokemon(143);
