@@ -49,7 +49,7 @@ public class Battle2 {
 //        String copy = "something went wrong; ";
 //        try {
 ////			copy = Files.readString(Paths.get("Stats.txt"));
-//            byte[] file = Files.readAllBytes(Paths.get("ShowdownLearnsets.txt"));
+
 //            copy = new String(file);
 //        } catch (IOException e) {
 //            e.printStackTrace();
@@ -61,7 +61,7 @@ public class Battle2 {
         EaseOfUse ez=new EaseOfUse();
         Scanner kboard=new Scanner(System.in);
         Calculator calc=new Calculator();
-//        String filepath = "PokemonTitleScreen.wav";
+
 //        PlayMusic musicObject = new PlayMusic();
 //        musicObject.playMusic(filepath);
         Pokemon[] p1mons=new Pokemon[6];
