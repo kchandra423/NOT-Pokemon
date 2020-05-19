@@ -19,6 +19,9 @@ import java.awt.image.BufferedImage;
 public class Battle {
     public static int P1numberOfFaintedMons=0;//self explanatory
     public static int P2numberOfFaintedMons=0;//self explanatory
+	private final String[] MUSIC_OPTIOINS= new String[]{"Music/Battle! (Brendan_May).wav", "Music/Battle! Rival Hugh.wav","Music/BattleVsTrainer.wav","Music/BattleVsWildPokemon.wav","Music/BillsLighthouse.wav",
+	"Music/bw2-kanto-gym-leader.wav","Music/bw-subway-trainer.wav","Music/PaletteTown.wav","Music/PewterCity.wav","Music/PokemonBattleMusic.wav","Music/PokemonGym.wav","Music/PokemonTitleScreen.wav","Music/PokemonThemeSong.wav",
+	"Music/PokemonThemeSong.wav","Music/RivalAppears.wav","Music/TeamRocketHideout.wav","Music/ViridianForest.wav"};//16 music options
 
 	private JFrame frame=new JFrame();//self explanatory
 	private JPanel mainPanel;//self explanatory
@@ -40,6 +43,7 @@ public class Battle {
 	boolean confirm1=false,confirm2=false;//i hate action performed not being able to access things like a normal method
 	static Player P1, P2;
 	private static Object myObject1 =new Object(), myObject2=new Object(), myObject3=new Object();
+	private PlayMusic musicPlayer=new PlayMusic();
 
 
 
@@ -95,6 +99,9 @@ public class Battle {
 //		mainPanel.remove(leftPanelTB);
 //		mainPanel.remove(rightPanelTB);
 //		mainPanel.removeAll();
+		musicPlayer.stop();
+		int random=(int)(Math.random()*16);
+		musicPlayer.play(MUSIC_OPTIOINS[random]);
 		frame.getContentPane().removeAll();
 		mainPanel=new JPanel();
 			P1.setOpposingPlayer(P2);
@@ -562,61 +569,51 @@ P2.setCurrentMon();
 		Player p2 = b.P2;
 		p1.setOpposingPlayer(p2);
 
-//			String filepath1 = "Music/PokemonTitleScreen.wav";
-			String filepath1 = "Music/BattleVsWildPokemon.wav";
-			String filepath2 = "Music/BattleVsTrainer.wav";
-			String filepath3 = "Music/BillsLighthouse.wav";
-			String filepath4 = "Music/PaletteTown.wav";
-			String filepath5 = "Music/PewterCity.wav";
-			String filepath6 = "Music/PokemonGym.wav";
-			String filepath7 = "Music/RivalAppears.wav";
-			String filepath8 = "Music/TeamRocketHideout.wav";
-			String filepath9 = "Music/ViridianForest.wav";
-		String filepath10 = "Music/bw2-kanto-gym-leader.wav";
-			PlayMusic musicObject = new PlayMusic();
-			//self explanatory
-			int random = (int) (Math.random()*10);
-			random=9;
-			if(random < 1)
-			{
-				musicObject.play(filepath1);
-			}
-			else if(random < 2)
-			{
-				musicObject.play(filepath2);
-			}
-			else if(random < 3)
-			{
-				musicObject.play(filepath3);
-			}
-			else if(random < 4)
-			{
-				musicObject.play(filepath4);
-			}
-			else if(random < 5)
-			{
-				musicObject.play(filepath5);
-			}
-			else if(random < 6)
-			{
-				musicObject.play(filepath6);
-			}
-			else if(random < 7)
-			{
-				musicObject.play(filepath7);
-			}
-			else if(random < 8)
-			{
-				musicObject.play(filepath8);
-			}
-			else if(random < 9)
-			{
-				musicObject.play(filepath9);
-			}
-			else if(random < 10)
-			{
-				musicObject.play(filepath10);
-			}
+
+//			PlayMusic musicObject = new PlayMusic();
+//			//self explanatory
+//			int random = (int) (Math.random()*10);
+//			random=9;
+//			if(random < 1)
+//			{
+//				musicObject.play(filepath1);
+//			}
+//			else if(random < 2)
+//			{
+//				musicObject.play(filepath2);
+//			}
+//			else if(random < 3)
+//			{
+//				musicObject.play(filepath3);
+//			}
+//			else if(random < 4)
+//			{
+//				musicObject.play(filepath4);
+//			}
+//			else if(random < 5)
+//			{
+//				musicObject.play(filepath5);
+//			}
+//			else if(random < 6)
+//			{
+//				musicObject.play(filepath6);
+//			}
+//			else if(random < 7)
+//			{
+//				musicObject.play(filepath7);
+//			}
+//			else if(random < 8)
+//			{
+//				musicObject.play(filepath8);
+//			}
+//			else if(random < 9)
+//			{
+//				musicObject.play(filepath9);
+//			}
+//			else if(random < 10)
+//			{
+//				musicObject.play(filepath10);
+//			}
 
 		b.leftText.setText("The match has begun!");//self explanatory
 		b.rightText.setText("The match has begun!");//self explanatory
@@ -1111,6 +1108,9 @@ P2.setCurrentMon();
     }
     // This method lets you choose your pokemon and their moves
 	private void teamBuilder(){
+
+		int random=(int)(Math.random()*16);
+		musicPlayer.play(MUSIC_OPTIOINS[random]);
 		Calculator calc= new Calculator();
 		JPanel mainPanelTB=new JPanel();// the main panel with all of the the components inside
 		mainPanelTB.setLayout(new GridLayout(1,2));
@@ -1791,6 +1791,7 @@ P2.setCurrentMon();
 		P1=new Player(p1Pokemon);
 // set the pokemon chosen to the fields
 		P2=new Player(p2Pokemon);
+
 
 }
 
