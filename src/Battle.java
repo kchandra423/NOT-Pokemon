@@ -521,65 +521,7 @@ P2.setCurrentMon();
 		int[][] givenMoves2 = new int[6][4];
 
 
-		String[] options = new String[] {"Yes", "No"};
-		int response = JOptionPane.showOptionDialog(null, "Would you like to pause?", null, JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION, null, options, options[0]);
-		 
-		if(response == 0)
-		{
-			String filepath1 = "Music/PokemonTitleScreen.wav";
-			String filepath2 = "Music/BattleVsWildPokemon.wav";
-			String filepath3 = "Music/BattleVsTrainer.wav";
-			String filepath4 = "Music/BillsLighthouse.wav";
-			String filepath5 = "Music/PaletteTown.wav";
-			String filepath6 = "Music/PewterCity.wav";
-			String filepath7 = "Music/PokemonGym.wav";
-			String filepath8 = "Music/RivalAppears.wav";
-			String filepath9 = "Music/TeamRocketHideout.wav";
-			String filepath10 = "Music/ViridianForest.wav";
-			PlayMusic musicObject = new PlayMusic();
-			//self explanatory
-			int random = (int) (Math.random()*10);
-			if(random < 1)
-			{
-				musicObject.playMusic(filepath1);
-			}
-			else if(random < 2)
-			{
-				musicObject.playMusic(filepath2);
-			}
-			else if(random < 3)
-			{
-				musicObject.playMusic(filepath3);
-			}
-			else if(random < 4)
-			{
-				musicObject.playMusic(filepath4);
-			}
-			else if(random < 5)
-			{
-				musicObject.playMusic(filepath5);
-			}
-			else if(random < 6)
-			{
-				musicObject.playMusic(filepath6);
-			}
-			else if(random < 7)
-			{
-				musicObject.playMusic(filepath7);
-			}
-			else if(random < 8)
-			{
-				musicObject.playMusic(filepath8);
-			}
-			else if(random < 9)
-			{
-				musicObject.playMusic(filepath9);
-			}
-			else if(random < 10)
-			{
-				musicObject.playMusic(filepath10);
-			}
-		}
+
 
 		p1mons[0] = new Pokemon(130);
 		p1mons[1] = new Pokemon(143);
@@ -619,6 +561,62 @@ P2.setCurrentMon();
 
 		Player p2 = b.P2;
 		p1.setOpposingPlayer(p2);
+
+//			String filepath1 = "Music/PokemonTitleScreen.wav";
+			String filepath1 = "Music/BattleVsWildPokemon.wav";
+			String filepath2 = "Music/BattleVsTrainer.wav";
+			String filepath3 = "Music/BillsLighthouse.wav";
+			String filepath4 = "Music/PaletteTown.wav";
+			String filepath5 = "Music/PewterCity.wav";
+			String filepath6 = "Music/PokemonGym.wav";
+			String filepath7 = "Music/RivalAppears.wav";
+			String filepath8 = "Music/TeamRocketHideout.wav";
+			String filepath9 = "Music/ViridianForest.wav";
+		String filepath10 = "Music/bw2-kanto-gym-leader.wav";
+			PlayMusic musicObject = new PlayMusic();
+			//self explanatory
+			int random = (int) (Math.random()*10);
+			random=9;
+			if(random < 1)
+			{
+				musicObject.play(filepath1);
+			}
+			else if(random < 2)
+			{
+				musicObject.play(filepath2);
+			}
+			else if(random < 3)
+			{
+				musicObject.play(filepath3);
+			}
+			else if(random < 4)
+			{
+				musicObject.play(filepath4);
+			}
+			else if(random < 5)
+			{
+				musicObject.play(filepath5);
+			}
+			else if(random < 6)
+			{
+				musicObject.play(filepath6);
+			}
+			else if(random < 7)
+			{
+				musicObject.play(filepath7);
+			}
+			else if(random < 8)
+			{
+				musicObject.play(filepath8);
+			}
+			else if(random < 9)
+			{
+				musicObject.play(filepath9);
+			}
+			else if(random < 10)
+			{
+				musicObject.play(filepath10);
+			}
 
 		b.leftText.setText("The match has begun!");//self explanatory
 		b.rightText.setText("The match has begun!");//self explanatory

@@ -12,18 +12,19 @@ import javax.swing.JOptionPane;
 
 public class PlayMusic {
 	
-	 private static LinkedList<Line> speakers = new LinkedList<Line>();
-	
-	public void playMusic(String musicLocation)
+//	 private static LinkedList<Line> speakers = new LinkedList<Line>();
+	private long currentTime;
+	private Clip clip;
+	public void play(String musicLocation)
 	{
 		try 
 		{
 			File musicPath = new File(musicLocation);
 			
-			if(musicPath.exists())
+
 			{
 				AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-				Clip clip = AudioSystem.getClip();
+				clip = AudioSystem.getClip();
 				clip.open(audioInput);
 				clip.start();
 				clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -36,14 +37,23 @@ public class PlayMusic {
 				
 				
 			}
-			else
-			{
-				System.out.println("Can't find file");
-			}
+
 		}
 		catch (Exception ex)
 		{
 			ex.printStackTrace();
 		}
+	}
+	public void pause(){
+		currentTime=clip.getMicrosecondPosition();
+		clip.stop();
+	}
+	public void resume(){
+		clip.setMicrosecondPosition(currentTime);
+		clip.start();
+
+	}
+	public void stop(){
+		clip.stop();
 	}
 }
