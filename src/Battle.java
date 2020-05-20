@@ -721,12 +721,12 @@ P2.setCurrentMon();
 			}
 
 //buttons betweens 0 and 4 are for moves, buttons between 4 and 8 are for switches
-			if (b.p1Selection >= 5 && P1numberOfFaintedMons < 5) {
+			if (b.p1Selection >= 4 && P1numberOfFaintedMons < 5) {
 				p1WillSwitch = true;
 				p1SwitchIn = b.p1Selection - 4;
 
 				b.p1Selection = -1;
-			} else if (b.p1Selection <= 4 && b.p1Selection >= 0) {
+			} else if (b.p1Selection < 4 && b.p1Selection >= 0) {
 
 
 				p1SelectedMoveIndex = b.p1Selection;
@@ -747,12 +747,12 @@ P2.setCurrentMon();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if (b.p2Selection >= 5 && P2numberOfFaintedMons < 5) {
+		if (b.p2Selection >=4 && P2numberOfFaintedMons < 5) {
 			p2WillSwitch = true;
 			p2SwitchIn = b.p2Selection - 4;
 
 			b.p2Selection = -1;
-		} else if (b.p2Selection <= 4 && b.p2Selection >= 0) {
+		} else if (b.p2Selection < 4 && b.p2Selection >= 0) {
 
 
 			p2SelectedMoveIndex = b.p2Selection;
@@ -819,6 +819,32 @@ P2.setCurrentMon();
 
 		} else {
 //self explanatory
+			if(p1SelectedMoveIndex==4){
+
+					System.out.println("player1's index was 4 somehow");
+				System.out.println("player1's index was 4 somehow");
+				System.out.println("player1's index was 4 somehow");
+				System.out.println("player1's index was 4 somehow");
+				System.out.println("player1's index was 4 somehow");
+				System.out.println("player1's index was 4 somehow");
+				System.out.println("player1's index was 4 somehow");
+				System.out.println("player1's index was 4 somehow");
+				System.out.println("player1's index was 4 somehow");
+
+			}
+			if(p2SelectedMoveIndex==4){
+				System.out.println("player2's index was 4 somehow");
+				System.out.println("player2's index was 4 somehow");
+				System.out.println("player2's index was 4 somehow");
+				System.out.println("player2's index was 4 somehow");
+				System.out.println("player2's index was 4 somehow");
+				System.out.println("player2's index was 4 somehow");
+				System.out.println("player2's index was 4 somehow");
+				System.out.println("player2's index was 4 somehow");
+				System.out.println("player2's index was 4 somehow");
+				System.out.println("player2's index was 4 somehow");
+
+			}
 			int x = calc.calculateWhoGoesFirst(p1, p2, p1.getCurrentMon().getMoves()[p1SelectedMoveIndex], p2.getCurrentMon().getMoves()[p2SelectedMoveIndex]);
 			if (x == 1) {
 				p1.fight(p1SelectedMoveIndex);
@@ -1027,7 +1053,7 @@ P2.setCurrentMon();
 	}
 
     private void animateHPChange() {
-    	timer = new Timer(5, new ActionListener() {
+    	timer = new Timer(4, new ActionListener() {
     		@Override
     		public void actionPerformed(ActionEvent e) {
     			if(!bar1.isChanging() && !bar2.isChanging()

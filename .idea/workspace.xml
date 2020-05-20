@@ -2,16 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c409674a-022d-407e-a93f-62a2b7549e75" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Megas" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Text/ShowdownStats.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Text/ShowdownStats.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Text/Stats.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Text/Stats.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NOT Pokemon/Calculator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Sprites/SpritesBack/Icon_" beforeDir="false" afterPath="$PROJECT_DIR$/Forms" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Sprites/SpritesBack/hakamoo-back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Sprites/SpritesBack/hakamo-o-back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Sprites/SpritesBack/hooh-back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Sprites/SpritesBack/ho-oh-back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Sprites/SpritesBack/jangmoo-back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Sprites/SpritesBack/jangmo-o-back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Sprites/SpritesBack/kommoo-back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Sprites/SpritesBack/kommo-o-back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Sprites/SpritesBack/nidoranf-back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Sprites/SpritesBack/nidoran-f-back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Sprites/SpritesBack/nidoranm-back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Sprites/SpritesBack/nidoran-m-back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Sprites/SpritesBack/porygonz-back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Sprites/SpritesBack/porygon-z-back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Sprites/SpritesFront/Icon_" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Sprites/SpritesFront/hakamoo.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Sprites/SpritesFront/hakamo-o.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Sprites/SpritesFront/hooh.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Sprites/SpritesFront/ho-oh.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Sprites/SpritesFront/jangmoo.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Sprites/SpritesFront/jangmo-o.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Sprites/SpritesFront/kommoo.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Sprites/SpritesFront/kommo-o.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Sprites/SpritesFront/nidoranf.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Sprites/SpritesFront/nidoran-f.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Sprites/SpritesFront/nidoranm.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Sprites/SpritesFront/nidoran-m.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Sprites/SpritesFront/porygonz.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Sprites/SpritesFront/porygon-z.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/ReadFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NOT Pokemon/ReadFile.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Battle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Battle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Battle2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Battle2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pokemon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ReadFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReadFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +77,7 @@
       <recent name="$PROJECT_DIR$/Text" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Images/Sprites" />
       <recent name="$PROJECT_DIR$/Music" />
       <recent name="$PROJECT_DIR$/Images" />
       <recent name="$PROJECT_DIR$" />
@@ -137,10 +152,10 @@
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state x="916" y="811" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.23.3840.2057@0.23.3840.2057" timestamp="1587094053315" />
-    <state x="1662" y="978" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589867379728">
+    <state x="1662" y="978" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589954899905">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
-    <state x="1662" y="978" key="#com.intellij.fileTypes.FileTypeChooser/0.23.3840.2057@0.23.3840.2057" timestamp="1589867379728" />
+    <state x="1662" y="978" key="#com.intellij.fileTypes.FileTypeChooser/0.23.3840.2057@0.23.3840.2057" timestamp="1589954899905" />
     <state x="987" y="837" key="#com.intellij.ide.util.MemberChooser" timestamp="1589342376753">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
@@ -153,26 +168,26 @@
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state x="2119" y="844" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.3840.2057@0.23.3840.2057" timestamp="1589841259306" />
-    <state width="2170" height="279" key="GridCell.Tab.0.bottom" timestamp="1589948629125">
+    <state width="2170" height="279" key="GridCell.Tab.0.bottom" timestamp="1589958453487">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.bottom/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286148" />
-    <state width="2170" height="279" key="GridCell.Tab.0.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1589948629125" />
-    <state width="2170" height="279" key="GridCell.Tab.0.center" timestamp="1589948629124">
+    <state width="2170" height="279" key="GridCell.Tab.0.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1589958453487" />
+    <state width="2170" height="279" key="GridCell.Tab.0.center" timestamp="1589958453486">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.center/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286147" />
-    <state width="2170" height="279" key="GridCell.Tab.0.center/0.23.3840.2057@0.23.3840.2057" timestamp="1589948629124" />
-    <state width="2170" height="279" key="GridCell.Tab.0.left" timestamp="1589948629123">
+    <state width="2170" height="279" key="GridCell.Tab.0.center/0.23.3840.2057@0.23.3840.2057" timestamp="1589958453486" />
+    <state width="2170" height="279" key="GridCell.Tab.0.left" timestamp="1589958453486">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.left/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286145" />
-    <state width="2170" height="279" key="GridCell.Tab.0.left/0.23.3840.2057@0.23.3840.2057" timestamp="1589948629123" />
-    <state width="2170" height="279" key="GridCell.Tab.0.right" timestamp="1589948629124">
+    <state width="2170" height="279" key="GridCell.Tab.0.left/0.23.3840.2057@0.23.3840.2057" timestamp="1589958453486" />
+    <state width="2170" height="279" key="GridCell.Tab.0.right" timestamp="1589958453486">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.right/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286148" />
-    <state width="2170" height="279" key="GridCell.Tab.0.right/0.23.3840.2057@0.23.3840.2057" timestamp="1589948629124" />
+    <state width="2170" height="279" key="GridCell.Tab.0.right/0.23.3840.2057@0.23.3840.2057" timestamp="1589958453486" />
     <state width="2170" height="715" key="GridCell.Tab.1.bottom" timestamp="1589795194820">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
@@ -242,27 +257,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ReadFile.java</url>
-          <line>119</line>
+          <line>121</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ReadFile.java</url>
-          <line>121</line>
+          <line>123</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>1448</line>
+          <line>1474</line>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>1212</line>
+          <line>1238</line>
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>1210</line>
+          <line>1236</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -277,7 +292,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>890</line>
+          <line>916</line>
           <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -287,7 +302,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>826</line>
+          <line>852</line>
           <option name="timeStamp" value="66" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -297,7 +312,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>828</line>
+          <line>854</line>
           <option name="timeStamp" value="68" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

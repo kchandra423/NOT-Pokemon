@@ -8,6 +8,8 @@
 //  Bugs:
 //    none
 //
+import sun.rmi.transport.proxy.RMIMasterSocketFactory;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -21,14 +23,14 @@ public class ReadFile {
         String copy = "something went wrong; ";
         try {
 //			copy = Files.readString(Paths.get("Stats.txt"));
-            byte[] file = Files.readAllBytes(Paths.get(""));
+            byte[] file = Files.readAllBytes(Paths.get("Text/ShowdownStats.txt"));
             copy = new String(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println(
 //            read.orderMoves(
-                (read.orderMoves(copy)));
+                (read.getMegas(copy)));
     }
 
     public String formatShowDownMovesets(String s) {
@@ -190,19 +192,60 @@ public class ReadFile {
         String[] currentChunksLines = new String[10];
         String[] lines;
         String currentLine = "";
+        int numberOfMegas=0;
         for (int i = 0; i < chunks.length; i++) {
+
             String chunk = chunks[i];
             lines = chunk.split("\n");
-            if(lines[i].contains("mega")) {
-                Arrays.fill(currentChunksLines, "null#");
-
+            if(lines[1].contains("mega")) {
+                Arrays.fill(currentChunksLines, "null;");
+                numberOfMegas++;
                 for (int k = 0; k < lines.length; k++) {
                     currentLine = lines[k];
-
+                    if (currentLine.contains("num: ")) {
+                        currentChunksLines[0] = "1000"+numberOfMegas
+                                + ";";
+                    }
                     if (currentLine.contains("species: ")) {
                         currentChunksLines[1] = currentLine.substring
                                 (currentLine.indexOf("species: ") + 9, currentLine.indexOf(",") + 1)
-                                + "#";
+                                + ";";
+                    }
+                    if (currentLine.contains("types: ")) {
+                        String x=currentLine.substring(currentLine.indexOf("types: ") + 7, currentLine.indexOf("],") );
+
+                        x.replace("\"","");
+                        x.replace(" ","");
+                        String[] types=x.split(",");
+                        currentChunksLines[2]=types[0]+";";
+                        try{
+                            currentChunksLines[3]=types[1]+";";
+                        }catch (Exception e){
+                            currentChunksLines[3]="NA;";
+                        }
+
+                    }
+                    if (currentLine.contains("baseStats: ")) {
+                        String x=currentLine.substring(currentLine.indexOf("baseStats: ") + 11, currentLine.indexOf("},") + 1);
+                        x.replace("}","");
+                        x.replace(" ","");
+                        String newString="";
+                       for(int z=0;z<x.length();z++){
+                           if((Character.isDigit(x.charAt(z)))||x.charAt(z)==','){
+                               newString+=x.charAt(z);
+                           }
+                       }
+
+                        String[] stats=newString.split(",");
+                        currentChunksLines[4]=stats[0]+";";
+                        currentChunksLines[5]=stats[1]+";";
+                        currentChunksLines[6]=stats[2]+";";
+                        currentChunksLines[7]=stats[3]+";";
+                        currentChunksLines[8]=stats[4]+";";
+                        currentChunksLines[9]=stats[5]+";"+"\n";
+
+
+
                     }
                 }
                 for (int a = 0; a < currentChunksLines.length; a++) {
@@ -210,6 +253,12 @@ public class ReadFile {
                 }
             }
         }
+        masterString=masterString.replace("]","");
+        masterString=masterString.replace("[","");
+        masterString=masterString.replace("\"","");
+        masterString=masterString.replace("[","");
+        masterString=masterString.replace(" ","");
+        masterString=masterString.replace(",","");
         return masterString;
 
     }

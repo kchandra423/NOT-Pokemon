@@ -126,8 +126,10 @@ public class Pokemon {
 	}//self explanatory
 
 	public String getID() {//some of the txt files use a pokemons id, which is just its name without spaces or capitalizon or special symbols
-		return name.replace(" ", "").replace("-", "").replace(".", "").toLowerCase();
+		return name.replace(" ", "").replace(".", "").toLowerCase();
 	}
+
+
 
 
 
