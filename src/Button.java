@@ -27,10 +27,10 @@ public class Button extends JButton {
 	public int getNum() {
 		return num;
 	}
-
-	public boolean hasProblem() {
+	boolean hasProblem() {
 		return hasProblem;
 	}
+
 
 	public void setProblem(boolean problem) {
 		hasProblem = problem;

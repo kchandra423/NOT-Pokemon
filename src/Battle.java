@@ -708,7 +708,7 @@ P2.setCurrentMon();
 
 
 		}
-
+		b.repaint(p1,p2);
 		while (gameNotOver) {
 
 //**for p1***
@@ -959,7 +959,7 @@ P2.setCurrentMon();
 
     }
     public void repaint(Player p1, Player p2) {
-
+Calculator calc=new Calculator();
 			name1.setText(p1.getCurrentMon().getName());//self explanatory
 
 			name2 .setText(p2.getCurrentMon().getName());//self explanatory
@@ -985,12 +985,44 @@ P2.setCurrentMon();
 
 
 			for (int i =0;i<leftMoveButtons.length;i++){
+				leftMoveButtons[i].setOpaque(true);
 				leftMoveButtons[i].setText(p1.getCurrentMon().getMoves()[i].getName());//self explanatory
 				if(p1.getCurrentMon().getMoves()[i].getPP() == 0) {
 					leftMoveButtons[i].setEnabled(false);
 				}
 				else {
 					leftMoveButtons[i].setEnabled(true);
+				}
+				double howEffective=calc.typeModifier(
+						calc.getIntFromType(p1.getCurrentMon().getMoves()[i].getType()),
+						calc.getIntFromType(p2.getCurrentMon().getType1()),
+						calc.getIntFromType(p2.getCurrentMon().getType2()));
+				if(howEffective==4.0){
+					leftMoveButtons[i].setBackground(new Color(255,0,0));
+					leftMoveButtons[i].setForeground(new Color(255,0,0));
+				}
+				else if(howEffective==2.0){
+					leftMoveButtons[i].setBackground(new Color(255,127,0));
+					leftMoveButtons[i].setForeground(new Color(255,127,0));
+
+				}
+				else if(howEffective==1.0){
+					leftMoveButtons[i].setBackground(new Color(255,255,255));
+					leftMoveButtons[i].setForeground(new Color(0,0,0));
+				}
+				else if(howEffective==0.5){
+					leftMoveButtons[i].setBackground(new Color(0,255,255));
+					leftMoveButtons[i].setForeground(new Color(0,127,255));
+				}
+				else if(howEffective==0.25){
+					leftMoveButtons[i].setBackground(new Color(0,0,255));
+					leftMoveButtons[i].setForeground(new Color(0,0,255));
+				}
+				else if(howEffective==0.0){
+					leftMoveButtons[i].setBackground(new Color(0,0,0));
+					leftMoveButtons[i].setForeground(new Color(0,0,0));
+
+
 				}
 			}
 			for (int i =0;i<leftSwitchButtons.length;i++){
@@ -1032,12 +1064,44 @@ P2.setCurrentMon();
 
 
 		for (int i =0;i<rightMoveButtons.length;i++){//self explanatory
+			rightMoveButtons[i].setOpaque(true);
 			rightMoveButtons[i].setText(p2.getCurrentMon().getMoves()[i].getName());
 			if(p2.getCurrentMon().getMoves()[i].getPP() == 0) {
 				rightMoveButtons[i].setEnabled(false);
 			}
 			else {
 				rightMoveButtons[i].setEnabled(true);
+			}
+			double howEffective=calc.typeModifier(
+					calc.getIntFromType(p2.getCurrentMon().getMoves()[i].getType()),
+					calc.getIntFromType(p1.getCurrentMon().getType1()),
+					calc.getIntFromType(p1.getCurrentMon().getType2()));
+			if(howEffective==4.0){
+				rightMoveButtons[i].setBackground(new Color(255,0,0));
+				rightMoveButtons[i].setForeground(new Color(255,0,0));
+			}
+			else if(howEffective==2.0){
+				rightMoveButtons[i].setBackground(new Color(255,127,0));
+				rightMoveButtons[i].setForeground(new Color(255,127,0));
+
+			}
+			else if(howEffective==1.0){
+				rightMoveButtons[i].setBackground(new Color(255,255,255));
+				rightMoveButtons[i].setForeground(new Color(0,0,0));
+			}
+			else if(howEffective==0.5){
+				rightMoveButtons[i].setBackground(new Color(0,255,255));
+				rightMoveButtons[i].setForeground(new Color(0,127,255));
+			}
+			else if(howEffective==0.25){
+				rightMoveButtons[i].setBackground(new Color(0,0,255));
+				rightMoveButtons[i].setForeground(new Color(0,0,255));
+			}
+			else if(howEffective==0.0){
+				rightMoveButtons[i].setBackground(new Color(0,0,0));
+				rightMoveButtons[i].setForeground(new Color(0,0,0));
+
+
 			}
 		}
 		for (int i =0;i<rightSwitchButtons.length;i++){
@@ -1099,7 +1163,7 @@ P2.setCurrentMon();
 		GridBagConstraints constraints=new GridBagConstraints();//we used a  grid bag layout for the UI
 		JLabel[] leftPanelImages=new JLabel[6], rightPanelImages=new JLabel[6];//self explanatory
 		JTextArea[] rightPokemonInputs=new JTextArea[6], leftPokemonInputs=new JTextArea[6];//self explanatory
-		JTextField[][] rightMoveInputs=new JTextField[6][4],leftMoveInputs=new JTextField[6][4];//self explanatory
+		KTextField[][] rightMoveInputs=new KTextField[6][4],leftMoveInputs=new KTextField[6][4];//self explanatory
 		Button[] rightConfirmationButtons=new Button[6],leftConfirmationButtons=new Button[6];//confirms a pokemon
 		JButton rightValidationButton=new JButton("Confirm Team"),leftValidationButton=new JButton("Confirm Team");//confirms the entire team
 
@@ -1140,7 +1204,37 @@ P2.setCurrentMon();
 		for (int i = 0; i < 6; i++) {//keeps track of the column you are on
 
 			for (int k = 0; k < 4; k++) {//keeps track of the row
-				leftMoveInputs[i][k] = new JTextField("Pound");//pound is the default move
+				leftMoveInputs[i][k] = new KTextField("Pound");//pound is the default move
+				leftMoveInputs[i][k].setColumn(i);
+				leftMoveInputs[i][k].setRow(k);
+				leftMoveInputs[i][k].addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						if (SwingUtilities.isRightMouseButton(e)) {
+							int x = ((KTextField) e.getSource()).getColumn();
+							int y=((KTextField) e.getSource()).getRow();
+							String textInfo = leftMoveInputs[x][y].getText();
+
+							try {
+								Move z=new Move(textInfo);
+								JOptionPane.showMessageDialog(leftPanelTB,//in the left panel
+										z.toString(),//see above
+										"Move Info",//self explanatory
+										2,//self explanatory
+										(new ImageIcon(new ImageIcon("Images/Types/" + //the icon depends on the type of the move
+												z.getType() + ".png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+							}
+							catch (Exception ex){
+								JOptionPane.showMessageDialog(leftPanelTB,
+										"That was not a valid move",
+										"Invalid Move",//self explanatory
+										2,//self explanatory
+										(new ImageIcon(new ImageIcon("Images/Exclamation.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));//self explanatory
+							}
+
+						}
+					}
+				});
 				constraints.gridx = i;//the column you are on
 				constraints.gridy = k + 1;//row+1 because the pokemon input are in the first row
 				constraints.gridwidth = 1;
@@ -1462,7 +1556,37 @@ P2.setCurrentMon();
 	for (int i = 0; i < 6; i++) {//keeps track of the column you are on
 
 		for (int k = 0; k < 4; k++) {//keeps track of the row
-			rightMoveInputs[i][k] = new JTextField("Pound");
+			rightMoveInputs[i][k] = new KTextField("Pound");//pound is the default move
+			rightMoveInputs[i][k].setColumn(i);
+			rightMoveInputs[i][k].setRow(k);
+			rightMoveInputs[i][k].addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if (SwingUtilities.isRightMouseButton(e)) {
+						int x = ((KTextField) e.getSource()).getColumn();
+						int y=((KTextField) e.getSource()).getRow();
+						String textInfo = rightMoveInputs[x][y].getText();
+
+						try {
+							Move z=new Move(textInfo);
+							JOptionPane.showMessageDialog(rightPanelTB,//in the right panel
+									z.toString(),//see above
+									"Move Info",//self explanatory
+									2,//self explanatory
+									(new ImageIcon(new ImageIcon("Images/Types/" + //the icon depends on the type of the move
+											z.getType() + ".png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+						}
+						catch (Exception ex){
+							JOptionPane.showMessageDialog(rightPanelTB,
+									"That was not a valid move",
+									"Invalid Move",//self explanatory
+									2,//self explanatory
+									(new ImageIcon(new ImageIcon("Images/Exclamation.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));//self explanatory
+						}
+
+					}
+				}
+			});
 			constraints.gridx = i;//the column you are on
 			constraints.gridy = k + 1;//row+1 because the pokemon input are in the first row
 			constraints.gridwidth = 1;
@@ -1726,7 +1850,7 @@ P2.setCurrentMon();
 				rightPokemonInputs[5].setText("Chandelure");
 				rightMoveInputs[5][0].setText("Recover");
 				rightMoveInputs[5][1].setText("Shadow Ball");
-				rightMoveInputs[5][2].setText("Recover");
+				rightMoveInputs[5][2].setText("Crunch");
 				rightMoveInputs[5][3].setText("Flamethrower");
 
 
