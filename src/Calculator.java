@@ -358,7 +358,7 @@ public class Calculator {
 // (((2 * Level + 10) / 250) * (Attack[or special attack] / Defense[or special defense]) * Boosts + 2)
 		//we simplified it for the moost part and just added a magic constant at the end
 		//also since we dont have level's implemented, we just use the smogon level standard, which is 50
-		damage = (int) (((((((200 / 5) + 2) * power * attack) / defense) / 50) + 2)
+		damage = (int) ((((((2*100/5+2)*power*attack/defense))/50)+2)
 				* typeModifier(moveType, defenseType1, defenseType2)
 				* ThreadLocalRandom.current().nextDouble(.85, 1.01));
 
@@ -401,7 +401,7 @@ public class Calculator {
 		target.heal((int)(target.getBaseHealth()*heal));
 		System.out.println(target.getName()+" healed "+(int)(target.getBaseHealth()*heal)+" health.");
 		if(damaging){
-		return (int) (damage / 4.61538461538 * 3);//magic constants !
+		return  (damage);//magic constants !
 		}else{
 			return 0;
 		}

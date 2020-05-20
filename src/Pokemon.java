@@ -106,13 +106,13 @@ public class Pokemon {
 		name = s[1];//self explanatory
 		type1 = s[2];//self explanatory
 		type2 = s[3];//self explanatory
-		baseHealth = Integer.parseInt(s[4]);
+		baseHealth = Integer.parseInt(s[4])*2+110;
 		health = baseHealth;//self explanatory
-		baseAttack = Integer.parseInt(s[5]);
-		baseDefense = Integer.parseInt(s[6]);
-		baseSpecialAttack = Integer.parseInt(s[7]);//self explanatory
-		baseSpecialDefense = Integer.parseInt(s[8]);
-		baseSpeed = Integer.parseInt(s[9]);
+		baseAttack = Integer.parseInt(s[5])*2+5;
+		baseDefense = Integer.parseInt(s[6])*2+5;
+		baseSpecialAttack = Integer.parseInt(s[7])*2+5;//self explanatory
+		baseSpecialDefense = Integer.parseInt(s[8])*2+5;
+		baseSpeed = Integer.parseInt(s[9])*2+5;
 
 
 	}

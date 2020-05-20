@@ -11,6 +11,7 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 public class ReadFile {
     //17
@@ -180,6 +181,38 @@ public class ReadFile {
         }
         return masterString;
     }
+    public String getMegas(String s) {
+        //takes a string of the showdown movesets txt file and returns a string with
+        // each move neccesary stats seperated by # and each move seperated by a \n
+        String masterString = "";
+        String[] chunks;
+        chunks = s.split("ENDLINE");
+        String[] currentChunksLines = new String[10];
+        String[] lines;
+        String currentLine = "";
+        for (int i = 0; i < chunks.length; i++) {
+            String chunk = chunks[i];
+            lines = chunk.split("\n");
+            if(lines[i].contains("mega")) {
+                Arrays.fill(currentChunksLines, "null#");
+
+                for (int k = 0; k < lines.length; k++) {
+                    currentLine = lines[k];
+
+                    if (currentLine.contains("species: ")) {
+                        currentChunksLines[1] = currentLine.substring
+                                (currentLine.indexOf("species: ") + 9, currentLine.indexOf(",") + 1)
+                                + "#";
+                    }
+                }
+                for (int a = 0; a < currentChunksLines.length; a++) {
+                    masterString += currentChunksLines[a];
+                }
+            }
+        }
+        return masterString;
+
+    }
 //  0    1        2      3          4     5    6    7         8      9       10     11       12         13    14     15   16     17     18
 //Num, accuracy, power, category, desc, name, pp , priority, flags, chance, self, boosts, crit ratio, drain, heal,status,target, type, id
     //self= boosts target self
@@ -190,6 +223,7 @@ public class ReadFile {
         String[] neu = new String[719];
         String[] old = s.split("\n");
         int num = 0;
+
         for (int i = 0; i < old.length; i++) {
             String firstPartOfOLd = old[i].split("#")[0];
             try {

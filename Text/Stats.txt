@@ -800,3 +800,11 @@
 800;Necrozma;Psychic;NA;97;107;101;127;89;79;
 801;Magearna;Steel;Fairy;80;95;115;130;115;65;
 802;Marshadow;Fighting;Ghost;90;125;80;90;90;125;
+803;Poipole;Poison;NA;67;73;67;73;67;73;
+804;Naganadel;Poison;Dragon;73;73;73;127;73;121;
+805;Stakataka;Rock;Steel;61;131;211;53;101;13;
+806;Blacephalon;Fire;Ghost;53;127;53;151;79;107;
+807;Zeraora;Electric;NA;88;112;75;102;80;143;
+808;Meltan;Steel;NA;46;65;65;55;35;34;
+809;Melmetal;Steel;NA;135;143;143;80;65;34;
+

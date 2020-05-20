@@ -1027,7 +1027,7 @@ P2.setCurrentMon();
 	}
 
     private void animateHPChange() {
-    	timer = new Timer(25, new ActionListener() {
+    	timer = new Timer(5, new ActionListener() {
     		@Override
     		public void actionPerformed(ActionEvent e) {
     			if(!bar1.isChanging() && !bar2.isChanging()

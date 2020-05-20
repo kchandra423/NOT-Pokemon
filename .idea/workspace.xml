@@ -2,11 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c409674a-022d-407e-a93f-62a2b7549e75" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/test" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Text/Moves.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Text/Moves.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Text/ShowdownStats.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Text/ShowdownStats.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Text/Stats.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Text/Stats.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NOT Pokemon/Calculator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/ReadFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NOT Pokemon/ReadFile.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Battle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Battle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pokemon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReadFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReadFile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,13 +52,16 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Text" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Text" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Music" />
       <recent name="$PROJECT_DIR$/Images" />
@@ -145,26 +153,26 @@
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state x="2119" y="844" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.3840.2057@0.23.3840.2057" timestamp="1589841259306" />
-    <state width="2479" height="276" key="GridCell.Tab.0.bottom" timestamp="1589876416486">
+    <state width="2170" height="279" key="GridCell.Tab.0.bottom" timestamp="1589948629125">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.bottom/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286148" />
-    <state width="2479" height="276" key="GridCell.Tab.0.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1589876416486" />
-    <state width="2479" height="276" key="GridCell.Tab.0.center" timestamp="1589876416485">
+    <state width="2170" height="279" key="GridCell.Tab.0.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1589948629125" />
+    <state width="2170" height="279" key="GridCell.Tab.0.center" timestamp="1589948629124">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.center/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286147" />
-    <state width="2479" height="276" key="GridCell.Tab.0.center/0.23.3840.2057@0.23.3840.2057" timestamp="1589876416485" />
-    <state width="2479" height="276" key="GridCell.Tab.0.left" timestamp="1589876416485">
+    <state width="2170" height="279" key="GridCell.Tab.0.center/0.23.3840.2057@0.23.3840.2057" timestamp="1589948629124" />
+    <state width="2170" height="279" key="GridCell.Tab.0.left" timestamp="1589948629123">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.left/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286145" />
-    <state width="2479" height="276" key="GridCell.Tab.0.left/0.23.3840.2057@0.23.3840.2057" timestamp="1589876416485" />
-    <state width="2479" height="276" key="GridCell.Tab.0.right" timestamp="1589876416486">
+    <state width="2170" height="279" key="GridCell.Tab.0.left/0.23.3840.2057@0.23.3840.2057" timestamp="1589948629123" />
+    <state width="2170" height="279" key="GridCell.Tab.0.right" timestamp="1589948629124">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.right/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286148" />
-    <state width="2479" height="276" key="GridCell.Tab.0.right/0.23.3840.2057@0.23.3840.2057" timestamp="1589876416486" />
+    <state width="2170" height="279" key="GridCell.Tab.0.right/0.23.3840.2057@0.23.3840.2057" timestamp="1589948629124" />
     <state width="2170" height="715" key="GridCell.Tab.1.bottom" timestamp="1589795194820">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
@@ -234,12 +242,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ReadFile.java</url>
-          <line>118</line>
+          <line>119</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ReadFile.java</url>
-          <line>120</line>
+          <line>121</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
