@@ -15,6 +15,8 @@ import java.nio.file.Paths;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Calculator {
+	private Battle battle;
+	
 	String typings[] = { "Normal", "Fighting", "Flying", "Poison", "Ground", "Rock", "Bug", "Ghost", "Steel", "Fire",
 			"Water", "Grass", "Electric", "Psychic", "Ice", "Dragon", "Dark", "Fairy" };
 
@@ -43,6 +45,10 @@ public class Calculator {
 // entire aray of things for this besides to waste my time.
 // I literally would have learned nothing if i filled all that out manually, which he had already did
 
+	// constructor to get the battle class to use the log command
+	public Calculator(Battle battle) {
+		this.battle = battle;
+	}
 
 	//checks if a pokemon is valid
 	public boolean isPokemon(String pokemonName){
@@ -189,7 +195,7 @@ public class Calculator {
 		if (move.getAccuracy() == 101) {//some moves cannot miss, in which case they are given an accuracy of 101
 
 		} else if (Math.random() > (double) move.getAccuracy() / 100) {//self explanatory
-			System.out.println(target.getName() + " evaded the attack!");
+			battle.log(target.getName() + " evaded the attack!");
 			return 0;
 
 		}
@@ -405,14 +411,14 @@ public class Calculator {
 			if (user.getStatus().equalsIgnoreCase("brn")) {
 				damage *= 2;
 			}
-			System.out.println(user.getName() + " scored a critical hit!");
+			battle.log(user.getName() + " scored a critical hit!");
 
 		} else if (Math.random() < 0.25 && move.getCritical() == 1) {
 			damage *= 1.5;
 			if (user.getStatus().equalsIgnoreCase("brn")) {
 				damage *= 2;
 			}
-			System.out.println(user.getName() + " scored a critical hit!");
+			battle.log(user.getName() + " scored a critical hit!");
 
 		} else if (Math.random() <= 1 && move.getCritical() == 2) {// only because we assume they have max affection
 			//(affection is another variable were not going to implement)
@@ -421,19 +427,23 @@ public class Calculator {
 				damage *= 2;
 			}
 
-			System.out.println(user.getName() + " scored a critical hit!");
+			battle.log(user.getName() + " scored a critical hit!");
 		} else if (move.getCritical() >= 3) {
 			damage *= 1.5;
 			if (user.getStatus().equalsIgnoreCase("brn")) {
 				damage *= 2;
 			}
-			System.out.println(user.getName() + " scored a critical hit!");
+			battle.log(user.getName() + " scored a critical hit!");
 
 		}
 		user.heal((int)(damage*drain));
-		System.out.println(user.getName()+" absorbed "+(int)(damage*drain)+" health from "+target.getName());
+		if(drain > 0) {
+			battle.log(user.getName()+" absorbed "+(int)(damage*drain)+" health from "+target.getName());
+		}
 		target.heal((int)(target.getBaseHealth()*heal));
-		System.out.println(target.getName()+" healed "+(int)(target.getBaseHealth()*heal)+" health.");
+		if(heal > 0) {
+			battle.log(target.getName()+" healed "+(int)(target.getBaseHealth()*heal)+" health.");
+		}
 		if(damaging){
 		return  (damage);//magic constants !
 		}else{

@@ -13,44 +13,48 @@ import java.awt.event.*;
 import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.text.DefaultCaret;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Battle {
-    public static int P1numberOfFaintedMons=0;//self explanatory
-    public static int P2numberOfFaintedMons=0;//self explanatory
-	private final String[] MUSIC_OPTIONS= new String[]{"Music/Battle! (Brendan_May).wav", "Music/Battle! Rival Hugh.wav","Music/BattleVsTrainer.wav","Music/BattleVsWildPokemon.wav","Music/BillsLighthouse.wav",
-	"Music/bw2-kanto-gym-leader.wav","Music/bw-subway-trainer.wav","Music/PaletteTown.wav","Music/PewterCity.wav","Music/PokemonBattleMusic.wav","Music/PokemonGym.wav","Music/PokemonTitleScreen.wav","Music/PokemonThemeSong.wav",
-	"Music/RivalAppears.wav","Music/TeamRocketHideout.wav","Music/ViridianForest.wav"};//16 music options
+	public static int P1numberOfFaintedMons = 0;// self explanatory
+	public static int P2numberOfFaintedMons = 0;// self explanatory
+	private final String[] MUSIC_OPTIONS = { "Music/Battle! (Brendan_May).wav", "Music/Battle! Rival Hugh.wav",
+			"Music/BattleVsTrainer.wav", "Music/BattleVsWildPokemon.wav", "Music/BillsLighthouse.wav",
+			"Music/bw2-kanto-gym-leader.wav", "Music/bw-subway-trainer.wav", "Music/PaletteTown.wav",
+			"Music/PewterCity.wav", "Music/PokemonBattleMusic.wav", "Music/PokemonGym.wav",
+			"Music/PokemonTitleScreen.wav", "Music/PokemonThemeSong.wav", "Music/RivalAppears.wav",
+			"Music/TeamRocketHideout.wav", "Music/ViridianForest.wav" };// 16 music options
 
-	private JFrame frame=new JFrame();//self explanatory
-	private JPanel mainPanel;//self explanatory
+	private JFrame frame = new JFrame();// self explanatory
+	private JPanel mainPanel;// self explanatory
 	private JPanel leftPanel, rightPanel;
-	private BackgroundPanel leftDisplayPanel, rightDisplayPanel;//the display shown to the user
-	private JPanel leftUI, rightUI;//the users interface
-	private JPanel leftMovePanel=new JPanel(),rightMovePanel = new JPanel();//move options
-	private JPanel leftSwitchPanel= new JPanel(),rightSwitchPanel=new JPanel();//switch options
+	private BackgroundPanel leftDisplayPanel, rightDisplayPanel;// the display shown to the user
+	private JPanel leftUI, rightUI;// the users interface
+	private JPanel leftMovePanel = new JPanel(), rightMovePanel = new JPanel();// move options
+	private JPanel leftSwitchPanel = new JPanel(), rightSwitchPanel = new JPanel();// switch options
 
-	private static JLabel name1, name2, image1, image2,name3, name4, image3, image4,
-			attack = new JLabel("Attack"), switchOut = new JLabel("Switch");
+	private JLabel name1, name2, image1, image2, name3, name4, image3, image4, attack = new JLabel("Attack"),
+			switchOut = new JLabel("Switch");
 	private HealthBar bar1, bar2, bar3, bar4;
-	private Button[] leftMoveButtons = new Button[4],rightMoveButtons=new Button[4];
-	private int p1Selection=-1;
-	private int p2Selection =-1;
-	private Button[] leftSwitchButtons = new Button[6],rightSwitchButtons = new Button[6];
-	public JTextArea leftText, rightText;
+	private Button[] leftMoveButtons = new Button[4], rightMoveButtons = new Button[4];
+	private int p1Selection = -1;
+	private int p2Selection = -1;
+	private Button[] leftSwitchButtons = new Button[6], rightSwitchButtons = new Button[6];
+	private JTextArea leftText, rightText;
 	private Timer timer;
-	boolean confirm1=false,confirm2=false;//i hate action performed not being able to access things like a normal method
-	static Player P1, P2;
-	private static Object myObject1 =new Object(), myObject2=new Object(), myObject3=new Object();
-	private PlayMusic musicPlayer=new PlayMusic();
-
-
-
-
-
+	private boolean confirm1 = false, confirm2 = false;// i hate action performed not being able to access things like a normal
+												// method
+	private static Player P1, P2;
+	private static Object myObject1 = new Object(), myObject2 = new Object(), myObject3 = new Object();
+	private PlayMusic musicPlayer = new PlayMusic();
+	private Calculator calc;
 
 	public Battle() {
+		calc = new Calculator(this);
+		
         frame = new JFrame();
         BufferedImage icon;
         try {
@@ -70,7 +74,7 @@ public class Battle {
 //		frame.add(mainPanel);
 //				frame.getContentPane().add(rightPanel);
 
-		frame.setBounds(100, 100, 3000, 750);
+		frame.setBounds(100, 100, 2000, 750);
 		frame.setVisible(true);
 		 frame.setResizable(false);
 		frame.setTitle("NOT Pokemon");
@@ -326,9 +330,10 @@ P2.setCurrentMon();
 			c.insets = new Insets(0, 0, 0, 0);
 			leftPanel.add(leftSwitchPanel, c);
 			leftText = new JTextArea(20, 20);
-//    	text.setEditable(false);
+			leftText.setEditable(false);
 			leftText.setLineWrap(true);
 			leftText.setWrapStyleWord(true);
+			((DefaultCaret)leftText.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 			JScrollPane pane = new JScrollPane(leftText,
 					ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 					ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -492,9 +497,10 @@ P2.setCurrentMon();
 			y.insets = new Insets(0, 0, 0, 0);
 			rightPanel.add(rightSwitchPanel, y);
 			rightText = new JTextArea(20, 20);
-//    	text.setEditable(false);
+			rightText.setEditable(false);
 			rightText.setLineWrap(true);
 			rightText.setWrapStyleWord(true);
+			((DefaultCaret)rightText.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 			JScrollPane pane2 = new JScrollPane(rightText,
 					ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 					ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -516,10 +522,7 @@ P2.setCurrentMon();
     }
 //the main, where everything happens
     public static void main (String[] args) {
-
-		EaseOfUse ez = new EaseOfUse();
-
-		Calculator calc = new Calculator();
+		/*
 		Pokemon[] p1mons = new Pokemon[6];
 		Pokemon[] p2mons = new Pokemon[6];
 		int[][] givenMoves = new int[6][4];
@@ -557,10 +560,10 @@ P2.setCurrentMon();
 		givenMoves2[5] = new int[]{18, 19, 20, 21};
 		P1 = new Player(p1mons, givenMoves);//default teams, not used for anything now that we have the teambuilder
 		P2 = new Player(p2mons, givenMoves2);
-
+		*/
+		
 		Battle b = new Battle();// calls the constructor, which sets up the gui
 		Player p1 = b.P1;// doesn't use the global variables because this was created before we had GUI
-
 		Player p2 = b.P2;
 		p1.setOpposingPlayer(p2);
 
@@ -759,7 +762,7 @@ P2.setCurrentMon();
 
 			b.p2Selection = -1;
 		}
-
+		b.log("------ ------ ------");
 		if (p1WillSwitch && p2WillSwitch) {//calculates who switches first based on whos faster
 			//kind of useless since you cant see it and use the information it gives you since there are no
 			//animations but, good to have implemented incase we add them
@@ -845,7 +848,7 @@ P2.setCurrentMon();
 				System.out.println("player2's index was 4 somehow");
 
 			}
-			int x = calc.calculateWhoGoesFirst(p1, p2, p1.getCurrentMon().getMoves()[p1SelectedMoveIndex], p2.getCurrentMon().getMoves()[p2SelectedMoveIndex]);
+			int x = b.calc.calculateWhoGoesFirst(p1, p2, p1.getCurrentMon().getMoves()[p1SelectedMoveIndex], p2.getCurrentMon().getMoves()[p2SelectedMoveIndex]);
 			if (x == 1) {
 				p1.fight(p1SelectedMoveIndex);
 				p2.fight(p2SelectedMoveIndex);
@@ -854,11 +857,10 @@ P2.setCurrentMon();
 				p1.fight(p1SelectedMoveIndex);
 			} else {
 				while (true) {
-					ez.print("Something went wrong");//questioinable style, but gets your attention when it happens, and we have never had it happen
+					System.out.println("Something went wrong");//questioinable style, but gets your attention when it happens, and we have never had it happen
 				}
 			}
 		}
-
 		b.repaint(p1, p2);//repaints the display
 		if (p1.isDefeated()) {//self explanatory
 			gameNotOver = false;
@@ -958,8 +960,7 @@ P2.setCurrentMon();
         }
 
     }
-    public void repaint(Player p1, Player p2) {
-Calculator calc=new Calculator();
+    private void repaint(Player p1, Player p2) {
 			name1.setText(p1.getCurrentMon().getName());//self explanatory
 
 			name2 .setText(p2.getCurrentMon().getName());//self explanatory
@@ -1146,7 +1147,6 @@ Calculator calc=new Calculator();
 
 		int random=(int)(Math.random()*16);
 		musicPlayer.play(MUSIC_OPTIONS[random]);
-		Calculator calc= new Calculator();
 		JPanel mainPanelTB=new JPanel();// the main panel with all of the the components inside
 		mainPanelTB.setLayout(new GridLayout(1,2));
 		frame.add(mainPanelTB);//using the frame from the field so as not to use multiple Jframes
@@ -1953,17 +1953,19 @@ Calculator calc=new Calculator();
 		constraints.fill = GridBagConstraints.HORIZONTAL;
 		constraints.insets = new Insets(5, 5, 5, 0);
 		rightUI.add(rightPresetTeam3, constraints);//adds to UI
-	leftPanelTB.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
-	rightPanelTB.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
-	rightDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
-	leftDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
+		leftPanelTB.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
+		rightPanelTB.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
+		rightDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
+		leftDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK));//self explanatory
 
-		P1=new Player(p1Pokemon);
+		P1=new Player(this, calc, p1Pokemon);
 // set the pokemon chosen to the fields
-		P2=new Player(p2Pokemon);
+		P2=new Player(this, calc, p2Pokemon);
+	}
 
-
-}
-
+	public void log(String s) {
+    	leftText.setText(leftText.getText() + "\n" + s);
+    	rightText.setText(rightText.getText() + "\n" + s);
+    }
 
 }

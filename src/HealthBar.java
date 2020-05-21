@@ -45,27 +45,30 @@ public class HealthBar extends JLabel {
 		g2.setColor(hpText);
 		g2.setFont(g2.getFont().deriveFont(10f));
 		g2.drawString("HP", xOffset+8, 10);
+		double remaining = (double)hpOnScreen/pokemon.getBaseHealth()*105;
+		// if pokemon has not fainted, always draw at least one pixel
+		int pixels = (remaining > 0 && remaining < 1) ? 1 : (int)Math.round(remaining);
 		// change color based on health percentage
 		if(hpOnScreen > pokemon.getBaseHealth()/2.0) {
 			g2.setColor(lightGreen);
-			g2.fillRect(xOffset+30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 8);
+			g2.fillRect(xOffset+30, 2, pixels, 8);
 			g2.setColor(darkGreen);
-			g2.fillRect(xOffset+30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
-			g2.fillRect(xOffset+30, 8, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
+			g2.fillRect(xOffset+30, 2, pixels, 2);
+			g2.fillRect(xOffset+30, 8, pixels, 2);
 		}
 		else if(hpOnScreen >= pokemon.getBaseHealth()/5.0) {
 			g2.setColor(lightYellow);
-			g2.fillRect(xOffset+30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 8);
+			g2.fillRect(xOffset+30, 2, pixels, 8);
 			g2.setColor(darkYellow);
-			g2.fillRect(xOffset+30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
-			g2.fillRect(xOffset+30, 8, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
+			g2.fillRect(xOffset+30, 2, pixels, 2);
+			g2.fillRect(xOffset+30, 8, pixels, 2);
 		}
 		else {
 			g2.setColor(lightRed);
-			g2.fillRect(xOffset+30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 8);
+			g2.fillRect(xOffset+30, 2, pixels, 8);
 			g2.setColor(darkRed);
-			g2.fillRect(xOffset+30, 2, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
-			g2.fillRect(xOffset+30, 8, (int)((double)hpOnScreen/pokemon.getBaseHealth()*105), 2);
+			g2.fillRect(xOffset+30, 2, pixels, 2);
+			g2.fillRect(xOffset+30, 8, pixels, 2);
 		}
 		g2.setColor(border);
 		g2.fillRect(xOffset+28, 2, 2, 8);

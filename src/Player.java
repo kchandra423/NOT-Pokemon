@@ -13,18 +13,23 @@
 //      unknown
 //
 public class Player {
+	private Battle battle;
+	private EaseOfUse ez = new EaseOfUse();
+    private Calculator calculator;//self explanatory
     private Pokemon[] pokemon;//has 6 pokemon
-    private EaseOfUse ez = new EaseOfUse();
-    private Calculator calculator= new Calculator();//self explanatory
     private Pokemon currentMon;// your current pokemon that is in play
     private Player opposingPlayer;// the opponent
-    public Player(Pokemon[] givenMons, Player other){//sets pokemon and opponent
-        pokemon=givenMons;
+    public Player(Battle battle, Calculator calc, Pokemon[] givenMons, Player other){//sets pokemon and opponent
+        this.battle = battle;
+    	calculator = calc;
+    	pokemon=givenMons;
         opposingPlayer=other;
         currentMon=givenMons[0];
     }
-    public Player(Pokemon[] givenMons, int[][] givenMoves, Player other){//sets pokemon and moves
-        pokemon=givenMons;
+    public Player(Battle battle, Calculator calc, Pokemon[] givenMons, int[][] givenMoves, Player other){//sets pokemon and moves
+    	this.battle = battle;
+    	calculator = calc;
+    	pokemon=givenMons;
         Move[] hi=new Move[4];
         for (int i=0;i<6;i++){
             for(int k=0;k<4;k++){
@@ -38,8 +43,10 @@ public class Player {
         opposingPlayer=other;
         currentMon=givenMons[0];
     }
-    public Player(Pokemon[] givenMons, int[][] givenMoves){//sets mons and moves but not opponent
-        pokemon=givenMons;
+    public Player(Battle battle, Calculator calc, Pokemon[] givenMons, int[][] givenMoves){//sets mons and moves but not opponent
+        this.battle = battle;
+    	calculator = calc;
+    	pokemon=givenMons;
         for (int i=0;i<givenMons.length;i++){
 
                 pokemon[i].setMoves(givenMoves[i]);
@@ -48,13 +55,17 @@ public class Player {
 
         currentMon=givenMons[0];
     }
-    public Player(Pokemon[] givenMons){//just sets mons
-        pokemon=givenMons;
+    public Player(Battle battle, Calculator calc, Pokemon[] givenMons){//just sets mons
+        this.battle = battle;
+    	calculator = calc;
+    	pokemon=givenMons;
         currentMon=givenMons[0];
 
     }
-    public Player(int[] givenMons,int[][] givenMoves,Player other) {//sets mons and moves, but as an int array that it converts into pokemon
-        for (int i = 0; i < givenMons.length; i++) {
+    public Player(Battle battle, Calculator calc, int[] givenMons,int[][] givenMoves,Player other) {//sets mons and moves, but as an int array that it converts into pokemon
+        this.battle = battle;
+    	calculator = calc;
+    	for (int i = 0; i < givenMons.length; i++) {
             pokemon[i] = new Pokemon(givenMons[i]);
         }
         for (int i = 0; i < givenMons.length; i++) {
@@ -82,33 +93,36 @@ public class Player {
         other.opposingPlayer = this;
     }
     public void fight(int indexOfMove){
+    	if(currentMon.getHealth()<=0) {
+        	return;
+        }
     	if(currentMon.getMoves()[indexOfMove].getPP() == 0) {
-
+    		// System.out.println("There's no PP left for this move!");
+    		return;
     	}
     	else {
     		currentMon.getMoves()[indexOfMove].usePP();
-    		// System.out.println("There's no PP left for this move!");
     	}
-        if(currentMon.getHealth()<=0) {
-        	
-        }
-        else if(currentMon.getStatus().equalsIgnoreCase("brn"))
+        if(currentMon.getStatus().equalsIgnoreCase("brn"))
         {
             int moveType = calculator.getIntFromType(currentMon.getMoves()[indexOfMove].getType());
             int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
             int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
             int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
-            ez.print(currentMon.getName() + " did " + damage /2 + " damage to " + opposingPlayer.currentMon.getName());
-            System.out.println(calculator.howEffective(moveType, opposingType1, opposingType2));
+            battle.log(currentMon.getName() + " did " + damage /2 + " damage to " + opposingPlayer.currentMon.getName());
+            String howEffective = calculator.howEffective(moveType, opposingType1, opposingType2);
+            if(!howEffective.isEmpty()) {
+            	battle.log(howEffective);
+            }
             opposingPlayer.currentMon.takeDamage(damage/2);
             currentMon.takeDamage((int)(currentMon.getBaseHealth() * 0.06));
-            System.out.println(currentMon.getName() + " was hurt from its burn");
+            battle.log(currentMon.getName() + " was hurt from its burn");
         }
         else if(currentMon.getStatus().equalsIgnoreCase("par"))
         {
-            System.out.println(currentMon.getName() + " has paralysis");
+        	battle.log(currentMon.getName() + " has paralysis");
             if(Math.random() < 0.25) {
-                System.out.println(currentMon.getName() + " was fully Paralyzed");
+            	battle.log(currentMon.getName() + " was fully Paralyzed");
             }
             else
             {
@@ -116,8 +130,11 @@ public class Player {
                 int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
                 int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
                 int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
-                ez.print(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
-                System.out.println(calculator.howEffective(moveType, opposingType1, opposingType2));
+                battle.log(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
+                String howEffective = calculator.howEffective(moveType, opposingType1, opposingType2);
+                if(!howEffective.isEmpty()) {
+                	battle.log(howEffective);
+                }
                 opposingPlayer.currentMon.takeDamage(damage);
             }
         }
@@ -130,13 +147,16 @@ public class Player {
                 int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
                 int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
                 int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
-                ez.print(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
-                System.out.println(calculator.howEffective(moveType, opposingType1, opposingType2));
+                battle.log(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
+                String howEffective = calculator.howEffective(moveType, opposingType1, opposingType2);
+                if(!howEffective.isEmpty()) {
+                	battle.log(howEffective);
+                }
                 opposingPlayer.currentMon.takeDamage(damage);
             }
             else
             {
-                System.out.println(currentMon.getName() + " was Frozen Solid");
+                battle.log(currentMon.getName() + " was Frozen Solid");
             }
         }
         else if(currentMon.getStatus().equalsIgnoreCase("psn"))
@@ -145,15 +165,18 @@ public class Player {
             int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
             int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
             int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
-            ez.print(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
-            System.out.println(calculator.howEffective(moveType, opposingType1, opposingType2));
+            battle.log(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
+            String howEffective = calculator.howEffective(moveType, opposingType1, opposingType2);
+            if(!howEffective.isEmpty()) {
+            	battle.log(howEffective);
+            }
             opposingPlayer.currentMon.takeDamage(damage);
             currentMon.takeDamage((int)(currentMon.getBaseHealth() * 1.0/8));
-            System.out.println(currentMon.getName() + " was hurt from the poison");
+            battle.log(currentMon.getName() + " was hurt from the poison");
         }
         else if(currentMon.getStatus().equalsIgnoreCase("slp"))
         {
-            System.out.println(currentMon.getName() + " is fast asleep");
+        	battle.log(currentMon.getName() + " is fast asleep");
             if(Math.random() < 1.0/3)
             {
                 currentMon.setStatus("");
@@ -164,14 +187,18 @@ public class Player {
             int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
             int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
             int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
-            ez.print(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
-            System.out.println(calculator.howEffective(moveType, opposingType1, opposingType2));
+            battle.log(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
+            String howEffective = calculator.howEffective(moveType, opposingType1, opposingType2);
+            if(!howEffective.isEmpty()) {
+            	battle.log(howEffective);
+            }
             opposingPlayer.currentMon.takeDamage(damage);
         }
     }
 
     public void switchOut(Pokemon switchIn){//self explanatory
        if(switchIn.getHealth()>0) {
+    	   battle.log(currentMon.getName() + " was switched out for " + switchIn.getName());
            currentMon = switchIn;
        }
     }
