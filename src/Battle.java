@@ -21,7 +21,7 @@ public class Battle {
     public static int P2numberOfFaintedMons=0;//self explanatory
 	private final String[] MUSIC_OPTIONS= new String[]{"Music/Battle! (Brendan_May).wav", "Music/Battle! Rival Hugh.wav","Music/BattleVsTrainer.wav","Music/BattleVsWildPokemon.wav","Music/BillsLighthouse.wav",
 	"Music/bw2-kanto-gym-leader.wav","Music/bw-subway-trainer.wav","Music/PaletteTown.wav","Music/PewterCity.wav","Music/PokemonBattleMusic.wav","Music/PokemonGym.wav","Music/PokemonTitleScreen.wav","Music/PokemonThemeSong.wav",
-	"Music/PokemonThemeSong.wav","Music/RivalAppears.wav","Music/TeamRocketHideout.wav","Music/ViridianForest.wav"};//16 music options
+	"Music/RivalAppears.wav","Music/TeamRocketHideout.wav","Music/ViridianForest.wav"};//16 music options
 
 	private JFrame frame=new JFrame();//self explanatory
 	private JPanel mainPanel;//self explanatory
@@ -166,8 +166,15 @@ public class Battle {
 P1.setCurrentMon();
 P2.setCurrentMon();
 			name1 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+			name1.setOpaque(true);
+			name1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			name1.setBackground(Color.LIGHT_GRAY);
 //			System.out.println(P2.getCurrentMon().getName());
 			name2 = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
+		name2 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+		name2.setOpaque(true);
+		name2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		name2.setBackground(Color.LIGHT_GRAY);
 			bar1 = new HealthBar(P1.getCurrentMon());
 			bar1.setBackground(Color.LIGHT_GRAY);
 			bar1.setXOffset(true);
@@ -339,8 +346,15 @@ P2.setCurrentMon();
 
 			GridBagConstraints y = new GridBagConstraints();
 			name3 = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
-
+		name3 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+		name3.setOpaque(true);
+		name3.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		name3.setBackground(Color.LIGHT_GRAY);
 			name4 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+		name4 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+		name4.setOpaque(true);
+		name4.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		name4.setBackground(Color.LIGHT_GRAY);
 			bar3 = new HealthBar(P2.getCurrentMon());
 			bar3.setBackground(Color.LIGHT_GRAY);
 			bar3.setXOffset(true);
@@ -694,7 +708,7 @@ P2.setCurrentMon();
 
 
 		}
-
+		b.repaint(p1,p2);
 		while (gameNotOver) {
 
 //**for p1***
@@ -707,12 +721,12 @@ P2.setCurrentMon();
 			}
 
 //buttons betweens 0 and 4 are for moves, buttons between 4 and 8 are for switches
-			if (b.p1Selection >= 5 && P1numberOfFaintedMons < 5) {
+			if (b.p1Selection >= 4 && P1numberOfFaintedMons < 5) {
 				p1WillSwitch = true;
 				p1SwitchIn = b.p1Selection - 4;
 
 				b.p1Selection = -1;
-			} else if (b.p1Selection <= 4 && b.p1Selection >= 0) {
+			} else if (b.p1Selection < 4 && b.p1Selection >= 0) {
 
 
 				p1SelectedMoveIndex = b.p1Selection;
@@ -733,12 +747,12 @@ P2.setCurrentMon();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if (b.p2Selection >= 5 && P2numberOfFaintedMons < 5) {
+		if (b.p2Selection >=4 && P2numberOfFaintedMons < 5) {
 			p2WillSwitch = true;
 			p2SwitchIn = b.p2Selection - 4;
 
 			b.p2Selection = -1;
-		} else if (b.p2Selection <= 4 && b.p2Selection >= 0) {
+		} else if (b.p2Selection < 4 && b.p2Selection >= 0) {
 
 
 			p2SelectedMoveIndex = b.p2Selection;
@@ -805,6 +819,32 @@ P2.setCurrentMon();
 
 		} else {
 //self explanatory
+			if(p1SelectedMoveIndex==4){
+
+					System.out.println("player1's index was 4 somehow");
+				System.out.println("player1's index was 4 somehow");
+				System.out.println("player1's index was 4 somehow");
+				System.out.println("player1's index was 4 somehow");
+				System.out.println("player1's index was 4 somehow");
+				System.out.println("player1's index was 4 somehow");
+				System.out.println("player1's index was 4 somehow");
+				System.out.println("player1's index was 4 somehow");
+				System.out.println("player1's index was 4 somehow");
+
+			}
+			if(p2SelectedMoveIndex==4){
+				System.out.println("player2's index was 4 somehow");
+				System.out.println("player2's index was 4 somehow");
+				System.out.println("player2's index was 4 somehow");
+				System.out.println("player2's index was 4 somehow");
+				System.out.println("player2's index was 4 somehow");
+				System.out.println("player2's index was 4 somehow");
+				System.out.println("player2's index was 4 somehow");
+				System.out.println("player2's index was 4 somehow");
+				System.out.println("player2's index was 4 somehow");
+				System.out.println("player2's index was 4 somehow");
+
+			}
 			int x = calc.calculateWhoGoesFirst(p1, p2, p1.getCurrentMon().getMoves()[p1SelectedMoveIndex], p2.getCurrentMon().getMoves()[p2SelectedMoveIndex]);
 			if (x == 1) {
 				p1.fight(p1SelectedMoveIndex);
@@ -919,7 +959,7 @@ P2.setCurrentMon();
 
     }
     public void repaint(Player p1, Player p2) {
-
+Calculator calc=new Calculator();
 			name1.setText(p1.getCurrentMon().getName());//self explanatory
 
 			name2 .setText(p2.getCurrentMon().getName());//self explanatory
@@ -945,12 +985,44 @@ P2.setCurrentMon();
 
 
 			for (int i =0;i<leftMoveButtons.length;i++){
+				leftMoveButtons[i].setOpaque(true);
 				leftMoveButtons[i].setText(p1.getCurrentMon().getMoves()[i].getName());//self explanatory
 				if(p1.getCurrentMon().getMoves()[i].getPP() == 0) {
 					leftMoveButtons[i].setEnabled(false);
 				}
 				else {
 					leftMoveButtons[i].setEnabled(true);
+				}
+				double howEffective=calc.typeModifier(
+						calc.getIntFromType(p1.getCurrentMon().getMoves()[i].getType()),
+						calc.getIntFromType(p2.getCurrentMon().getType1()),
+						calc.getIntFromType(p2.getCurrentMon().getType2()));
+				if(howEffective==4.0){
+					leftMoveButtons[i].setBackground(new Color(255,0,0));
+					leftMoveButtons[i].setForeground(new Color(255,0,0));
+				}
+				else if(howEffective==2.0){
+					leftMoveButtons[i].setBackground(new Color(255,127,0));
+					leftMoveButtons[i].setForeground(new Color(255,127,0));
+
+				}
+				else if(howEffective==1.0){
+					leftMoveButtons[i].setBackground(new Color(255,255,255));
+					leftMoveButtons[i].setForeground(new Color(0,0,0));
+				}
+				else if(howEffective==0.5){
+					leftMoveButtons[i].setBackground(new Color(0,255,255));
+					leftMoveButtons[i].setForeground(new Color(0,127,255));
+				}
+				else if(howEffective==0.25){
+					leftMoveButtons[i].setBackground(new Color(0,0,255));
+					leftMoveButtons[i].setForeground(new Color(0,0,255));
+				}
+				else if(howEffective==0.0){
+					leftMoveButtons[i].setBackground(new Color(0,0,0));
+					leftMoveButtons[i].setForeground(new Color(0,0,0));
+
+
 				}
 			}
 			for (int i =0;i<leftSwitchButtons.length;i++){
@@ -992,12 +1064,44 @@ P2.setCurrentMon();
 
 
 		for (int i =0;i<rightMoveButtons.length;i++){//self explanatory
+			rightMoveButtons[i].setOpaque(true);
 			rightMoveButtons[i].setText(p2.getCurrentMon().getMoves()[i].getName());
 			if(p2.getCurrentMon().getMoves()[i].getPP() == 0) {
 				rightMoveButtons[i].setEnabled(false);
 			}
 			else {
 				rightMoveButtons[i].setEnabled(true);
+			}
+			double howEffective=calc.typeModifier(
+					calc.getIntFromType(p2.getCurrentMon().getMoves()[i].getType()),
+					calc.getIntFromType(p1.getCurrentMon().getType1()),
+					calc.getIntFromType(p1.getCurrentMon().getType2()));
+			if(howEffective==4.0){
+				rightMoveButtons[i].setBackground(new Color(255,0,0));
+				rightMoveButtons[i].setForeground(new Color(255,0,0));
+			}
+			else if(howEffective==2.0){
+				rightMoveButtons[i].setBackground(new Color(255,127,0));
+				rightMoveButtons[i].setForeground(new Color(255,127,0));
+
+			}
+			else if(howEffective==1.0){
+				rightMoveButtons[i].setBackground(new Color(255,255,255));
+				rightMoveButtons[i].setForeground(new Color(0,0,0));
+			}
+			else if(howEffective==0.5){
+				rightMoveButtons[i].setBackground(new Color(0,255,255));
+				rightMoveButtons[i].setForeground(new Color(0,127,255));
+			}
+			else if(howEffective==0.25){
+				rightMoveButtons[i].setBackground(new Color(0,0,255));
+				rightMoveButtons[i].setForeground(new Color(0,0,255));
+			}
+			else if(howEffective==0.0){
+				rightMoveButtons[i].setBackground(new Color(0,0,0));
+				rightMoveButtons[i].setForeground(new Color(0,0,0));
+
+
 			}
 		}
 		for (int i =0;i<rightSwitchButtons.length;i++){
@@ -1013,7 +1117,7 @@ P2.setCurrentMon();
 	}
 
     private void animateHPChange() {
-    	timer = new Timer(25, new ActionListener() {
+    	timer = new Timer(4, new ActionListener() {
     		@Override
     		public void actionPerformed(ActionEvent e) {
     			if(!bar1.isChanging() && !bar2.isChanging()
@@ -1059,7 +1163,7 @@ P2.setCurrentMon();
 		GridBagConstraints constraints=new GridBagConstraints();//we used a  grid bag layout for the UI
 		JLabel[] leftPanelImages=new JLabel[6], rightPanelImages=new JLabel[6];//self explanatory
 		JTextArea[] rightPokemonInputs=new JTextArea[6], leftPokemonInputs=new JTextArea[6];//self explanatory
-		JTextField[][] rightMoveInputs=new JTextField[6][4],leftMoveInputs=new JTextField[6][4];//self explanatory
+		KTextField[][] rightMoveInputs=new KTextField[6][4],leftMoveInputs=new KTextField[6][4];//self explanatory
 		Button[] rightConfirmationButtons=new Button[6],leftConfirmationButtons=new Button[6];//confirms a pokemon
 		JButton rightValidationButton=new JButton("Confirm Team"),leftValidationButton=new JButton("Confirm Team");//confirms the entire team
 
@@ -1100,7 +1204,37 @@ P2.setCurrentMon();
 		for (int i = 0; i < 6; i++) {//keeps track of the column you are on
 
 			for (int k = 0; k < 4; k++) {//keeps track of the row
-				leftMoveInputs[i][k] = new JTextField("Pound");//pound is the default move
+				leftMoveInputs[i][k] = new KTextField("Pound");//pound is the default move
+				leftMoveInputs[i][k].setColumn(i);
+				leftMoveInputs[i][k].setRow(k);
+				leftMoveInputs[i][k].addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						if (SwingUtilities.isRightMouseButton(e)) {
+							int x = ((KTextField) e.getSource()).getColumn();
+							int y=((KTextField) e.getSource()).getRow();
+							String textInfo = leftMoveInputs[x][y].getText();
+
+							try {
+								Move z=new Move(textInfo);
+								JOptionPane.showMessageDialog(leftPanelTB,//in the left panel
+										z.toString(),//see above
+										"Move Info",//self explanatory
+										2,//self explanatory
+										(new ImageIcon(new ImageIcon("Images/Types/" + //the icon depends on the type of the move
+												z.getType() + ".png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+							}
+							catch (Exception ex){
+								JOptionPane.showMessageDialog(leftPanelTB,
+										"That was not a valid move",
+										"Invalid Move",//self explanatory
+										2,//self explanatory
+										(new ImageIcon(new ImageIcon("Images/Exclamation.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));//self explanatory
+							}
+
+						}
+					}
+				});
 				constraints.gridx = i;//the column you are on
 				constraints.gridy = k + 1;//row+1 because the pokemon input are in the first row
 				constraints.gridwidth = 1;
@@ -1163,7 +1297,7 @@ P2.setCurrentMon();
 		}
 		constraints.gridx = 0;//the column you are on
 		constraints.gridy = 6;//should be the 6th row of things in this column
-		constraints.gridwidth = 5;
+		constraints.gridwidth = 6;
 		constraints.gridheight = 1;
 		constraints.weightx = 0.5;
 		constraints.weighty = 0.0;
@@ -1229,7 +1363,7 @@ P2.setCurrentMon();
 
 				leftPokemonInputs[3].setText("Hydreigon");
 				leftMoveInputs[3][0].setText("Dark Pulse");
-				leftMoveInputs[3][1].setText("Earthquake");
+				leftMoveInputs[3][1].setText("Draco Meteor");
 				leftMoveInputs[3][2].setText("Flash Cannon");
 				leftMoveInputs[3][3].setText("Recover");
 
@@ -1422,7 +1556,37 @@ P2.setCurrentMon();
 	for (int i = 0; i < 6; i++) {//keeps track of the column you are on
 
 		for (int k = 0; k < 4; k++) {//keeps track of the row
-			rightMoveInputs[i][k] = new JTextField("Pound");
+			rightMoveInputs[i][k] = new KTextField("Pound");//pound is the default move
+			rightMoveInputs[i][k].setColumn(i);
+			rightMoveInputs[i][k].setRow(k);
+			rightMoveInputs[i][k].addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if (SwingUtilities.isRightMouseButton(e)) {
+						int x = ((KTextField) e.getSource()).getColumn();
+						int y=((KTextField) e.getSource()).getRow();
+						String textInfo = rightMoveInputs[x][y].getText();
+
+						try {
+							Move z=new Move(textInfo);
+							JOptionPane.showMessageDialog(rightPanelTB,//in the right panel
+									z.toString(),//see above
+									"Move Info",//self explanatory
+									2,//self explanatory
+									(new ImageIcon(new ImageIcon("Images/Types/" + //the icon depends on the type of the move
+											z.getType() + ".png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+						}
+						catch (Exception ex){
+							JOptionPane.showMessageDialog(rightPanelTB,
+									"That was not a valid move",
+									"Invalid Move",//self explanatory
+									2,//self explanatory
+									(new ImageIcon(new ImageIcon("Images/Exclamation.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));//self explanatory
+						}
+
+					}
+				}
+			});
 			constraints.gridx = i;//the column you are on
 			constraints.gridy = k + 1;//row+1 because the pokemon input are in the first row
 			constraints.gridwidth = 1;
@@ -1686,7 +1850,7 @@ P2.setCurrentMon();
 				rightPokemonInputs[5].setText("Chandelure");
 				rightMoveInputs[5][0].setText("Recover");
 				rightMoveInputs[5][1].setText("Shadow Ball");
-				rightMoveInputs[5][2].setText("Recover");
+				rightMoveInputs[5][2].setText("Crunch");
 				rightMoveInputs[5][3].setText("Flamethrower");
 
 

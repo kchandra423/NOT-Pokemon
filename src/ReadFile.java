@@ -8,9 +8,12 @@
 //  Bugs:
 //    none
 //
+import sun.rmi.transport.proxy.RMIMasterSocketFactory;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 public class ReadFile {
     //17
@@ -20,14 +23,14 @@ public class ReadFile {
         String copy = "something went wrong; ";
         try {
 //			copy = Files.readString(Paths.get("Stats.txt"));
-            byte[] file = Files.readAllBytes(Paths.get(""));
+            byte[] file = Files.readAllBytes(Paths.get("Text/ShowdownStats.txt"));
             copy = new String(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println(
 //            read.orderMoves(
-                (read.orderMoves(copy)));
+                (read.getSpecifiedPokemon(copy)));
     }
 
     public String formatShowDownMovesets(String s) {
@@ -180,16 +183,346 @@ public class ReadFile {
         }
         return masterString;
     }
+    public String getMegas(String s) {
+        //takes a string of the showdown movesets txt file and returns a string with
+        // each move neccesary stats seperated by # and each move seperated by a \n
+        String masterString = "";
+        String[] chunks;
+        chunks = s.split("ENDLINE");
+        String[] currentChunksLines = new String[10];
+        String[] lines;
+        String currentLine = "";
+        int numberOfMegas=0;
+        for (int i = 0; i < chunks.length; i++) {
+
+            String chunk = chunks[i];
+            lines = chunk.split("\n");
+            if(lines[1].contains("mega")) {
+                Arrays.fill(currentChunksLines, "null;");
+                numberOfMegas++;
+                for (int k = 0; k < lines.length; k++) {
+                    currentLine = lines[k];
+                    if (currentLine.contains("num: ")) {
+                        currentChunksLines[0] = "1000"+numberOfMegas
+                                + ";";
+                    }
+                    if (currentLine.contains("species: ")) {
+                        currentChunksLines[1] = currentLine.substring
+                                (currentLine.indexOf("species: ") + 9, currentLine.indexOf(",") + 1)
+                                + ";";
+                    }
+                    if (currentLine.contains("types: ")) {
+                        String x=currentLine.substring(currentLine.indexOf("types: ") + 7, currentLine.indexOf("],") );
+
+                        x.replace("\"","");
+                        x.replace(" ","");
+                        String[] types=x.split(",");
+                        currentChunksLines[2]=types[0]+";";
+                        try{
+                            currentChunksLines[3]=types[1]+";";
+                        }catch (Exception e){
+                            currentChunksLines[3]="NA;";
+                        }
+
+                    }
+                    if (currentLine.contains("baseStats: ")) {
+                        String x=currentLine.substring(currentLine.indexOf("baseStats: ") + 11, currentLine.indexOf("},") + 1);
+                        x.replace("}","");
+                        x.replace(" ","");
+                        String newString="";
+                       for(int z=0;z<x.length();z++){
+                           if((Character.isDigit(x.charAt(z)))||x.charAt(z)==','){
+                               newString+=x.charAt(z);
+                           }
+                       }
+
+                        String[] stats=newString.split(",");
+                        currentChunksLines[4]=stats[0]+";";
+                        currentChunksLines[5]=stats[1]+";";
+                        currentChunksLines[6]=stats[2]+";";
+                        currentChunksLines[7]=stats[3]+";";
+                        currentChunksLines[8]=stats[4]+";";
+                        currentChunksLines[9]=stats[5]+";"+"\n";
+
+
+
+                    }
+                }
+                for (int a = 0; a < currentChunksLines.length; a++) {
+                    masterString += currentChunksLines[a];
+                }
+            }
+        }
+        masterString=masterString.replace("]","");
+        masterString=masterString.replace("[","");
+        masterString=masterString.replace("\"","");
+        masterString=masterString.replace("[","");
+        masterString=masterString.replace(" ","");
+        masterString=masterString.replace(",","");
+        return masterString;
+
+    }
+    public String getArceus(String s) {
+        //takes a string of the showdown movesets txt file and returns a string with
+        // each move neccesary stats seperated by # and each move seperated by a \n
+        String masterString = "";
+        String[] chunks;
+        chunks = s.split("ENDLINE");
+        String[] currentChunksLines = new String[10];
+        String[] lines;
+        String currentLine = "";
+        int numberOfMegas=49;
+        for (int i = 0; i < chunks.length; i++) {
+
+            String chunk = chunks[i];
+            lines = chunk.split("\n");
+            if(lines[1].contains("arceus")) {
+                Arrays.fill(currentChunksLines, "null;");
+                numberOfMegas++;
+                for (int k = 0; k < lines.length; k++) {
+                    currentLine = lines[k];
+                    if (currentLine.contains("num: ")) {
+                        currentChunksLines[0] = "1000"+numberOfMegas
+                                + ";";
+                    }
+                    if (currentLine.contains("species: ")) {
+                        currentChunksLines[1] = currentLine.substring
+                                (currentLine.indexOf("species: ") + 9, currentLine.indexOf(",") + 1)
+                                + ";";
+                    }
+                    if (currentLine.contains("types: ")) {
+                        String x=currentLine.substring(currentLine.indexOf("types: ") + 7, currentLine.indexOf("],") );
+
+                        x.replace("\"","");
+                        x.replace(" ","");
+                        String[] types=x.split(",");
+                        currentChunksLines[2]=types[0]+";";
+                        try{
+                            currentChunksLines[3]=types[1]+";";
+                        }catch (Exception e){
+                            currentChunksLines[3]="NA;";
+                        }
+
+                    }
+                    if (currentLine.contains("baseStats: ")) {
+                        String x=currentLine.substring(currentLine.indexOf("baseStats: ") + 11, currentLine.indexOf("},") + 1);
+                        x.replace("}","");
+                        x.replace(" ","");
+                        String newString="";
+                        for(int z=0;z<x.length();z++){
+                            if((Character.isDigit(x.charAt(z)))||x.charAt(z)==','){
+                                newString+=x.charAt(z);
+                            }
+                        }
+
+                        String[] stats=newString.split(",");
+                        currentChunksLines[4]=stats[0]+";";
+                        currentChunksLines[5]=stats[1]+";";
+                        currentChunksLines[6]=stats[2]+";";
+                        currentChunksLines[7]=stats[3]+";";
+                        currentChunksLines[8]=stats[4]+";";
+                        currentChunksLines[9]=stats[5]+";"+"\n";
+
+
+
+                    }
+                }
+                for (int a = 0; a < currentChunksLines.length; a++) {
+                    masterString += currentChunksLines[a];
+                }
+            }
+        }
+        masterString=masterString.replace("]","");
+        masterString=masterString.replace("[","");
+        masterString=masterString.replace("\"","");
+        masterString=masterString.replace("[","");
+        masterString=masterString.replace(" ","");
+        masterString=masterString.replace(",","");
+        return masterString;
+
+    }
+    public String getSilvally(String s) {
+        //takes a string of the showdown movesets txt file and returns a string with
+        // each move neccesary stats seperated by # and each move seperated by a \n
+        String masterString = "";
+        String[] chunks;
+        chunks = s.split("ENDLINE");
+        String[] currentChunksLines = new String[10];
+        String[] lines;
+        String currentLine = "";
+        int numberOfMegas=67;
+        for (int i = 0; i < chunks.length; i++) {
+
+            String chunk = chunks[i];
+            lines = chunk.split("\n");
+            if(lines[1].contains("silvally")) {
+                Arrays.fill(currentChunksLines, "null;");
+                numberOfMegas++;
+                for (int k = 0; k < lines.length; k++) {
+                    currentLine = lines[k];
+                    if (currentLine.contains("num: ")) {
+                        currentChunksLines[0] = "1000"+numberOfMegas
+                                + ";";
+                    }
+                    if (currentLine.contains("species: ")) {
+                        currentChunksLines[1] = currentLine.substring
+                                (currentLine.indexOf("species: ") + 9, currentLine.indexOf(",") + 1)
+                                + ";";
+                    }
+                    if (currentLine.contains("types: ")) {
+                        String x=currentLine.substring(currentLine.indexOf("types: ") + 7, currentLine.indexOf("],") );
+
+                        x.replace("\"","");
+                        x.replace(" ","");
+                        String[] types=x.split(",");
+                        currentChunksLines[2]=types[0]+";";
+                        try{
+                            currentChunksLines[3]=types[1]+";";
+                        }catch (Exception e){
+                            currentChunksLines[3]="NA;";
+                        }
+
+                    }
+                    if (currentLine.contains("baseStats: ")) {
+                        String x=currentLine.substring(currentLine.indexOf("baseStats: ") + 11, currentLine.indexOf("},") + 1);
+                        x.replace("}","");
+                        x.replace(" ","");
+                        String newString="";
+                        for(int z=0;z<x.length();z++){
+                            if((Character.isDigit(x.charAt(z)))||x.charAt(z)==','){
+                                newString+=x.charAt(z);
+                            }
+                        }
+
+                        String[] stats=newString.split(",");
+                        currentChunksLines[4]=stats[0]+";";
+                        currentChunksLines[5]=stats[1]+";";
+                        currentChunksLines[6]=stats[2]+";";
+                        currentChunksLines[7]=stats[3]+";";
+                        currentChunksLines[8]=stats[4]+";";
+                        currentChunksLines[9]=stats[5]+";"+"\n";
+
+
+
+                    }
+                }
+                for (int a = 0; a < currentChunksLines.length; a++) {
+                    masterString += currentChunksLines[a];
+                }
+            }
+        }
+        masterString=masterString.replace("]","");
+        masterString=masterString.replace("[","");
+        masterString=masterString.replace("\"","");
+        masterString=masterString.replace("[","");
+        masterString=masterString.replace(" ","");
+        masterString=masterString.replace(",","");
+        return masterString;
+
+    }
+    public String getSpecifiedPokemon(String s) {
+        //takes a string of the showdown movesets txt file and returns a string with
+        // each move neccesary stats seperated by # and each move seperated by a \n
+        String masterString = "";
+        String[] chunks;
+        chunks = s.split("ENDLINE");
+        String[] currentChunksLines = new String[10];
+        String[] lines;
+        String currentLine = "";
+        int numberOfMegas=89;
+        for (int i = 0; i < chunks.length; i++) {
+
+            String chunk = chunks[i];
+            lines = chunk.split("\n");
+            if(lines[1].contains("primal")) {
+                Arrays.fill(currentChunksLines, "null;");
+                numberOfMegas++;
+                for (int k = 0; k < lines.length; k++) {
+                    currentLine = lines[k];
+                    if (currentLine.contains("num: ")) {
+                        currentChunksLines[0] = "1000"+numberOfMegas
+                                + ";";
+                    }
+                    if (currentLine.contains("species: ")) {
+                        currentChunksLines[1] = currentLine.substring
+                                (currentLine.indexOf("species: ") + 9, currentLine.indexOf(",") + 1)
+                                + ";";
+                    }
+                    if (currentLine.contains("types: ")) {
+                        String x=currentLine.substring(currentLine.indexOf("types: ") + 7, currentLine.indexOf("],") );
+
+                        x.replace("\"","");
+                        x.replace(" ","");
+                        String[] types=x.split(",");
+                        currentChunksLines[2]=types[0]+";";
+                        try{
+                            currentChunksLines[3]=types[1]+";";
+                        }catch (Exception e){
+                            currentChunksLines[3]="NA;";
+                        }
+
+                    }
+                    if (currentLine.contains("baseStats: ")) {
+                        String x=currentLine.substring(currentLine.indexOf("baseStats: ") + 11, currentLine.indexOf("},") + 1);
+                        x.replace("}","");
+                        x.replace(" ","");
+                        String newString="";
+                        for(int z=0;z<x.length();z++){
+                            if((Character.isDigit(x.charAt(z)))||x.charAt(z)==','){
+                                newString+=x.charAt(z);
+                            }
+                        }
+
+                        String[] stats=newString.split(",");
+                        currentChunksLines[4]=stats[0]+";";
+                        currentChunksLines[5]=stats[1]+";";
+                        currentChunksLines[6]=stats[2]+";";
+                        currentChunksLines[7]=stats[3]+";";
+                        currentChunksLines[8]=stats[4]+";";
+                        currentChunksLines[9]=stats[5]+";"+"\n";
+
+
+
+                    }
+                }
+                for (int a = 0; a < currentChunksLines.length; a++) {
+                    masterString += currentChunksLines[a];
+                }
+            }
+        }
+        masterString=masterString.replace("]","");
+        masterString=masterString.replace("[","");
+        masterString=masterString.replace("\"","");
+        masterString=masterString.replace("[","");
+        masterString=masterString.replace(" ","");
+        masterString=masterString.replace(",","");
+        return masterString;
+
+    }
 //  0    1        2      3          4     5    6    7         8      9       10     11       12         13    14     15   16     17     18
 //Num, accuracy, power, category, desc, name, pp , priority, flags, chance, self, boosts, crit ratio, drain, heal,status,target, type, id
     //self= boosts target self
     // target= everything targets self
-
+//public String addBack(String s) {
+////    //takes a string of the showdown movesets txt file and returns a string with
+////    // each move neccesary stats seperated by # and each move seperated by a \n
+////    String masterString = "";
+////    String[] lines;
+////    lines = s.split("ENDLINE");
+////    String[] currentChunksLines = new String[10];
+////
+////    String currentLine = "";
+////
+////
+////    return masterString;
+////
+////}
     public String orderMoves(String s) {//orders a txt files move from first to last
         String masterString = "";
         String[] neu = new String[719];
         String[] old = s.split("\n");
         int num = 0;
+
         for (int i = 0; i < old.length; i++) {
             String firstPartOfOLd = old[i].split("#")[0];
             try {

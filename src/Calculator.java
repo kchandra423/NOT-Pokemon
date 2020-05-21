@@ -23,7 +23,7 @@ public class Calculator {
 	double flying[] = { 1, 2, 1, 1, 1, .5, 2, 1, .5, 1, 1, 2, .5, 1, 1, 1, 1, 1 };
 	double poison[] = { 1, 1, 1, .5, .5, .5, 1, .5, 0, 1, 1, 2, 1, 1, 1, 1, 1, 2 };
 	double ground[] = { 1, 1, 0, 2, 1, 2, .5, 1, 2, 2, 1, .5, 2, 1, 1, 1, 1, 1 };
-	double rock[] = { 1, .5, 2, 1, .5, 1, 2, 1, .5, 2, 1, 1, 1, 1, 2, 1, 1, 2, .5 };
+	double rock[] = { 1, .5, 2, 1, .5, 1, 2, 1, .5, 2, 1, 1, 1, 1, 2, 1, 1, 1, .5 };
 	double bug[] = { 1, .5, .5, .5, 1, 1, 1, .5, .5, .5, 1, 2, 1, 2, 1, 1, 2, .5 };
 	double ghost[] = { 0, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, .5, 1 };
 	double steel[] = { 1, 1, 1, 1, 1, 2, 1, 1, .5, .5, .5, 1, .5, 1, 2, 1, 1, 2 };
@@ -246,7 +246,12 @@ public class Calculator {
 				&& (target.getType1().equalsIgnoreCase("Poison") || target.getType2().equalsIgnoreCase("Poison"))) {
 
 		} else if (!(status.equalsIgnoreCase("null"))) {//self explanatory
-			if (Math.random() <= (double) move.getChance() / 100
+			if(move.getCategory().equalsIgnoreCase("status")){
+				if ((boostsTarget.getStatus().equalsIgnoreCase("") || boostsTarget.getStatus().equalsIgnoreCase("null"))) {
+					boostsTarget.setStatus(move.getStatus());
+				}
+			}
+			else if (Math.random() <= (double) move.getChance() / 100
 					&& (boostsTarget.getStatus().equalsIgnoreCase("") || boostsTarget.getStatus().equalsIgnoreCase("null"))) {
 				boostsTarget.setStatus(move.getStatus());
 			}
@@ -353,7 +358,7 @@ public class Calculator {
 // (((2 * Level + 10) / 250) * (Attack[or special attack] / Defense[or special defense]) * Boosts + 2)
 		//we simplified it for the moost part and just added a magic constant at the end
 		//also since we dont have level's implemented, we just use the smogon level standard, which is 50
-		damage = (int) (((((((200 / 5) + 2) * power * attack) / defense) / 50) + 2)
+		damage = (int) ((((((2*100/5+2)*power*attack/defense))/50)+2)
 				* typeModifier(moveType, defenseType1, defenseType2)
 				* ThreadLocalRandom.current().nextDouble(.85, 1.01));
 
@@ -396,7 +401,7 @@ public class Calculator {
 		target.heal((int)(target.getBaseHealth()*heal));
 		System.out.println(target.getName()+" healed "+(int)(target.getBaseHealth()*heal)+" health.");
 		if(damaging){
-		return (int) (damage / 4.61538461538 * 3);//magic constants !
+		return  (damage);//magic constants !
 		}else{
 			return 0;
 		}

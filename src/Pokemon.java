@@ -54,7 +54,7 @@ public class Pokemon {
 		}
 		String[] splittedCopy;
 		splittedCopy = copy.split("\n");//splits it by line
-		for (int i = 0; i < 802; i++) {
+		for (int i = 0; i < 915; i++) {
 			String stats = splittedCopy[i];
 			String[] s = stats.split(";");//splits by semicolon,
 			// just look at the stats.txt file and youll understand
@@ -99,21 +99,51 @@ public class Pokemon {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+
 		String[] splittedCopy;
 		splittedCopy = copy.split("\n");//splits by line
-		String stats = splittedCopy[dexNumber - 1];
-		String[] s = stats.split(";");//splits y ;
-		name = s[1];//self explanatory
-		type1 = s[2];//self explanatory
-		type2 = s[3];//self explanatory
-		baseHealth = Integer.parseInt(s[4]);
-		health = baseHealth;//self explanatory
-		baseAttack = Integer.parseInt(s[5]);
-		baseDefense = Integer.parseInt(s[6]);
-		baseSpecialAttack = Integer.parseInt(s[7]);//self explanatory
-		baseSpecialDefense = Integer.parseInt(s[8]);
-		baseSpeed = Integer.parseInt(s[9]);
+		if(dexNumber>=810){
+			for (int i = 810; i < 914; i++) {
+				String stats = splittedCopy[i];
+				String[] s = stats.split(";");//splits by semicolon,
+				// just look at the stats.txt file and youll understand
+//				try {
+					if (Integer.parseInt(s[0])==(dexNumber)) {
+						name = s[1];//self explanatory
+						type1 = s[2];//self explanatory
+						type2 = s[3];//self explanatory
+						baseHealth = Integer.parseInt(s[4]) * 2 + 110;
+						health = baseHealth;//self explanatory
+						baseAttack = Integer.parseInt(s[5]) * 2 + 5;
+						baseDefense = Integer.parseInt(s[6]) * 2 + 5;
+						baseSpecialAttack = Integer.parseInt(s[7]) * 2 + 5;//self explanatory
+						baseSpecialDefense = Integer.parseInt(s[8]) * 2 + 5;
+						baseSpeed = Integer.parseInt(s[9]) * 2 + 5;
+						break;
 
+					}
+//				}
+//			catch (Exception e) {
+
+//				}
+			}
+		}
+		else {
+			String stats = splittedCopy[dexNumber - 1];
+			String[] s = stats.split(";");//splits y ;
+
+			name = s[1];//self explanatory
+			type1 = s[2];//self explanatory
+			type2 = s[3];//self explanatory
+			baseHealth = Integer.parseInt(s[4]) * 2 + 110;
+			health = baseHealth;//self explanatory
+			baseAttack = Integer.parseInt(s[5]) * 2 + 5;
+			baseDefense = Integer.parseInt(s[6]) * 2 + 5;
+			baseSpecialAttack = Integer.parseInt(s[7]) * 2 + 5;//self explanatory
+			baseSpecialDefense = Integer.parseInt(s[8]) * 2 + 5;
+			baseSpeed = Integer.parseInt(s[9]) * 2 + 5;
+		}
 
 	}
 
@@ -126,8 +156,10 @@ public class Pokemon {
 	}//self explanatory
 
 	public String getID() {//some of the txt files use a pokemons id, which is just its name without spaces or capitalizon or special symbols
-		return name.replace(" ", "").replace("-", "").replace(".", "").toLowerCase();
+		return name.replace(" ", "").replace(".", "").toLowerCase();
 	}
+
+
 
 
 
