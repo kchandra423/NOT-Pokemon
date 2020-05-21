@@ -1312,7 +1312,7 @@ P2.setCurrentMon();
 					}
 					if(validPokemon && validMove) {//do this if the pokemon and the move is valid
 						leftConfirmationButtons[x].setProblem(false);
-						Pokemon pokemon = new Pokemon(leftPokemonInputs[x].getText());//get the text from the pokemon input at column x
+						Pokemon pokemon = new Pokemon(Battle.this, leftPokemonInputs[x].getText());//get the text from the pokemon input at column x
 						Move[] moves = new Move[4];
 						for (int i = 0; i < moves.length; i++) {//length is 4
 							moves[i] = new Move(leftMoveInputs[x][i].getText());
@@ -1705,7 +1705,7 @@ P2.setCurrentMon();
 					}
 					if (validPokemon && validMove) {
 						rightConfirmationButtons[x].setProblem(false);
-						Pokemon pokemon = new Pokemon(rightPokemonInputs[x].getText());//get the text from the pokemon input at column x
+						Pokemon pokemon = new Pokemon(Battle.this, rightPokemonInputs[x].getText());//get the text from the pokemon input at column x
 						Move[] moves = new Move[4];
 						for (int i = 0; i < moves.length; i++) {//length is 4
 							moves[i] = new Move(rightMoveInputs[x][i].getText());

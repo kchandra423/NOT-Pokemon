@@ -15,6 +15,8 @@ import java.nio.file.Paths;
 import java.nio.file.Files;
 
 public class Pokemon {
+	private Battle battle;
+	
 	private int dex = 0;//self explanatory
 	private String name = "";//self explanatory
 	private int baseHealth;//self explanatory
@@ -78,7 +80,8 @@ public class Pokemon {
 		setStats(dex);
 	}
 
-	public Pokemon(String pokeName) {//instantiates with a name
+	public Pokemon(Battle battle, String pokeName) {//instantiates with a name
+		this.battle = battle;
 		name = pokeName;
 		int dexNumber = convertMonName(pokeName);
 		dex = dexNumber;
@@ -408,7 +411,7 @@ public class Pokemon {
 
 	public void setAttackIncrease(int stages) {//self explanatory
 		if(attackIncrease==6){
-			System.out.println(name + "'s attack can't go any higher!");
+			battle.log(name + "'s attack can't go any higher!");
 		}
 		else {
 			int actualStages=0;
@@ -418,13 +421,13 @@ public class Pokemon {
 				actualStages++;
 			}
 //			attackIncrease += stages;
-			System.out.println(name + "'s attack increased by " + actualStages + " stages!");
+			battle.log(name + "'s attack increased by " + actualStages + " stages!");
 		}
 	}
 
 	public void setSpecialAttackIncrease(int stages) {//self explanatory
 		if (specialAttackIncrease == 6) {
-			System.out.println(name + "'s special attack can't go any higher!");
+			battle.log(name + "'s special attack can't go any higher!");
 		} else {
 			int actualStages = 0;
 			while (specialAttackIncrease + 1 < 7 && stages > 0) {
@@ -433,13 +436,13 @@ public class Pokemon {
 				actualStages++;
 			}
 //			specialAttackIncrease += stages;
-			System.out.println(name + "'s special attack increased by " + actualStages + " stages!");
+			battle.log(name + "'s special attack increased by " + actualStages + " stages!");
 		}
 	}
 
 	public void setDefenseIncrease(int stages) {//self explanatory
 		if(defenseIncrease==6){
-			System.out.println(name + "'s defense can't go any higher!");
+			battle.log(name + "'s defense can't go any higher!");
 		}
 		else {
 			int actualStages=0;
@@ -449,14 +452,14 @@ public class Pokemon {
 				actualStages++;
 			}
 //			defenseIncrease += stages;
-			System.out.println(name + "'s defense increased by " + actualStages + " stages!");
+			battle.log(name + "'s defense increased by " + actualStages + " stages!");
 		}
 
 	}
 
 	public void setSpecialDefenseIncrease(int stages) {//self explanatory
 		if(specialDefenseIncrease==6){
-			System.out.println(name + "'s special defense can't go any higher!");
+			battle.log(name + "'s special defense can't go any higher!");
 		}
 		else {
 			int actualStages=0;
@@ -466,14 +469,14 @@ public class Pokemon {
 				actualStages++;
 			}
 //			specialDefenseIncrease += stages;
-			System.out.println(name + "'s special defense increased by " + actualStages + " stages!");
+			battle.log(name + "'s special defense increased by " + actualStages + " stages!");
 		}
 
 }
 
 	public void setSpeedIncrease(int stages) {//self explanatory
 		if(speedIncrease==6){
-			System.out.println(name + "'s speed can't go any higher!");
+			battle.log(name + "'s speed can't go any higher!");
 		}
 		else {
 			int actualStages=0;
@@ -483,7 +486,7 @@ public class Pokemon {
 				actualStages++;
 			}
 //			speedIncrease += stages;
-			System.out.println(name + "'s speed increased by " + actualStages + " stages!");
+			battle.log(name + "'s speed increased by " + actualStages + " stages!");
 		}
 //		speedIncrease += stages;
 //		System.out.println(name + "'s speed increased by " + stages + " stages!");
@@ -492,7 +495,7 @@ public class Pokemon {
 
 	public void setAttackDecrease(int stages) {//self explanatory
 		if(attackDecrease==6){
-			System.out.println(name + "'s attack can't go any lower!");
+			battle.log(name + "'s attack can't go any lower!");
 		}
 		else {
 			int actualStages=0;
@@ -502,7 +505,7 @@ public class Pokemon {
 				actualStages++;
 			}
 //			attackDecrease += stages;
-			System.out.println(name + "'s attack Decreased by " + actualStages + " stages...");
+			battle.log(name + "'s attack Decreased by " + actualStages + " stages...");
 		}
 
 
@@ -510,7 +513,7 @@ public class Pokemon {
 
 	public void setSpecialAttackDecrease(int stages) {//self explanatory
 		if(specialAttackDecrease==6){
-			System.out.println(name + "'s special attack can't go any lower!");
+			battle.log(name + "'s special attack can't go any lower!");
 		}
 		else {
 			int actualStages=0;
@@ -520,14 +523,14 @@ public class Pokemon {
 				actualStages++;
 			}
 //			specialAttackDecrease += stages;
-			System.out.println(name + "'s special attack Decreased by " + actualStages + " stages...");
+			battle.log(name + "'s special attack Decreased by " + actualStages + " stages...");
 		}
 
 	}
 
 	public void setDefenseDecrease(int stages) {//self explanatory
 		if(defenseDecrease==6){
-			System.out.println(name + "'s defense can't go any lower!");
+			battle.log(name + "'s defense can't go any lower!");
 		}
 		else {
 			int actualStages=0;
@@ -537,14 +540,14 @@ public class Pokemon {
 				actualStages++;
 			}
 //			defenseDecrease += stages;
-			System.out.println(name + "'s defense Decreased by " + actualStages + " stages...");
+			battle.log(name + "'s defense Decreased by " + actualStages + " stages...");
 		}
 
 	}
 
 	public void setSpecialDefenseDecrease(int stages) {//self explanatory
 		if(specialDefenseDecrease==6){
-			System.out.println(name + "'s special defense can't go any lower!");
+			battle.log(name + "'s special defense can't go any lower!");
 		}
 		else {
 			int actualStages=0;
@@ -554,14 +557,14 @@ public class Pokemon {
 				actualStages++;
 			}
 //			specialDefenseDecrease += stages;
-			System.out.println(name + "'s special defense Decreased by " + actualStages + " stages...");
+			battle.log(name + "'s special defense Decreased by " + actualStages + " stages...");
 		}
 
 	}
 
 	public void setSpeedDecrease(int stages) {//self explanatory
 		if(speedDecrease==6){
-			System.out.println(name + "'s speed can't go any lower!");
+			battle.log(name + "'s speed can't go any lower!");
 		}
 		else {
 			int actualStages=0;
@@ -571,7 +574,7 @@ public class Pokemon {
 				actualStages++;
 			}
 //			speedDecrease += stages;
-			System.out.println(name + "'s speed Decreased by " + actualStages + " stages...");
+			battle.log(name + "'s speed Decreased by " + actualStages + " stages...");
 		}
 	}
 	public void resetBoosts(){//self explanatory
