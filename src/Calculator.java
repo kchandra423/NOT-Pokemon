@@ -44,6 +44,37 @@ public class Calculator {
 // I literally would have learned nothing if i filled all that out manually, which he had already did
 
 
+	//checks if a pokemon is valid
+	public boolean isPokemon(String pokemonName){
+		boolean answer = false;
+		String copy = "something went wrong; ";
+		try {
+//				copy = Files.readString(Paths.get("Stats.txt"));
+			byte[] file = Files.readAllBytes(Paths.get("Text/Stats.txt"));//you should know what this does by now
+			// so im not going to keep on commenting what this does because we use the exact same try catch every time
+			// we use a txt file
+			copy = new String(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String[] lines = copy.split("\n");//split by line
+
+		String currentLine = "";
+		for (int i = 0; i < lines.length; i++) {//iterates throught the whole txt file
+			currentLine = lines[i];
+			try {
+				String name = currentLine.split(";")[1];
+				if (pokemonName.equalsIgnoreCase(name)) {// self explanatory
+					answer = true;
+					break;
+				}
+			} catch (Exception e) {
+
+			}
+		}
+		return answer;
+	}
+	
 	//checks if a move is valid
 	public boolean isMove(String moveName){
 		boolean answer = false;
@@ -62,20 +93,23 @@ public class Calculator {
 		String currentLine = "";
 		for (int i = 0; i < lines.length; i++) {//iterates throught the whole txt file
 			currentLine = lines[i];
-			try{String name=currentLine.split("#")[5];//split by # instead of using TSV (tab seperated values)or
+			try {
+				String name = currentLine.split("#")[5];// split by # instead of using TSV (tab seperated values)or
 				// CSV(colon seperated values), we used hashtags
-				//because the text file we use has colons and tabs that we want to keep sometiems
+				// because the text file we use has colons and tabs that we want to keep
+				// sometiems
 
-
-			if (moveName.equalsIgnoreCase(name)){//self explanatory
-				answer=true;
-			}}
-				catch(Exception e){
-
+				if (moveName.equalsIgnoreCase(name)) {// self explanatory
+					answer = true;
+					break;
 				}
+			} catch (Exception e) {
+
+			}
 		}
 		return answer;
 	}
+	
 	public int getIntFromType(String type) {//every type has its respective int,
 		// so given the name of a type we can get its int
 		int answer = -1;

@@ -1252,25 +1252,65 @@ Calculator calc=new Calculator();
 				public void actionPerformed(ActionEvent e) {
 
 					int x = ((Button) e.getSource()).getNum();//x is the column its from
+					boolean validPokemon=true;//if the user chooses a pokemon that is valid
+					if(calc.isPokemon(leftPokemonInputs[x].getText())) {
+						
+					}
+					else {//if the input is not a pokemon, do this
+						leftConfirmationButtons[x].setProblem(true);
+						validPokemon=false;
+						String columnWordEnd = "th";
+						if(x+1 == 1) {
+							columnWordEnd = "st";
+						}
+						else if(x+1 == 2) {
+							columnWordEnd = "nd";
+						}
+						else if(x+1 == 3) {
+							columnWordEnd = "rd";
+						}
+						JOptionPane.showMessageDialog(leftDisplay,
+								"Your pokemon in the "+(x+1)+columnWordEnd+" column is not a valid pokemon",
+								"Invalid Pokemon",//self explanatory
+								2,//self explanatory
+								(new ImageIcon(new ImageIcon("Images/Exclamation.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));//self explanatory
+					}
 					boolean validMove=true;//if the user chooses a move that is valid
-					for (int i = 0; i <4; i++) {//length is 4
+					for (int i = 0; i < 4; i++) {//length is 4
 						if(calc.isMove(leftMoveInputs[x][i].getText())){
 
 						}
 						else{//if the input is not a move, do this
 							leftConfirmationButtons[x].setProblem(true);
 							validMove=false;
+							String rowWordEnd = "th", columnWordEnd = "th";
+							if(i+1 == 1) {
+								rowWordEnd = "st";
+							}
+							else if(i+1 == 2) {
+								rowWordEnd = "nd";
+							}
+							else if(i+1 == 3) {
+								rowWordEnd = "rd";
+							}
+							if(x+1 == 1) {
+								columnWordEnd = "st";
+							}
+							else if(x+1 == 2) {
+								columnWordEnd = "nd";
+							}
+							else if(x+1 == 3) {
+								columnWordEnd = "rd";
+							}
 							JOptionPane.showMessageDialog(leftDisplay,
-									"Your move in the "+(x+1)+"th column and "+(i+1)+"th row is not a valid move",//yes I know this doesnt work for 1 2 and 3,
+									"Your move in the "+(x+1)+columnWordEnd+" column and "+(i+1)+rowWordEnd+" row is not a valid move",//yes I know this doesnt work for 1 2 and 3,
 									// but its really not a big deal, you get the point
 									"Invalid Move",//self explanatory
 									2,//self explanatory
 									(new ImageIcon(new ImageIcon("Images/Exclamation.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));//self explanatory
-
-
 						}
 					}
-					if(validMove) {//do this if the move is valid
+					if(validPokemon && validMove) {//do this if the pokemon and the move is valid
 						leftConfirmationButtons[x].setProblem(false);
 						Pokemon pokemon = new Pokemon(leftPokemonInputs[x].getText());//get the text from the pokemon input at column x
 						Move[] moves = new Move[4];
@@ -1606,6 +1646,28 @@ Calculator calc=new Calculator();
 				{
 
 					int x = ((Button) e.getSource()).getNum();//x is the column its from
+					boolean validPokemon=true;
+					if(calc.isPokemon(rightPokemonInputs[x].getText())) {
+						
+					} else {
+						rightConfirmationButtons[x].setProblem(true);
+						validPokemon=false;
+						String columnWordEnd = "th";
+						if(x+1 == 1) {
+							columnWordEnd = "st";
+						}
+						else if(x+1 == 2) {
+							columnWordEnd = "nd";
+						}
+						else if(x+1 == 3) {
+							columnWordEnd = "rd";
+						}
+						JOptionPane.showMessageDialog(rightDisplay,
+								"Your pokemon in the "+(x+1)+columnWordEnd+" column is not a valid pokemon",
+								"Invalid Pokemon",
+								2,
+								(new ImageIcon(new ImageIcon("Images/Exclamation.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+					}
 					boolean validMove = true;
 					for (int i = 0; i < 4; i++) {//length is 4
 						if (calc.isMove(rightMoveInputs[x][i].getText())) {
@@ -1613,8 +1675,27 @@ Calculator calc=new Calculator();
 						} else {
 							rightConfirmationButtons[x].setProblem(true);
 							validMove = false;
+							String rowWordEnd = "th", columnWordEnd = "th";
+							if(i+1 == 1) {
+								rowWordEnd = "st";
+							}
+							else if(i+1 == 2) {
+								rowWordEnd = "nd";
+							}
+							else if(i+1 == 3) {
+								rowWordEnd = "rd";
+							}
+							if(x+1 == 1) {
+								columnWordEnd = "st";
+							}
+							else if(x+1 == 2) {
+								columnWordEnd = "nd";
+							}
+							else if(x+1 == 3) {
+								columnWordEnd = "rd";
+							}
 							JOptionPane.showMessageDialog(rightDisplay,
-									"Your move in the " + (x + 1) + "th column and " + (i + 1) + "th row is not a valid move",
+									"Your move in the " + (x + 1) + columnWordEnd + " column and " + (i + 1) + rowWordEnd + " row is not a valid move",
 									"Invalid Move",
 									2,
 									(new ImageIcon(new ImageIcon("Images/Exclamation.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
@@ -1622,7 +1703,7 @@ Calculator calc=new Calculator();
 
 						}
 					}
-					if (validMove) {
+					if (validPokemon && validMove) {
 						rightConfirmationButtons[x].setProblem(false);
 						Pokemon pokemon = new Pokemon(rightPokemonInputs[x].getText());//get the text from the pokemon input at column x
 						Move[] moves = new Move[4];
