@@ -15,6 +15,8 @@ import java.nio.file.Paths;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Calculator {
+	private Battle battle;
+	
 	String typings[] = { "Normal", "Fighting", "Flying", "Poison", "Ground", "Rock", "Bug", "Ghost", "Steel", "Fire",
 			"Water", "Grass", "Electric", "Psychic", "Ice", "Dragon", "Dark", "Fairy" };
 
@@ -43,7 +45,42 @@ public class Calculator {
 // entire aray of things for this besides to waste my time.
 // I literally would have learned nothing if i filled all that out manually, which he had already did
 
+	// constructor to get the battle class to use the log command
+	public Calculator(Battle battle) {
+		this.battle = battle;
+	}
 
+	//checks if a pokemon is valid
+	public boolean isPokemon(String pokemonName){
+		boolean answer = false;
+		String copy = "something went wrong; ";
+		try {
+//				copy = Files.readString(Paths.get("Stats.txt"));
+			byte[] file = Files.readAllBytes(Paths.get("Text/Stats.txt"));//you should know what this does by now
+			// so im not going to keep on commenting what this does because we use the exact same try catch every time
+			// we use a txt file
+			copy = new String(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String[] lines = copy.split("\n");//split by line
+
+		String currentLine = "";
+		for (int i = 0; i < lines.length; i++) {//iterates throught the whole txt file
+			currentLine = lines[i];
+			try {
+				String name = currentLine.split(";")[1];
+				if (pokemonName.equalsIgnoreCase(name)) {// self explanatory
+					answer = true;
+					break;
+				}
+			} catch (Exception e) {
+
+			}
+		}
+		return answer;
+	}
+	
 	//checks if a move is valid
 	public boolean isMove(String moveName){
 		boolean answer = false;
@@ -62,20 +99,23 @@ public class Calculator {
 		String currentLine = "";
 		for (int i = 0; i < lines.length; i++) {//iterates throught the whole txt file
 			currentLine = lines[i];
-			try{String name=currentLine.split("#")[5];//split by # instead of using TSV (tab seperated values)or
+			try {
+				String name = currentLine.split("#")[5];// split by # instead of using TSV (tab seperated values)or
 				// CSV(colon seperated values), we used hashtags
-				//because the text file we use has colons and tabs that we want to keep sometiems
+				// because the text file we use has colons and tabs that we want to keep
+				// sometiems
 
-
-			if (moveName.equalsIgnoreCase(name)){//self explanatory
-				answer=true;
-			}}
-				catch(Exception e){
-
+				if (moveName.equalsIgnoreCase(name)) {// self explanatory
+					answer = true;
+					break;
 				}
+			} catch (Exception e) {
+
+			}
 		}
 		return answer;
 	}
+	
 	public int getIntFromType(String type) {//every type has its respective int,
 		// so given the name of a type we can get its int
 		int answer = -1;
@@ -155,7 +195,7 @@ public class Calculator {
 		if (move.getAccuracy() == 101) {//some moves cannot miss, in which case they are given an accuracy of 101
 
 		} else if (Math.random() > (double) move.getAccuracy() / 100) {//self explanatory
-			System.out.println(target.getName() + " evaded the attack!");
+			battle.log(target.getName() + " evaded the attack!");
 			return 0;
 
 		}
@@ -371,14 +411,14 @@ public class Calculator {
 			if (user.getStatus().equalsIgnoreCase("brn")) {
 				damage *= 2;
 			}
-			System.out.println(user.getName() + " scored a critical hit!");
+			battle.log(user.getName() + " scored a critical hit!");
 
 		} else if (Math.random() < 0.25 && move.getCritical() == 1) {
 			damage *= 1.5;
 			if (user.getStatus().equalsIgnoreCase("brn")) {
 				damage *= 2;
 			}
-			System.out.println(user.getName() + " scored a critical hit!");
+			battle.log(user.getName() + " scored a critical hit!");
 
 		} else if (Math.random() <= 1 && move.getCritical() == 2) {// only because we assume they have max affection
 			//(affection is another variable were not going to implement)
@@ -387,19 +427,23 @@ public class Calculator {
 				damage *= 2;
 			}
 
-			System.out.println(user.getName() + " scored a critical hit!");
+			battle.log(user.getName() + " scored a critical hit!");
 		} else if (move.getCritical() >= 3) {
 			damage *= 1.5;
 			if (user.getStatus().equalsIgnoreCase("brn")) {
 				damage *= 2;
 			}
-			System.out.println(user.getName() + " scored a critical hit!");
+			battle.log(user.getName() + " scored a critical hit!");
 
 		}
 		user.heal((int)(damage*drain));
-		System.out.println(user.getName()+" absorbed "+(int)(damage*drain)+" health from "+target.getName());
+		if(drain > 0) {
+			battle.log(user.getName()+" absorbed "+(int)(damage*drain)+" health from "+target.getName());
+		}
 		target.heal((int)(target.getBaseHealth()*heal));
-		System.out.println(target.getName()+" healed "+(int)(target.getBaseHealth()*heal)+" health.");
+		if(heal > 0) {
+			battle.log(target.getName()+" healed "+(int)(target.getBaseHealth()*heal)+" health.");
+		}
 		if(damaging){
 		return  (damage);//magic constants !
 		}else{

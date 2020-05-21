@@ -12,7 +12,7 @@ public class BackgroundPanel extends JPanel {
 	
 	public BackgroundPanel(Image background) {
 		super();
-		this.background = background;
+		this.background = background.getScaledInstance(600, 400, Image.SCALE_DEFAULT);
 	}
 	
 	@Override
