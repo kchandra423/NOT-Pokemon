@@ -48,7 +48,8 @@ public class Battle {
 	private boolean confirm1 = false, confirm2 = false;// i hate action performed not being able to access things like a normal
 												// method
 	private static Player P1, P2;
-	private static Object myObject1 = new Object(), myObject2 = new Object(), myObject3 = new Object();
+	private static Object myObject1 = new Object(), myObject2 = new Object();
+//	myObject3 = new Object();
 	private PlayMusic musicPlayer = new PlayMusic();
 	private Calculator calc;
 
@@ -561,12 +562,14 @@ P2.setCurrentMon();
 		P1 = new Player(p1mons, givenMoves);//default teams, not used for anything now that we have the teambuilder
 		P2 = new Player(p2mons, givenMoves2);
 		*/
-		
+
+
 		Battle b = new Battle();// calls the constructor, which sets up the gui
 		Player p1 = b.P1;// doesn't use the global variables because this was created before we had GUI
 		Player p2 = b.P2;
 		p1.setOpposingPlayer(p2);
-
+b.confirm1=false;
+b.confirm2=false;
 		b.leftText.setText("The match has begun!");//self explanatory
 		b.rightText.setText("The match has begun!");//self explanatory
 		boolean gameNotOver = true;//self explanatory
@@ -608,8 +611,15 @@ P2.setCurrentMon();
 
 
 					b.p1Selection = ((Button) e.getSource()).getNum();//sets the selection
-					synchronized (myObject2) {//notifies the object
-						myObject2.notify();
+//					synchronized (myObject2) {//notifies the object
+//						myObject2.notify();
+//					}
+					synchronized (myObject2){
+						if(b.confirm2==true){//notifys the object in main if the other player has selected
+							myObject2.notify();
+						}else{
+							b.confirm1 =true;//if the other player hasn't confirmed, confirms your own
+						}
 					}
 				}
 			});
@@ -638,8 +648,12 @@ P2.setCurrentMon();
 				public void actionPerformed(ActionEvent e) {
 
 					b.p1Selection = ((Button) e.getSource()).getNum();
-					synchronized (myObject2) {
-						myObject2.notify();
+					synchronized (myObject2){
+						if(b.confirm2==true){//notifys the object in main if the other player has selected
+							myObject2.notify();
+						}else{
+							b.confirm1 =true;//if the other player hasn't confirmed, confirms your own
+						}
 					}
 
 				}
@@ -671,8 +685,12 @@ P2.setCurrentMon();
 				public void actionPerformed(ActionEvent e) {
 
 					b.p2Selection = ((Button) e.getSource()).getNum();
-					synchronized (myObject3) {
-						myObject3.notify();
+					synchronized (myObject2){
+						if(b.confirm1==true){//notifys the object in main if the other player has selected
+							myObject2.notify();
+						}else{
+							b.confirm2 =true;//if the other player hasn't confirmed, confirms your own
+						}
 					}
 				}
 			});
@@ -702,8 +720,12 @@ P2.setCurrentMon();
 				public void actionPerformed(ActionEvent e) {
 
 					b.p2Selection = ((Button) e.getSource()).getNum();
-					synchronized (myObject3) {
-						myObject3.notify();
+					synchronized (myObject2){
+						if(b.confirm1==true){//notifys the object in main if the other player has selected
+							myObject2.notify();
+						}else{
+							b.confirm2 =true;//if the other player hasn't confirmed, confirms your own
+						}
 					}
 
 				}
@@ -722,7 +744,8 @@ P2.setCurrentMon();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
+			b.confirm2=false;
+			b.confirm1=false;
 //buttons betweens 0 and 4 are for moves, buttons between 4 and 8 are for switches
 			if (b.p1Selection >= 4 && P1numberOfFaintedMons < 5) {
 				p1WillSwitch = true;
@@ -743,13 +766,13 @@ P2.setCurrentMon();
 //same thing as p1
 
 
-			try {
-			synchronized (myObject3) {
-				myObject3.wait();//waits until it is notified by a button
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//			try {
+//			synchronized (myObject3) {
+//				myObject3.wait();//waits until it is notified by a button
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		if (b.p2Selection >=4 && P2numberOfFaintedMons < 5) {
 			p2WillSwitch = true;
 			p2SwitchIn = b.p2Selection - 4;
@@ -955,6 +978,7 @@ P2.setCurrentMon();
 
 				p2SwitchIn=-1;
 				b.repaint(p1, p2);
+
             }
 
         }
@@ -1380,7 +1404,7 @@ P2.setCurrentMon();
 		leftPresetTeam1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				leftPokemonInputs[0].setText("Landorus");
+				leftPokemonInputs[0].setText("Landorus-therian");
 				leftMoveInputs[0][0].setText("Earthquake");
 				leftMoveInputs[0][1].setText("Rock Tomb");
 				leftMoveInputs[0][2].setText("Swords Dance");
@@ -1401,11 +1425,11 @@ P2.setCurrentMon();
 				leftMoveInputs[2][3].setText("Dragon Dance");
 
 
-				leftPokemonInputs[3].setText("Hydreigon");
-				leftMoveInputs[3][0].setText("Dark Pulse");
-				leftMoveInputs[3][1].setText("Draco Meteor");
-				leftMoveInputs[3][2].setText("Flash Cannon");
-				leftMoveInputs[3][3].setText("Recover");
+				leftPokemonInputs[3].setText("Charizard-mega-x");
+				leftMoveInputs[3][0].setText("Flamethrower");
+				leftMoveInputs[3][1].setText("Dragon claw");
+				leftMoveInputs[3][2].setText("Air Slash");
+				leftMoveInputs[3][3].setText("dragon dance");
 
 				leftPokemonInputs[4].setText("Magearna");
 				leftMoveInputs[4][0].setText("Shift Gear");
@@ -1461,7 +1485,7 @@ P2.setCurrentMon();
 				leftMoveInputs[2][3].setText("Icicle Crash");
 
 
-				leftPokemonInputs[3].setText("Scizor");
+				leftPokemonInputs[3].setText("Scizor-mega");
 				leftMoveInputs[3][0].setText("Swords Dance");
 				leftMoveInputs[3][1].setText("Bullet Punch");
 				leftMoveInputs[3][2].setText("Megahorn");
@@ -1473,7 +1497,7 @@ P2.setCurrentMon();
 				leftMoveInputs[4][2].setText("Calm Mind");
 				leftMoveInputs[4][3].setText("Ice Beam");
 
-				leftPokemonInputs[5].setText("Lycanroc");
+				leftPokemonInputs[5].setText("Lycanroc-midnight");
 				leftMoveInputs[5][0].setText("Accelerock");
 				leftMoveInputs[5][1].setText("Stone Edge");
 				leftMoveInputs[5][2].setText("Crunch");
@@ -1510,7 +1534,7 @@ P2.setCurrentMon();
 				leftMoveInputs[0][3].setText("Sleep Powder");
 
 
-				leftPokemonInputs[1].setText("Gyarados");
+				leftPokemonInputs[1].setText("Gyarados-mega");
 				leftMoveInputs[1][0].setText("Crunch");
 				leftMoveInputs[1][1].setText("Earthquake");
 				leftMoveInputs[1][2].setText("Hydro Pump");
@@ -1772,18 +1796,18 @@ P2.setCurrentMon();
 		rightPresetTeam1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				rightPokemonInputs[0].setText("Garchomp");
-				rightMoveInputs[0][0].setText("Earthquake");
-				rightMoveInputs[0][1].setText("Dragon Claw");
-				rightMoveInputs[0][2].setText("Fire Blast");
-				rightMoveInputs[0][3].setText("Dragon Dance");
+				rightPokemonInputs[1].setText("Garchomp-mega");
+				rightMoveInputs[1][0].setText("Earthquake");
+				rightMoveInputs[1][1].setText("Dragon Claw");
+				rightMoveInputs[1][2].setText("Fire Blast");
+				rightMoveInputs[1][3].setText("Dragon Dance");
 
 
-				rightPokemonInputs[1].setText("Deoxys");
-				rightMoveInputs[1][0].setText("Psycho Boost");
-				rightMoveInputs[1][1].setText("Fire Blast");
-				rightMoveInputs[1][2].setText("Nuzzle");
-				rightMoveInputs[1][3].setText("Poison Powder");
+				rightPokemonInputs[0].setText("Deoxys-defense");
+				rightMoveInputs[0][0].setText("Psycho Boost");
+				rightMoveInputs[0][1].setText("Will-o-Wisp");
+				rightMoveInputs[0][2].setText("Nuzzle");
+				rightMoveInputs[0][3].setText("sleep powder");
 
 
 				rightPokemonInputs[2].setText("Genesect");
@@ -1839,7 +1863,7 @@ P2.setCurrentMon();
 				rightMoveInputs[0][3].setText("Calm Mind");
 
 
-				rightPokemonInputs[1].setText("Charizard");
+				rightPokemonInputs[1].setText("Charizard-mega-y");
 				rightMoveInputs[1][0].setText("Dragon Claw");
 				rightMoveInputs[1][1].setText("Flare Blitz");
 				rightMoveInputs[1][2].setText("Dragon Dance");
@@ -1895,7 +1919,7 @@ P2.setCurrentMon();
 		rightPresetTeam3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				rightPokemonInputs[0].setText("Garchomp");
+				rightPokemonInputs[0].setText("Garchomp-mega");
 				rightMoveInputs[0][0].setText("Stone Edge");
 				rightMoveInputs[0][1].setText("Fire Blast");
 				rightMoveInputs[0][2].setText("Draco Meteor");
@@ -1928,7 +1952,7 @@ P2.setCurrentMon();
 				rightMoveInputs[4][2].setText("Ember");
 				rightMoveInputs[4][3].setText("Wood Hammer");
 
-				rightPokemonInputs[5].setText("Chandelure");
+				rightPokemonInputs[5].setText("blacephalon");
 				rightMoveInputs[5][0].setText("Recover");
 				rightMoveInputs[5][1].setText("Shadow Ball");
 				rightMoveInputs[5][2].setText("Crunch");
