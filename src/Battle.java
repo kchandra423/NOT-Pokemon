@@ -1049,9 +1049,17 @@ b.confirm2=false;
 				leftSwitchButtons[i].setText(p1.getPokemon()[i].getName());
 				if(p1.getPokemon()[i].getHealth() <= 0 || p1.getPokemon()[i] == p1.getCurrentMon()) {//self explanatory
 					leftSwitchButtons[i].setEnabled(false);
+					leftSwitchButtons[i].setOpaque(false);
 				}
 				else{
 					leftSwitchButtons[i].setEnabled(true);
+					if(p1.getPokemon()[leftSwitchButtons[i].getNum()-4].getSpeed()>=p2.getCurrentMon().getSpeed()){
+						leftSwitchButtons[i].setOpaque(true);
+						leftSwitchButtons[i].setBackground(Color.RED);
+					}
+					else{
+						leftSwitchButtons[i].setOpaque(false);
+					}
 				}
 			}
 
@@ -1124,13 +1132,19 @@ b.confirm2=false;
 
 			}
 		}
-		for (int i =0;i<rightSwitchButtons.length;i++){
+		for (int i =0;i<rightSwitchButtons.length;i++) {
 			rightSwitchButtons[i].setText(p2.getPokemon()[i].getName());//self explanatory
-			if(p2.getPokemon()[i].getHealth() <= 0 || p2.getPokemon()[i] == p2.getCurrentMon()) {
+			if (p2.getPokemon()[i].getHealth() <= 0 || p2.getPokemon()[i] == p2.getCurrentMon()) {
 				rightSwitchButtons[i].setEnabled(false);
-			}
-			else{
+				rightSwitchButtons[i].setOpaque(false);
+			} else {
 				rightSwitchButtons[i].setEnabled(true);
+				if (p2.getPokemon()[rightSwitchButtons[i].getNum() - 4].getSpeed() >= p1.getCurrentMon().getSpeed()) {
+					rightSwitchButtons[i].setOpaque(true);
+					rightSwitchButtons[i].setBackground(Color.RED);
+				} else {
+					rightSwitchButtons[i].setOpaque(false);
+				}
 			}
 		}
 		animateHPChange();

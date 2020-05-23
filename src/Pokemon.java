@@ -613,11 +613,11 @@ public class Pokemon {
 		try {
 			answer = "\n" + "Name: " + name
 					+ "\n" + "Health: " + health + " / " + baseHealth
-					+ "\n" + "Defense: " + baseDefense
-					+ "\n" + "Attack: " + baseAttack
-					+ "\n" + "Special Attack: " + baseSpecialAttack
-					+ "\n" + "Special Defense: " + baseSpecialDefense
-					+ "\n" + "Speed: " + baseSpeed
+					+ "\n" + "Defense: " + getDefense()
+					+ "\n" + "Attack: " + getAttack()
+					+ "\n" + "Special Attack: " + getSpecialAttack()
+					+ "\n" + "Special Defense: " + getSpecialDefense()
+					+ "\n" + "Speed: " + getSpeed()
 					+ "\n" + "Modifiers: " + (attackIncrease - attackDecrease) + " attack, "
 					+ (defenseIncrease - defenseDecrease) + " defense, "
 					+ (specialAttackIncrease - specialAttackDecrease) + " special attack, "
