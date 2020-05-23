@@ -393,20 +393,38 @@ public class Pokemon {
 		return type2;
 	}
 
-	public void takeDamage(int damage) {//self explanatory
-
-		health -= damage;
-		if(health < 0) {
-			health = 0;
+	public int takeDamage(int damage) {//self explanatory
+		int answer;
+		if(health-damage<=0){
+	answer=health;
+	health = 0;
 		}
+		else {
+			health -= damage;
+			answer=damage;
+		}
+
+
+		return answer;//returns the damage that was actually done.
+		// ex) If you deal 100000 damage to a pokemon with 1, you only dealt 1 damage.
+
 	}
 	
-	public void heal(int heal) {//self explanatory
+	public int heal(int heal) {//self explanatory
 
-		health += heal;
-		if(health > baseHealth) {
+		int answer;
+		if(health+heal>=baseHealth){
+			answer=baseHealth-health;
 			health = baseHealth;
 		}
+		else {
+			health +=heal;
+			answer=heal;
+		}
+
+
+		return answer;//returns the amount of health actually healed.
+		// ex) If you are at full health and recover half your health, you won't actually heal anything.
 	}
 
 	public void setAttackIncrease(int stages) {//self explanatory

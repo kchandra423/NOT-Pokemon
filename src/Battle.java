@@ -50,7 +50,7 @@ public class Battle {
 	private boolean confirm1 = false, confirm2 = false;// i hate action performed not being able to access things like a normal
 												// method
 	private static Player P1, P2;
-	private static Object myObject1 = new Object(), myObject2 = new Object();
+	private static Object myObject1 = new Object(), myObject2 = new Object(), myObject3=new Object();
 //	myObject3 = new Object();
 	private PlayMusic musicPlayer = new PlayMusic();
 	private Calculator calc;
@@ -223,7 +223,7 @@ P2.setCurrentMon();
 					if (SwingUtilities.isRightMouseButton(e)) {
 						JOptionPane leftPokemonInfoPopup = new JOptionPane("P2 current Pokemon info");
 						leftPokemonInfoPopup.showMessageDialog(
-								leftDisplayPanel,
+								leftPanel,
 								P2.getCurrentMon().toString(),
 								"Player 2 Pokemon Info",
 								2,
@@ -526,45 +526,6 @@ P2.setCurrentMon();
     }
 //the main, where everything happens
     public static void main (String[] args) {
-		/*
-		Pokemon[] p1mons = new Pokemon[6];
-		Pokemon[] p2mons = new Pokemon[6];
-		int[][] givenMoves = new int[6][4];
-		int[][] givenMoves2 = new int[6][4];
-
-		p1mons[0] = new Pokemon(130);
-		p1mons[1] = new Pokemon(143);
-		p1mons[2] = new Pokemon(150);
-		p1mons[3] = new Pokemon(384);
-		p1mons[4] = new Pokemon(493);
-		p1mons[5] = new Pokemon(487);
-
-		p2mons[0] = new Pokemon(700);
-		p2mons[1] = new Pokemon(802);
-		p2mons[2] = new Pokemon(801);
-		p2mons[3] = new Pokemon(800);
-		p2mons[4] = new Pokemon(798);
-		p2mons[5] = new Pokemon(791);
-//
-//
-		givenMoves[0] = new int[]{14, 370, 609, 26};
-		givenMoves[1] = new int[]{53, 56, 59, 76};
-		givenMoves[2] = new int[]{85, 89, 94, 98};
-		givenMoves[3] = new int[]{14, 370, 609, 26};
-		givenMoves[4] = new int[]{53, 56, 59, 76};
-		givenMoves[5] = new int[]{85, 89, 94, 98};
-//
-//
-//
-		givenMoves2[0] = new int[]{22, 23, 24, 25};
-		givenMoves2[1] = new int[]{14, 370, 609, 1};
-		givenMoves2[2] = new int[]{6, 7, 8, 9};
-		givenMoves2[3] = new int[]{10, 11, 12, 13};
-		givenMoves2[4] = new int[]{14, 15, 16, 17};
-		givenMoves2[5] = new int[]{18, 19, 20, 21};
-		P1 = new Player(p1mons, givenMoves);//default teams, not used for anything now that we have the teambuilder
-		P2 = new Player(p2mons, givenMoves2);
-		*/
 
 
 		Battle b = new Battle();// calls the constructor, which sets up the gui
@@ -616,7 +577,7 @@ b.confirm2=false;
 					if (SwingUtilities.isRightMouseButton(e)) {
 						int x = ((Button) e.getSource()).getNum();
 						String textInfo = p1.getCurrentMon().getMoves()[x].toString();//gets the info about the move this button represents
-						popup.showMessageDialog(b.leftDisplayPanel,//in the left display panel
+						popup.showMessageDialog(b.leftPanel,//in the left display panel
 								textInfo,//see above
 								"Move Info",//self explanatory
 								2,//self explanatory
@@ -658,7 +619,7 @@ b.confirm2=false;
 					if (SwingUtilities.isRightMouseButton(e)) {
 						int x = ((Button) e.getSource()).getNum();
 						String textInfo = p1.getPokemon()[x - 4].toString();
-						popup.showMessageDialog(b.leftDisplayPanel,
+						popup.showMessageDialog(b.leftPanel,
 								textInfo,
 								"Pokemon Switch info",
 								2,
@@ -911,13 +872,21 @@ b.confirm2=false;
 			}
 		}
 		b.repaint(p1, p2);//repaints the display
-		if (p1.isDefeated()) {//self explanatory
+			try {
+				synchronized (myObject3) {
+					myObject3.wait();//waits until it is notified by a button
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if (p1.isDefeated()) {//self explanatory
 			gameNotOver = false;
 			popup.showMessageDialog(b.mainPanel,
 					"Player 2 Won the game!",
 					"Game Finished",
 					2,
 					(new ImageIcon(new ImageIcon("Images/Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
+			b.frame.dispatchEvent(new WindowEvent(b.frame, WindowEvent.WINDOW_CLOSING));
 			break;
 		}
 		if (p2.isDefeated()) {//self explanatory
@@ -928,7 +897,7 @@ b.confirm2=false;
 					"Game Finished",
 					2,
 					(new ImageIcon(new ImageIcon("Images/Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
-
+			b.frame.dispatchEvent(new WindowEvent(b.frame, WindowEvent.WINDOW_CLOSING));
 			break;
 		}
 		if (p1.getCurrentMon().getHealth() <= 0) {//self explanatory
@@ -952,7 +921,7 @@ b.confirm2=false;
 
 			String y;
 			do {
-				y = (String) popup.showInputDialog(b.leftDisplayPanel,
+				y = (String) popup.showInputDialog(b.leftPanel,
 						"Your current Pokemon fainted. Please choose which pokemon you want to switch in."//self explanatory
 						, "Pokemon defeated",
 						2,
@@ -1174,6 +1143,8 @@ b.confirm2=false;
     			if(!bar1.isChanging() && !bar2.isChanging()
     					&& !bar3.isChanging() && !bar4.isChanging()) {
     				timer.stop();
+    				synchronized (myObject3)
+					{myObject3.notify();}
     			}
     			if(bar1.isChanging()) {
     				bar1.repaint();

@@ -436,17 +436,14 @@ public class Calculator {
 			battle.log(user.getName() + " scored a critical hit!");
 
 		}
-		user.heal((int)(damage*drain));
-		if(drain > 0) {
-			battle.log(user.getName()+" absorbed "+(int)(damage*drain)+" health from "+target.getName());
-		}
-		target.heal((int)(target.getBaseHealth()*heal));
+		 int damageHealed=target.heal((int)(target.getBaseHealth()*heal));
 		if(heal > 0) {
-			battle.log(target.getName()+" healed "+(int)(target.getBaseHealth()*heal)+" health.");
+			battle.log(target.getName()+" healed "+damageHealed+" health.");
 		}
 		if(damaging){
-		return  (damage);//magic constants !
-		}else{
+		return  (damage);
+		}
+		else{
 			return 0;
 		}
 

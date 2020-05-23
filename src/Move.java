@@ -155,11 +155,13 @@ public class Move {
 	public String toString() {//self explanatory
 		String answer = "\n" + "Name: " + name
 				+ "\n" + "PP: " + pp + " / " + basePP
+				+ "\n" + "Category: " + category
 				+ "\n" + "Power: " + power
 				+ "\n" + "Accuracy: " + accuracy
 				+ "\n" + "Description: " + description
 				+ "\n" + "Boosts: " + boosts
 				+ "\n" + "Status: " + status
+				+ "\n" + "Priority: " + priority
 				+ "\n" + "Side effects targets self? : " + self
 				+ "\n" + "Type: " + type;
 		return answer;

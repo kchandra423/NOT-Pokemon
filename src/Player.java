@@ -109,12 +109,20 @@ public class Player {
             int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
             int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
             int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
-            battle.log(currentMon.getName() + " did " + damage /2 + " damage to " + opposingPlayer.currentMon.getName());
+
+
+            int damageDone;
+            damageDone=opposingPlayer.currentMon.takeDamage(damage/2);
+            battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+            double drain=currentMon.getMoves()[indexOfMove].getDrain();
+            int damageAbsorbed = currentMon.heal((int)(damageDone*drain));
+            if(drain > 0) {
+                battle.log(currentMon.getName()+" absorbed "+damageAbsorbed+" health from "+opposingPlayer.currentMon.getName());
+            }
             String howEffective = calculator.howEffective(moveType, opposingType1, opposingType2);
             if(!howEffective.isEmpty()) {
-            	battle.log(howEffective);
+                battle.log(howEffective);
             }
-            opposingPlayer.currentMon.takeDamage(damage/2);
             currentMon.takeDamage((int)(currentMon.getBaseHealth() * 0.06));
             battle.log(currentMon.getName() + " was hurt from its burn");
         }
@@ -130,29 +138,47 @@ public class Player {
                 int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
                 int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
                 int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
-                battle.log(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
+
+                int damageDone;
+                damageDone=opposingPlayer.currentMon.takeDamage(damage);
+                battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+                double drain=currentMon.getMoves()[indexOfMove].getDrain();
+                int damageAbsorbed = currentMon.heal((int)(damageDone*drain));
+                if(drain > 0) {
+                    battle.log(currentMon.getName()+" absorbed "+damageAbsorbed+" health from "+opposingPlayer.currentMon.getName());
+                }
                 String howEffective = calculator.howEffective(moveType, opposingType1, opposingType2);
                 if(!howEffective.isEmpty()) {
-                	battle.log(howEffective);
+                    battle.log(howEffective);
                 }
-                opposingPlayer.currentMon.takeDamage(damage);
+
+
             }
         }
         else if(currentMon.getStatus().equalsIgnoreCase("frz"))
         {
             if(Math.random() < 0.2)
             {
+                battle.log(currentMon.getName()+" thawed out!");
                 currentMon.setStatus("");
                 int moveType = calculator.getIntFromType(currentMon.getMoves()[indexOfMove].getType());
                 int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
                 int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
                 int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
-                battle.log(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
+
+                int damageDone;
+                damageDone=opposingPlayer.currentMon.takeDamage(damage);
+                battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+                double drain=currentMon.getMoves()[indexOfMove].getDrain();
+                int damageAbsorbed = currentMon.heal((int)(damageDone*drain));
+                if(drain > 0) {
+                    battle.log(currentMon.getName()+" absorbed "+damageAbsorbed+" health from "+opposingPlayer.currentMon.getName());
+                }
                 String howEffective = calculator.howEffective(moveType, opposingType1, opposingType2);
                 if(!howEffective.isEmpty()) {
-                	battle.log(howEffective);
+                    battle.log(howEffective);
                 }
-                opposingPlayer.currentMon.takeDamage(damage);
+
             }
             else
             {
@@ -165,12 +191,19 @@ public class Player {
             int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
             int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
             int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
-            battle.log(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
+//            battle.log(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
+            int damageDone;
+            damageDone=opposingPlayer.currentMon.takeDamage(damage);
+            battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+            double drain=currentMon.getMoves()[indexOfMove].getDrain();
+            int damageAbsorbed = currentMon.heal((int)(damageDone*drain));
+            if(drain > 0) {
+                battle.log(currentMon.getName()+" absorbed "+damageAbsorbed+" health from "+opposingPlayer.currentMon.getName());
+            }
             String howEffective = calculator.howEffective(moveType, opposingType1, opposingType2);
             if(!howEffective.isEmpty()) {
-            	battle.log(howEffective);
+                battle.log(howEffective);
             }
-            opposingPlayer.currentMon.takeDamage(damage);
             currentMon.takeDamage((int)(currentMon.getBaseHealth() * 1.0/8));
             battle.log(currentMon.getName() + " was hurt from the poison");
         }
@@ -180,19 +213,27 @@ public class Player {
             if(Math.random() < 1.0/3)
             {
                 currentMon.setStatus("");
+                battle.log(currentMon.getName()+" started to wake up");
             }
         }
         else {
+
             int moveType = calculator.getIntFromType(currentMon.getMoves()[indexOfMove].getType());
             int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
             int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
             int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
-            battle.log(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
+            int damageDone;
+            damageDone=opposingPlayer.currentMon.takeDamage(damage);
+            battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+            double drain=currentMon.getMoves()[indexOfMove].getDrain();
+            int damageAbsorbed = currentMon.heal((int)(damageDone*drain));
+            if(drain > 0) {
+                battle.log(currentMon.getName()+" absorbed "+damageAbsorbed+" health from "+opposingPlayer.currentMon.getName());
+            }
             String howEffective = calculator.howEffective(moveType, opposingType1, opposingType2);
             if(!howEffective.isEmpty()) {
-            	battle.log(howEffective);
+                battle.log(howEffective);
             }
-            opposingPlayer.currentMon.takeDamage(damage);
         }
     }
 
