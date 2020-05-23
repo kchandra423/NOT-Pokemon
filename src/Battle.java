@@ -9,6 +9,8 @@
 //  Bugs:
 //      Lots Probably. Will be listed all be listed at the end of the project
 //
+import org.omg.PortableInterceptor.INACTIVE;
+
 import java.awt.event.*;
 import java.io.*;
 import javax.imageio.ImageIO;
@@ -52,6 +54,7 @@ public class Battle {
 //	myObject3 = new Object();
 	private PlayMusic musicPlayer = new PlayMusic();
 	private Calculator calc;
+	private long textSpeed;
 
 	public Battle() {
 		calc = new Calculator(this);
@@ -570,8 +573,29 @@ P2.setCurrentMon();
 		p1.setOpposingPlayer(p2);
 b.confirm1=false;
 b.confirm2=false;
-		b.leftText.setText("The match has begun!");//self explanatory
-		b.rightText.setText("The match has begun!");//self explanatory
+		int u=-1;
+		Object[] selection = new Object[]{0,1,5,10,15,20};
+
+			do {
+				try{
+				u = (int)JOptionPane.showInputDialog(b.mainPanel,
+						"Choose your text speed.\nA lower number means that text will be written quickly,and a higher number means that text will be written slowly"//self explanatory
+						, "Pokemon defeated",
+						2,
+						new ImageIcon(new ImageIcon("Images/Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
+						selection,
+						"15");}
+				catch (Exception e){
+
+				}
+			}
+			while (u == -1);//prevents you from exiting without giving an answer
+		b.textSpeed= u;
+
+
+
+		b.leftText.setText("The match has begun!\n");//self explanatory
+		b.rightText.setText("The match has begun!\n");//self explanatory
 		boolean gameNotOver = true;//self explanatory
 		boolean p1WillSwitch = false;//self explanatory
 		boolean p2WillSwitch = false;//self explanatory
@@ -785,8 +809,10 @@ b.confirm2=false;
 
 			b.p2Selection = -1;
 		}
-		b.log("------ ------ ------");
-		if (p1WillSwitch && p2WillSwitch) {//calculates who switches first based on whos faster
+
+				b.log("\n------ ------ ------\n");
+
+			if (p1WillSwitch && p2WillSwitch) {//calculates who switches first based on whos faster
 			//kind of useless since you cant see it and use the information it gives you since there are no
 			//animations but, good to have implemented incase we add them
 			if (p1.getCurrentMon().getSpeed() > p2.getCurrentMon().getSpeed()) {//self explanatory
@@ -1987,9 +2013,29 @@ b.confirm2=false;
 		P2=new Player(this, calc, p2Pokemon);
 	}
 
-	public void log(String s) {
-    	leftText.setText(leftText.getText() + "\n" + s);
-    	rightText.setText(rightText.getText() + "\n" + s);
-    }
-
+	public void log(String s)  {
+		Object myOject0=new Object();
+if(textSpeed==0){
+	leftText.setText(leftText.getText() + "" + s);
+	rightText.setText(rightText.getText() + "" + s);
+}else {
+	for (int i = 0; i < s.length(); i++) {
+		leftText.setText(leftText.getText() + "" + s.charAt(i));
+		rightText.setText(rightText.getText() + "" + s.charAt(i));
+//			myOject0.wait(20);
+		if (textSpeed != 1) {
+			synchronized (myOject0) {
+				try {
+					myOject0.wait(textSpeed);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+//		}
+	}
+}
+		leftText.setText(leftText.getText() + "\n") ;
+		rightText.setText(rightText.getText() + "\n") ;
+	}
 }
