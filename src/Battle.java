@@ -1461,11 +1461,11 @@ b.confirm2=false;
 		leftPresetTeam2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				leftPokemonInputs[0].setText("Kommo-o");
-				leftMoveInputs[0][0].setText("Dragon Dance");
-				leftMoveInputs[0][1].setText("Dragon Claw");
-				leftMoveInputs[0][2].setText("Earthquake");
-				leftMoveInputs[0][3].setText("Sky Uppercut");
+				leftPokemonInputs[5].setText("Kommo-o");
+				leftMoveInputs[5][0].setText("Dragon Dance");
+				leftMoveInputs[5][1].setText("Dragon Claw");
+				leftMoveInputs[5][2].setText("Earthquake");
+				leftMoveInputs[5][3].setText("Sky Uppercut");
 
 
 				leftPokemonInputs[1].setText("Salazzle");
@@ -1494,11 +1494,11 @@ b.confirm2=false;
 				leftMoveInputs[4][2].setText("Calm Mind");
 				leftMoveInputs[4][3].setText("Ice Beam");
 
-				leftPokemonInputs[5].setText("Lycanroc-midnight");
-				leftMoveInputs[5][0].setText("Accelerock");
-				leftMoveInputs[5][1].setText("Stone Edge");
-				leftMoveInputs[5][2].setText("Crunch");
-				leftMoveInputs[5][3].setText("Fire Fang");
+				leftPokemonInputs[0].setText("Lycanroc-midnight");
+				leftMoveInputs[0][0].setText("Accelerock");
+				leftMoveInputs[0][1].setText("Stone Edge");
+				leftMoveInputs[0][2].setText("Crunch");
+				leftMoveInputs[0][3].setText("Fire Fang");
 
 
 
