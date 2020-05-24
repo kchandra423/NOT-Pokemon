@@ -50,13 +50,15 @@ public class Battle {
 	private boolean confirm1 = false, confirm2 = false;// i hate action performed not being able to access things like a normal
 												// method
 	private static Player P1, P2;
-	private static Object myObject1 = new Object(), myObject2 = new Object(), myObject3=new Object();
+	private static Object myObject1 = new Object(), myObject2 = new Object(), myObject3=new Object(), myObject4 =new Object();
 //	myObject3 = new Object();
 	private PlayMusic musicPlayer = new PlayMusic();
 	private Calculator calc;
 	private long textSpeed;
 
 	public Battle() {
+
+
 		calc = new Calculator(this);
 		
         frame = new JFrame();
@@ -83,19 +85,22 @@ public class Battle {
 		 frame.setResizable(false);
 		frame.setTitle("NOT Pokemon");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+		titleScreen();
+
+		try{
+			synchronized(myObject4){
+				myObject4.wait();
+			}}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		frame.getContentPane().removeAll();
 //		confirm1 =false;
 //		confirm2=false;
 		teamBuilder();
 
-//		while(wait3){
-//			if((wait1==false)&&(wait2==false)){
-//				wait3=false;
-//				mainPanel.removeAll();
-//			}
-//			System.out.print("");
-//		}
 
-//		mainPanel.wait();
 		try{
 		synchronized(myObject1){
 			myObject1.wait();
@@ -518,7 +523,21 @@ P2.setCurrentMon();
 			y.fill = GridBagConstraints.BOTH;
 			y.insets = new Insets(5, 5, 5, 5);
 			rightPanel.add(pane2, y);
+		Font pokemonPlaceHolder=new Font("Arial", Font.PLAIN, 40);
+		try {
 
+				pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("PokemonGB.ttf"));
+
+
+
+		} catch (FontFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Font pokemonGB=pokemonPlaceHolder.deriveFont((float) 15);
+		leftText.setFont(pokemonGB);
+		rightText.setFont(pokemonGB);
 			leftPanel.updateUI();
 			rightPanel.updateUI();
 			repaint(P1, P2);
@@ -921,7 +940,7 @@ b.confirm2=false;
 
 			String y;
 			do {
-				y = (String) popup.showInputDialog(b.leftPanel,
+				y = (String) popup.showInputDialog(b.leftDisplayPanel,
 						"Your current Pokemon fainted. Please choose which pokemon you want to switch in."//self explanatory
 						, "Pokemon defeated",
 						2,
@@ -1053,7 +1072,7 @@ b.confirm2=false;
 				}
 				else{
 					leftSwitchButtons[i].setEnabled(true);
-					if(p1.getPokemon()[leftSwitchButtons[i].getNum()-4].getSpeed()>=p2.getCurrentMon().getSpeed()){
+					if(p1.getPokemon()[leftSwitchButtons[i].getNum()-4].getSpeed()>p2.getCurrentMon().getSpeed()){
 						leftSwitchButtons[i].setOpaque(true);
 						leftSwitchButtons[i].setBackground(Color.RED);
 					}
@@ -1139,7 +1158,7 @@ b.confirm2=false;
 				rightSwitchButtons[i].setOpaque(false);
 			} else {
 				rightSwitchButtons[i].setEnabled(true);
-				if (p2.getPokemon()[rightSwitchButtons[i].getNum() - 4].getSpeed() >= p1.getCurrentMon().getSpeed()) {
+				if (p2.getPokemon()[rightSwitchButtons[i].getNum() - 4].getSpeed() > p1.getCurrentMon().getSpeed()) {
 					rightSwitchButtons[i].setOpaque(true);
 					rightSwitchButtons[i].setBackground(Color.RED);
 				} else {
@@ -1997,8 +2016,95 @@ b.confirm2=false;
 // set the pokemon chosen to the fields
 		P2=new Player(this, calc, p2Pokemon);
 	}
+	private void titleScreen(){
+		JPanel mainPanelTitleScreen =new JPanel(new GridLayout(2,1));
+		JPanel logo= new JPanel();
+		mainPanelTitleScreen.add(logo);
+		JPanel UI=new JPanel(new BorderLayout());
+		mainPanelTitleScreen.add(UI);
+//		GridBagConstraints constraints=new GridBagConstraints();
+		JPanel music=new JPanel(new BorderLayout()),settings=new JPanel(new BorderLayout()),play =new JPanel( new BorderLayout());
+		JButton musicButton =new JButton("Music");
+		JButton settingsButton=new JButton("Settings");
+		JButton playButton =new JButton("Play!");
+		frame.add(mainPanelTitleScreen);
+		music.add(musicButton);
+		settings.add(settingsButton);
+		play.add(playButton);
 
+		UI.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		logo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		music.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		settings.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		play.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+musicButton.setPreferredSize(new Dimension(500,100));
+Font pokemonPlaceHolder=new Font("Arial", Font.PLAIN, 40);
+try {
+	if(Math.random()<0.5){
+	pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("Pokemon Hollow.ttf"));
+	}
+	else{
+		pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("Pokemon Solid.ttf"));
+	}
+
+		} catch (FontFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		settingsButton.setPreferredSize(new Dimension(500,100));
+		Font pokemon=pokemonPlaceHolder.deriveFont((float) 40.0);
+
+		playButton.setFont(pokemon);
+		settingsButton.setFont(pokemon);
+
+		musicButton.setFont(pokemon);
+//		constraints.gridx = 0;
+//		constraints.gridy = 0;
+//		constraints.gridwidth = 1;
+//		constraints.gridheight = 1;
+//		constraints.weightx = 1;
+//		constraints.weighty = 0;
+//		constraints.anchor = GridBagConstraints.PAGE_START;
+////		constraints.fill = GridBagConstraints.HORIZONTAL;
+//		constraints.insets = new Insets(0, 0, 0, 0);
+		UI.add(music,BorderLayout.WEST);
+
+//		constraints.gridx = 1;
+//		constraints.gridy = 0;
+//		constraints.gridwidth = 2;
+//		constraints.gridheight = 1;
+//		constraints.weightx = 1;
+//		constraints.weighty = 0;
+//		constraints.anchor = GridBagConstraints.PAGE_START;
+////		constraints.fill = GridBagConstraints.HORIZONTAL;
+//		constraints.insets = new Insets(0, 0, 0, 0);
+		UI.add(play,BorderLayout.CENTER);
+
+//		constraints.gridx = 3;
+//		constraints.gridy = 0;
+//		constraints.gridwidth = 1;
+//		constraints.gridheight = 1;
+//		constraints.weightx = 1;
+//		constraints.weighty = 0;
+//		constraints.anchor = GridBagConstraints.PAGE_START;
+////		constraints.fill = GridBagConstraints.HORIZONTAL;
+//		constraints.insets = new Insets(0, 0, 0, 0);
+		UI.add(settings,BorderLayout.EAST);
+
+		playButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				synchronized (myObject4){
+
+					myObject4.notify();
+
+				}
+			}
+		});
+	}
 	public void log(String s)  {
+
 		Object myOject0=new Object();
 if(textSpeed==0){
 	leftText.setText(leftText.getText() + "" + s);
