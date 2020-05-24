@@ -23,14 +23,14 @@ public class ReadFile {
         String copy = "something went wrong; ";
         try {
 //			copy = Files.readString(Paths.get("Stats.txt"));
-            byte[] file = Files.readAllBytes(Paths.get("Text/ShowdownStats.txt"));
+            byte[] file = Files.readAllBytes(Paths.get("Text/ShowdownMovesets.txt"));
             copy = new String(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println(
 //            read.orderMoves(
-                (read.getSpecifiedPokemon(copy)));
+                (read.orderMoves(read.formatShowDownMovesets(copy))));
     }
 
     public String formatShowDownMovesets(String s) {
@@ -40,7 +40,7 @@ public class ReadFile {
         String[] chunks;
         chunks = s.split("ENDLINE");
         String[] lines;
-        String[] currentChunksLines = new String[19];
+        String[] currentChunksLines = new String[21];
         String currentLine = "";
         for (int i = 0; i < chunks.length; i++) {
             String chunk = chunks[i];
@@ -124,29 +124,41 @@ public class ReadFile {
                     currentChunksLines[14] = currentLine.substring
                             (currentLine.indexOf("heal: ") + 6, currentLine.indexOf("],") + 1)
                             + "#";
-                } else if (currentLine.contains("\ttarget: \"self\"")) {
-                    System.out.println("hjjjhhjj");
+                }
+                else if (currentLine.contains("\tmultihit: ")) {
+
+                    currentChunksLines[18] = currentLine.substring
+                            (currentLine.indexOf("multihit: ") + 10, currentLine.indexOf("],") + 1)
+                            + "#";
+                }
+                else if (currentLine.contains("\trecoil: ")) {
+
+                    currentChunksLines[19] = currentLine.substring
+                            (currentLine.indexOf("recoil: ") + 8, currentLine.indexOf("],") + 1)
+                            + "#";
+                }else if (currentLine.contains("\ttarget: \"self\"")) {
+//                    System.out.println("hjjjhhjj");
                     currentChunksLines[16] = "true#";
 
 //                            currentLine.substring
 //                            (currentLine.indexOf("target: ") + 8, currentLine.indexOf("\""))
 //                            + "#";
                 } else if (currentLine.contains("\ttarget: \"adjacentAllyOrSelf\"")) {
-                    System.out.println("hjjjhhjj");
+//                    System.out.println("hjjjhhjj");
                     currentChunksLines[16] = "true#";
 
 //                            currentLine.substring
 //                            (currentLine.indexOf("target: ") + 8, currentLine.indexOf("\""))
 //                            + "#";
                 } else if (currentLine.contains("\ttarget: \"allyTeam\"")) {
-                    System.out.println("hjjjhhjj");
+//                    System.out.println("hjjjhhjj");
                     currentChunksLines[16] = "true#";
 
 //                            currentLine.substring
 //                            (currentLine.indexOf("target: ") + 8, currentLine.indexOf("\""))
 //                            + "#";
                 } else if (currentLine.contains("\ttarget: \"adjacentAlly\"")) {
-                    System.out.println("hjjjhhjj");
+//                    System.out.println("hjjjhhjj");
                     currentChunksLines[16] = "true#";
 
 //                            currentLine.substring
@@ -163,7 +175,7 @@ public class ReadFile {
                             + "#";
                 } else if (currentLine.contains("\tid: ")) {
 
-                    currentChunksLines[18] = currentLine.substring
+                    currentChunksLines[20] = currentLine.substring
                             (currentLine.indexOf("id: ") + 4, currentLine.indexOf(","))
                             + "\n";
                 } else if (currentLine.indexOf("\tboosts: ") != -1) {
@@ -181,6 +193,10 @@ public class ReadFile {
                 masterString += currentChunksLines[a];
             }
         }
+        masterString=masterString.replace("\t","");
+        masterString=masterString.replace("\"","");
+        masterString=masterString.replace("\'","");
+        masterString=masterString.replace("NOTLINEEND","");
         return masterString;
     }
     public String getMegas(String s) {

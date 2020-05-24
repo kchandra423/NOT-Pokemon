@@ -39,6 +39,8 @@ public class Move {
 	private boolean target;//true if the target is the user
 	private String type;
 	private String id;
+	private Ratio multiHit;
+	private Ratio recoil;
 	//more info about each stat in the calculate basic damage method of calculator
 
 	public Move(int number) {
@@ -130,7 +132,25 @@ public class Move {
 		status = s[15];
 		target = (s[16].equalsIgnoreCase("null")) ? false : true;
 		type = s[17];
-		id = s[18];
+
+		if (s[18].equalsIgnoreCase("null")) {
+			multiHit = new Ratio(1, 1);
+		} else {
+			String[] s2 = s[18].replaceAll("[\\[\\],]", "").split(" ");
+			int first = Integer.parseInt(s2[0]);
+			int second = Integer.parseInt(s2[1]);
+			multiHit = new Ratio(first, second);
+		}
+
+		if (s[19].equalsIgnoreCase("null")) {
+			recoil = new Ratio(0, 1);
+		} else {
+			String[] s2 = s[19].replaceAll("[\\[\\],]", "").split(" ");
+			int first = Integer.parseInt(s2[0]);
+			int second = Integer.parseInt(s2[1]);
+			recoil = new Ratio(first, second);
+		}
+		id = s[20];
 
 	}
 
@@ -217,6 +237,12 @@ public class Move {
 		return critical;
 	}
 
+	public double getRecoil() {
+		return  (double)recoil.getFirst()/(double)recoil.getSecond();
+	}
+	public Ratio getMultiHit() {
+		return  multiHit;
+	}
 	public int getPriority() {
 		return priority;
 	}//self explanatory
