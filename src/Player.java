@@ -119,6 +119,11 @@ public class Player {
             if(drain > 0) {
                 battle.log(currentMon.getName()+" absorbed "+damageAbsorbed+" health from "+opposingPlayer.currentMon.getName());
             }
+            double recoil=currentMon.getMoves()[indexOfMove].getRecoil();
+            int recoilDamage = currentMon.takeDamage((int)(damageDone*recoil));
+            if(recoil > 0) {
+                battle.log(currentMon.getName()+" took " + recoilDamage + " as recoil.");
+            }
             String howEffective = calculator.howEffective(moveType, opposingType1, opposingType2);
             if(!howEffective.isEmpty()) {
                 battle.log(howEffective);
@@ -147,6 +152,11 @@ public class Player {
                 if(drain > 0) {
                     battle.log(currentMon.getName()+" absorbed "+damageAbsorbed+" health from "+opposingPlayer.currentMon.getName());
                 }
+                double recoil=currentMon.getMoves()[indexOfMove].getRecoil();
+                int recoilDamage = currentMon.takeDamage((int)(damageDone*recoil));
+                if(recoil > 0) {
+                    battle.log(currentMon.getName()+" took " + recoilDamage + " as recoil.");
+                }
                 String howEffective = calculator.howEffective(moveType, opposingType1, opposingType2);
                 if(!howEffective.isEmpty()) {
                     battle.log(howEffective);
@@ -173,6 +183,11 @@ public class Player {
                 int damageAbsorbed = currentMon.heal((int)(damageDone*drain));
                 if(drain > 0) {
                     battle.log(currentMon.getName()+" absorbed "+damageAbsorbed+" health from "+opposingPlayer.currentMon.getName());
+                }
+                double recoil=currentMon.getMoves()[indexOfMove].getRecoil();
+                int recoilDamage = currentMon.takeDamage((int)(damageDone*recoil));
+                if(recoil > 0) {
+                    battle.log(currentMon.getName()+" took " + recoilDamage + " as recoil.");
                 }
                 String howEffective = calculator.howEffective(moveType, opposingType1, opposingType2);
                 if(!howEffective.isEmpty()) {
@@ -204,6 +219,11 @@ public class Player {
             if(!howEffective.isEmpty()) {
                 battle.log(howEffective);
             }
+            double recoil=currentMon.getMoves()[indexOfMove].getRecoil();
+            int recoilDamage = currentMon.takeDamage((int)(damageDone*recoil));
+            if(recoil > 0) {
+                battle.log(currentMon.getName()+" took " + recoilDamage + " as recoil.");
+            }
             currentMon.takeDamage((int)(currentMon.getBaseHealth() * 1.0/8));
             battle.log(currentMon.getName() + " was hurt from the poison");
         }
@@ -229,6 +249,11 @@ public class Player {
             int damageAbsorbed = currentMon.heal((int)(damageDone*drain));
             if(drain > 0) {
                 battle.log(currentMon.getName()+" absorbed "+damageAbsorbed+" health from "+opposingPlayer.currentMon.getName());
+            }
+            double recoil=currentMon.getMoves()[indexOfMove].getRecoil();
+            int recoilDamage = currentMon.takeDamage((int)(damageDone*recoil));
+            if(recoil > 0) {
+                battle.log(currentMon.getName()+" took " + recoilDamage + " as recoil.");
             }
             String howEffective = calculator.howEffective(moveType, opposingType1, opposingType2);
             if(!howEffective.isEmpty()) {
