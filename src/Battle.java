@@ -19,16 +19,28 @@ import javax.swing.text.DefaultCaret;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 
 public class Battle {
 	public static int P1numberOfFaintedMons = 0;// self explanatory
 	public static int P2numberOfFaintedMons = 0;// self explanatory
-	private final String[] MUSIC_OPTIONS = { "Music/Battle! (Brendan_May).wav", "Music/Battle! Rival Hugh.wav",
-			"Music/BattleVsTrainer.wav", "Music/BattleVsWildPokemon.wav", "Music/BillsLighthouse.wav",
-			"Music/bw2-kanto-gym-leader.wav", "Music/bw-subway-trainer.wav", "Music/PaletteTown.wav",
-			"Music/PewterCity.wav", "Music/PokemonBattleMusic.wav", "Music/PokemonGym.wav",
-			"Music/PokemonTitleScreen.wav", "Music/PokemonThemeSong.wav", "Music/RivalAppears.wav",
-			"Music/TeamRocketHideout.wav", "Music/ViridianForest.wav" };// 16 music options
+
+	private final String[] MUSIC_OPTIONS = { "Battle! (Brendan_May)", "Battle! Rival Hugh",
+			"BattleVsTrainer", "BattleVsWildPokemon", "BillsLighthouse",
+			"bw2-kanto-gym-leader", "bw-subway-trainer", "PaletteTown",
+			"PewterCity", "PokemonBattleMusic", "PokemonGym",
+			"PokemonTitleScreen", "PokemonThemeSong", "RivalAppears",
+			"TeamRocketHideout", "ViridianForest", "Battle! Team Plasma",
+			"bw2-theme","Pinch in Battle!","platinum-title", "xy-theme",
+			"xy_vs_gymleader","bw2-title","heartgold-title"};// 24 music options
+	private final String[] TITLE_SCEENS={"Music/PokemonTitleScreen.wav","Music/bw2-title.wav",
+			"Music/heartgold-title.wav","Music/xy-theme.wav","Music/platinum-title.wav","Music/bw2-theme.wav"};//6 title screens
+	private int musicSelection=-1;
+
+
+	private long textSpeed=5;
+	private int healthBarDecreationRate=4;
+
 
 	private JFrame frame = new JFrame();// self explanatory
 	private JPanel mainPanel;// self explanatory
@@ -54,7 +66,7 @@ public class Battle {
 //	myObject3 = new Object();
 	private PlayMusic musicPlayer = new PlayMusic();
 	private Calculator calc;
-	private long textSpeed;
+
 
 	public Battle() {
 
@@ -111,9 +123,9 @@ public class Battle {
 //		mainPanel.remove(leftPanelTB);
 //		mainPanel.remove(rightPanelTB);
 //		mainPanel.removeAll();
-		musicPlayer.stop();
-		int random=(int)(Math.random()*16);
-		musicPlayer.play(MUSIC_OPTIONS[random]);
+//		musicPlayer.stop();
+//		int random=(int)(Math.random()*16);
+//		musicPlayer.play(MUSIC_OPTIONS[random]);
 		frame.getContentPane().removeAll();
 		mainPanel=new JPanel();
 			P1.setOpposingPlayer(P2);
@@ -546,36 +558,19 @@ P2.setCurrentMon();
 //the main, where everything happens
     public static void main (String[] args) {
 
-
+boolean dangerZoneActivated=false;
 		Battle b = new Battle();// calls the constructor, which sets up the gui
 		Player p1 = b.P1;// doesn't use the global variables because this was created before we had GUI
 		Player p2 = b.P2;
 		p1.setOpposingPlayer(p2);
 b.confirm1=false;
 b.confirm2=false;
-		int u=-1;
-		Object[] selection = new Object[]{0,1,5,10,15,20};
-
-			do {
-				try{
-				u = (int)JOptionPane.showInputDialog(b.mainPanel,
-						"Choose your text speed.\nA lower number means that text will be written quickly,and a higher number means that text will be written slowly"//self explanatory
-						, "Pokemon defeated",
-						2,
-						new ImageIcon(new ImageIcon("Images/Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
-						selection,
-						"15");}
-				catch (Exception e){
-
-				}
-			}
-			while (u == -1);//prevents you from exiting without giving an answer
-		b.textSpeed= u;
 
 
 
-		b.leftText.setText("The match has begun!\n");//self explanatory
-		b.rightText.setText("The match has begun!\n");//self explanatory
+
+		b.log("The match has begun!\n");//self explanatory
+
 		boolean gameNotOver = true;//self explanatory
 		boolean p1WillSwitch = false;//self explanatory
 		boolean p2WillSwitch = false;//self explanatory
@@ -994,12 +989,17 @@ b.confirm2=false;
 				b.repaint(p1, p2);
 
             }
-
+			if((P1numberOfFaintedMons==5||P2numberOfFaintedMons==5)&&!dangerZoneActivated){
+				b.musicPlayer.stop();
+				b.musicPlayer.play("Music/Pinch in Battle!.wav");
+				dangerZoneActivated=true;
+			}
         }
 
     }
     private void repaint(Player p1, Player p2) {
-			name1.setText(p1.getCurrentMon().getName());//self explanatory
+
+		name1.setText(p1.getCurrentMon().getName());//self explanatory
 
 			name2 .setText(p2.getCurrentMon().getName());//self explanatory
 
@@ -1170,7 +1170,7 @@ b.confirm2=false;
 	}
 
     private void animateHPChange() {
-    	timer = new Timer(4, new ActionListener() {
+    	timer = new Timer(healthBarDecreationRate, new ActionListener() {
     		@Override
     		public void actionPerformed(ActionEvent e) {
     			if(!bar1.isChanging() && !bar2.isChanging()
@@ -1198,9 +1198,15 @@ b.confirm2=false;
     }
     // This method lets you choose your pokemon and their moves
 	private void teamBuilder(){
+musicPlayer.stop();
+		if(musicSelection==-1){
+	int random=(int)(Math.random()*24);
+	musicPlayer.play("Music/"+MUSIC_OPTIONS[random]+".wav");
+}
+else{
+	musicPlayer.play("Music/"+MUSIC_OPTIONS[musicSelection]+".wav");
+}
 
-		int random=(int)(Math.random()*16);
-		musicPlayer.play(MUSIC_OPTIONS[random]);
 		JPanel mainPanelTB=new JPanel();// the main panel with all of the the components inside
 		mainPanelTB.setLayout(new GridLayout(1,2));
 		frame.add(mainPanelTB);//using the frame from the field so as not to use multiple Jframes
@@ -2017,6 +2023,8 @@ b.confirm2=false;
 		P2=new Player(this, calc, p2Pokemon);
 	}
 	private void titleScreen(){
+		int random=(int)(Math.random()*6);
+		musicPlayer.play(TITLE_SCEENS[random]);
 		JPanel mainPanelTitleScreen =new JPanel(new GridLayout(2,1));
 		JPanel logo= new JPanel();
 		mainPanelTitleScreen.add(logo);
@@ -2032,20 +2040,20 @@ b.confirm2=false;
 		settings.add(settingsButton);
 		play.add(playButton);
 
-		UI.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		logo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		music.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		settings.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		play.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+//		UI.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+//		logo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+//		music.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+//		settings.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+//		play.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 musicButton.setPreferredSize(new Dimension(500,100));
 Font pokemonPlaceHolder=new Font("Arial", Font.PLAIN, 40);
 try {
-	if(Math.random()<0.5){
-	pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("Pokemon Hollow.ttf"));
-	}
-	else{
-		pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("Pokemon Solid.ttf"));
-	}
+//	if(Math.random()<0.25){
+//	pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("PokemonHollow.ttf"));
+//	}
+//	else{
+		pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("PokemonSolid.ttf"));
+//	}
 
 		} catch (FontFormatException e) {
 			e.printStackTrace();
@@ -2059,37 +2067,13 @@ try {
 		settingsButton.setFont(pokemon);
 
 		musicButton.setFont(pokemon);
-//		constraints.gridx = 0;
-//		constraints.gridy = 0;
-//		constraints.gridwidth = 1;
-//		constraints.gridheight = 1;
-//		constraints.weightx = 1;
-//		constraints.weighty = 0;
-//		constraints.anchor = GridBagConstraints.PAGE_START;
-////		constraints.fill = GridBagConstraints.HORIZONTAL;
-//		constraints.insets = new Insets(0, 0, 0, 0);
+
 		UI.add(music,BorderLayout.WEST);
 
-//		constraints.gridx = 1;
-//		constraints.gridy = 0;
-//		constraints.gridwidth = 2;
-//		constraints.gridheight = 1;
-//		constraints.weightx = 1;
-//		constraints.weighty = 0;
-//		constraints.anchor = GridBagConstraints.PAGE_START;
-////		constraints.fill = GridBagConstraints.HORIZONTAL;
-//		constraints.insets = new Insets(0, 0, 0, 0);
+
 		UI.add(play,BorderLayout.CENTER);
 
-//		constraints.gridx = 3;
-//		constraints.gridy = 0;
-//		constraints.gridwidth = 1;
-//		constraints.gridheight = 1;
-//		constraints.weightx = 1;
-//		constraints.weighty = 0;
-//		constraints.anchor = GridBagConstraints.PAGE_START;
-////		constraints.fill = GridBagConstraints.HORIZONTAL;
-//		constraints.insets = new Insets(0, 0, 0, 0);
+
 		UI.add(settings,BorderLayout.EAST);
 
 		playButton.addActionListener(new ActionListener() {
@@ -2102,6 +2086,83 @@ try {
 				}
 			}
 		});
+		musicButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String input;
+				input= (String) JOptionPane.showInputDialog(mainPanelTitleScreen,
+						"Select your music. If you don't select anything, the music choice will be random"
+						,"Pokemon defeated",
+						2,
+						new ImageIcon (new ImageIcon("Images/Music.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
+						MUSIC_OPTIONS,
+						null);
+				if(input!=null){
+			for(int i=0;i<MUSIC_OPTIONS.length;i++){
+				if(input.equalsIgnoreCase(MUSIC_OPTIONS[i])){
+					musicSelection=i;
+					break;
+				}
+			}}
+			}
+		});
+		settingsButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String[] options=new String[]{"Healthbar","TextSpeed"};
+				String input;
+				input= (String) JOptionPane.showInputDialog(mainPanelTitleScreen,
+						"What setting would you like to change"
+						,"Settings",
+						2,
+						new ImageIcon (new ImageIcon("Images/Settings.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
+						options,
+						null);
+				if(input!=null){
+					if(input.equals("Healthbar")){
+						int u=-1;
+						Object[] selection = new Object[]{0,2,4,6,8,10};
+
+
+						try{
+							u = (int)JOptionPane.showInputDialog(mainPanelTitleScreen,
+									"HealthBar speed.\nA lower number means that the Health bars will change quickly,\n and a higher number means that the Health bars will change slowly"//self explanatory
+									, "Health bar speed",
+									2,
+									new ImageIcon(new ImageIcon("Images/Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
+									selection,
+									"15");}
+						catch (Exception ex) {
+
+						}
+
+
+						healthBarDecreationRate= u;
+					}else if(input.equals("TextSpeed")){
+						int u=-1;
+						Object[] selection = new Object[]{0,1,5,10,15,20};
+
+
+						try{
+							u = (int)JOptionPane.showInputDialog(mainPanelTitleScreen,
+									"Choose your text speed.\nA lower number means that text will be written quickly, and a higher number means that text will be written slowly"//self explanatory
+									, "TextSpeed",
+									2,
+									new ImageIcon(new ImageIcon("Images/Pokeball.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
+									selection,
+									"15");}
+						catch (Exception ex) {
+
+						}
+
+
+						textSpeed= u;
+					}
+				}
+			}
+
+		});
+
 	}
 	public void log(String s)  {
 

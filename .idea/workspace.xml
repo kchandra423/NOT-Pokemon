@@ -2,10 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c409674a-022d-407e-a93f-62a2b7549e75" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Pokemon Hollow.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pokemon Solid.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PokemonGB.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Images/Music.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Images/Settings.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Music/Battle! Team Plasma.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Music/Pinch in Battle!.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Music/bw2-theme.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Music/bw2-title.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Music/heartgold-title.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Music/platinum-title.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Music/xy-theme.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Music/xy_vs_gymleader.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pokemon Hollow.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/PokemonHollow.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pokemon Solid.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/PokemonSolid.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/META-INF/NOT Pokemon.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NOT Pokemon/Ratio.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NOT Pokemon/Ratio.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Battle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Battle.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +58,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Music" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -55,13 +66,14 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/Images/Sprites" />
       <recent name="$PROJECT_DIR$/Music" />
       <recent name="$PROJECT_DIR$/Images" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/Images/Sprites" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Music" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/Text" />
     </key>
@@ -134,10 +146,10 @@
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state x="916" y="811" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.23.3840.2057@0.23.3840.2057" timestamp="1587094053315" />
-    <state x="1662" y="978" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1590219062601">
+    <state x="1662" y="978" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1590294572297">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
-    <state x="1662" y="978" key="#com.intellij.fileTypes.FileTypeChooser/0.23.3840.2057@0.23.3840.2057" timestamp="1590219062601" />
+    <state x="1662" y="978" key="#com.intellij.fileTypes.FileTypeChooser/0.23.3840.2057@0.23.3840.2057" timestamp="1590294572297" />
     <state x="987" y="837" key="#com.intellij.ide.util.MemberChooser" timestamp="1589961770297">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
@@ -150,26 +162,26 @@
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state x="2119" y="844" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.3840.2057@0.23.3840.2057" timestamp="1589841259306" />
-    <state width="2297" height="606" key="GridCell.Tab.0.bottom" timestamp="1590285350223">
+    <state width="2297" height="606" key="GridCell.Tab.0.bottom" timestamp="1590296797253">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.bottom/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286148" />
-    <state width="2297" height="606" key="GridCell.Tab.0.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1590285350223" />
-    <state width="2297" height="606" key="GridCell.Tab.0.center" timestamp="1590285350223">
+    <state width="2297" height="606" key="GridCell.Tab.0.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1590296797253" />
+    <state width="2297" height="606" key="GridCell.Tab.0.center" timestamp="1590296797252">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.center/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286147" />
-    <state width="2297" height="606" key="GridCell.Tab.0.center/0.23.3840.2057@0.23.3840.2057" timestamp="1590285350223" />
-    <state width="2297" height="606" key="GridCell.Tab.0.left" timestamp="1590285350222">
+    <state width="2297" height="606" key="GridCell.Tab.0.center/0.23.3840.2057@0.23.3840.2057" timestamp="1590296797252" />
+    <state width="2297" height="606" key="GridCell.Tab.0.left" timestamp="1590296797252">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.left/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286145" />
-    <state width="2297" height="606" key="GridCell.Tab.0.left/0.23.3840.2057@0.23.3840.2057" timestamp="1590285350222" />
-    <state width="2297" height="606" key="GridCell.Tab.0.right" timestamp="1590285350223">
+    <state width="2297" height="606" key="GridCell.Tab.0.left/0.23.3840.2057@0.23.3840.2057" timestamp="1590296797252" />
+    <state width="2297" height="606" key="GridCell.Tab.0.right" timestamp="1590296797252">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.right/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286148" />
-    <state width="2297" height="606" key="GridCell.Tab.0.right/0.23.3840.2057@0.23.3840.2057" timestamp="1590285350223" />
+    <state width="2297" height="606" key="GridCell.Tab.0.right/0.23.3840.2057@0.23.3840.2057" timestamp="1590296797252" />
     <state width="2297" height="715" key="GridCell.Tab.1.bottom" timestamp="1590210097101">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
@@ -253,33 +265,28 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>1692</line>
+          <line>1698</line>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>955</line>
+          <line>950</line>
           <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>832</line>
+          <line>827</line>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>817</line>
+          <line>812</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Calculator.java</url>
           <line>436</line>
           <option name="timeStamp" value="71" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>112</line>
-          <option name="timeStamp" value="72" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
