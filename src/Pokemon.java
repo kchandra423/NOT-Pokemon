@@ -90,6 +90,16 @@ public class Pokemon {
 		}
 		setStats(dex);
 	}
+	public Pokemon( String pokeName) {//instantiates with a name
+
+		name = pokeName;
+		int dexNumber = convertMonName(pokeName);
+		dex = dexNumber;
+		for (int i = 0; i < 4; i++) {
+			moves[i] = new Move(1);
+		}
+		setStats(dex);
+	}
 
 	//uses the stats file to get the stats of a pokemon
 	public void setStats(int dexNumber) {

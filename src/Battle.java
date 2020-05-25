@@ -93,7 +93,7 @@ public class Battle {
 //				frame.getContentPane().add(rightPanel);
 
 //		frame.setBounds(100, 100, 2000, 750);
-		frame.setBounds(100, 100, 2250, 900);
+		frame.setBounds(100, 100, 2250, 850);
 
 		frame.setVisible(true);
 		 frame.setResizable(false);
@@ -1386,7 +1386,9 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 					}
 					boolean validMove=true;//if the user chooses a move that is valid
 					for (int i = 0; i < 4; i++) {//length is 4
-						if(calc.isMove(leftMoveInputs[x][i].getText())){
+						if(calc.isMove(leftMoveInputs[x][i].getText())
+								&&calc.hasMove(new Pokemon(leftPokemonInputs[x].getText()),new Move(leftMoveInputs[x][i].getText()))
+						){
 
 						}
 						else{//if the input is not a move, do this
@@ -1491,29 +1493,29 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 			public void actionPerformed(ActionEvent e) {
 				leftPokemonInputs[0].setText("Landorus-therian");
 				leftMoveInputs[0][0].setText("Earthquake");
-				leftMoveInputs[0][1].setText("Rock Tomb");
+				leftMoveInputs[0][1].setText("Stone Edge");
 				leftMoveInputs[0][2].setText("Swords Dance");
-				leftMoveInputs[0][3].setText("Ice Beam");
+				leftMoveInputs[0][3].setText("Fly");
 
 
 				leftPokemonInputs[1].setText("Volcarona");
 				leftMoveInputs[1][0].setText("Quiver Dance");
 				leftMoveInputs[1][1].setText("Fire Blast");
 				leftMoveInputs[1][2].setText("Bug Buzz");
-				leftMoveInputs[1][3].setText("Earthquake");
+				leftMoveInputs[1][3].setText("Roost");
 
 
 				leftPokemonInputs[2].setText("Dragonite");
 				leftMoveInputs[2][0].setText("Earthquake");
-				leftMoveInputs[2][1].setText("Recover");
-				leftMoveInputs[2][2].setText("Air Slash");
+				leftMoveInputs[2][1].setText("Extreme Speed");
+				leftMoveInputs[2][2].setText("Fly");
 				leftMoveInputs[2][3].setText("Dragon Dance");
 
 
 				leftPokemonInputs[3].setText("Charizard-mega-x");
-				leftMoveInputs[3][0].setText("Flamethrower");
+				leftMoveInputs[3][0].setText("Flare Blitz");
 				leftMoveInputs[3][1].setText("Dragon claw");
-				leftMoveInputs[3][2].setText("Air Slash");
+				leftMoveInputs[3][2].setText("Earthquake");
 				leftMoveInputs[3][3].setText("dragon dance");
 
 				leftPokemonInputs[4].setText("Magearna");
@@ -1550,31 +1552,31 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				leftPokemonInputs[5].setText("Kommo-o");
-				leftMoveInputs[5][0].setText("Dragon Dance");
-				leftMoveInputs[5][1].setText("Dragon Claw");
-				leftMoveInputs[5][2].setText("Earthquake");
-				leftMoveInputs[5][3].setText("Sky Uppercut");
+				leftMoveInputs[5][0].setText("Clanging scales");
+				leftMoveInputs[5][1].setText("Close Combat");
+				leftMoveInputs[5][2].setText("Poison Jab");
+				leftMoveInputs[5][3].setText("Dragon dance");
 
 
 				leftPokemonInputs[1].setText("Salazzle");
 				leftMoveInputs[1][0].setText("Nasty Plot");
 				leftMoveInputs[1][1].setText("Sludge Wave");
 				leftMoveInputs[1][2].setText("Flamethrower");
-				leftMoveInputs[1][3].setText("Grass Knot");
+				leftMoveInputs[1][3].setText("Dragon Pulse");
 
 
 				leftPokemonInputs[2].setText("Xurkitree");
 				leftMoveInputs[2][0].setText("Thunderbolt");
 				leftMoveInputs[2][1].setText("Energy Ball");
-				leftMoveInputs[2][2].setText("Air Slash");
-				leftMoveInputs[2][3].setText("Icicle Crash");
+				leftMoveInputs[2][2].setText("Power whip");
+				leftMoveInputs[2][3].setText("Tail Glow");
 
 
 				leftPokemonInputs[3].setText("Scizor-mega");
 				leftMoveInputs[3][0].setText("Swords Dance");
 				leftMoveInputs[3][1].setText("Bullet Punch");
-				leftMoveInputs[3][2].setText("Megahorn");
-				leftMoveInputs[3][3].setText("Recover");
+				leftMoveInputs[3][2].setText("Roost");
+				leftMoveInputs[3][3].setText("Superpower");
 
 				leftPokemonInputs[4].setText("Tapu Fini");
 				leftMoveInputs[4][0].setText("Scald");
@@ -1582,11 +1584,11 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 				leftMoveInputs[4][2].setText("Calm Mind");
 				leftMoveInputs[4][3].setText("Ice Beam");
 
-				leftPokemonInputs[0].setText("Lycanroc-midnight");
-				leftMoveInputs[0][0].setText("Accelerock");
-				leftMoveInputs[0][1].setText("Stone Edge");
-				leftMoveInputs[0][2].setText("Crunch");
-				leftMoveInputs[0][3].setText("Fire Fang");
+				leftPokemonInputs[0].setText("Tyranitar-Mega");
+				leftMoveInputs[0][0].setText("Fire Punch");
+				leftMoveInputs[0][1].setText("Earthquake");
+				leftMoveInputs[0][2].setText("Stone edge");
+				leftMoveInputs[0][3].setText("Crunch");
 
 
 
@@ -1613,10 +1615,10 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				leftPokemonInputs[0].setText("Azelf");
-				leftMoveInputs[0][0].setText("Nuzzle");
-				leftMoveInputs[0][1].setText("Poison Powder");
-				leftMoveInputs[0][2].setText("Will-O-Wisp");
-				leftMoveInputs[0][3].setText("Sleep Powder");
+				leftMoveInputs[0][0].setText("Nasty Plot");
+				leftMoveInputs[0][1].setText("Psychic");
+				leftMoveInputs[0][2].setText("Flamethrower");
+				leftMoveInputs[0][3].setText("Dazzling Gleam");
 
 
 				leftPokemonInputs[1].setText("Gyarados-mega");
@@ -1628,7 +1630,7 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 
 				leftPokemonInputs[2].setText("Kartana");
 				leftMoveInputs[2][0].setText("Leaf Blade");
-				leftMoveInputs[2][1].setText("Smart Strike");
+				leftMoveInputs[2][1].setText("Sacred Sword");
 				leftMoveInputs[2][2].setText("Night Slash");
 				leftMoveInputs[2][3].setText("Swords Dance");
 
@@ -1641,15 +1643,15 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 
 				leftPokemonInputs[4].setText("Magnezone");
 				leftMoveInputs[4][0].setText("Thunderbolt");
-				leftMoveInputs[4][1].setText("Nuzzle");
+				leftMoveInputs[4][1].setText("Thunder wave");
 				leftMoveInputs[4][2].setText("Flash Cannon");
-				leftMoveInputs[4][3].setText("Ice Beam");
+				leftMoveInputs[4][3].setText("Explosion");
 
 				leftPokemonInputs[5].setText("Excadrill");
 				leftMoveInputs[5][0].setText("Earthquake");
-				leftMoveInputs[5][1].setText("Iron Head");
-				leftMoveInputs[5][2].setText("Rock Slide");
-				leftMoveInputs[5][3].setText("Poison Powder");
+				leftMoveInputs[5][1].setText("Smart Strike");
+				leftMoveInputs[5][2].setText("Rock Tomb");
+				leftMoveInputs[5][3].setText("Swords Dance");
 
 
 				leftConfirmationButtons[0].doClick();
@@ -1779,7 +1781,9 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 					}
 					boolean validMove = true;
 					for (int i = 0; i < 4; i++) {//length is 4
-						if (calc.isMove(rightMoveInputs[x][i].getText())) {
+						if(calc.isMove(rightMoveInputs[x][i].getText())
+								&&calc.hasMove(new Pokemon(rightPokemonInputs[x].getText()),new Move(rightMoveInputs[x][i].getText()))
+						){
 
 						} else {
 							rightConfirmationButtons[x].setProblem(true);
@@ -1883,23 +1887,23 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 			public void actionPerformed(ActionEvent e) {
 				rightPokemonInputs[1].setText("Garchomp-mega");
 				rightMoveInputs[1][0].setText("Earthquake");
-				rightMoveInputs[1][1].setText("Dragon Claw");
+				rightMoveInputs[1][1].setText("Draco Meteor");
 				rightMoveInputs[1][2].setText("Fire Blast");
-				rightMoveInputs[1][3].setText("Dragon Dance");
+				rightMoveInputs[1][3].setText("Swords Dance");
 
 
-				rightPokemonInputs[0].setText("Deoxys-defense");
+				rightPokemonInputs[0].setText("Deoxys-attack");
 				rightMoveInputs[0][0].setText("Psycho Boost");
-				rightMoveInputs[0][1].setText("Will-o-Wisp");
-				rightMoveInputs[0][2].setText("Nuzzle");
-				rightMoveInputs[0][3].setText("sleep powder");
+				rightMoveInputs[0][1].setText("Ice beam");
+				rightMoveInputs[0][2].setText("superpower");
+				rightMoveInputs[0][3].setText("Dark pulse");
 
 
 				rightPokemonInputs[2].setText("Genesect");
 				rightMoveInputs[2][0].setText("Bug Buzz");
 				rightMoveInputs[2][1].setText("Flamethrower");
 				rightMoveInputs[2][2].setText("Ice Beam");
-				rightMoveInputs[2][3].setText("Iron Head");
+				rightMoveInputs[2][3].setText("Flash cannon");
 
 
 				rightPokemonInputs[3].setText("Terrakion");
@@ -1908,17 +1912,17 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 				rightMoveInputs[3][2].setText("Earthquake");
 				rightMoveInputs[3][3].setText("Quick Attack");
 
-				rightPokemonInputs[4].setText("Politoed");
-				rightMoveInputs[4][0].setText("Hydro Pump");
-				rightMoveInputs[4][1].setText("Surf");
-				rightMoveInputs[4][2].setText("Ice Beam");
-				rightMoveInputs[4][3].setText("Sleep Powder");
+				rightPokemonInputs[4].setText("Manaphy");
+				rightMoveInputs[4][0].setText("Tail Glow");
+				rightMoveInputs[4][1].setText("Rest");
+				rightMoveInputs[4][2].setText("Surf");
+				rightMoveInputs[4][3].setText("Psychic");
 
 				rightPokemonInputs[5].setText("Staraptor");
 				rightMoveInputs[5][0].setText("Brave Bird");
 				rightMoveInputs[5][1].setText("Double-Edge");
 				rightMoveInputs[5][2].setText("Close Combat");
-				rightMoveInputs[5][3].setText("Recover");
+				rightMoveInputs[5][3].setText("Roost");
 				rightConfirmationButtons[0].doClick();
 				rightConfirmationButtons[1].doClick();
 				rightConfirmationButtons[2].doClick();
@@ -1942,37 +1946,37 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				rightPokemonInputs[0].setText("Tapu Fini");
-				rightMoveInputs[0][0].setText("Surf");
+				rightMoveInputs[0][0].setText("Scald");
 				rightMoveInputs[0][1].setText("Moonblast");
-				rightMoveInputs[0][2].setText("Nuzzle");
+				rightMoveInputs[0][2].setText("Icy wind");
 				rightMoveInputs[0][3].setText("Calm Mind");
 
 
 				rightPokemonInputs[1].setText("Charizard-mega-y");
-				rightMoveInputs[1][0].setText("Dragon Claw");
-				rightMoveInputs[1][1].setText("Flare Blitz");
-				rightMoveInputs[1][2].setText("Dragon Dance");
-				rightMoveInputs[1][3].setText("Recover");
+				rightMoveInputs[1][0].setText("Flamethrower");
+				rightMoveInputs[1][1].setText("Focus blast");
+				rightMoveInputs[1][2].setText("Roost");
+				rightMoveInputs[1][3].setText("Solar beam");
 
 
-				rightPokemonInputs[2].setText("Gliscor");
-				rightMoveInputs[2][0].setText("Poison Powder");
+				rightPokemonInputs[2].setText("Landorus-therian");
+				rightMoveInputs[2][0].setText("Explosion");
 				rightMoveInputs[2][1].setText("Earthquake");
-				rightMoveInputs[2][2].setText("Recover");
-				rightMoveInputs[2][3].setText("Crunch");
+				rightMoveInputs[2][2].setText("Stone edge");
+				rightMoveInputs[2][3].setText("Knock off");
 
 
-				rightPokemonInputs[3].setText("Raikou");
+				rightPokemonInputs[3].setText("Tapu koko");
 				rightMoveInputs[3][0].setText("Thunderbolt");
-				rightMoveInputs[3][1].setText("Calm Mind");
-				rightMoveInputs[3][2].setText("Shadow Ball");
-				rightMoveInputs[3][3].setText("Ice Beam");
+				rightMoveInputs[3][1].setText("Dazzling Gleam");
+				rightMoveInputs[3][2].setText("Roost");
+				rightMoveInputs[3][3].setText("thunder wave");
 
-				rightPokemonInputs[4].setText("Weavile");
-				rightMoveInputs[4][0].setText("Ice Punch");
-				rightMoveInputs[4][1].setText("Ice Shard");
-				rightMoveInputs[4][2].setText("Low Kick");
-				rightMoveInputs[4][3].setText("Knock Off");
+				rightPokemonInputs[4].setText("Greninja");
+				rightMoveInputs[4][0].setText("Hydro pump");
+				rightMoveInputs[4][1].setText("dark pulse");
+				rightMoveInputs[4][2].setText("water shuriken");
+				rightMoveInputs[4][3].setText("gunk shot");
 
 				rightPokemonInputs[5].setText("Tapu Lele");
 				rightMoveInputs[5][0].setText("Psyshock");
@@ -2005,22 +2009,22 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				rightPokemonInputs[0].setText("Garchomp-mega");
-				rightMoveInputs[0][0].setText("Stone Edge");
-				rightMoveInputs[0][1].setText("Fire Blast");
-				rightMoveInputs[0][2].setText("Draco Meteor");
+				rightMoveInputs[0][0].setText("Swords Dance");
+				rightMoveInputs[0][1].setText("Fire fang");
+				rightMoveInputs[0][2].setText("Stone edge");
 				rightMoveInputs[0][3].setText("Earthquake");
 
 
-				rightPokemonInputs[1].setText("Araquanid");
-				rightMoveInputs[1][0].setText("Liquidation");
-				rightMoveInputs[1][1].setText("Poison Powder");
-				rightMoveInputs[1][2].setText("Leech Life");
-				rightMoveInputs[1][3].setText("Recover");
+				rightPokemonInputs[1].setText("Keldeo");
+				rightMoveInputs[1][0].setText("Calm mind");
+				rightMoveInputs[1][1].setText("Scald");
+				rightMoveInputs[1][2].setText("Secret Sword");
+				rightMoveInputs[1][3].setText("Icy wind");
 
 
 				rightPokemonInputs[2].setText("Tapu Lele");
 				rightMoveInputs[2][0].setText("Psychic");
-				rightMoveInputs[2][1].setText("Psyshock");
+				rightMoveInputs[2][1].setText("Calm mind");
 				rightMoveInputs[2][2].setText("Moonblast");
 				rightMoveInputs[2][3].setText("Focus Blast");
 
@@ -2032,16 +2036,16 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 				rightMoveInputs[3][3].setText("Swords Dance");
 
 				rightPokemonInputs[4].setText("Tapu Bulu");
-				rightMoveInputs[4][0].setText("Glare");
-				rightMoveInputs[4][1].setText("Recover");
-				rightMoveInputs[4][2].setText("Ember");
-				rightMoveInputs[4][3].setText("Wood Hammer");
+				rightMoveInputs[4][0].setText("bulk up");
+				rightMoveInputs[4][1].setText("horn leech");
+				rightMoveInputs[4][2].setText("Superpower");
+				rightMoveInputs[4][3].setText("megahorn");
 
-				rightPokemonInputs[5].setText("blacephalon");
-				rightMoveInputs[5][0].setText("Recover");
-				rightMoveInputs[5][1].setText("Shadow Ball");
-				rightMoveInputs[5][2].setText("Crunch");
-				rightMoveInputs[5][3].setText("Flamethrower");
+				rightPokemonInputs[5].setText("Victini");
+				rightMoveInputs[5][0].setText("V-create");
+				rightMoveInputs[5][1].setText("Bolt Strike");
+				rightMoveInputs[5][2].setText("Focus blast");
+				rightMoveInputs[5][3].setText("Zen headbutt");
 
 
 				rightConfirmationButtons[0].doClick();

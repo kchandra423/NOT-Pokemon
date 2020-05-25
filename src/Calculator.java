@@ -156,13 +156,18 @@ public class Calculator {
 		}
 		String[] lines = copy.split("\n");
 		String currentLine = "";
+		boolean pokemonFound=false;
 		for (int i = 0; i < lines.length; i++) {
 			currentLine = lines[i];
 			if (currentLine.contains(mon.getName().replace(" ", "").replace("-", "").replace(".", "").toLowerCase())) {
+				pokemonFound=true;
 				if (currentLine.contains(move.getId())) {
 					answer = true;
 				}
 			}
+		}
+		if(!pokemonFound){
+			answer=true;
 		}
 		return answer;
 	}
@@ -211,6 +216,7 @@ public class Calculator {
 		Pokemon boostsTarget;
 		category=move.getCategory();//self explanatory
 		moveType = getIntFromType(move.getType());//self explanatory
+
 		if(move.isSelf()){
 			boostsTarget=user;
 
@@ -268,7 +274,9 @@ public class Calculator {
 
 
 		}
-
+if(typeModifier(moveType,defenseType1,defenseType2)==0){
+	return 0;
+}
 
 		if (status.equalsIgnoreCase("par")//paralyzsis cant be given to electric types and
 				// lowers your speed by half and gives you a 0.25 chance to be unable to move
