@@ -33,44 +33,41 @@ public class Battle {
 			"TeamRocketHideout", "ViridianForest", "Battle! Team Plasma",
 			"bw2-theme","Pinch in Battle!","platinum-title", "xy-theme",
 			"xy_vs_gymleader","bw2-title","heartgold-title","Decisive Battle! N"};// 25 music options
-	private final String[] TITLE_SCEENS={"Music/PokemonTitleScreen.wav","Music/bw2-title.wav",
-			"Music/heartgold-title.wav","Music/xy-theme.wav","Music/platinum-title.wav","Music/bw2-theme.wav"};//6 title screens
-	private int musicSelection=-1;
+	private final String[] TITLE_SCREENS={"PokemonTitleScreen","bw2-title","heartgold-title",
+			"xy-theme","platinum-title","bw2-theme"};//6 title screens
 
-
-	private long textSpeed=5;
-	private int healthBarDecreationRate=4;
-
-
-	private JFrame frame = new JFrame();// self explanatory
+	private JFrame frame;// self explanatory
 	private JPanel mainPanel;// self explanatory
 	private JPanel leftPanel, rightPanel;
 	private BackgroundPanel leftDisplayPanel, rightDisplayPanel;// the display shown to the user
 	private JPanel leftUI, rightUI;// the users interface
-	private JPanel leftMovePanel = new JPanel(), rightMovePanel = new JPanel();// move options
-	private JPanel leftSwitchPanel = new JPanel(), rightSwitchPanel = new JPanel();// switch options
+	private JPanel leftMovePanel, rightMovePanel;// move options
+	private JPanel leftSwitchPanel, rightSwitchPanel;// switch options
 
-	private JLabel name1, name2, image1, image2, name3, name4, image3, image4, attack = new JLabel("Attack"),
-			switchOut = new JLabel("Switch");
+	private JLabel name1, name2, image1, image2, name3, name4, image3, image4, attack, switchOut;
 	private HealthBar bar1, bar2, bar3, bar4;
-	private Button[] leftMoveButtons = new Button[4], rightMoveButtons = new Button[4];
-	private int p1Selection = -1;
-	private int p2Selection = -1;
-	private Button[] leftSwitchButtons = new Button[6], rightSwitchButtons = new Button[6];
+	private Button[] leftMoveButtons, rightMoveButtons;
+	private Button[] leftSwitchButtons, rightSwitchButtons;
 	private JTextArea leftText, rightText;
 	private Timer timer;
-	private boolean confirm1 = false, confirm2 = false;// i hate action performed not being able to access things like a normal
-												// method
+	
+	private boolean confirm1 = false, confirm2 = false;// i hate action performed not being able to access things like a normal method
 	private static Player P1, P2;
 	private static Object myObject1 = new Object(), myObject2 = new Object(), myObject3=new Object(), myObject4 =new Object();
-//	myObject3 = new Object();
-	private PlayMusic musicPlayer = new PlayMusic();
+	
+	private MusicPlayer musicPlayer;
 	private Calculator calc;
+	
+	private int musicSelection=-1;
+	private int p1Selection = -1;
+	private int p2Selection = -1;
+	private long textSpeed=5;
+	private int healthBarDecreationRate=4;
 
 
 	public Battle() {
 
-
+		musicPlayer = new MusicPlayer();
 		calc = new Calculator(this);
 		
         frame = new JFrame();
@@ -157,6 +154,10 @@ public class Battle {
 //		leftPanel.add(leftUI, BorderLayout.SOUTH);
 //		rightPanel.add(rightUI,BorderLayout.SOUTH);
 //		leftUI.add(attack);
+			leftMovePanel = new JPanel();
+			rightMovePanel = new JPanel();
+			leftSwitchPanel = new JPanel();
+			rightSwitchPanel = new JPanel();
 			leftUI.add(leftMovePanel);
 //		leftUI.add(switchOut);
 			leftUI.add(leftSwitchPanel);
@@ -203,11 +204,11 @@ P2.setCurrentMon();
 		name2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		name2.setBackground(Color.LIGHT_GRAY);
 			bar1 = new HealthBar(P1.getCurrentMon());
-			bar1.setBackground(Color.LIGHT_GRAY);
+			// bar1.setBackground(Color.LIGHT_GRAY);
 			bar1.setXOffset(true);
 			bar1.setPreferredSize(new Dimension(200,15));
 			bar2 = new HealthBar(P2.getCurrentMon());
-			bar2.setBackground(Color.LIGHT_GRAY);
+			// bar2.setBackground(Color.LIGHT_GRAY);
 			bar2.setXOffset(false);
 			ImageIcon pic =
 //					new ImageIcon
@@ -300,6 +301,7 @@ P2.setCurrentMon();
 			leftPanel.add(attack, c);
 			GridLayout layout2 = new GridLayout(2, 2);
 			leftMovePanel.setLayout(layout2);
+			leftMoveButtons = new Button[4];
 			for (int i = 0; i < leftMoveButtons.length; i++) {
 				leftMoveButtons[i] = new Button(P1.getCurrentMon().getMoves()[i].getName(), i);
 				leftMoveButtons[i].setPreferredSize(new Dimension(100,45));
@@ -334,6 +336,7 @@ P2.setCurrentMon();
 			leftPanel.add(switchOut, c);
 			layout2 = new GridLayout(3, 2);
 			leftSwitchPanel.setLayout(layout2);
+			leftSwitchButtons = new Button[6];
 			for (int i = 0; i < leftSwitchButtons.length; i++) {
 				leftSwitchButtons[i] = new Button(P1.getPokemon()[i].getName(), i + 4);
 //    		switches[mon].addActionListener(new ActionListener() {
@@ -387,10 +390,10 @@ P2.setCurrentMon();
 		name4.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		name4.setBackground(Color.LIGHT_GRAY);
 			bar3 = new HealthBar(P2.getCurrentMon());
-			bar3.setBackground(Color.LIGHT_GRAY);
+			// bar3.setBackground(Color.LIGHT_GRAY);
 			bar3.setXOffset(true);
 			bar4 = new HealthBar(P1.getCurrentMon());
-			bar4.setBackground(Color.LIGHT_GRAY);
+			// bar4.setBackground(Color.LIGHT_GRAY);
 			bar4.setXOffset(false);
 			ImageIcon pic2 = new ImageIcon("Images/Sprites/SpritesBack/" + P2.getCurrentMon().getID() + "-back.gif");
 			image3 = new JLabel(pic2);
@@ -469,6 +472,7 @@ P2.setCurrentMon();
 			rightPanel.add(attack, y);
 			GridLayout layout3 = new GridLayout(2, 2);
 			rightMovePanel.setLayout(layout3);
+			rightMoveButtons = new Button[4];
 			for (int i = 0; i < rightMoveButtons.length; i++) {
 				rightMoveButtons[i] = new Button(P2.getCurrentMon().getMoves()[i].getName(), i);
 				rightMoveButtons[i].setPreferredSize(new Dimension(100,45));
@@ -503,6 +507,7 @@ P2.setCurrentMon();
 			rightPanel.add(switchOut, y);
 			layout3 = new GridLayout(3, 2);
 			rightSwitchPanel.setLayout(layout3);
+			rightSwitchButtons = new Button[6];
 			for (int i = 0; i < rightSwitchButtons.length; i++) {
 				rightSwitchButtons[i] = new Button(P2.getPokemon()[i].getName(), i + 4);
 //    		switches[mon].addActionListener(new ActionListener() {
@@ -1012,11 +1017,13 @@ b.confirm2=false;
 
 			if(bar1.getPokemon() != p1.getCurrentMon()) {//self explanatory
 				bar1.setPokemon(p1.getCurrentMon());
+				bar1.setXOffset(true);
 			}
 			bar1.repaint();
 
 			if(bar2.getPokemon() != p2.getCurrentMon()) {//self explanatory
 				bar2.setPokemon(p2.getCurrentMon());
+				bar2.setXOffset(false);
 			}
 			bar2.repaint();
 
@@ -1123,11 +1130,13 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 
 		if(bar3.getPokemon() != p2.getCurrentMon()) {
 			bar3.setPokemon(p2.getCurrentMon());//self explanatory
+			bar3.setXOffset(true);
 		}
 		bar3.repaint();
 
 		if(bar4.getPokemon() != p1.getCurrentMon()) {
 			bar4.setPokemon(p1.getCurrentMon());
+			bar4.setXOffset(false);
 		}//self explanatory
 		bar4.repaint();
 
@@ -2077,7 +2086,7 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 	}
 	private void titleScreen(){
 		int random=(int)(Math.random()*6);
-		musicPlayer.play(TITLE_SCEENS[random]);
+		musicPlayer.play("Music/" + TITLE_SCREENS[random] + ".wav");
 		Icon logoIcon=(new ImageIcon(new ImageIcon("Images/NotPokemonLogo.png").getImage().getScaledInstance((int)(450*1.75), (int)(225*1.75), Image.SCALE_DEFAULT)));
 		FadeLabel logoLabel=new FadeLabel(logoIcon,0.02f);
 		//225
