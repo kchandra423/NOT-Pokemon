@@ -538,7 +538,7 @@ P2.setCurrentMon();
 		Font pokemonPlaceHolder=new Font("Arial", Font.PLAIN, 40);
 		try {
 
-				pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("PokemonGB.ttf"));
+				pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("Fonts/PokemonGB.ttf"));
 
 
 
@@ -1025,7 +1025,7 @@ b.confirm2=false;
 
 			for (int i =0;i<leftMoveButtons.length;i++){
 				leftMoveButtons[i].setOpaque(true);
-				leftMoveButtons[i].setText(p1.getCurrentMon().getMoves()[i].getName());//self explanatory
+				leftMoveButtons[i].setText(p1.getCurrentMon().getMoves()[i].getName() + " " + p1.getCurrentMon().getMoves()[i].getPP() + "/" + p1.getCurrentMon().getMoves()[i].getBasePP());//self explanatory
 				int num=leftMoveButtons[i].getNum();
 				leftMoveButtons[i].setIcon(new ImageIcon("Images/Types-Classic/" + p1.getCurrentMon().getMoves()[i].getType() + ".png"));
 				if(p1.getCurrentMon().getMoves()[i].getPP() == 0) {
@@ -1122,7 +1122,7 @@ b.confirm2=false;
 
 		for (int i =0;i<rightMoveButtons.length;i++){//self explanatory
 			rightMoveButtons[i].setOpaque(true);
-			rightMoveButtons[i].setText(p2.getCurrentMon().getMoves()[i].getName());
+			rightMoveButtons[i].setText(p2.getCurrentMon().getMoves()[i].getName() + " " + p2.getCurrentMon().getMoves()[i].getPP() + "/" + p2.getCurrentMon().getMoves()[i].getBasePP());
 			int num=rightMoveButtons[i].getNum();
 			rightMoveButtons[i].setIcon(new ImageIcon("Images/Types-Classic/" + p2.getCurrentMon().getMoves()[i].getType() + ".png"));
 			if(p2.getCurrentMon().getMoves()[i].getPP() == 0) {
@@ -2079,10 +2079,10 @@ musicButton.setPreferredSize(new Dimension(500,100));
 Font pokemonPlaceHolder=new Font("Arial", Font.PLAIN, 40);
 try {
 //	if(Math.random()<0.25){
-//	pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("PokemonHollow.ttf"));
+//	pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("Fonts/PokemonHollow.ttf"));
 //	}
 //	else{
-		pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("PokemonSolid.ttf"));
+		pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("Fonts/PokemonSolid.ttf"));
 //	}
 
 		} catch (FontFormatException e) {
