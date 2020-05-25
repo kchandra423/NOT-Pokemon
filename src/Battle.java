@@ -2025,8 +2025,10 @@ else{
 	private void titleScreen(){
 		int random=(int)(Math.random()*6);
 		musicPlayer.play(TITLE_SCEENS[random]);
-		Icon logoIcon=new ImageIcon("Images/Backgrounds/BattleBackground1.png");
+		Icon logoIcon=(new ImageIcon(new ImageIcon("Images/NotPokemonLogo.png").getImage().getScaledInstance((int)(450*1.5), (int)(225*1.5), Image.SCALE_DEFAULT)));
 		FadeLabel logoLabel=new FadeLabel(logoIcon,0.02f);
+		//225
+		//451
 		JPanel mainPanelTitleScreen =new JPanel(new GridLayout(2,1));
 		JPanel logo= new JPanel();
 		mainPanelTitleScreen.add(logo);
@@ -2041,8 +2043,19 @@ else{
 		music.add(musicButton);
 		settings.add(settingsButton);
 		play.add(playButton);
+
 		logo.add(logoLabel);
 		logoLabel.faidIn();
+		logo.setOpaque(true);
+		logo.setBackground(Color.WHITE);
+		play.setOpaque(true);
+		play.setBackground(Color.WHITE);
+		settings.setOpaque(true);
+		settings.setBackground(Color.WHITE);
+		music.setOpaque(true);
+		music.setBackground(Color.WHITE);
+//		System.out.println(logoIcon.getIconHeight());
+//		System.out.println(logoIcon.getIconWidth());
 //		logoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 //		logo.setPreferredSize(new Dimension(500,100));
 //		UI.setBorder(BorderFactory.createLineBorder(Color.BLACK));
