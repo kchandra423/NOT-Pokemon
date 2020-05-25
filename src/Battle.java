@@ -9,7 +9,7 @@
 //  Bugs:
 //      Lots Probably. Will be listed all be listed at the end of the project
 //
-import org.omg.PortableInterceptor.INACTIVE;
+//import org.omg.PortableInterceptor.INACTIVE;
 
 import java.awt.event.*;
 import java.io.*;
@@ -785,7 +785,7 @@ b.confirm2=false;
 			b.p2Selection = -1;
 		}
 
-				b.log("\n------ ------ ------\n");
+				b.log("\n------\n");
 
 			if (p1WillSwitch && p2WillSwitch) {//calculates who switches first based on whos faster
 			//kind of useless since you cant see it and use the information it gives you since there are no
@@ -848,7 +848,7 @@ b.confirm2=false;
 //self explanatory
 			if(p1SelectedMoveIndex==4){
 
-					System.out.println("player1's index was 4 somehow");
+				System.out.println("player1's index was 4 somehow");
 				System.out.println("player1's index was 4 somehow");
 				System.out.println("player1's index was 4 somehow");
 				System.out.println("player1's index was 4 somehow");

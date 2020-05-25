@@ -1,7 +1,7 @@
 /*
  * Author: Eric Chang
  * Notes: A graphical representation of a health bar
- * Bugs: Increasing insets of some components will make the health bar disappear
+ * Bugs: Sometimes the health bar disappears
  */
 
 import javax.swing.*;
