@@ -1026,6 +1026,8 @@ b.confirm2=false;
 			for (int i =0;i<leftMoveButtons.length;i++){
 				leftMoveButtons[i].setOpaque(true);
 				leftMoveButtons[i].setText(p1.getCurrentMon().getMoves()[i].getName());//self explanatory
+				int num=leftMoveButtons[i].getNum();
+				leftMoveButtons[i].setIcon(new ImageIcon("Images/Types-Classic/" + p1.getCurrentMon().getMoves()[i].getType() + ".png"));
 				if(p1.getCurrentMon().getMoves()[i].getPP() == 0) {
 					leftMoveButtons[i].setEnabled(false);
 				}
@@ -1072,12 +1074,20 @@ b.confirm2=false;
 				}
 				else{
 					leftSwitchButtons[i].setEnabled(true);
-					if(p1.getPokemon()[leftSwitchButtons[i].getNum()-4].getSpeed()>p2.getCurrentMon().getSpeed()){
-						leftSwitchButtons[i].setOpaque(true);
+					leftSwitchButtons[i].setOpaque(true);
+					if (p1.getPokemon()[leftSwitchButtons[i].getNum() - 4].getSpeed() > p2.getCurrentMon().getSpeed()) {
+
 						leftSwitchButtons[i].setBackground(Color.RED);
 					}
-					else{
-						leftSwitchButtons[i].setOpaque(false);
+					else {
+						leftSwitchButtons[i].setBackground(Color.WHITE);
+					}
+					if (!(p1.getPokemon()[leftSwitchButtons[i].getNum() - 4].getStatus().equalsIgnoreCase(""))) {
+
+						leftSwitchButtons[i].setForeground(Color.BLUE);
+					}
+					else {
+						leftSwitchButtons[i].setForeground(Color.BLACK);
 					}
 				}
 			}
@@ -1113,6 +1123,8 @@ b.confirm2=false;
 		for (int i =0;i<rightMoveButtons.length;i++){//self explanatory
 			rightMoveButtons[i].setOpaque(true);
 			rightMoveButtons[i].setText(p2.getCurrentMon().getMoves()[i].getName());
+			int num=rightMoveButtons[i].getNum();
+			rightMoveButtons[i].setIcon(new ImageIcon("Images/Types-Classic/" + p2.getCurrentMon().getMoves()[i].getType() + ".png"));
 			if(p2.getCurrentMon().getMoves()[i].getPP() == 0) {
 				rightMoveButtons[i].setEnabled(false);
 			}
@@ -1158,11 +1170,20 @@ b.confirm2=false;
 				rightSwitchButtons[i].setOpaque(false);
 			} else {
 				rightSwitchButtons[i].setEnabled(true);
+				rightSwitchButtons[i].setOpaque(true);
 				if (p2.getPokemon()[rightSwitchButtons[i].getNum() - 4].getSpeed() > p1.getCurrentMon().getSpeed()) {
-					rightSwitchButtons[i].setOpaque(true);
+
 					rightSwitchButtons[i].setBackground(Color.RED);
-				} else {
-					rightSwitchButtons[i].setOpaque(false);
+				}
+				else {
+					rightSwitchButtons[i].setBackground(Color.WHITE);
+				}
+				if (!(p2.getPokemon()[rightSwitchButtons[i].getNum() - 4].getStatus().equalsIgnoreCase(""))) {
+
+					rightSwitchButtons[i].setForeground(Color.BLUE);
+				}
+				else {
+					rightSwitchButtons[i].setForeground(Color.BLACK);
 				}
 			}
 		}
