@@ -2128,7 +2128,7 @@ try {
 			e.printStackTrace();
 		}
 		settingsButton.setPreferredSize(new Dimension(500,100));
-		Font pokemon=pokemonPlaceHolder.deriveFont((float) 40.0);
+		Font pokemon=pokemonPlaceHolder.deriveFont((float) 65.0);
 
 		playButton.setFont(pokemon);
 		settingsButton.setFont(pokemon);
