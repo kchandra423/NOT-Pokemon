@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c409674a-022d-407e-a93f-62a2b7549e75" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Images/NotPokemonLogo.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Images/NotPokemonLogo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Battle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Battle.java" afterDir="false" />
     </list>
@@ -151,26 +149,26 @@
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state x="2119" y="844" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.3840.2057@0.23.3840.2057" timestamp="1589841259306" />
-    <state width="2297" height="606" key="GridCell.Tab.0.bottom" timestamp="1590371690321">
+    <state width="2297" height="606" key="GridCell.Tab.0.bottom" timestamp="1590378849237">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.bottom/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286148" />
-    <state width="2297" height="606" key="GridCell.Tab.0.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1590371690321" />
-    <state width="2297" height="606" key="GridCell.Tab.0.center" timestamp="1590371690320">
+    <state width="2297" height="606" key="GridCell.Tab.0.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1590378849237" />
+    <state width="2297" height="606" key="GridCell.Tab.0.center" timestamp="1590378849236">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.center/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286147" />
-    <state width="2297" height="606" key="GridCell.Tab.0.center/0.23.3840.2057@0.23.3840.2057" timestamp="1590371690320" />
-    <state width="2297" height="606" key="GridCell.Tab.0.left" timestamp="1590371690320">
+    <state width="2297" height="606" key="GridCell.Tab.0.center/0.23.3840.2057@0.23.3840.2057" timestamp="1590378849236" />
+    <state width="2297" height="606" key="GridCell.Tab.0.left" timestamp="1590378849235">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.left/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286145" />
-    <state width="2297" height="606" key="GridCell.Tab.0.left/0.23.3840.2057@0.23.3840.2057" timestamp="1590371690320" />
-    <state width="2297" height="606" key="GridCell.Tab.0.right" timestamp="1590371690321">
+    <state width="2297" height="606" key="GridCell.Tab.0.left/0.23.3840.2057@0.23.3840.2057" timestamp="1590378849235" />
+    <state width="2297" height="606" key="GridCell.Tab.0.right" timestamp="1590378849237">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
     <state width="3798" height="456" key="GridCell.Tab.0.right/0.0.3840.2160@0.0.3840.2160" timestamp="1589009286148" />
-    <state width="2297" height="606" key="GridCell.Tab.0.right/0.23.3840.2057@0.23.3840.2057" timestamp="1590371690321" />
+    <state width="2297" height="606" key="GridCell.Tab.0.right/0.23.3840.2057@0.23.3840.2057" timestamp="1590378849237" />
     <state width="2297" height="715" key="GridCell.Tab.1.bottom" timestamp="1590315599123">
       <screen x="0" y="23" width="3840" height="2057" />
     </state>
@@ -244,7 +242,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Battle.java</url>
-          <line>1698</line>
+          <line>1715</line>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
