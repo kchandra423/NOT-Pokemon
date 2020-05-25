@@ -111,9 +111,23 @@ public class Player {
             int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
 
 
-            int damageDone;
-            damageDone=opposingPlayer.currentMon.takeDamage(damage/2);
-            battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+            int damageDone = 0;
+            Ratio multiHit = currentMon.getMoves()[indexOfMove].getMultiHit();
+            if(multiHit.getSecond() > 1) {
+            	int totalDamageDone = 0;
+            	int numHits = (int)(multiHit.getFirst()+Math.random()*(multiHit.getSecond()-multiHit.getFirst()+1));
+	            for(int i = 0; i < numHits; i++) {
+	            	damageDone=opposingPlayer.currentMon.takeDamage(damage/2);
+	            	totalDamageDone += damageDone;
+	                battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+	            }
+	            battle.log("A total of " + totalDamageDone + " damage was dealt!");
+	            damageDone = totalDamageDone;
+            }
+            else {
+            	damageDone=opposingPlayer.currentMon.takeDamage(damage/2);
+            	battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+            }
             double drain=currentMon.getMoves()[indexOfMove].getDrain();
             int damageAbsorbed = currentMon.heal((int)(damageDone*drain));
             if(drain > 0) {
@@ -144,9 +158,23 @@ public class Player {
                 int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
                 int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
 
-                int damageDone;
-                damageDone=opposingPlayer.currentMon.takeDamage(damage);
-                battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+                int damageDone = 0;
+                Ratio multiHit = currentMon.getMoves()[indexOfMove].getMultiHit();
+                if(multiHit.getSecond() > 1) {
+                	int totalDamageDone = 0;
+                	int numHits = (int)(multiHit.getFirst()+Math.random()*(multiHit.getSecond()-multiHit.getFirst()+1));
+    	            for(int i = 0; i < numHits; i++) {
+    	            	damageDone=opposingPlayer.currentMon.takeDamage(damage/2);
+    	            	totalDamageDone += damageDone;
+    	                battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+    	            }
+    	            battle.log("A total of " + totalDamageDone + " damage was dealt!");
+    	            damageDone = totalDamageDone;
+                }
+                else {
+                	damageDone=opposingPlayer.currentMon.takeDamage(damage/2);
+                	battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+                }
                 double drain=currentMon.getMoves()[indexOfMove].getDrain();
                 int damageAbsorbed = currentMon.heal((int)(damageDone*drain));
                 if(drain > 0) {
@@ -176,9 +204,23 @@ public class Player {
                 int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
                 int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
 
-                int damageDone;
-                damageDone=opposingPlayer.currentMon.takeDamage(damage);
-                battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+                int damageDone = 0;
+                Ratio multiHit = currentMon.getMoves()[indexOfMove].getMultiHit();
+                if(multiHit.getSecond() > 1) {
+                	int totalDamageDone = 0;
+                	int numHits = (int)(multiHit.getFirst()+Math.random()*(multiHit.getSecond()-multiHit.getFirst()+1));
+    	            for(int i = 0; i < numHits; i++) {
+    	            	damageDone=opposingPlayer.currentMon.takeDamage(damage/2);
+    	            	totalDamageDone += damageDone;
+    	                battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+    	            }
+    	            battle.log("A total of " + totalDamageDone + " damage was dealt!");
+    	            damageDone = totalDamageDone;
+                }
+                else {
+                	damageDone=opposingPlayer.currentMon.takeDamage(damage/2);
+                	battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+                }
                 double drain=currentMon.getMoves()[indexOfMove].getDrain();
                 int damageAbsorbed = currentMon.heal((int)(damageDone*drain));
                 if(drain > 0) {
@@ -207,9 +249,23 @@ public class Player {
             int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
             int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
 //            battle.log(currentMon.getName() + " did " + damage + " damage to " + opposingPlayer.currentMon.getName());
-            int damageDone;
-            damageDone=opposingPlayer.currentMon.takeDamage(damage);
-            battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+            int damageDone = 0;
+            Ratio multiHit = currentMon.getMoves()[indexOfMove].getMultiHit();
+            if(multiHit.getSecond() > 1) {
+            	int totalDamageDone = 0;
+            	int numHits = (int)(multiHit.getFirst()+Math.random()*(multiHit.getSecond()-multiHit.getFirst()+1));
+	            for(int i = 0; i < numHits; i++) {
+	            	damageDone=opposingPlayer.currentMon.takeDamage(damage/2);
+	            	totalDamageDone += damageDone;
+	                battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+	            }
+	            battle.log("A total of " + totalDamageDone + " damage was dealt!");
+	            damageDone = totalDamageDone;
+            }
+            else {
+            	damageDone=opposingPlayer.currentMon.takeDamage(damage/2);
+            	battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+            }
             double drain=currentMon.getMoves()[indexOfMove].getDrain();
             int damageAbsorbed = currentMon.heal((int)(damageDone*drain));
             if(drain > 0) {
@@ -242,9 +298,23 @@ public class Player {
             int opposingType1 = calculator.getIntFromType(opposingPlayer.currentMon.getType1());
             int opposingType2 = calculator.getIntFromType(opposingPlayer.currentMon.getType2());
             int damage = calculator.calculateBasicDamage(currentMon, opposingPlayer.currentMon, currentMon.getMoves()[indexOfMove]);
-            int damageDone;
-            damageDone=opposingPlayer.currentMon.takeDamage(damage);
-            battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+            int damageDone = 0;
+            Ratio multiHit = currentMon.getMoves()[indexOfMove].getMultiHit();
+            if(multiHit.getSecond() > 1) {
+            	int totalDamageDone = 0;
+            	int numHits = (int)(multiHit.getFirst()+Math.random()*(multiHit.getSecond()-multiHit.getFirst()+1));
+	            for(int i = 0; i < numHits; i++) {
+	            	damageDone=opposingPlayer.currentMon.takeDamage(damage/2);
+	            	totalDamageDone += damageDone;
+	                battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+	            }
+	            battle.log("A total of " + totalDamageDone + " damage was dealt!");
+	            damageDone = totalDamageDone;
+            }
+            else {
+            	damageDone=opposingPlayer.currentMon.takeDamage(damage/2);
+            	battle.log(currentMon.getName() + " did " + damageDone + " damage to " + opposingPlayer.currentMon.getName());
+            }
             double drain=currentMon.getMoves()[indexOfMove].getDrain();
             int damageAbsorbed = currentMon.heal((int)(damageDone*drain));
             if(drain > 0) {

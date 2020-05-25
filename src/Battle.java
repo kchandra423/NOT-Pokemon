@@ -538,7 +538,7 @@ P2.setCurrentMon();
 		Font pokemonPlaceHolder=new Font("Arial", Font.PLAIN, 40);
 		try {
 
-				pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("PokemonGB.ttf"));
+				pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("Fonts/PokemonGB.ttf"));
 
 
 
@@ -1025,9 +1025,9 @@ b.confirm2=false;
 
 			for (int i =0;i<leftMoveButtons.length;i++){
 				leftMoveButtons[i].setOpaque(true);
-				leftMoveButtons[i].setText(p1.getCurrentMon().getMoves()[i].getName());//self explanatory
+				leftMoveButtons[i].setText(p1.getCurrentMon().getMoves()[i].getName() + " " + p1.getCurrentMon().getMoves()[i].getPP() + "/" + p1.getCurrentMon().getMoves()[i].getBasePP());//self explanatory
+				int num=leftMoveButtons[i].getNum();
 				leftMoveButtons[i].setIcon(new ImageIcon("Images/Types-Classic/" + p1.getCurrentMon().getMoves()[i].getType() + ".png"));
-				leftMoveButtons[i].setRolloverIcon(new ImageIcon("Images/Categories/" + p1.getCurrentMon().getMoves()[i].getCategory() + ".png"));
 				if(p1.getCurrentMon().getMoves()[i].getPP() == 0) {
 					leftMoveButtons[i].setEnabled(false);
 				}
@@ -1068,8 +1068,6 @@ b.confirm2=false;
 			}
 			for (int i =0;i<leftSwitchButtons.length;i++){
 				leftSwitchButtons[i].setText(p1.getPokemon()[i].getName());
-				ImageIcon pokemonPic=new ImageIcon("Images/Sprites/SpritesFront/" + P1.getPokemon()[i].getID() + ".gif");
-				leftSwitchButtons[i].setIcon(new ImageIcon(pokemonPic.getImage().getScaledInstance((int)(pokemonPic.getIconWidth()*0.45), (int)(pokemonPic.getIconHeight()*0.45), Image.SCALE_DEFAULT)));
 				if(p1.getPokemon()[i].getHealth() <= 0 || p1.getPokemon()[i] == p1.getCurrentMon()) {//self explanatory
 					leftSwitchButtons[i].setEnabled(false);
 					leftSwitchButtons[i].setOpaque(false);
@@ -1124,10 +1122,9 @@ b.confirm2=false;
 
 		for (int i =0;i<rightMoveButtons.length;i++){//self explanatory
 			rightMoveButtons[i].setOpaque(true);
-			rightMoveButtons[i].setText(p2.getCurrentMon().getMoves()[i].getName());
-//			int num=rightMoveButtons[i].getNum();
+			rightMoveButtons[i].setText(p2.getCurrentMon().getMoves()[i].getName() + " " + p2.getCurrentMon().getMoves()[i].getPP() + "/" + p2.getCurrentMon().getMoves()[i].getBasePP());
+			int num=rightMoveButtons[i].getNum();
 			rightMoveButtons[i].setIcon(new ImageIcon("Images/Types-Classic/" + p2.getCurrentMon().getMoves()[i].getType() + ".png"));
-			rightMoveButtons[i].setRolloverIcon(new ImageIcon("Images/Categories/" + p2.getCurrentMon().getMoves()[i].getCategory() + ".png"));
 			if(p2.getCurrentMon().getMoves()[i].getPP() == 0) {
 				rightMoveButtons[i].setEnabled(false);
 			}
@@ -1168,8 +1165,6 @@ b.confirm2=false;
 		}
 		for (int i =0;i<rightSwitchButtons.length;i++) {
 			rightSwitchButtons[i].setText(p2.getPokemon()[i].getName());//self explanatory
-			ImageIcon pokemonPic2=new ImageIcon("Images/Sprites/SpritesFront/" + P2.getPokemon()[i].getID() + ".gif");
-			rightSwitchButtons[i].setIcon(new ImageIcon(pokemonPic2.getImage().getScaledInstance((int)(pokemonPic2.getIconWidth()*0.45), (int)(pokemonPic2.getIconHeight()*0.45), Image.SCALE_DEFAULT)));
 			if (p2.getPokemon()[i].getHealth() <= 0 || p2.getPokemon()[i] == p2.getCurrentMon()) {
 				rightSwitchButtons[i].setEnabled(false);
 				rightSwitchButtons[i].setOpaque(false);
@@ -1224,20 +1219,11 @@ b.confirm2=false;
     }
     // This method lets you choose your pokemon and their moves
 	private void teamBuilder(){
-musicPlayer.stop();
-		if(musicSelection==-1){
-	int random=(int)(Math.random()*25);
-	musicPlayer.play("Music/"+MUSIC_OPTIONS[random]+".wav");
-}
-else{
-	musicPlayer.play("Music/"+MUSIC_OPTIONS[musicSelection]+".wav");
-}
-
 		JPanel mainPanelTB=new JPanel();// the main panel with all of the the components inside
 		mainPanelTB.setLayout(new GridLayout(1,2));
 		frame.add(mainPanelTB);//using the frame from the field so as not to use multiple Jframes
-		 JPanel leftPanelTB=new JPanel(new GridLayout(2,1));// the panel for P1
-		 JPanel rightPanelTB=new JPanel(new GridLayout(2,1));// the panel for P2
+		JPanel leftPanelTB=new JPanel(new GridLayout(2,1));// the panel for P1
+		JPanel rightPanelTB=new JPanel(new GridLayout(2,1));// the panel for P2
 		JPanel leftDisplay=new JPanel(new GridLayout(1,6)),rightDisplay=new JPanel(new GridLayout(1,6));// the display of the pokemon when you choose them
 		mainPanelTB.add(leftPanelTB);
 		mainPanelTB.add(rightPanelTB);
@@ -1274,7 +1260,7 @@ else{
 	}
 		for (int i = 0; i < leftPokemonInputs.length; i++) {//i is the column you are on
 
-			leftPokemonInputs[i] = new JTextArea("Please select a pokemon");//default pokemon for player 1 is charizard
+			leftPokemonInputs[i] = new JTextArea("Pokemon");
 			leftPokemonInputs[i].setRows(3);
 			constraints.gridx = i;//your current column
 			constraints.gridy = 0;//1st row
@@ -1290,7 +1276,7 @@ else{
 		for (int i = 0; i < 6; i++) {//keeps track of the column you are on
 
 			for (int k = 0; k < 4; k++) {//keeps track of the row
-				leftMoveInputs[i][k] = new KTextField("Please select a move");//pound is the default move
+				leftMoveInputs[i][k] = new KTextField("Move");
 				leftMoveInputs[i][k].setColumn(i);
 				leftMoveInputs[i][k].setRow(k);
 				leftMoveInputs[i][k].addMouseListener(new MouseAdapter() {
@@ -1665,7 +1651,7 @@ else{
 
 
 		for (int i = 0; i < rightPokemonInputs.length; i++) {
-		rightPokemonInputs[i] = new JTextArea("Please select a Pokemon");//P2 pokemon default is blastoise
+		rightPokemonInputs[i] = new JTextArea("Pokemon");
 		rightPokemonInputs[i].setRows(3);
 		constraints.gridx = i;
 		constraints.gridy = 0;
@@ -1682,7 +1668,7 @@ else{
 	for (int i = 0; i < 6; i++) {//keeps track of the column you are on
 
 		for (int k = 0; k < 4; k++) {//keeps track of the row
-			rightMoveInputs[i][k] = new KTextField("Please select a move");//pound is the default move
+			rightMoveInputs[i][k] = new KTextField("Move");
 			rightMoveInputs[i][k].setColumn(i);
 			rightMoveInputs[i][k].setRow(k);
 			rightMoveInputs[i][k].addMouseListener(new MouseAdapter() {
@@ -2093,10 +2079,10 @@ musicButton.setPreferredSize(new Dimension(500,100));
 Font pokemonPlaceHolder=new Font("Arial", Font.PLAIN, 40);
 try {
 //	if(Math.random()<0.25){
-//	pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("PokemonHollow.ttf"));
+//	pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("Fonts/PokemonHollow.ttf"));
 //	}
 //	else{
-		pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("PokemonSolid.ttf"));
+		pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("Fonts/PokemonSolid.ttf"));
 //	}
 
 		} catch (FontFormatException e) {
@@ -2135,19 +2121,22 @@ try {
 			public void actionPerformed(ActionEvent e) {
 				String input;
 				input= (String) JOptionPane.showInputDialog(mainPanelTitleScreen,
-						"Select your music. If you don't select anything, the music choice will be random"
+						"Select your music. If you don't select anything, the current music will keep playing"
 						,"Music",
 						2,
 						new ImageIcon (new ImageIcon("Images/Music.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
 						MUSIC_OPTIONS,
 						null);
 				if(input!=null){
-			for(int i=0;i<MUSIC_OPTIONS.length;i++){
-				if(input.equalsIgnoreCase(MUSIC_OPTIONS[i])){
-					musicSelection=i;
-					break;
+					for (int i = 0; i < MUSIC_OPTIONS.length; i++) {
+						if (input.equalsIgnoreCase(MUSIC_OPTIONS[i])) {
+							musicSelection = i;
+							musicPlayer.stop();
+							musicPlayer.play("Music/" + MUSIC_OPTIONS[musicSelection] + ".wav");
+							break;
+						}
+					}
 				}
-			}}
 			}
 		});
 		settingsButton.addActionListener(new ActionListener() {
