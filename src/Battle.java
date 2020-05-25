@@ -1080,8 +1080,8 @@ b.confirm2=false;
 				int switchPanelWidth=frame.getWidth()-leftText.getWidth()-rightPanel.getWidth();
 int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPanel.getHeight();
 				double multiplier;
-				double linkWithHeight=(double)switchPanelHeight/pokemonPic.getIconHeight()/6;
-				double linkWithWidth=(double)switchPanelWidth/pokemonPic.getIconHeight()/6;
+				double linkWithHeight=(double)switchPanelHeight/pokemonPic.getIconHeight()/12;
+				double linkWithWidth=(double)switchPanelWidth/pokemonPic.getIconHeight()/12;
 				if(linkWithHeight<linkWithWidth) {
 					multiplier =linkWithHeight;
 				}
@@ -1192,8 +1192,8 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 			int switchPanelWidth=frame.getWidth()-rightText.getWidth()-leftPanel.getWidth();
 			int switchPanelHeight=frame.getHeight()-rightMovePanel.getHeight()-rightDisplayPanel.getHeight();
 			double multiplier;
-			double linkWithHeight=(double)switchPanelHeight/pokemonPic.getIconHeight()/6;
-			double linkWithWidth=(double)switchPanelWidth/pokemonPic.getIconHeight()/6;
+			double linkWithHeight=(double)switchPanelHeight/pokemonPic.getIconHeight()/12;
+			double linkWithWidth=(double)switchPanelWidth/pokemonPic.getIconHeight()/12;
 			if(linkWithHeight<linkWithWidth) {
 				multiplier =linkWithHeight;
 			}
