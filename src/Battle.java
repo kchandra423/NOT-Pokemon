@@ -1198,20 +1198,11 @@ b.confirm2=false;
     }
     // This method lets you choose your pokemon and their moves
 	private void teamBuilder(){
-musicPlayer.stop();
-		if(musicSelection==-1){
-	int random=(int)(Math.random()*25);
-	musicPlayer.play("Music/"+MUSIC_OPTIONS[random]+".wav");
-}
-else{
-	musicPlayer.play("Music/"+MUSIC_OPTIONS[musicSelection]+".wav");
-}
-
 		JPanel mainPanelTB=new JPanel();// the main panel with all of the the components inside
 		mainPanelTB.setLayout(new GridLayout(1,2));
 		frame.add(mainPanelTB);//using the frame from the field so as not to use multiple Jframes
-		 JPanel leftPanelTB=new JPanel(new GridLayout(2,1));// the panel for P1
-		 JPanel rightPanelTB=new JPanel(new GridLayout(2,1));// the panel for P2
+		JPanel leftPanelTB=new JPanel(new GridLayout(2,1));// the panel for P1
+		JPanel rightPanelTB=new JPanel(new GridLayout(2,1));// the panel for P2
 		JPanel leftDisplay=new JPanel(new GridLayout(1,6)),rightDisplay=new JPanel(new GridLayout(1,6));// the display of the pokemon when you choose them
 		mainPanelTB.add(leftPanelTB);
 		mainPanelTB.add(rightPanelTB);
@@ -1248,7 +1239,7 @@ else{
 	}
 		for (int i = 0; i < leftPokemonInputs.length; i++) {//i is the column you are on
 
-			leftPokemonInputs[i] = new JTextArea("Please select a pokemon");//default pokemon for player 1 is charizard
+			leftPokemonInputs[i] = new JTextArea("Pokemon");
 			leftPokemonInputs[i].setRows(3);
 			constraints.gridx = i;//your current column
 			constraints.gridy = 0;//1st row
@@ -1264,7 +1255,7 @@ else{
 		for (int i = 0; i < 6; i++) {//keeps track of the column you are on
 
 			for (int k = 0; k < 4; k++) {//keeps track of the row
-				leftMoveInputs[i][k] = new KTextField("Please select a move");//pound is the default move
+				leftMoveInputs[i][k] = new KTextField("Move");
 				leftMoveInputs[i][k].setColumn(i);
 				leftMoveInputs[i][k].setRow(k);
 				leftMoveInputs[i][k].addMouseListener(new MouseAdapter() {
@@ -1639,7 +1630,7 @@ else{
 
 
 		for (int i = 0; i < rightPokemonInputs.length; i++) {
-		rightPokemonInputs[i] = new JTextArea("Please select a Pokemon");//P2 pokemon default is blastoise
+		rightPokemonInputs[i] = new JTextArea("Pokemon");
 		rightPokemonInputs[i].setRows(3);
 		constraints.gridx = i;
 		constraints.gridy = 0;
@@ -1656,7 +1647,7 @@ else{
 	for (int i = 0; i < 6; i++) {//keeps track of the column you are on
 
 		for (int k = 0; k < 4; k++) {//keeps track of the row
-			rightMoveInputs[i][k] = new KTextField("Please select a move");//pound is the default move
+			rightMoveInputs[i][k] = new KTextField("Move");
 			rightMoveInputs[i][k].setColumn(i);
 			rightMoveInputs[i][k].setRow(k);
 			rightMoveInputs[i][k].addMouseListener(new MouseAdapter() {
@@ -2109,19 +2100,22 @@ try {
 			public void actionPerformed(ActionEvent e) {
 				String input;
 				input= (String) JOptionPane.showInputDialog(mainPanelTitleScreen,
-						"Select your music. If you don't select anything, the music choice will be random"
+						"Select your music. If you don't select anything, the current music will keep playing"
 						,"Music",
 						2,
 						new ImageIcon (new ImageIcon("Images/Music.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)),
 						MUSIC_OPTIONS,
 						null);
 				if(input!=null){
-			for(int i=0;i<MUSIC_OPTIONS.length;i++){
-				if(input.equalsIgnoreCase(MUSIC_OPTIONS[i])){
-					musicSelection=i;
-					break;
+					for (int i = 0; i < MUSIC_OPTIONS.length; i++) {
+						if (input.equalsIgnoreCase(MUSIC_OPTIONS[i])) {
+							musicSelection = i;
+							musicPlayer.stop();
+							musicPlayer.play("Music/" + MUSIC_OPTIONS[musicSelection] + ".wav");
+							break;
+						}
+					}
 				}
-			}}
 			}
 		});
 		settingsButton.addActionListener(new ActionListener() {
