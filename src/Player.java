@@ -14,7 +14,6 @@
 //
 public class Player {
 	private Battle battle;
-	private EaseOfUse ez = new EaseOfUse();
     private Calculator calculator;//self explanatory
     private Pokemon[] pokemon;//has 6 pokemon
     private Pokemon currentMon;// your current pokemon that is in play

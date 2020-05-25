@@ -1364,7 +1364,7 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 				constraints.insets = new Insets(5, 5, 5, 0);
 				leftUI.add(leftMoveInputs[i][k], constraints);
 			}
-			leftConfirmationButtons[i] = new Button("Confirm", i);
+			leftConfirmationButtons[i] = new Button("Confirm Pokemon", i);
 			leftConfirmationButtons[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -1759,7 +1759,7 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 
 			rightUI.add(rightMoveInputs[i][k], constraints);
 		}
-		rightConfirmationButtons[i] = new Button("Confirm", i);
+		rightConfirmationButtons[i] = new Button("Confirm Pokemon", i);
 		rightConfirmationButtons[i].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
