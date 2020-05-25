@@ -1028,6 +1028,7 @@ b.confirm2=false;
 				leftMoveButtons[i].setText(p1.getCurrentMon().getMoves()[i].getName() + " " + p1.getCurrentMon().getMoves()[i].getPP() + "/" + p1.getCurrentMon().getMoves()[i].getBasePP());//self explanatory
 				int num=leftMoveButtons[i].getNum();
 				leftMoveButtons[i].setIcon(new ImageIcon("Images/Types-Classic/" + p1.getCurrentMon().getMoves()[i].getType() + ".png"));
+				leftMoveButtons[i].setRolloverIcon(new ImageIcon("Images/Categories/" + p1.getCurrentMon().getMoves()[i].getCategory() + ".png"));
 				if(p1.getCurrentMon().getMoves()[i].getPP() == 0) {
 					leftMoveButtons[i].setEnabled(false);
 				}
@@ -1068,6 +1069,8 @@ b.confirm2=false;
 			}
 			for (int i =0;i<leftSwitchButtons.length;i++){
 				leftSwitchButtons[i].setText(p1.getPokemon()[i].getName());
+				ImageIcon pokemonPic = new ImageIcon("Images/Sprites/SpritesFront/" + p1.getPokemon()[i].getID() + ".gif");
+				leftSwitchButtons[i].setIcon(new ImageIcon((pokemonPic).getImage().getScaledInstance((int)(pokemonPic.getIconWidth() * 0.4), (int)(pokemonPic.getIconHeight() * 0.4), Image.SCALE_DEFAULT)));
 				if(p1.getPokemon()[i].getHealth() <= 0 || p1.getPokemon()[i] == p1.getCurrentMon()) {//self explanatory
 					leftSwitchButtons[i].setEnabled(false);
 					leftSwitchButtons[i].setOpaque(false);
@@ -1125,6 +1128,7 @@ b.confirm2=false;
 			rightMoveButtons[i].setText(p2.getCurrentMon().getMoves()[i].getName() + " " + p2.getCurrentMon().getMoves()[i].getPP() + "/" + p2.getCurrentMon().getMoves()[i].getBasePP());
 			int num=rightMoveButtons[i].getNum();
 			rightMoveButtons[i].setIcon(new ImageIcon("Images/Types-Classic/" + p2.getCurrentMon().getMoves()[i].getType() + ".png"));
+			rightMoveButtons[i].setRolloverIcon(new ImageIcon("Images/Categories/" + p2.getCurrentMon().getMoves()[i].getCategory() + ".png"));
 			if(p2.getCurrentMon().getMoves()[i].getPP() == 0) {
 				rightMoveButtons[i].setEnabled(false);
 			}
@@ -1165,6 +1169,8 @@ b.confirm2=false;
 		}
 		for (int i =0;i<rightSwitchButtons.length;i++) {
 			rightSwitchButtons[i].setText(p2.getPokemon()[i].getName());//self explanatory
+			ImageIcon pokemonPic = new ImageIcon("Images/Sprites/SpritesFront/" + p2.getPokemon()[i].getID() + ".gif");
+			rightSwitchButtons[i].setIcon(new ImageIcon((pokemonPic).getImage().getScaledInstance((int)(pokemonPic.getIconWidth() * 0.4), (int)(pokemonPic.getIconHeight() * 0.4), Image.SCALE_DEFAULT)));
 			if (p2.getPokemon()[i].getHealth() <= 0 || p2.getPokemon()[i] == p2.getCurrentMon()) {
 				rightSwitchButtons[i].setEnabled(false);
 				rightSwitchButtons[i].setOpaque(false);
