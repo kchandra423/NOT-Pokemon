@@ -225,9 +225,13 @@ public class Pokemon {
 		} else if (specialDefenseDecrease == 0 && specialDefenseIncrease == 0) {// no stat changes
 			return baseSpecialDefense;
 		} else {// this shouldn't happen
-			while (true) {
-				System.out.println("what");
+			int g=5;
+			while (g>0) {
+				System.out.println("Something went wrong getting spf");
+				g--;
+
 			}
+			return -1;
 		}
 	}
 
@@ -254,10 +258,13 @@ public class Pokemon {
 		} else if (defenseDecrease == 0 && defenseIncrease == 0) {// no stat changes
 			return baseDefense;
 		} else {// this shouldn't happen
+			int g=5;
+			while (g>0) {
+				System.out.println("Something went wrong getting def");
+				g--;
 
-			while (true) {
-				System.out.println("what");
 			}
+			return -1;
 		}
 	}
 
@@ -284,9 +291,13 @@ public class Pokemon {
 		} else if (attackDecrease == 0 && attackIncrease == 0) {// no stat changes
 			return baseAttack;
 		} else {// this shouldn't happen
-			while (true) {
-				System.out.println("what");
+			int g=5;
+			while (g>0) {
+				System.out.println("Something went wrong getting atk");
+				g--;
+
 			}
+			return -1;
 		}
 	}
 
@@ -318,9 +329,13 @@ public class Pokemon {
 		} else if (specialAttackDecrease == 0 && specialAttackIncrease == 0) {// no stat changes
 			return baseSpecialAttack;
 		} else {// this shouldn't happen
-			while (true) {
-				System.out.println("what");
+			int g=5;
+			while (g>0) {
+				System.out.println("Something went wrong getting spa");
+				g--;
+
 			}
+			return -1;
 		}
 	}
 
@@ -347,9 +362,13 @@ public class Pokemon {
 		} else if (speedDecrease == 0 && speedIncrease == 0) {// no stat changes
 			return baseSpeed;
 		} else {// this shouldn't happen
-			while (true) {
-				System.out.println("what");
+			int g=5;
+			while (g>0) {
+				System.out.println("Something went wrong getting spe");
+				g--;
+
 			}
+			return -1;
 		}
 	}
 

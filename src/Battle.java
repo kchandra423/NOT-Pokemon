@@ -19,7 +19,6 @@ import javax.swing.text.DefaultCaret;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Arrays;
 
 public class Battle {
 	public static int P1numberOfFaintedMons = 0;// self explanatory
@@ -40,18 +39,26 @@ public class Battle {
 	private JPanel mainPanel;// self explanatory
 	private JPanel leftPanel, rightPanel;
 	private BackgroundPanel leftDisplayPanel, rightDisplayPanel;// the display shown to the user
-	private JPanel leftUI, rightUI;// the users interface
+	private JPanel leftUI, rightUI;// the users interface panel
 	private JPanel leftMovePanel, rightMovePanel;// move options
 	private JPanel leftSwitchPanel, rightSwitchPanel;// switch options
 
-	private JLabel name1, name2, image1, image2, name3, name4, image3, image4, attack, switchOut;
-	private HealthBar bar1, bar2, bar3, bar4;
+	//  Jlabels for each pokemon, on each side
+	private JLabel P1pokemon, P1OpposingPokemon, P1pokemonImage, P1opposingPokemonImage, P2pokemon, P2OpposingPokemon, P2pokemonImage, P2opposingPokemonImage, attack, switchOut;
+
+	//a health bar for each pokemon
+	private HealthBar P1pokemonHealthBar, P1opposingPokemonHealthBar, P2pokemonHealthBar, P2opposingPokemonHealthBar;
+
+	// the buttons that each player can choose: move is for attacking, switch, is for switching out
 	private Button[] leftMoveButtons, rightMoveButtons;
 	private Button[] leftSwitchButtons, rightSwitchButtons;
+
+	//the text areas for each player
 	private JTextArea leftText, rightText;
+
 	private Timer timer;
 	
-	private boolean confirm1 = false, confirm2 = false;// i hate action performed not being able to access things like a normal method
+	private boolean confirm1 = false, confirm2 = false;// confirms whether each player has confirmed there team during the teamvbuilder phase
 	private static Player P1, P2;
 	private static Object myObject1 = new Object(), myObject2 = new Object(), myObject3=new Object(), myObject4 =new Object();
 	
@@ -193,23 +200,23 @@ public class Battle {
 //		});
 P1.setCurrentMon();
 P2.setCurrentMon();
-			name1 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
-			name1.setOpaque(true);
-			name1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-			name1.setBackground(Color.LIGHT_GRAY);
+			P1pokemon = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+			P1pokemon.setOpaque(true);
+			P1pokemon.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			P1pokemon.setBackground(Color.LIGHT_GRAY);
 //			System.out.println(P2.getCurrentMon().getName());
-			name2 = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
-		name2 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
-		name2.setOpaque(true);
-		name2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		name2.setBackground(Color.LIGHT_GRAY);
-			bar1 = new HealthBar(P1.getCurrentMon());
+			P1OpposingPokemon = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
+		P1OpposingPokemon = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+		P1OpposingPokemon.setOpaque(true);
+		P1OpposingPokemon.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		P1OpposingPokemon.setBackground(Color.LIGHT_GRAY);
+			P1pokemonHealthBar = new HealthBar(P1.getCurrentMon());
 			// bar1.setBackground(Color.LIGHT_GRAY);
-			bar1.setXOffset(true);
-			bar1.setPreferredSize(new Dimension(200,15));
-			bar2 = new HealthBar(P2.getCurrentMon());
+			P1pokemonHealthBar.setXOffset(true);
+			P1pokemonHealthBar.setPreferredSize(new Dimension(200,15));
+			P1opposingPokemonHealthBar = new HealthBar(P2.getCurrentMon());
 			// bar2.setBackground(Color.LIGHT_GRAY);
-			bar2.setXOffset(false);
+			P1opposingPokemonHealthBar.setXOffset(false);
 			ImageIcon pic =
 //					new ImageIcon
 //					(new ImageIcon(
@@ -219,8 +226,8 @@ P2.setCurrentMon();
 
 					new ImageIcon("Images/Sprites/SpritesBack/" + P1.getCurrentMon().getID() + "-back.gif");
 			//pic = new ImageIcon(pic.getImage().getScaledInstance((int) (pic.getIconWidth() * 4), (int) (pic.getIconHeight() * 4), Image.SCALE_DEFAULT));
-			image1 = new JLabel(pic);
-			image1.addMouseListener(new MouseAdapter() {
+			P1pokemonImage = new JLabel(pic);
+			P1pokemonImage.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					if (SwingUtilities.isRightMouseButton(e)) {
@@ -237,8 +244,8 @@ P2.setCurrentMon();
 			});
 //			leftP1Image.setIcon(pic);
 			pic = new ImageIcon("Images/Sprites/SpritesFront/" + P2.getCurrentMon().getID() + ".gif");
-			image2 = new JLabel(pic);
-			image2.addMouseListener(new MouseAdapter() {
+			P1opposingPokemonImage = new JLabel(pic);
+			P1opposingPokemonImage.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					if (SwingUtilities.isRightMouseButton(e)) {
@@ -262,20 +269,20 @@ P2.setCurrentMon();
 			c2.anchor = GridBagConstraints.LAST_LINE_START;
 			c2.weightx = 0.5;
 			c2.weighty = 0.5;
-			leftDisplayPanel.add(name1, c2);
+			leftDisplayPanel.add(P1pokemon, c2);
 			c2.gridy = 4;
-			leftDisplayPanel.add(bar1, c2);
+			leftDisplayPanel.add(P1pokemonHealthBar, c2);
 			c2.gridy = 5;
-			leftDisplayPanel.add(image1, c2);
+			leftDisplayPanel.add(P1pokemonImage, c2);
 			c2.gridx = 1;
 			c2.gridy = 0;
 			c2.insets = new Insets(5, 105, 5, 5);
 			c2.anchor = GridBagConstraints.FIRST_LINE_END;
-			leftDisplayPanel.add(name2, c2);
+			leftDisplayPanel.add(P1OpposingPokemon, c2);
 			c2.gridy = 1;
-			leftDisplayPanel.add(bar2, c2);
+			leftDisplayPanel.add(P1opposingPokemonHealthBar, c2);
 			c2.gridy = 2;
-			leftDisplayPanel.add(image2, c2);
+			leftDisplayPanel.add(P1opposingPokemonImage, c2);
 			leftDisplayPanel.setBackground(Color.LIGHT_GRAY);
 			c.gridx = 0;
 			c.gridy = 0;
@@ -379,25 +386,25 @@ P2.setCurrentMon();
 
 
 			GridBagConstraints y = new GridBagConstraints();
-			name3 = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
-		name3 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
-		name3.setOpaque(true);
-		name3.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		name3.setBackground(Color.LIGHT_GRAY);
-			name4 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
-		name4 = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
-		name4.setOpaque(true);
-		name4.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		name4.setBackground(Color.LIGHT_GRAY);
-			bar3 = new HealthBar(P2.getCurrentMon());
+			P2pokemon = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
+		P2pokemon = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+		P2pokemon.setOpaque(true);
+		P2pokemon.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		P2pokemon.setBackground(Color.LIGHT_GRAY);
+			P2OpposingPokemon = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+		P2OpposingPokemon = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
+		P2OpposingPokemon.setOpaque(true);
+		P2OpposingPokemon.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		P2OpposingPokemon.setBackground(Color.LIGHT_GRAY);
+			P2pokemonHealthBar = new HealthBar(P2.getCurrentMon());
 			// bar3.setBackground(Color.LIGHT_GRAY);
-			bar3.setXOffset(true);
-			bar4 = new HealthBar(P1.getCurrentMon());
+			P2pokemonHealthBar.setXOffset(true);
+			P2opposingPokemonHealthBar = new HealthBar(P1.getCurrentMon());
 			// bar4.setBackground(Color.LIGHT_GRAY);
-			bar4.setXOffset(false);
+			P2opposingPokemonHealthBar.setXOffset(false);
 			ImageIcon pic2 = new ImageIcon("Images/Sprites/SpritesBack/" + P2.getCurrentMon().getID() + "-back.gif");
-			image3 = new JLabel(pic2);
-			image3.addMouseListener(new MouseAdapter() {
+			P2pokemonImage = new JLabel(pic2);
+			P2pokemonImage.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					JOptionPane leftPokemonInfoPopup = new JOptionPane("P2 current Pokemon info");
@@ -412,8 +419,8 @@ P2.setCurrentMon();
 				}
 			});
 			pic2 = new ImageIcon("Images/Sprites/SpritesFront/" + P1.getCurrentMon().getID() + ".gif");
-			image4 = new JLabel(pic2);
-			image4.addMouseListener(new MouseAdapter() {
+			P2opposingPokemonImage = new JLabel(pic2);
+			P2opposingPokemonImage.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					JOptionPane leftPokemonInfoPopup = new JOptionPane("P1 current Pokemon info");
@@ -432,20 +439,20 @@ P2.setCurrentMon();
 			y2.anchor = GridBagConstraints.LAST_LINE_START;
 			y2.weightx = 0.5;
 			y2.weighty = 0.5;
-			rightDisplayPanel.add(name3, y2);
+			rightDisplayPanel.add(P2pokemon, y2);
 			y2.gridy = 4;
-			rightDisplayPanel.add(bar3, y2);
+			rightDisplayPanel.add(P2pokemonHealthBar, y2);
 			y2.gridy = 5;
-			rightDisplayPanel.add(image3, y2);
+			rightDisplayPanel.add(P2pokemonImage, y2);
 			y2.gridx = 1;
 			y2.gridy = 0;
 			y2.insets = new Insets(5, 105, 5, 5);
 			y2.anchor = GridBagConstraints.FIRST_LINE_END;
-			rightDisplayPanel.add(name4, y2);
+			rightDisplayPanel.add(P2OpposingPokemon, y2);
 			y2.gridy = 1;
-			rightDisplayPanel.add(bar4, y2);
+			rightDisplayPanel.add(P2opposingPokemonHealthBar, y2);
 			y2.gridy = 2;
-			rightDisplayPanel.add(image4, y2);
+			rightDisplayPanel.add(P2opposingPokemonImage, y2);
 			rightDisplayPanel.setBackground(Color.LIGHT_GRAY);
 			y.gridx = 0;
 			y.gridy = 0;
@@ -892,8 +899,10 @@ b.confirm2=false;
 				p2.fight(p2SelectedMoveIndex);
 				p1.fight(p1SelectedMoveIndex);
 			} else {
-				while (true) {
+				int y=5;
+				while (y>0) {
 					System.out.println("Something went wrong");//questioinable style, but gets your attention when it happens, and we have never had it happen
+					y--;
 				}
 			}
 		}
@@ -1011,30 +1020,30 @@ b.confirm2=false;
     }
     private void repaint(Player p1, Player p2) {
 
-		name1.setText(p1.getCurrentMon().getName());//self explanatory
+		P1pokemon.setText(p1.getCurrentMon().getName());//self explanatory
 
-			name2 .setText(p2.getCurrentMon().getName());//self explanatory
+			P1OpposingPokemon.setText(p2.getCurrentMon().getName());//self explanatory
 
-			if(bar1.getPokemon() != p1.getCurrentMon()) {//self explanatory
-				bar1.setPokemon(p1.getCurrentMon());
-				bar1.setXOffset(true);
+			if(P1pokemonHealthBar.getPokemon() != p1.getCurrentMon()) {//self explanatory
+				P1pokemonHealthBar.setPokemon(p1.getCurrentMon());
+				P1pokemonHealthBar.setXOffset(true);
 			}
-			bar1.repaint();
+			P1pokemonHealthBar.repaint();
 
-			if(bar2.getPokemon() != p2.getCurrentMon()) {//self explanatory
-				bar2.setPokemon(p2.getCurrentMon());
-				bar2.setXOffset(false);
+			if(P1opposingPokemonHealthBar.getPokemon() != p2.getCurrentMon()) {//self explanatory
+				P1opposingPokemonHealthBar.setPokemon(p2.getCurrentMon());
+				P1opposingPokemonHealthBar.setXOffset(false);
 			}
-			bar2.repaint();
+			P1opposingPokemonHealthBar.repaint();
 
 			Icon pic = null;
 
 
-				image1.setIcon(new ImageIcon("Images/Sprites/SpritesBack/" + p1.getCurrentMon().getID() + "-back.gif"));//self explanatory
+				P1pokemonImage.setIcon(new ImageIcon("Images/Sprites/SpritesBack/" + p1.getCurrentMon().getID() + "-back.gif"));//self explanatory
 
 
 
-				image2.setIcon(new ImageIcon("Images/Sprites/SpritesFront/" + p2.getCurrentMon().getID() + ".gif"));//self explanatory
+				P1opposingPokemonImage.setIcon(new ImageIcon("Images/Sprites/SpritesFront/" + p2.getCurrentMon().getID() + ".gif"));//self explanatory
 
 
 			for (int i =0;i<leftMoveButtons.length;i++){
@@ -1124,31 +1133,31 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 
 
 
-		name3.setText(p2.getCurrentMon().getName());//self explanatory
+		P2pokemon.setText(p2.getCurrentMon().getName());//self explanatory
 
-		name4 .setText(p1.getCurrentMon().getName());//self explanatory
+		P2OpposingPokemon.setText(p1.getCurrentMon().getName());//self explanatory
 
-		if(bar3.getPokemon() != p2.getCurrentMon()) {
-			bar3.setPokemon(p2.getCurrentMon());//self explanatory
-			bar3.setXOffset(true);
+		if(P2pokemonHealthBar.getPokemon() != p2.getCurrentMon()) {
+			P2pokemonHealthBar.setPokemon(p2.getCurrentMon());//self explanatory
+			P2pokemonHealthBar.setXOffset(true);
 		}
-		bar3.repaint();
+		P2pokemonHealthBar.repaint();
 
-		if(bar4.getPokemon() != p1.getCurrentMon()) {
-			bar4.setPokemon(p1.getCurrentMon());
-			bar4.setXOffset(false);
+		if(P2opposingPokemonHealthBar.getPokemon() != p1.getCurrentMon()) {
+			P2opposingPokemonHealthBar.setPokemon(p1.getCurrentMon());
+			P2opposingPokemonHealthBar.setXOffset(false);
 		}//self explanatory
-		bar4.repaint();
+		P2opposingPokemonHealthBar.repaint();
 
 		pic = null;
 
 //		pic = ;
-		image3.setIcon(new ImageIcon("Images/Sprites/SpritesBack/" + p2.getCurrentMon().getID() + "-back.gif"));
+		P2pokemonImage.setIcon(new ImageIcon("Images/Sprites/SpritesBack/" + p2.getCurrentMon().getID() + "-back.gif"));
 
 
 
 //		pic = ;
-		image4.setIcon(new ImageIcon("Images/Sprites/SpritesFront/" + p1.getCurrentMon().getID() + ".gif"));
+		P2opposingPokemonImage.setIcon(new ImageIcon("Images/Sprites/SpritesFront/" + p1.getCurrentMon().getID() + ".gif"));
 
 
 		for (int i =0;i<rightMoveButtons.length;i++){//self explanatory
@@ -1240,23 +1249,23 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
     	timer = new Timer(healthBarDecreationRate, new ActionListener() {
     		@Override
     		public void actionPerformed(ActionEvent e) {
-    			if(!bar1.isChanging() && !bar2.isChanging()
-    					&& !bar3.isChanging() && !bar4.isChanging()) {
+    			if(!P1pokemonHealthBar.isChanging() && !P1opposingPokemonHealthBar.isChanging()
+    					&& !P2pokemonHealthBar.isChanging() && !P2opposingPokemonHealthBar.isChanging()) {
     				timer.stop();
     				synchronized (myObject3)
 					{myObject3.notify();}
     			}
-    			if(bar1.isChanging()) {
-    				bar1.repaint();
+    			if(P1pokemonHealthBar.isChanging()) {
+    				P1pokemonHealthBar.repaint();
     			}
-    			if(bar2.isChanging()) {
-    				bar2.repaint();
+    			if(P1opposingPokemonHealthBar.isChanging()) {
+    				P1opposingPokemonHealthBar.repaint();
     			}
-    			if(bar3.isChanging()) {
-    				bar3.repaint();
+    			if(P2pokemonHealthBar.isChanging()) {
+    				P2pokemonHealthBar.repaint();
     			}
-    			if(bar4.isChanging()) {
-    				bar4.repaint();
+    			if(P2opposingPokemonHealthBar.isChanging()) {
+    				P2opposingPokemonHealthBar.repaint();
     			}
     		}
     	});
@@ -1988,7 +1997,7 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 				rightMoveInputs[4][3].setText("gunk shot");
 
 				rightPokemonInputs[5].setText("Tapu Lele");
-				rightMoveInputs[5][0].setText("Psyshock");
+				rightMoveInputs[5][0].setText("Psychic");
 				rightMoveInputs[5][1].setText("Moonblast");
 				rightMoveInputs[5][2].setText("Shadow Ball");
 				rightMoveInputs[5][3].setText("Focus Blast");
@@ -2027,7 +2036,7 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 				rightPokemonInputs[1].setText("Keldeo");
 				rightMoveInputs[1][0].setText("Calm mind");
 				rightMoveInputs[1][1].setText("Scald");
-				rightMoveInputs[1][2].setText("Secret Sword");
+				rightMoveInputs[1][2].setText("Focus Blast");
 				rightMoveInputs[1][3].setText("Icy wind");
 
 
