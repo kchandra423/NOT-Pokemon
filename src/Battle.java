@@ -1026,6 +1026,8 @@ b.confirm2=false;
 			for (int i =0;i<leftMoveButtons.length;i++){
 				leftMoveButtons[i].setOpaque(true);
 				leftMoveButtons[i].setText(p1.getCurrentMon().getMoves()[i].getName());//self explanatory
+				int num=leftMoveButtons[i].getNum();
+				leftMoveButtons[i].setIcon(new ImageIcon("Images/Types-Classic/" + p1.getCurrentMon().getMoves()[i].getType() + ".png"));
 				if(p1.getCurrentMon().getMoves()[i].getPP() == 0) {
 					leftMoveButtons[i].setEnabled(false);
 				}
@@ -1121,6 +1123,8 @@ b.confirm2=false;
 		for (int i =0;i<rightMoveButtons.length;i++){//self explanatory
 			rightMoveButtons[i].setOpaque(true);
 			rightMoveButtons[i].setText(p2.getCurrentMon().getMoves()[i].getName());
+			int num=rightMoveButtons[i].getNum();
+			rightMoveButtons[i].setIcon(new ImageIcon("Images/Types-Classic/" + p2.getCurrentMon().getMoves()[i].getType() + ".png"));
 			if(p2.getCurrentMon().getMoves()[i].getPP() == 0) {
 				rightMoveButtons[i].setEnabled(false);
 			}
