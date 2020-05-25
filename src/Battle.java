@@ -32,7 +32,7 @@ public class Battle {
 			"PokemonTitleScreen", "PokemonThemeSong", "RivalAppears",
 			"TeamRocketHideout", "ViridianForest", "Battle! Team Plasma",
 			"bw2-theme","Pinch in Battle!","platinum-title", "xy-theme",
-			"xy_vs_gymleader","bw2-title","heartgold-title"};// 24 music options
+			"xy_vs_gymleader","bw2-title","heartgold-title","Decisive Battle! N"};// 25 music options
 	private final String[] TITLE_SCEENS={"Music/PokemonTitleScreen.wav","Music/bw2-title.wav",
 			"Music/heartgold-title.wav","Music/xy-theme.wav","Music/platinum-title.wav","Music/bw2-theme.wav"};//6 title screens
 	private int musicSelection=-1;
@@ -1200,7 +1200,7 @@ b.confirm2=false;
 	private void teamBuilder(){
 musicPlayer.stop();
 		if(musicSelection==-1){
-	int random=(int)(Math.random()*24);
+	int random=(int)(Math.random()*25);
 	musicPlayer.play("Music/"+MUSIC_OPTIONS[random]+".wav");
 }
 else{
@@ -2025,6 +2025,8 @@ else{
 	private void titleScreen(){
 		int random=(int)(Math.random()*6);
 		musicPlayer.play(TITLE_SCEENS[random]);
+		Icon logoIcon=new ImageIcon("Images/Backgrounds/BattleBackground1.png");
+		FadeLabel logoLabel=new FadeLabel(logoIcon,0.02f);
 		JPanel mainPanelTitleScreen =new JPanel(new GridLayout(2,1));
 		JPanel logo= new JPanel();
 		mainPanelTitleScreen.add(logo);
@@ -2039,7 +2041,10 @@ else{
 		music.add(musicButton);
 		settings.add(settingsButton);
 		play.add(playButton);
-
+		logo.add(logoLabel);
+		logoLabel.faidIn();
+//		logoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+//		logo.setPreferredSize(new Dimension(500,100));
 //		UI.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 //		logo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 //		music.setBorder(BorderFactory.createLineBorder(Color.BLACK));
