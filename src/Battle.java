@@ -92,7 +92,9 @@ public class Battle {
 //		frame.add(mainPanel);
 //				frame.getContentPane().add(rightPanel);
 
-		frame.setBounds(100, 100, 2000, 750);
+//		frame.setBounds(100, 100, 2000, 750);
+		frame.setBounds(100, 100, 2250, 900);
+
 		frame.setVisible(true);
 		 frame.setResizable(false);
 		frame.setTitle("NOT Pokemon");
@@ -203,6 +205,7 @@ P2.setCurrentMon();
 			bar1 = new HealthBar(P1.getCurrentMon());
 			bar1.setBackground(Color.LIGHT_GRAY);
 			bar1.setXOffset(true);
+			bar1.setPreferredSize(new Dimension(200,15));
 			bar2 = new HealthBar(P2.getCurrentMon());
 			bar2.setBackground(Color.LIGHT_GRAY);
 			bar2.setXOffset(false);
@@ -299,6 +302,7 @@ P2.setCurrentMon();
 			leftMovePanel.setLayout(layout2);
 			for (int i = 0; i < leftMoveButtons.length; i++) {
 				leftMoveButtons[i] = new Button(P1.getCurrentMon().getMoves()[i].getName(), i);
+				leftMoveButtons[i].setPreferredSize(new Dimension(100,45));
 //    		leftMoveButtons[i].addActionListener(new ActionListener() {
 //                @Override
 //                public void actionPerformed(ActionEvent e) {
@@ -354,6 +358,7 @@ P2.setCurrentMon();
 			leftText.setEditable(false);
 			leftText.setLineWrap(true);
 			leftText.setWrapStyleWord(true);
+//			leftText.setPreferredSize(new Dimension(50,600));
 			((DefaultCaret)leftText.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 			JScrollPane pane = new JScrollPane(leftText,
 					ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -466,6 +471,7 @@ P2.setCurrentMon();
 			rightMovePanel.setLayout(layout3);
 			for (int i = 0; i < rightMoveButtons.length; i++) {
 				rightMoveButtons[i] = new Button(P2.getCurrentMon().getMoves()[i].getName(), i);
+				rightMoveButtons[i].setPreferredSize(new Dimension(100,45));
 //    		rightMoveButtons[i].addActionListener(new ActionListener() {
 //                @Override
 //                public void actionPerformed(ActionEvent e) {
@@ -521,6 +527,7 @@ P2.setCurrentMon();
 			rightText.setEditable(false);
 			rightText.setLineWrap(true);
 			rightText.setWrapStyleWord(true);
+//			rightText.setPreferredSize(new Dimension(50,600));
 			((DefaultCaret)rightText.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 			JScrollPane pane2 = new JScrollPane(rightText,
 					ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -1070,7 +1077,19 @@ b.confirm2=false;
 			for (int i =0;i<leftSwitchButtons.length;i++){
 				leftSwitchButtons[i].setText(p1.getPokemon()[i].getName());
 				ImageIcon pokemonPic = new ImageIcon("Images/Sprites/SpritesFront/" + p1.getPokemon()[i].getID() + ".gif");
-				leftSwitchButtons[i].setIcon(new ImageIcon((pokemonPic).getImage().getScaledInstance((int)(pokemonPic.getIconWidth() * 0.4), (int)(pokemonPic.getIconHeight() * 0.4), Image.SCALE_DEFAULT)));
+				int switchPanelWidth=frame.getWidth()-leftText.getWidth()-rightPanel.getWidth();
+int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPanel.getHeight();
+				double multiplier;
+				double linkWithHeight=(double)switchPanelHeight/pokemonPic.getIconHeight()/6;
+				double linkWithWidth=(double)switchPanelWidth/pokemonPic.getIconHeight()/6;
+				if(linkWithHeight<linkWithWidth) {
+					multiplier =linkWithHeight;
+				}
+				else{
+					multiplier =linkWithWidth;
+				}
+				leftSwitchButtons[i].setIcon(new ImageIcon((pokemonPic).getImage().getScaledInstance((int)(pokemonPic.getIconWidth() * multiplier),
+						(int)(pokemonPic.getIconHeight() * multiplier), Image.SCALE_DEFAULT)));
 				if(p1.getPokemon()[i].getHealth() <= 0 || p1.getPokemon()[i] == p1.getCurrentMon()) {//self explanatory
 					leftSwitchButtons[i].setEnabled(false);
 					leftSwitchButtons[i].setOpaque(false);
@@ -1170,7 +1189,19 @@ b.confirm2=false;
 		for (int i =0;i<rightSwitchButtons.length;i++) {
 			rightSwitchButtons[i].setText(p2.getPokemon()[i].getName());//self explanatory
 			ImageIcon pokemonPic = new ImageIcon("Images/Sprites/SpritesFront/" + p2.getPokemon()[i].getID() + ".gif");
-			rightSwitchButtons[i].setIcon(new ImageIcon((pokemonPic).getImage().getScaledInstance((int)(pokemonPic.getIconWidth() * 0.4), (int)(pokemonPic.getIconHeight() * 0.4), Image.SCALE_DEFAULT)));
+			int switchPanelWidth=frame.getWidth()-rightText.getWidth()-leftPanel.getWidth();
+			int switchPanelHeight=frame.getHeight()-rightMovePanel.getHeight()-rightDisplayPanel.getHeight();
+			double multiplier;
+			double linkWithHeight=(double)switchPanelHeight/pokemonPic.getIconHeight()/6;
+			double linkWithWidth=(double)switchPanelWidth/pokemonPic.getIconHeight()/6;
+			if(linkWithHeight<linkWithWidth) {
+				multiplier =linkWithHeight;
+			}
+			else{
+				multiplier =linkWithWidth;
+			}
+			rightSwitchButtons[i].setIcon(new ImageIcon((pokemonPic).getImage().getScaledInstance((int)(pokemonPic.getIconWidth() * multiplier),
+					(int)(pokemonPic.getIconHeight() * multiplier), Image.SCALE_DEFAULT)));
 			if (p2.getPokemon()[i].getHealth() <= 0 || p2.getPokemon()[i] == p2.getCurrentMon()) {
 				rightSwitchButtons[i].setEnabled(false);
 				rightSwitchButtons[i].setOpaque(false);
