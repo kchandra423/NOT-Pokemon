@@ -2074,7 +2074,7 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 	private void titleScreen(){
 		int random=(int)(Math.random()*6);
 		musicPlayer.play(TITLE_SCEENS[random]);
-		Icon logoIcon=(new ImageIcon(new ImageIcon("Images/NotPokemonLogo.png").getImage().getScaledInstance((int)(450*1.5), (int)(225*1.5), Image.SCALE_DEFAULT)));
+		Icon logoIcon=(new ImageIcon(new ImageIcon("Images/NotPokemonLogo.png").getImage().getScaledInstance((int)(450*1.75), (int)(225*1.75), Image.SCALE_DEFAULT)));
 		FadeLabel logoLabel=new FadeLabel(logoIcon,0.02f);
 		//225
 		//451
