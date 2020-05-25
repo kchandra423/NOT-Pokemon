@@ -97,6 +97,7 @@ public class HealthBar extends JLabel {
 	// change the pokemon the health bar is for
 	public void setPokemon(Pokemon pokemon) {
 		this.pokemon = pokemon;
+		xOffset = 0;
 		hpOnScreen = pokemon.getHealth();
 		changing = false;
 	}

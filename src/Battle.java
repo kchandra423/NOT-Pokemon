@@ -204,11 +204,11 @@ P2.setCurrentMon();
 		name2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		name2.setBackground(Color.LIGHT_GRAY);
 			bar1 = new HealthBar(P1.getCurrentMon());
-			bar1.setBackground(Color.LIGHT_GRAY);
+			// bar1.setBackground(Color.LIGHT_GRAY);
 			bar1.setXOffset(true);
 			bar1.setPreferredSize(new Dimension(200,15));
 			bar2 = new HealthBar(P2.getCurrentMon());
-			bar2.setBackground(Color.LIGHT_GRAY);
+			// bar2.setBackground(Color.LIGHT_GRAY);
 			bar2.setXOffset(false);
 			ImageIcon pic =
 //					new ImageIcon
@@ -390,10 +390,10 @@ P2.setCurrentMon();
 		name4.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		name4.setBackground(Color.LIGHT_GRAY);
 			bar3 = new HealthBar(P2.getCurrentMon());
-			bar3.setBackground(Color.LIGHT_GRAY);
+			// bar3.setBackground(Color.LIGHT_GRAY);
 			bar3.setXOffset(true);
 			bar4 = new HealthBar(P1.getCurrentMon());
-			bar4.setBackground(Color.LIGHT_GRAY);
+			// bar4.setBackground(Color.LIGHT_GRAY);
 			bar4.setXOffset(false);
 			ImageIcon pic2 = new ImageIcon("Images/Sprites/SpritesBack/" + P2.getCurrentMon().getID() + "-back.gif");
 			image3 = new JLabel(pic2);
@@ -1017,11 +1017,13 @@ b.confirm2=false;
 
 			if(bar1.getPokemon() != p1.getCurrentMon()) {//self explanatory
 				bar1.setPokemon(p1.getCurrentMon());
+				bar1.setXOffset(true);
 			}
 			bar1.repaint();
 
 			if(bar2.getPokemon() != p2.getCurrentMon()) {//self explanatory
 				bar2.setPokemon(p2.getCurrentMon());
+				bar2.setXOffset(false);
 			}
 			bar2.repaint();
 
@@ -1128,11 +1130,13 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 
 		if(bar3.getPokemon() != p2.getCurrentMon()) {
 			bar3.setPokemon(p2.getCurrentMon());//self explanatory
+			bar3.setXOffset(true);
 		}
 		bar3.repaint();
 
 		if(bar4.getPokemon() != p1.getCurrentMon()) {
 			bar4.setPokemon(p1.getCurrentMon());
+			bar4.setXOffset(false);
 		}//self explanatory
 		bar4.repaint();
 
