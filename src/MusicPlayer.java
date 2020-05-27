@@ -2,6 +2,7 @@
 /*
  * Author: Gilad Bitton
  * Revised: Kumar Chandra
+ * notes: plays .wav files
  */
 import java.io.File;
 //import java.util.LinkedList;

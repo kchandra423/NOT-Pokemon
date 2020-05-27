@@ -8,7 +8,7 @@
 //  Bugs:
 //    none
 //
-//import sun.rmi.transport.proxy.RMIMasterSocketFactory;
+
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -519,20 +519,9 @@ public class ReadFile {
 //Num, accuracy, power, category, desc, name, pp , priority, flags, chance, self, boosts, crit ratio, drain, heal,status,target, type, id
     //self= boosts target self
     // target= everything targets self
-//public String addBack(String s) {
-////    //takes a string of the showdown movesets txt file and returns a string with
-////    // each move neccesary stats seperated by # and each move seperated by a \n
-////    String masterString = "";
-////    String[] lines;
-////    lines = s.split("ENDLINE");
-////    String[] currentChunksLines = new String[10];
-////
-////    String currentLine = "";
-////
-////
-////    return masterString;
-////
-////}
+
+
+
     public String orderMoves(String s) {//orders a txt files move from first to last
         String masterString = "";
         String[] neu = new String[719];

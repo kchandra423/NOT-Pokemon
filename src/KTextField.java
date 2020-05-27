@@ -1,6 +1,7 @@
 /*
  * Author: Kumar Chandra
  * Revised: Kumar Chandra
+ * Notes: a Jtext field with two numbers to identify itself
  */
 import javax.swing.*;
 

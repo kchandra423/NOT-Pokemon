@@ -1,15 +1,14 @@
 //
 //  Author: Kumar Chandra
 //  Revised: Kumar Chandra
-//           5/10/20
+//           5/26/20
 //
 //  Notes:
 //       Holds all the GUI for the project and houses the main. Uses almost every other class to run a game of Pokemon.
 //
 //  Bugs:
-//      Lots Probably. Will be listed all be listed at the end of the project
-//
-//import org.omg.PortableInterceptor.INACTIVE;
+//      unknown
+
 
 import java.awt.event.*;
 import java.io.*;
@@ -56,14 +55,15 @@ public class Battle {
 	//the text areas for each player
 	private JTextArea leftText, rightText;
 
-	private Timer timer;
+	private Timer timer;//self explanatory
 	
 	private boolean confirm1 = false, confirm2 = false;// confirms whether each player has confirmed there team during the teamvbuilder phase
-	private static Player P1, P2;
+	private static Player P1, P2;//self explanatory
 	private static Object myObject1 = new Object(), myObject2 = new Object(), myObject3=new Object(), myObject4 =new Object();
+	//used for thread synchronization. TBH we probably could have just used 1
 	
-	private MusicPlayer musicPlayer;
-	private Calculator calc;
+	private MusicPlayer musicPlayer;//self explanatory
+	private Calculator calc;//self explanatory
 	
 	private int musicSelection=-1;
 	private int p1Selection = -1;
@@ -74,176 +74,127 @@ public class Battle {
 
 	public Battle() {
 
-		musicPlayer = new MusicPlayer();
-		calc = new Calculator(this);
+		musicPlayer = new MusicPlayer();//creating a music play
+		calc = new Calculator(this);//creating a calculator
 		
-        frame = new JFrame();
-        BufferedImage icon;
+        frame = new JFrame();//creating a JFrame
+        BufferedImage icon;//image for logo of the app icon thing. Doesnt seem to work
         try {
-			icon = ImageIO.read(new File("Images/Pokeball.png"));
-	        frame.setIconImage(icon);
+			icon = ImageIO.read(new File("Images/Pokeball.png"));//getting image
+	        frame.setIconImage(icon);//setting image
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 
+    	GridBagConstraints constrainstsForP1Panel = new GridBagConstraints();//the constraints for the grid bag layout
 
-//    	panel = new JPanel(new GridBagLayout());
-//    	display = new JPanel();
-//    	movePanel = new JPanel();
-//    	switchPanel = new JPanel();
-    	GridBagConstraints c = new GridBagConstraints();
-//		mainPanel=new JPanel();
-//		frame.add(mainPanel);
-//				frame.getContentPane().add(rightPanel);
+		frame.setBounds(100, 100, 2250, 850);//setting frame size
 
-//		frame.setBounds(100, 100, 2000, 750);
-		frame.setBounds(100, 100, 2250, 850);
+		frame.setVisible(true);//set visible
+		 frame.setResizable(false);//cant be resize
+		frame.setTitle("NOT Pokemon");//set title
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//program ends when you close the window
 
-		frame.setVisible(true);
-		 frame.setResizable(false);
-		frame.setTitle("NOT Pokemon");
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-		titleScreen();
+		titleScreen();//run the title screen
 
 		try{
 			synchronized(myObject4){
-				myObject4.wait();
+				myObject4.wait();//wait for the title screen to notify you  that its done
 			}}
 		catch (Exception e){
 			e.printStackTrace();
 		}
-		frame.getContentPane().removeAll();
-//		confirm1 =false;
-//		confirm2=false;
-		teamBuilder();
+		frame.getContentPane().removeAll();// remove everything in the Jframe
+
+		teamBuilder();//run the teambuilder
 
 
 		try{
 		synchronized(myObject1){
-			myObject1.wait();
+			myObject1.wait();//wait for the teambuikder to notify you that its done
 		}}
 		catch (Exception e){
 			e.printStackTrace();
 		}
-//		mainPanel.remove(leftPanelTB);
-//		mainPanel.remove(rightPanelTB);
-//		mainPanel.removeAll();
-//		musicPlayer.stop();
-//		int random=(int)(Math.random()*16);
-//		musicPlayer.play(MUSIC_OPTIONS[random]);
-		frame.getContentPane().removeAll();
-		mainPanel=new JPanel();
-			P1.setOpposingPlayer(P2);
+
+		frame.getContentPane().removeAll();//remove evertyhgin from the frame
+		mainPanel=new JPanel();//the main panel where everytihng is held
+			P1.setOpposingPlayer(P2);//set oppsoing players
 			P2.setOpposingPlayer(P1);
 
-			mainPanel.setLayout(new GridLayout(1, 2));
-		frame.add(mainPanel);
-			leftPanel = new JPanel(new GridBagLayout());
+			mainPanel.setLayout(new GridLayout(1, 2));//grid layout for main panel
+		frame.add(mainPanel);//adding to frame
+			leftPanel = new JPanel(new GridBagLayout());//using grid baglayout
 			rightPanel = new JPanel(new GridBagLayout());
 			int backgroundNumber;
 			do {
-				backgroundNumber = (int)(Math.random()*18)+1;
-			} while(backgroundNumber == 9 || backgroundNumber == 12);
+				backgroundNumber = (int)(Math.random()*18)+1;//choose which background to use
+			} while(backgroundNumber == 9 || backgroundNumber == 12);//you cant use backgrounds 9 and 12
 			BufferedImage background;
 			try {
 				background = ImageIO.read(new File("Images/Backgrounds/BattleBackground"
 						+ backgroundNumber + ".png"));
-				leftDisplayPanel = new BackgroundPanel(background);
+				leftDisplayPanel = new BackgroundPanel(background);//set the background to the display panels
 				rightDisplayPanel = new BackgroundPanel(background);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			leftPanel.add(leftDisplayPanel);
+			leftPanel.add(leftDisplayPanel);//adding display
 			rightPanel.add(rightDisplayPanel);
-			leftUI = new JPanel(new GridLayout(2, 1));
+			leftUI = new JPanel(new GridLayout(2, 1));//ui has a gird layout
 			rightUI = new JPanel(new GridLayout(2, 1));
-//		leftPanel.add(leftUI, BorderLayout.SOUTH);
-//		rightPanel.add(rightUI,BorderLayout.SOUTH);
-//		leftUI.add(attack);
-			leftMovePanel = new JPanel();
+
+			leftMovePanel = new JPanel();//where you select moves
 			rightMovePanel = new JPanel();
-			leftSwitchPanel = new JPanel();
+			leftSwitchPanel = new JPanel();//where you select switches
 			rightSwitchPanel = new JPanel();
-			leftUI.add(leftMovePanel);
-//		leftUI.add(switchOut);
+			leftUI.add(leftMovePanel);//add to UI
+
 			leftUI.add(leftSwitchPanel);
 			rightUI.add(rightMovePanel);
 			rightUI.add(rightSwitchPanel);
 			mainPanel.add(leftPanel);
 			mainPanel.add(rightPanel);
-//		p1PokemonButton.setVisible(true);
-//		p1PokemonButton.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				JOptionPane leftPokemonInfoPopup=new JOptionPane("P1 current Pokemon info");
-//				leftPokemonInfoPopup.showMessageDialog(leftDisplayPanel,
-//						p1.getCurrentMon().toString(),"Pokemon Info",
-//						2,
-//						new ImageIcon("Images/Sprites/SpritesFront/"+p1.getCurrentMon().getID()+".gif"));
-////			leftText.setText(leftText.getText()+p1.getCurrentMon().toString());
-//			}
-//		});
-//		p2PokemonButton.setVisible(true);
-//		p2PokemonButton.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				JOptionPane leftPokemonInfoPopup=new JOptionPane("P2 current Pokemon info");
-//				leftPokemonInfoPopup.showMessageDialog(
-//						rightDisplayPanel,
-//						p2.getCurrentMon().toString(),
-//						"Pokemon Info",
-//						2,
-//						new ImageIcon("Images/Sprites/SpritesFront/"+p2.getCurrentMon().getID()+".gif"));
-////				rightText.setText(rightText.getText()+p2.getCurrentMon().toString());
-//			}
-//		});
-P1.setCurrentMon();
+
+P1.setCurrentMon();//set current mon to something random, as theyll be cahnged later
 P2.setCurrentMon();
-			P1pokemon = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
-			P1pokemon.setOpaque(true);
+			P1pokemon = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);//label is now the name of the pokemon
+			P1pokemon.setOpaque(true);//you can see it
 			P1pokemon.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			P1pokemon.setBackground(Color.LIGHT_GRAY);
-//			System.out.println(P2.getCurrentMon().getName());
-			P1OpposingPokemon = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
+
+			P1OpposingPokemon = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);//label name is of the opposing pokmeon
 		P1OpposingPokemon = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
-		P1OpposingPokemon.setOpaque(true);
-		P1OpposingPokemon.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		P1OpposingPokemon.setBackground(Color.LIGHT_GRAY);
-			P1pokemonHealthBar = new HealthBar(P1.getCurrentMon());
-			// bar1.setBackground(Color.LIGHT_GRAY);
+		P1OpposingPokemon.setOpaque(true);//you can see it
+		P1OpposingPokemon.setBorder(BorderFactory.createLineBorder(Color.BLACK));//has border
+		P1OpposingPokemon.setBackground(Color.LIGHT_GRAY);//has background
+			P1pokemonHealthBar = new HealthBar(P1.getCurrentMon());//uses the current pokemon of player 1
+
 			P1pokemonHealthBar.setXOffset(true);
 			P1pokemonHealthBar.setPreferredSize(new Dimension(200,15));
 			P1opposingPokemonHealthBar = new HealthBar(P2.getCurrentMon());
-			// bar2.setBackground(Color.LIGHT_GRAY);
+
 			P1opposingPokemonHealthBar.setXOffset(false);
 			ImageIcon pic =
-//					new ImageIcon
-//					(new ImageIcon(
-//							"Images/Sprites/SpritesFront/" + p1.getCurrentMon().getID() + ".gif")
-//							.getImage().
-//									getScaledInstance(100, 500, Image.SCALE_DEFAULT));
-
 					new ImageIcon("Images/Sprites/SpritesBack/" + P1.getCurrentMon().getID() + "-back.gif");
-			//pic = new ImageIcon(pic.getImage().getScaledInstance((int) (pic.getIconWidth() * 4), (int) (pic.getIconHeight() * 4), Image.SCALE_DEFAULT));
+
 			P1pokemonImage = new JLabel(pic);
 			P1pokemonImage.addMouseListener(new MouseAdapter() {
 				@Override
-				public void mouseClicked(MouseEvent e) {
-					if (SwingUtilities.isRightMouseButton(e)) {
-						JOptionPane leftPokemonInfoPopup = new JOptionPane("P1 current Pokemon info");
+				public void mouseClicked(MouseEvent e) {//add a mouse listener
+					if (SwingUtilities.isRightMouseButton(e)) {//checks if its a right clickk
+						JOptionPane leftPokemonInfoPopup = new JOptionPane("P1 current Pokemon info");//pops up stuff if so
 
 						leftPokemonInfoPopup.setBackground(Color.DARK_GRAY);
 						leftPokemonInfoPopup.showMessageDialog(leftDisplayPanel,
 								P1.getCurrentMon().toString(), "Player 1 Pokemon Info",
 								2,
-//								(new ImageIcon (new ImageIcon("Images/Sprites/SpritesFront/" + p1.getCurrentMon().getID() + ".gif").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
 								new ImageIcon("Images/Sprites/SpritesFront/" + P1.getCurrentMon().getID() + ".gif"));
 					}
 				}
 			});
-//			leftP1Image.setIcon(pic);
-			pic = new ImageIcon("Images/Sprites/SpritesFront/" + P2.getCurrentMon().getID() + ".gif");
+
+			pic = new ImageIcon("Images/Sprites/SpritesFront/" + P2.getCurrentMon().getID() + ".gif");//same as above
 			P1opposingPokemonImage = new JLabel(pic);
 			P1opposingPokemonImage.addMouseListener(new MouseAdapter() {
 				@Override
@@ -256,136 +207,154 @@ P2.setCurrentMon();
 								"Player 2 Pokemon Info",
 								2,
 								new ImageIcon("Images/Sprites/SpritesFront/" + P2.getCurrentMon().getID() + ".gif"));
-//				rightText.setText(rightText.getText()+p2.getCurrentMon().toString());
 					}
 				}
 			});
-			leftDisplayPanel.setLayout(new GridBagLayout());
-			GridBagConstraints c2 = new GridBagConstraints();
-			c2.gridx = 0;
-			c2.gridy = 3;
-			c2.fill = GridBagConstraints.HORIZONTAL;
-			c2.insets = new Insets(5, 5, 5, 5);
-			c2.anchor = GridBagConstraints.LAST_LINE_START;
-			c2.weightx = 0.5;
-			c2.weighty = 0.5;
-			leftDisplayPanel.add(P1pokemon, c2);
-			c2.gridy = 4;
-			leftDisplayPanel.add(P1pokemonHealthBar, c2);
-			c2.gridy = 5;
-			leftDisplayPanel.add(P1pokemonImage, c2);
-			c2.gridx = 1;
-			c2.gridy = 0;
-			c2.insets = new Insets(5, 105, 5, 5);
-			c2.anchor = GridBagConstraints.FIRST_LINE_END;
-			leftDisplayPanel.add(P1OpposingPokemon, c2);
-			c2.gridy = 1;
-			leftDisplayPanel.add(P1opposingPokemonHealthBar, c2);
-			c2.gridy = 2;
-			leftDisplayPanel.add(P1opposingPokemonImage, c2);
+			leftDisplayPanel.setLayout(new GridBagLayout());//uses grid bag
+
+		/*if you dont know how to use grid bag please go to the API so you understand what is going.
+		this will not all be commented because there is just too much stuff. Basically, the tldr version is that
+		a grid bag layout is like a grid layout buts easier to set the position and size of specific componenets
+
+		 */
+		GridBagConstraints constraintsForP1Display = new GridBagConstraints();
+			constraintsForP1Display.gridx = 0;
+			constraintsForP1Display.gridy = 3;
+			constraintsForP1Display.fill = GridBagConstraints.HORIZONTAL;
+			constraintsForP1Display.insets = new Insets(5, 5, 5, 5);
+			constraintsForP1Display.anchor = GridBagConstraints.LAST_LINE_START;
+			constraintsForP1Display.weightx = 0.5;
+			constraintsForP1Display.weighty = 0.5;
+
+			leftDisplayPanel.add(P1pokemon, constraintsForP1Display);
+			constraintsForP1Display.gridy = 4;
+
+			leftDisplayPanel.add(P1pokemonHealthBar, constraintsForP1Display);
+			constraintsForP1Display.gridy = 5;
+
+			leftDisplayPanel.add(P1pokemonImage, constraintsForP1Display);
+			constraintsForP1Display.gridx = 1;
+			constraintsForP1Display.gridy = 0;
+			constraintsForP1Display.insets = new Insets(5, 105, 5, 5);
+			constraintsForP1Display.anchor = GridBagConstraints.FIRST_LINE_END;
+
+			leftDisplayPanel.add(P1OpposingPokemon, constraintsForP1Display);
+			constraintsForP1Display.gridy = 1;
+
+			leftDisplayPanel.add(P1opposingPokemonHealthBar, constraintsForP1Display);
+			constraintsForP1Display.gridy = 2;
+
+			leftDisplayPanel.add(P1opposingPokemonImage, constraintsForP1Display);
 			leftDisplayPanel.setBackground(Color.LIGHT_GRAY);
-			c.gridx = 0;
-			c.gridy = 0;
-			c.gridwidth = 4;
-			c.gridheight = 3;
-			c.weightx = 0.0;
-			c.weighty = 0.0;
-			c.anchor = GridBagConstraints.FIRST_LINE_START;
-			c.fill = GridBagConstraints.HORIZONTAL;
-			c.insets = new Insets(5, 5, 5, 0);
-			leftPanel.add(leftDisplayPanel, c);
-//
+
+			constrainstsForP1Panel.gridx = 0;
+			constrainstsForP1Panel.gridy = 0;
+			constrainstsForP1Panel.gridwidth = 4;
+			constrainstsForP1Panel.gridheight = 3;
+			constrainstsForP1Panel.weightx = 0.0;
+			constrainstsForP1Panel.weighty = 0.0;
+			constrainstsForP1Panel.anchor = GridBagConstraints.FIRST_LINE_START;
+			constrainstsForP1Panel.fill = GridBagConstraints.HORIZONTAL;
+			constrainstsForP1Panel.insets = new Insets(5, 5, 5, 0);
+			leftPanel.add(leftDisplayPanel, constrainstsForP1Panel);
+
 			attack = new JLabel("Attack");
-			c.gridx = 0;
-			c.gridy = 3;
-			c.gridwidth = 4;
-			c.gridheight = 1;
-			c.weightx = 0.5;
-			c.weighty = 0.0;
-			c.anchor = GridBagConstraints.FIRST_LINE_START;
-			c.fill = GridBagConstraints.HORIZONTAL;
-			c.insets = new Insets(0, 10, 0, 0);
-			leftPanel.add(attack, c);
-			GridLayout layout2 = new GridLayout(2, 2);
-			leftMovePanel.setLayout(layout2);
+			constrainstsForP1Panel.gridx = 0;
+			constrainstsForP1Panel.gridy = 3;
+			constrainstsForP1Panel.gridwidth = 4;
+			constrainstsForP1Panel.gridheight = 1;
+			constrainstsForP1Panel.weightx = 0.5;
+			constrainstsForP1Panel.weighty = 0.0;
+			constrainstsForP1Panel.anchor = GridBagConstraints.FIRST_LINE_START;
+			constrainstsForP1Panel.fill = GridBagConstraints.HORIZONTAL;
+			constrainstsForP1Panel.insets = new Insets(0, 10, 0, 0);
+
+			leftPanel.add(attack, constrainstsForP1Panel);
+
+			GridLayout P1MovePanelLayout = new GridLayout(2, 2);
+			leftMovePanel.setLayout(P1MovePanelLayout);
 			leftMoveButtons = new Button[4];
-			for (int i = 0; i < leftMoveButtons.length; i++) {
+
+			for (int i = 0; i < leftMoveButtons.length; i++) {//adding the buttons to the left move panels
 				leftMoveButtons[i] = new Button(P1.getCurrentMon().getMoves()[i].getName(), i);
 				leftMoveButtons[i].setPreferredSize(new Dimension(100,45));
-//    		leftMoveButtons[i].addActionListener(new ActionListener() {
-//                @Override
-//                public void actionPerformed(ActionEvent e) {
-//
-//                }
-//            });
+
 				leftMovePanel.add(leftMoveButtons[i]);
 			}
-			c.gridx = 0;
-			c.gridy = 4;
-			c.gridwidth = 4;
-			c.gridheight = 1;
-			c.weightx = 0.5;
-			c.weighty = 0.0;
-			c.anchor = GridBagConstraints.FIRST_LINE_START;
-			c.fill = GridBagConstraints.HORIZONTAL;
-			c.insets = new Insets(0, 0, 0, 0);
-			leftPanel.add(leftMovePanel, c);
+
+			constrainstsForP1Panel.gridx = 0;
+			constrainstsForP1Panel.gridy = 4;
+			constrainstsForP1Panel.gridwidth = 4;
+			constrainstsForP1Panel.gridheight = 1;
+			constrainstsForP1Panel.weightx = 0.5;
+			constrainstsForP1Panel.weighty = 0.0;
+			constrainstsForP1Panel.anchor = GridBagConstraints.FIRST_LINE_START;
+			constrainstsForP1Panel.fill = GridBagConstraints.HORIZONTAL;
+			constrainstsForP1Panel.insets = new Insets(0, 0, 0, 0);
+			leftPanel.add(leftMovePanel, constrainstsForP1Panel);
+
 			switchOut = new JLabel("Switch");
-			c.gridx = 0;
-			c.gridy = 5;
-			c.gridwidth = 4;
-			c.gridheight = 1;
-			c.weightx = 0.5;
-			c.weighty = 0.0;
-			c.anchor = GridBagConstraints.FIRST_LINE_START;
-			c.fill = GridBagConstraints.HORIZONTAL;
-			c.insets = new Insets(0, 10, 0, 0);
-			leftPanel.add(switchOut, c);
-			layout2 = new GridLayout(3, 2);
-			leftSwitchPanel.setLayout(layout2);
+			constrainstsForP1Panel.gridx = 0;
+			constrainstsForP1Panel.gridy = 5;
+			constrainstsForP1Panel.gridwidth = 4;
+			constrainstsForP1Panel.gridheight = 1;
+			constrainstsForP1Panel.weightx = 0.5;
+			constrainstsForP1Panel.weighty = 0.0;
+			constrainstsForP1Panel.anchor = GridBagConstraints.FIRST_LINE_START;
+			constrainstsForP1Panel.fill = GridBagConstraints.HORIZONTAL;
+			constrainstsForP1Panel.insets = new Insets(0, 10, 0, 0);
+
+			leftPanel.add(switchOut, constrainstsForP1Panel);
+			P1MovePanelLayout = new GridLayout(3, 2);
+
+			leftSwitchPanel.setLayout(P1MovePanelLayout);
+
 			leftSwitchButtons = new Button[6];
-			for (int i = 0; i < leftSwitchButtons.length; i++) {
+
+			for (int i = 0; i < leftSwitchButtons.length; i++) {//adding switch buttons to panel
 				leftSwitchButtons[i] = new Button(P1.getPokemon()[i].getName(), i + 4);
-//    		switches[mon].addActionListener(new ActionListener() {
-//                @Override
-//                public void actionPerformed(ActionEvent e) {
-//
-//                }
-//            });
 				leftSwitchPanel.add(leftSwitchButtons[i]);
 			}
-			c.gridx = 0;
-			c.gridy = 6;
-			c.gridwidth = 1;
-			c.gridheight = 1;
-			c.weightx = 0.5;
-			c.weighty = 0.0;
-			c.anchor = GridBagConstraints.FIRST_LINE_START;
-			c.fill = GridBagConstraints.HORIZONTAL;
-			c.insets = new Insets(0, 0, 0, 0);
-			leftPanel.add(leftSwitchPanel, c);
+
+			constrainstsForP1Panel.gridx = 0;
+			constrainstsForP1Panel.gridy = 6;
+			constrainstsForP1Panel.gridwidth = 1;
+			constrainstsForP1Panel.gridheight = 1;
+			constrainstsForP1Panel.weightx = 0.5;
+			constrainstsForP1Panel.weighty = 0.0;
+			constrainstsForP1Panel.anchor = GridBagConstraints.FIRST_LINE_START;
+			constrainstsForP1Panel.fill = GridBagConstraints.HORIZONTAL;
+			constrainstsForP1Panel.insets = new Insets(0, 0, 0, 0);
+
+			leftPanel.add(leftSwitchPanel, constrainstsForP1Panel);
 			leftText = new JTextArea(20, 20);
-			leftText.setEditable(false);
+			leftText.setEditable(false);//cant edit
 			leftText.setLineWrap(true);
 			leftText.setWrapStyleWord(true);
-//			leftText.setPreferredSize(new Dimension(50,600));
-			((DefaultCaret)leftText.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+
+			((DefaultCaret)leftText.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);//always updates text
 			JScrollPane pane = new JScrollPane(leftText,
 					ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 					ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			c.gridx = 4;
-			c.gridy = 0;
-			c.gridwidth = 3;
-			c.gridheight = 7;
-			c.weightx = 0.5;
-			c.weighty = 0.5;
-			c.anchor = GridBagConstraints.FIRST_LINE_END;
-			c.fill = GridBagConstraints.BOTH;
-			c.insets = new Insets(5, 5, 5, 5);
-			leftPanel.add(pane, c);
 
 
-			GridBagConstraints y = new GridBagConstraints();
+			constrainstsForP1Panel.gridx = 4;
+			constrainstsForP1Panel.gridy = 0;
+			constrainstsForP1Panel.gridwidth = 3;
+			constrainstsForP1Panel.gridheight = 7;
+			constrainstsForP1Panel.weightx = 0.5;
+			constrainstsForP1Panel.weighty = 0.5;
+			constrainstsForP1Panel.anchor = GridBagConstraints.FIRST_LINE_END;
+			constrainstsForP1Panel.fill = GridBagConstraints.BOTH;
+			constrainstsForP1Panel.insets = new Insets(5, 5, 5, 5);
+			leftPanel.add(pane, constrainstsForP1Panel);// pane to left panel
+
+
+
+			/*
+			These are the the same as the left side, except for the right side which is p2. NO comments, if you have a question, look at the other side
+			 */
+			GridBagConstraints constraintsForP2Panel = new GridBagConstraints();
 			P2pokemon = new JLabel(P2.getCurrentMon().getName(), SwingConstants.CENTER);
 		P2pokemon = new JLabel(P1.getCurrentMon().getName(), SwingConstants.CENTER);
 		P2pokemon.setOpaque(true);
@@ -397,10 +366,10 @@ P2.setCurrentMon();
 		P2OpposingPokemon.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		P2OpposingPokemon.setBackground(Color.LIGHT_GRAY);
 			P2pokemonHealthBar = new HealthBar(P2.getCurrentMon());
-			// bar3.setBackground(Color.LIGHT_GRAY);
+
 			P2pokemonHealthBar.setXOffset(true);
 			P2opposingPokemonHealthBar = new HealthBar(P1.getCurrentMon());
-			// bar4.setBackground(Color.LIGHT_GRAY);
+
 			P2opposingPokemonHealthBar.setXOffset(false);
 			ImageIcon pic2 = new ImageIcon("Images/Sprites/SpritesBack/" + P2.getCurrentMon().getID() + "-back.gif");
 			P2pokemonImage = new JLabel(pic2);
@@ -431,133 +400,124 @@ P2.setCurrentMon();
 				}
 			});
 			rightDisplayPanel.setLayout(new GridBagLayout());
-			GridBagConstraints y2 = new GridBagConstraints();
-			y2.gridx = 0;
-			y2.gridy = 3;
-			y2.fill = GridBagConstraints.HORIZONTAL;
-			y2.insets = new Insets(5, 5, 5, 5);
-			y2.anchor = GridBagConstraints.LAST_LINE_START;
-			y2.weightx = 0.5;
-			y2.weighty = 0.5;
-			rightDisplayPanel.add(P2pokemon, y2);
-			y2.gridy = 4;
-			rightDisplayPanel.add(P2pokemonHealthBar, y2);
-			y2.gridy = 5;
-			rightDisplayPanel.add(P2pokemonImage, y2);
-			y2.gridx = 1;
-			y2.gridy = 0;
-			y2.insets = new Insets(5, 105, 5, 5);
-			y2.anchor = GridBagConstraints.FIRST_LINE_END;
-			rightDisplayPanel.add(P2OpposingPokemon, y2);
-			y2.gridy = 1;
-			rightDisplayPanel.add(P2opposingPokemonHealthBar, y2);
-			y2.gridy = 2;
-			rightDisplayPanel.add(P2opposingPokemonImage, y2);
+			GridBagConstraints rightDisplayConstraints = new GridBagConstraints();
+			rightDisplayConstraints.gridx = 0;
+			rightDisplayConstraints.gridy = 3;
+			rightDisplayConstraints.fill = GridBagConstraints.HORIZONTAL;
+			rightDisplayConstraints.insets = new Insets(5, 5, 5, 5);
+			rightDisplayConstraints.anchor = GridBagConstraints.LAST_LINE_START;
+			rightDisplayConstraints.weightx = 0.5;
+			rightDisplayConstraints.weighty = 0.5;
+			rightDisplayPanel.add(P2pokemon, rightDisplayConstraints);
+			rightDisplayConstraints.gridy = 4;
+			rightDisplayPanel.add(P2pokemonHealthBar, rightDisplayConstraints);
+			rightDisplayConstraints.gridy = 5;
+			rightDisplayPanel.add(P2pokemonImage, rightDisplayConstraints);
+			rightDisplayConstraints.gridx = 1;
+			rightDisplayConstraints.gridy = 0;
+			rightDisplayConstraints.insets = new Insets(5, 105, 5, 5);
+			rightDisplayConstraints.anchor = GridBagConstraints.FIRST_LINE_END;
+			rightDisplayPanel.add(P2OpposingPokemon, rightDisplayConstraints);
+			rightDisplayConstraints.gridy = 1;
+			rightDisplayPanel.add(P2opposingPokemonHealthBar, rightDisplayConstraints);
+			rightDisplayConstraints.gridy = 2;
+			rightDisplayPanel.add(P2opposingPokemonImage, rightDisplayConstraints);
 			rightDisplayPanel.setBackground(Color.LIGHT_GRAY);
-			y.gridx = 0;
-			y.gridy = 0;
-			y.gridwidth = 4;
-			y.gridheight = 3;
-			y.weightx = 0.0;
-			y.weighty = 0.0;
-			y.anchor = GridBagConstraints.FIRST_LINE_START;
-			y.fill = GridBagConstraints.HORIZONTAL;
-			y.insets = new Insets(5, 5, 5, 0);
-			rightPanel.add(rightDisplayPanel, y);
+			constraintsForP2Panel.gridx = 0;
+			constraintsForP2Panel.gridy = 0;
+			constraintsForP2Panel.gridwidth = 4;
+			constraintsForP2Panel.gridheight = 3;
+			constraintsForP2Panel.weightx = 0.0;
+			constraintsForP2Panel.weighty = 0.0;
+			constraintsForP2Panel.anchor = GridBagConstraints.FIRST_LINE_START;
+			constraintsForP2Panel.fill = GridBagConstraints.HORIZONTAL;
+			constraintsForP2Panel.insets = new Insets(5, 5, 5, 0);
+			rightPanel.add(rightDisplayPanel, constraintsForP2Panel);
 
 
 			attack = new JLabel("Attack");
-			y.gridx = 0;
-			y.gridy = 3;
-			y.gridwidth = 4;
-			y.gridheight = 1;
-			y.weightx = 0.5;
-			y.weighty = 0.0;
-			y.anchor = GridBagConstraints.FIRST_LINE_START;
-			y.fill = GridBagConstraints.HORIZONTAL;
-			y.insets = new Insets(0, 10, 0, 0);
-			rightPanel.add(attack, y);
+			constraintsForP2Panel.gridx = 0;
+			constraintsForP2Panel.gridy = 3;
+			constraintsForP2Panel.gridwidth = 4;
+			constraintsForP2Panel.gridheight = 1;
+			constraintsForP2Panel.weightx = 0.5;
+			constraintsForP2Panel.weighty = 0.0;
+			constraintsForP2Panel.anchor = GridBagConstraints.FIRST_LINE_START;
+			constraintsForP2Panel.fill = GridBagConstraints.HORIZONTAL;
+			constraintsForP2Panel.insets = new Insets(0, 10, 0, 0);
+			rightPanel.add(attack, constraintsForP2Panel);
 			GridLayout layout3 = new GridLayout(2, 2);
 			rightMovePanel.setLayout(layout3);
 			rightMoveButtons = new Button[4];
 			for (int i = 0; i < rightMoveButtons.length; i++) {
 				rightMoveButtons[i] = new Button(P2.getCurrentMon().getMoves()[i].getName(), i);
 				rightMoveButtons[i].setPreferredSize(new Dimension(100,45));
-//    		rightMoveButtons[i].addActionListener(new ActionListener() {
-//                @Override
-//                public void actionPerformed(ActionEvent e) {
-//
-//                }
-//            });
+
 				rightMovePanel.add(rightMoveButtons[i]);
 			}
-			y.gridx = 0;
-			y.gridy = 4;
-			y.gridwidth = 4;
-			y.gridheight = 1;
-			y.weightx = 0.5;
-			y.weighty = 0.0;
-			y.anchor = GridBagConstraints.FIRST_LINE_START;
-			y.fill = GridBagConstraints.HORIZONTAL;
-			y.insets = new Insets(0, 0, 0, 0);
-			rightPanel.add(rightMovePanel, y);
+			constraintsForP2Panel.gridx = 0;
+			constraintsForP2Panel.gridy = 4;
+			constraintsForP2Panel.gridwidth = 4;
+			constraintsForP2Panel.gridheight = 1;
+			constraintsForP2Panel.weightx = 0.5;
+			constraintsForP2Panel.weighty = 0.0;
+			constraintsForP2Panel.anchor = GridBagConstraints.FIRST_LINE_START;
+			constraintsForP2Panel.fill = GridBagConstraints.HORIZONTAL;
+			constraintsForP2Panel.insets = new Insets(0, 0, 0, 0);
+			rightPanel.add(rightMovePanel, constraintsForP2Panel);
 			switchOut = new JLabel("Switch");
-			y.gridx = 0;
-			y.gridy = 5;
-			y.gridwidth = 4;
-			y.gridheight = 1;
-			y.weightx = 0.5;
-			y.weighty = 0.0;
-			y.anchor = GridBagConstraints.FIRST_LINE_START;
-			y.fill = GridBagConstraints.HORIZONTAL;
-			y.insets = new Insets(0, 10, 0, 0);
-			rightPanel.add(switchOut, y);
+			constraintsForP2Panel.gridx = 0;
+			constraintsForP2Panel.gridy = 5;
+			constraintsForP2Panel.gridwidth = 4;
+			constraintsForP2Panel.gridheight = 1;
+			constraintsForP2Panel.weightx = 0.5;
+			constraintsForP2Panel.weighty = 0.0;
+			constraintsForP2Panel.anchor = GridBagConstraints.FIRST_LINE_START;
+			constraintsForP2Panel.fill = GridBagConstraints.HORIZONTAL;
+			constraintsForP2Panel.insets = new Insets(0, 10, 0, 0);
+			rightPanel.add(switchOut, constraintsForP2Panel);
 			layout3 = new GridLayout(3, 2);
 			rightSwitchPanel.setLayout(layout3);
 			rightSwitchButtons = new Button[6];
 			for (int i = 0; i < rightSwitchButtons.length; i++) {
 				rightSwitchButtons[i] = new Button(P2.getPokemon()[i].getName(), i + 4);
-//    		switches[mon].addActionListener(new ActionListener() {
-//                @Override
-//                public void actionPerformed(ActionEvent e) {
-//
-//                }
-//            });
+
 				rightSwitchPanel.add(rightSwitchButtons[i]);
 			}
-			y.gridx = 0;
-			y.gridy = 6;
-			y.gridwidth = 1;
-			y.gridheight = 1;
-			y.weightx = 0.5;
-			y.weighty = 0.0;
-			y.anchor = GridBagConstraints.FIRST_LINE_START;
-			y.fill = GridBagConstraints.HORIZONTAL;
-			y.insets = new Insets(0, 0, 0, 0);
-			rightPanel.add(rightSwitchPanel, y);
+			constraintsForP2Panel.gridx = 0;
+			constraintsForP2Panel.gridy = 6;
+			constraintsForP2Panel.gridwidth = 1;
+			constraintsForP2Panel.gridheight = 1;
+			constraintsForP2Panel.weightx = 0.5;
+			constraintsForP2Panel.weighty = 0.0;
+			constraintsForP2Panel.anchor = GridBagConstraints.FIRST_LINE_START;
+			constraintsForP2Panel.fill = GridBagConstraints.HORIZONTAL;
+			constraintsForP2Panel.insets = new Insets(0, 0, 0, 0);
+			rightPanel.add(rightSwitchPanel, constraintsForP2Panel);
 			rightText = new JTextArea(20, 20);
 			rightText.setEditable(false);
 			rightText.setLineWrap(true);
 			rightText.setWrapStyleWord(true);
-//			rightText.setPreferredSize(new Dimension(50,600));
+
 			((DefaultCaret)rightText.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 			JScrollPane pane2 = new JScrollPane(rightText,
 					ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 					ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			y.gridx = 4;
-			y.gridy = 0;
-			y.gridwidth = 3;
-			y.gridheight = 7;
-			y.weightx = 0.5;
-			y.weighty = 0.5;
-			y.anchor = GridBagConstraints.FIRST_LINE_END;
-			y.fill = GridBagConstraints.BOTH;
-			y.insets = new Insets(5, 5, 5, 5);
-			rightPanel.add(pane2, y);
+			constraintsForP2Panel.gridx = 4;
+			constraintsForP2Panel.gridy = 0;
+			constraintsForP2Panel.gridwidth = 3;
+			constraintsForP2Panel.gridheight = 7;
+			constraintsForP2Panel.weightx = 0.5;
+			constraintsForP2Panel.weighty = 0.5;
+			constraintsForP2Panel.anchor = GridBagConstraints.FIRST_LINE_END;
+			constraintsForP2Panel.fill = GridBagConstraints.BOTH;
+			constraintsForP2Panel.insets = new Insets(5, 5, 5, 5);
+			rightPanel.add(pane2, constraintsForP2Panel);
 		Font pokemonPlaceHolder=new Font("Arial", Font.PLAIN, 40);
 		try {
 
-				pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("Fonts/PokemonGB.ttf"));
+				pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("Fonts/PokemonGB.ttf"));//set fonts
+
 
 
 
@@ -566,7 +526,7 @@ P2.setCurrentMon();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Font pokemonGB=pokemonPlaceHolder.deriveFont((float) 15);
+		Font pokemonGB=pokemonPlaceHolder.deriveFont((float) 15);//change font size
 		leftText.setFont(pokemonGB);
 		rightText.setFont(pokemonGB);
 			leftPanel.updateUI();
@@ -574,10 +534,11 @@ P2.setCurrentMon();
 			repaint(P1, P2);
 
     }
-//the main, where everything happens
+
+    //the main, where everything happens
     public static void main (String[] args) {
 
-boolean dangerZoneActivated=false;
+boolean dangerZoneActivated=false;//if you have 1 pokemon remaining, different music plays
 		Battle b = new Battle();// calls the constructor, which sets up the gui
 		Player p1 = b.P1;// doesn't use the global variables because this was created before we had GUI
 		Player p2 = b.P2;
@@ -784,13 +745,7 @@ b.confirm2=false;
 //same thing as p1
 
 
-//			try {
-//			synchronized (myObject3) {
-//				myObject3.wait();//waits until it is notified by a button
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+
 		if (b.p2Selection >=4 && P2numberOfFaintedMons < 5) {
 			p2WillSwitch = true;
 			p2SwitchIn = b.p2Selection - 4;
@@ -926,7 +881,6 @@ b.confirm2=false;
 		}
 		if (p2.isDefeated()) {//self explanatory
 			gameNotOver = false;
-//				popup.showMessageDialog(b.mainPanel,"Player 1 Won the game!");
 			popup.showMessageDialog(b.mainPanel,
 					"Player 1 Won the game!",
 					"Game Finished",
@@ -1018,6 +972,7 @@ b.confirm2=false;
         }
 
     }
+    //repaints the screen with updates info
     private void repaint(Player p1, Player p2) {
 
 		P1pokemon.setText(p1.getCurrentMon().getName());//self explanatory
@@ -1058,6 +1013,7 @@ b.confirm2=false;
 				else {
 					leftMoveButtons[i].setEnabled(true);
 				}
+				//foreground is the text, background is behind the button
 				double howEffective=calc.typeModifier(
 						calc.getIntFromType(p1.getCurrentMon().getMoves()[i].getType()),
 						calc.getIntFromType(p2.getCurrentMon().getType1()),
@@ -1151,12 +1107,10 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 
 		pic = null;
 
-//		pic = ;
 		P2pokemonImage.setIcon(new ImageIcon("Images/Sprites/SpritesBack/" + p2.getCurrentMon().getID() + "-back.gif"));
 
 
 
-//		pic = ;
 		P2opposingPokemonImage.setIcon(new ImageIcon("Images/Sprites/SpritesFront/" + p1.getCurrentMon().getID() + ".gif"));
 
 
@@ -1245,7 +1199,8 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 		animateHPChange();
 	}
 
-    private void animateHPChange() {
+    //used for animating the hp change of a pokemon using its health bar
+	private void animateHPChange() {
     	timer = new Timer(healthBarDecreationRate, new ActionListener() {
     		@Override
     		public void actionPerformed(ActionEvent e) {
@@ -1509,6 +1464,8 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 		leftPresetTeam1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//manually coded preset team
+				//each presetTeamButton is the same except the pokemon are different
 				leftPokemonInputs[0].setText("Landorus-therian");
 				leftMoveInputs[0][0].setText("Earthquake");
 				leftMoveInputs[0][1].setText("Stone Edge");
@@ -2093,19 +2050,22 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 // set the pokemon chosen to the fields
 		P2=new Player(this, calc, p2Pokemon);
 	}
+
+
+	//the titlescreen is where you select your music and settings
 	private void titleScreen(){
 		int random=(int)(Math.random()*6);
-		musicPlayer.play("Music/" + TITLE_SCREENS[random] + ".wav");
+		musicPlayer.play("Music/" + TITLE_SCREENS[random] + ".wav");//play random titlescreen music
+		//the titlescreen image is 450 by 225
 		Icon logoIcon=(new ImageIcon(new ImageIcon("Images/NotPokemonLogo.png").getImage().getScaledInstance((int)(450*1.75), (int)(225*1.75), Image.SCALE_DEFAULT)));
 		FadeLabel logoLabel=new FadeLabel(logoIcon,0.02f);
-		//225
-		//451
+
+
 		JPanel mainPanelTitleScreen =new JPanel(new GridLayout(2,1));
 		JPanel logo= new JPanel();
 		mainPanelTitleScreen.add(logo);
 		JPanel UI=new JPanel(new BorderLayout());
 		mainPanelTitleScreen.add(UI);
-//		GridBagConstraints constraints=new GridBagConstraints();
 		JPanel music=new JPanel(new BorderLayout()),settings=new JPanel(new BorderLayout()),play =new JPanel( new BorderLayout());
 		JButton musicButton =new JButton("Music");
 		JButton settingsButton=new JButton("Settings");
@@ -2125,24 +2085,13 @@ int switchPanelHeight=frame.getHeight()-leftMovePanel.getHeight()-leftDisplayPan
 		settings.setBackground(Color.WHITE);
 		music.setOpaque(true);
 		music.setBackground(Color.WHITE);
-//		System.out.println(logoIcon.getIconHeight());
-//		System.out.println(logoIcon.getIconWidth());
-//		logoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-//		logo.setPreferredSize(new Dimension(500,100));
-//		UI.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-//		logo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-//		music.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-//		settings.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-//		play.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
 musicButton.setPreferredSize(new Dimension(500,100));
 Font pokemonPlaceHolder=new Font("Arial", Font.PLAIN, 40);
 try {
-//	if(Math.random()<0.25){
-//	pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("Fonts/PokemonHollow.ttf"));
-//	}
-//	else{
-		pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("Fonts/PokemonSolid.ttf"));
-//	}
+
+		pokemonPlaceHolder=Font.createFont(Font.TRUETYPE_FONT,new File("Fonts/PokemonSolid.ttf"));//setting fonts
+
 
 		} catch (FontFormatException e) {
 			e.printStackTrace();
@@ -2170,7 +2119,7 @@ try {
 			public void actionPerformed(ActionEvent e) {
 				synchronized (myObject4){
 
-					myObject4.notify();
+					myObject4.notify();//notify that everything is done
 
 				}
 			}
@@ -2256,6 +2205,7 @@ try {
 		});
 
 	}
+	//prints everything to the text area one character a time depending on text speed
 	public void log(String s)  {
 
 		Object myOject0=new Object();
@@ -2266,7 +2216,7 @@ if(textSpeed==0){
 	for (int i = 0; i < s.length(); i++) {
 		leftText.setText(leftText.getText() + "" + s.charAt(i));
 		rightText.setText(rightText.getText() + "" + s.charAt(i));
-//			myOject0.wait(20);
+
 		if (textSpeed != 1) {
 			synchronized (myOject0) {
 				try {
@@ -2276,7 +2226,7 @@ if(textSpeed==0){
 				}
 			}
 		}
-//		}
+
 	}
 }
 		leftText.setText(leftText.getText() + "\n") ;

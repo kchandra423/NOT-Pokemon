@@ -41,9 +41,7 @@ public class Calculator {
 	double typingArray[][] = { normal, fighting, flying, poison, ground, rock, bug, ghost, steel, fire, water, grass,
 			electric, psychic, ice, dragon, dark, fairy };
 
-//Nathaniel Thomas wrote the info for the arrays, and i just used it because thers no point in writing an
-// entire aray of things for this besides to waste my time.
-// I literally would have learned nothing if i filled all that out manually, which he had already did
+//all the damage multipleir of each type against one another
 
 	// constructor to get the battle class to use the log command
 	public Calculator(Battle battle) {

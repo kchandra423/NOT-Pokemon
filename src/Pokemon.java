@@ -47,7 +47,6 @@ public class Pokemon {
 		int moveNumber = -1;
 		String copy = "something went wrong; ";
 		try {
-//			copy = Files.readString(Paths.get("Text/Stats.txt"));
 			byte[] file = Files.readAllBytes(Paths.get("Text/Stats.txt"));//he turns the stats.txt file into a string
 			// (funniest thing ive ever seen)
 			copy = new String(file);

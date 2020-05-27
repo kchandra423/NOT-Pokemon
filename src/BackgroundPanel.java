@@ -12,11 +12,12 @@ public class BackgroundPanel extends JPanel {
 	
 	public BackgroundPanel(Image background) {
 		super();
-		this.background = background.getScaledInstance(800, 600, Image.SCALE_DEFAULT);
+		this.background = background.getScaledInstance(800, 600, Image.SCALE_DEFAULT);//
+		// sets background to the chosen image
 	}
 	
 	@Override
-	protected void paintComponent(Graphics g) {
+	protected void paintComponent(Graphics g) {//paint component override
 		super.paintComponent(g);
 		g.drawImage(background, 0, 0, null);
 	}
