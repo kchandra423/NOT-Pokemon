@@ -1,258 +1,673 @@
-public class Pokemon {
-
-
-    private int dex;
-    private String name;
-    private int health;
-    private int specialDefense;
-    private int defense;
-    private int attack;
-    private int specialAttack;
-    private int speed;
-    private Move[] moves;
-    private String type1;
-    private String type2;
-    private String status;
-    private boolean hasStatus;
-    private int attackModifier;
-    private int specialAttackModifier;
-    private int defenseModifier;
-    private int specialDefenseModifier;
-    private int speedModifier;
-private boolean statsApplied;
-
-    public Pokemon(int dexNumber){
-        dex=dexNumber;
-        //setStats(dex);
-    }
-    public Pokemon( int dexParam,
-             String nameParam,
-             int healthParam,
-             int specialDefenseParam,
-      int defenseParam,
-       int attackParam,
-            int specialAttackParam,
-            int speedParam,
-    Move[] movesParam,
-         String type1Param,
-            String type2Param,
-            String statusParam,
-
-         int attackModifierParam,
-      int specialAttackModifierParam,
-         int defenseModifierParam,
-        int specialDefenseModifierParam,
-            int speedModifierParam){
-
-        dex=dexParam;
-        name=nameParam;
-        health=healthParam;
-        specialDefense=specialDefenseParam;
-        defense=defenseParam;
-        attack=attackParam;
-        specialAttack=specialAttackParam;
-        speed=speedParam;
-        moves=movesParam;
-        type1=type1Param;
-        type2=type2Param;
-        status=statusParam;
-        if(status.equalsIgnoreCase("NONE")){
-            hasStatus=false;
-        }
-        else{
-            hasStatus=true;
-        }
-       attackModifier=attackModifierParam;
-        specialAttackModifier=specialAttackModifierParam;
-       defenseModifier=defenseModifierParam;
-       specialDefenseModifier=specialDefenseModifierParam;
-        speedModifier=speedModifierParam;
-         statsApplied=true;
-    }
-
-    private void setStats(int dexNUmber){
-        //code some way of using the dex Number to get the stats of the pokemon
-    }
-
-    public int getDex() {
-        return dex;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public int getSpecialDefense() {
-        return specialDefense;
-    }
-
-    public int getDefense() {
-        return defense;
-    }
-
-    public int getAttack() {
-        return attack;
-    }
-
-    public int getSpecialAttack() {
-        return specialAttack;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public Move[] getMoves() {
-        return moves;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getType1() {
-        return type1;
-    }
-    public String getType2() {
-        return type2;
-    }
-    public String getStatus() {
-        return status;
-    }
-
-    public int getAttackModifier() {
-        return attackModifier;
-    }
-
-    public int getDefenseModifier() {
-        return defenseModifier;
-    }
-
-    public int getSpecialAttackModifier() {
-        return specialAttackModifier;
-    }
-
-    public boolean hasStatus() {
-        return hasStatus;
-    }
-
-    public int getSpecialDefenseModifier() {
-        return specialDefenseModifier;
-    }
-    public int getSpeedModifier() {
-        return speedModifier;
-
-    }
-
-    public boolean StatsApplied() {
-        return statsApplied;
-    }
-
-    public void setAttackModifier(int stages) {
-        attackModifier+=stages;
-        statsApplied=false;
-    }
-    public void setSpecialAttackModifier(int stages) {
-        specialAttackModifier+=stages;
-        statsApplied=false;
-    }
-    public void setDefenseModifier(int stages) {
-        defenseModifier+=stages;
-        statsApplied=false;
-    }
-    public void setSpecialDefenseModifier(int stages) {
-        specialDefenseModifier+=stages;
-        statsApplied=false;
-    }
-    public void setSpeedModifier(int stages) {
-        speedModifier+=stages;
-        statsApplied=false;
-    }
-//    dex=dexParam;
-//    name=nameParam;
-//    health=healthParam;
-//    specialDefense=specialDefenseParam;
-//    defense=defenseParam;
-//    attack=attackParam;
-//    specialAttack=specialAttackParam;
-//    speed=speedParam;
-//    moves=movesParam;
-//    type1=type1Param;
-//    type2=type2Param;
-//    status=statusParam;
-//        if(status.equalsIgnoreCase("NONE")){
-//        hasStatus=false;
-//    }
-//        else{
-//        hasStatus=true;
-//    }
-//    attackModifier=attackModifierParam;
-//    specialAttackModifier=specialAttackModifierParam;
-//    defenseModifier=defenseModifierParam;
-//    specialDefenseModifier=specialDefenseModifierParam;
-//    speedModifier=speedModifierParam;
-//    statsApplied=true;
-
-
-
-
-
-//    int dexParam,
-//    String nameParam,
-//    int healthParam,
-//    int specialDefenseParam,
-//    int defenseParam,
-//    int attackParam,
-//    int specialAttackParam,
-//    int speedParam,
-//    Move[] movesParam,
-//    String type1Param,
-//    String type2Param,
-//    String statusParam,
 //
-//    int attackModifierParam,
-//    int specialAttackModifierParam,
-//    int defenseModifierParam,
-//    int specialDefenseModifierParam,
-//    int speedModifierParam
-    public Pokemon applyModifiers(Pokemon target){
-        return new Pokemon(target.getDex(),target.getName(),target.getHealth(),
-                target.getSpecialDefense()+(int)(target.getSpecialDefenseModifier()*0.5*target.getSpecialDefense()),
-                target.getDefense()+(int)(target.getDefenseModifier()*0.5*target.getDefense()),
-                target.getAttack()+(int)(target.getAttackModifier()*0.5*target.getAttack()),
-                target.getSpecialAttack()+(int)(target.getSpecialAttackModifier()*0.5*target.getSpecialAttack()),
-                target.getSpeed()+(int)(target.getSpeedModifier()*0.5*target.getSpeed()),
-                target.getMoves(),
-                target.getType1(),target.getType2(),target.getStatus(),target.getAttackModifier(),target.getSpecialAttackModifier(),
-                target.getDefenseModifier(),target.getSpecialDefenseModifier(),target.getSpeedModifier());
-    }
+//  Author: Kumar Chandra
+//  Revised: Kumar Chandra
+//           5/3/20
+//
+//  Notes:
+//      This class creates Pokemon, which have 4 moves, and numerous different stats.
+//      This class stores info about a pokemon, and keeps track of any status conditions or modifiers it may have
+//
+//  Bugs:
+//    none
+//
+import java.io.*;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 
-    public String toString(){
-        String answer="\nDexNumber: "+dex
-                +"\n"+
-                "Name: "+name
-                +"\n"+
-                "Health: "+health
-                +"\n"+
-                "SpecialDefense: "+specialDefense
-                +"\n"+
-                "Defense: "+defense
-                +"\n"+
-                "Attack"+attack
-                +"\n"+
-                "Special Attack: "+specialAttack
-                +"\n"+
-        "Special Attack: "+specialAttack
-                +"\n"+
-                "Speed: "+speed
-                +"\n"+
+public class Pokemon {
+	private Battle battle;
+	
+	private int dex = 0;//self explanatory
+	private String name = "";//self explanatory
+	private int baseHealth;//self explanatory
+	private int health;//current health
+	private int baseSpecialDefense;//self explanatory
+	private int sleepCounter;//not implemented yet
+	private int baseDefense;//self explanatory
+	private int baseAttack;//self explanatory
+	private int baseSpecialAttack;//self explanatory
+	private String status = "";//self explanatory
+	private int baseSpeed;//self explanatory
+	private Move[] moves = new Move[4];//each pokemon has 4 moves
+	private String type1 = "";//self explanatory
+	private String type2 = "";//self explanatory
+	//****All your stat modifiers, which are essentially just buffs and debuffs******
+	private int attackIncrease;//self explanatory
+	private int attackDecrease;//self explanatory
+	private int specialAttackIncrease;//self explanatory
+	private int specialAttackDecrease;//self explanatory
+	private int defenseIncrease;//self explanatory
+	private int defenseDecrease;//self explanatory
+	private int specialDefenseIncrease;//self explanatory
+	private int specialDefenseDecrease;//self explanatory
+	private int speedIncrease;//self explanatory
+	private int speedDecrease;//self explanatory
 
-                "Types: "+type1 +"and"+type2
-                +"\n"+
-                "Status: "+status
-                +"\n"+
-        "Modifiers: "+attackModifier+" attack, "+defenseModifier+" defense, "+specialAttackModifier+" special attack, "+specialDefenseModifier+" special defense modifier, "+speedModifier+" speed modifier"
-                +"\n";
-        return answer;
-    }
+	public int convertMonName(String monName) {//takes a name of a pokemon and gets its dex number
+		int moveNumber = -1;
+		String copy = "something went wrong; ";
+		try {
+			byte[] file = Files.readAllBytes(Paths.get("Text/Stats.txt"));//he turns the stats.txt file into a string
+			// (funniest thing ive ever seen)
+			copy = new String(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String[] splittedCopy;
+		splittedCopy = copy.split("\n");//splits it by line
+		for (int i = 0; i < 915; i++) {
+			String stats = splittedCopy[i];
+			String[] s = stats.split(";");//splits by semicolon,
+			// just look at the stats.txt file and youll understand
+			try {
+				if (s[1].equalsIgnoreCase(monName)) {
+					moveNumber = Integer.parseInt(s[0]);
+					break;
+				}
+			} catch (Exception e) {
+
+			}
+		}
+		return moveNumber;
+	}
+
+	public Pokemon(int dexNumber) {//instantiates with a number
+		dex = dexNumber;
+		for (int i = 0; i < 4; i++) {
+			moves[i] = new Move(1);
+		}
+		setStats(dex);
+	}
+
+	public Pokemon(Battle battle, String pokeName) {//instantiates with a name
+		this.battle = battle;
+		name = pokeName;
+		int dexNumber = convertMonName(pokeName);
+		dex = dexNumber;
+		for (int i = 0; i < 4; i++) {
+			moves[i] = new Move(1);
+		}
+		setStats(dex);
+	}
+	public Pokemon( String pokeName) {//instantiates with a name
+
+		name = pokeName;
+		int dexNumber = convertMonName(pokeName);
+		dex = dexNumber;
+		for (int i = 0; i < 4; i++) {
+			moves[i] = new Move(1);
+		}
+		setStats(dex);
+	}
+
+	//uses the stats file to get the stats of a pokemon
+	public void setStats(int dexNumber) {
+
+		String copy = "something went wrong; ";
+		try {
+//			copy = Files.readString(Paths.get("Text/Stats.txt"));
+			byte[] file = Files.readAllBytes(Paths.get("Text/Stats.txt"));
+			copy = new String(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+
+		String[] splittedCopy;
+		splittedCopy = copy.split("\n");//splits by line
+		if(dexNumber>=810){
+			for (int i = 810; i < 914; i++) {
+				String stats = splittedCopy[i];
+				String[] s = stats.split(";");//splits by semicolon,
+				// just look at the stats.txt file and youll understand
+//				try {
+					if (Integer.parseInt(s[0])==(dexNumber)) {
+						name = s[1];//self explanatory
+						type1 = s[2];//self explanatory
+						type2 = s[3];//self explanatory
+						baseHealth = Integer.parseInt(s[4]) * 2 + 110;
+						health = baseHealth;//self explanatory
+						baseAttack = Integer.parseInt(s[5]) * 2 + 5;
+						baseDefense = Integer.parseInt(s[6]) * 2 + 5;
+						baseSpecialAttack = Integer.parseInt(s[7]) * 2 + 5;//self explanatory
+						baseSpecialDefense = Integer.parseInt(s[8]) * 2 + 5;
+						baseSpeed = Integer.parseInt(s[9]) * 2 + 5;
+						break;
+
+					}
+//				}
+//			catch (Exception e) {
+
+//				}
+			}
+		}
+		else {
+			String stats = splittedCopy[dexNumber - 1];
+			String[] s = stats.split(";");//splits y ;
+
+			name = s[1];//self explanatory
+			type1 = s[2];//self explanatory
+			type2 = s[3];//self explanatory
+			baseHealth = Integer.parseInt(s[4]) * 2 + 110;
+			health = baseHealth;//self explanatory
+			baseAttack = Integer.parseInt(s[5]) * 2 + 5;
+			baseDefense = Integer.parseInt(s[6]) * 2 + 5;
+			baseSpecialAttack = Integer.parseInt(s[7]) * 2 + 5;//self explanatory
+			baseSpecialDefense = Integer.parseInt(s[8]) * 2 + 5;
+			baseSpeed = Integer.parseInt(s[9]) * 2 + 5;
+		}
+
+	}
+
+	public int getDex() {
+		return dex;
+	}//self explanatory
+
+	public int getHealth() {
+		return health;
+	}//self explanatory
+
+	public String getID() {//some of the txt files use a pokemons id, which is just its name without spaces or capitalizon or special symbols
+		return name.replace(" ", "").replace(".", "").toLowerCase();
+	}
+
+
+
+
+
+
+
+
+	//**************************************
+	//**************************************
+	//***********IMPORTANT*******************
+	//**************************************
+	//***************************************
+	// the way stat modifiers work is that its calculated by getting
+	//your base stat, and using modifiers to calculate whatever it is currently
+	// it uses this formulate base stat * (2+statincrease)/(2)
+	// or base stat* (2)/(2+stat decrease)
+	// a stat increase and decrease cancel each other out
+	// you can't just do base stat * (2+statincrease)/(2+stat decrease) or else your numbers will be wrong
+	// all of the getStat methods use this are basically the same
+	// also stat increases and decreases cant go above 6
+
+
+
+
+
+	public int getSpecialDefense() {
+		if (specialDefenseDecrease == 0 && specialDefenseIncrease > 0) {// no stat decrease, their is a stat increase
+			return (int) (baseSpecialDefense * ((2.0 + specialDefenseIncrease) / 2.0));
+		} else if (specialDefenseDecrease > 0 && specialDefenseIncrease == 0) {// no stat increase, their is a stat
+			// decrease
+			return (int) (baseSpecialDefense * (2.0 / (2.0 + specialDefenseDecrease)));
+		} else if (specialDefenseIncrease > specialDefenseDecrease && specialDefenseDecrease != 0) {// stat increase and
+			// stat decrease,
+			// but stat increase
+			// is higher.
+			while (specialDefenseDecrease > 0) {
+				specialDefenseDecrease--;
+				specialDefenseIncrease--;
+			}
+			return (int) (baseSpecialDefense * ((2.0 + specialDefenseIncrease) / 2.0));
+		} else if (specialDefenseDecrease > specialDefenseIncrease && specialDefenseIncrease != 0) {// stat increase and
+			// decrease, but
+			// stat decrease is
+			// higher
+			while (specialDefenseIncrease > 0) {
+				specialDefenseDecrease--;
+				specialDefenseIncrease--;
+			}
+			return (int) (baseSpecialDefense * (2.0 / (2.0 + specialDefenseDecrease)));
+
+		} else if (specialDefenseDecrease == 0 && specialDefenseIncrease == 0) {// no stat changes
+			return baseSpecialDefense;
+		} else {// this shouldn't happen
+			int g=5;
+			while (g>0) {
+				System.out.println("Something went wrong getting spf");
+				g--;
+
+			}
+			return -1;
+		}
+	}
+
+	public int getDefense() {
+		if (defenseDecrease == 0 && defenseIncrease > 0) {// no stat decrease, their is a stat increase
+			return (int) (baseDefense * ((2.0 + defenseIncrease) / 2.0));
+		} else if (defenseDecrease > 0 && defenseIncrease == 0) {// no stat increase, their is a stat decrease
+			return (int) (baseDefense * (2.0 / (2.0 + defenseDecrease)));
+		} else if (defenseIncrease > defenseDecrease && defenseDecrease != 0) {// stat increase and stat decrease, but
+			// stat increase is higher.
+			while (defenseDecrease > 0) {
+				defenseDecrease--;
+				defenseIncrease--;
+			}
+			return (int) (baseDefense * ((2.0 + defenseIncrease) / 2.0));
+		} else if (defenseDecrease > defenseIncrease && defenseIncrease != 0) {// stat increase and decrease, but stat
+			// decrease is higher
+			while (defenseIncrease > 0) {
+				defenseDecrease--;
+				defenseIncrease--;
+			}
+			return (int) (baseDefense * (2.0 / (2.0 + defenseDecrease)));
+
+		} else if (defenseDecrease == 0 && defenseIncrease == 0) {// no stat changes
+			return baseDefense;
+		} else {// this shouldn't happen
+			int g=5;
+			while (g>0) {
+				System.out.println("Something went wrong getting def");
+				g--;
+
+			}
+			return -1;
+		}
+	}
+
+	public int getAttack() {
+		if (attackDecrease == 0 && attackIncrease > 0) {// no stat decrease, their is a stat increase
+			return (int) (baseAttack * ((2.0 + attackIncrease) / 2.0));
+		} else if (attackDecrease > 0 && attackIncrease == 0) {// no stat increase, their is a stat decrease
+			return (int) (baseAttack * (2.0 / (2.0 + attackDecrease)));
+		} else if (attackIncrease > attackDecrease && attackDecrease != 0) {// stat increase and stat decrease, but stat
+			// increase is higher.
+			while (attackDecrease > 0) {
+				attackDecrease--;
+				attackIncrease--;
+			}
+			return (int) (baseAttack * ((2.0 + attackIncrease) / 2.0));
+		} else if (attackDecrease > attackIncrease && attackIncrease != 0) {// stat increase and decrease, but stat
+			// decrease is higher
+			while (attackIncrease > 0) {
+				attackDecrease--;
+				attackIncrease--;
+			}
+			return (int) (baseAttack * (2.0 / (2.0 + attackDecrease)));
+
+		} else if (attackDecrease == 0 && attackIncrease == 0) {// no stat changes
+			return baseAttack;
+		} else {// this shouldn't happen
+			int g=5;
+			while (g>0) {
+				System.out.println("Something went wrong getting atk");
+				g--;
+
+			}
+			return -1;
+		}
+	}
+
+	public int getSpecialAttack() {
+		if (specialAttackDecrease == 0 && specialAttackIncrease > 0) {// no stat decrease, their is a stat increase
+			return (int) (baseSpecialAttack * ((2.0 + specialAttackIncrease) / 2.0));
+		} else if (specialAttackDecrease > 0 && specialAttackIncrease == 0) {// no stat increase, their is a stat
+			// decrease
+			return (int) (baseSpecialAttack * (2.0 / (2.0 + specialAttackDecrease)));
+		} else if (specialAttackIncrease > specialAttackDecrease && specialAttackDecrease != 0) {// stat increase and
+			// stat decrease,
+			// but stat increase
+			// is higher.
+			while (specialAttackDecrease > 0) {
+				specialAttackDecrease--;
+				specialAttackIncrease--;
+			}
+			return (int) (baseSpecialAttack * ((2.0 + specialAttackIncrease) / 2.0));
+		} else if (specialAttackDecrease > specialAttackIncrease && specialAttackIncrease != 0) {// stat increase and
+			// decrease, but
+			// stat decrease is
+			// higher
+			while (specialAttackIncrease > 0) {
+				specialAttackDecrease--;
+				specialAttackIncrease--;
+			}
+			return (int) (baseSpecialAttack * (2.0 / (2.0 + specialAttackDecrease)));
+
+		} else if (specialAttackDecrease == 0 && specialAttackIncrease == 0) {// no stat changes
+			return baseSpecialAttack;
+		} else {// this shouldn't happen
+			int g=5;
+			while (g>0) {
+				System.out.println("Something went wrong getting spa");
+				g--;
+
+			}
+			return -1;
+		}
+	}
+
+	public int getSpeed() {
+		if (speedDecrease == 0 && speedIncrease > 0) {// no stat decrease, their is a stat increase
+			return (int) (baseSpeed * ((2.0 + speedIncrease) / 2.0));
+		} else if (speedDecrease > 0 && speedIncrease == 0) {// no stat increase, their is a stat decrease
+			return (int) (baseSpeed * (2.0 / (2.0 + speedDecrease)));
+		} else if (speedIncrease > speedDecrease && speedDecrease != 0) {// stat increase and stat decrease, but stat
+			// increase is higher.
+			while (speedDecrease > 0) {
+				speedDecrease--;
+				speedIncrease--;
+			}
+			return (int) (baseSpeed * ((2.0 + speedIncrease) / 2.0));
+		} else if (speedDecrease > speedIncrease && speedIncrease != 0) {// stat increase and decrease, but stat
+			// decrease is higher
+			while (speedIncrease > 0) {
+				speedDecrease--;
+				speedIncrease--;
+			}
+			return (int) (baseSpeed * (2.0 / (2.0 + speedDecrease)));
+
+		} else if (speedDecrease == 0 && speedIncrease == 0) {// no stat changes
+			return baseSpeed;
+		} else {// this shouldn't happen
+			int g=5;
+			while (g>0) {
+				System.out.println("Something went wrong getting spe");
+				g--;
+
+			}
+			return -1;
+		}
+	}
+
+
+
+
+
+
+
+
+
+	//****************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setMoves(int[] givenMoves) {//sets your moves, converts given integers into moves
+		for (int i = 0; i < moves.length; i++) {
+			moves[i] = new Move(givenMoves[i]);
+		}
+	}
+
+
+	public void setMoves(Move[] givenMoves) {//sets your moves with moves
+		moves = givenMoves;
+	}
+
+	public Move[] getMoves() {//self explanatory
+		return moves;
+	}
+
+	public String getName() {//self explanatory
+		return name;
+	}
+
+	public String getType1() {//self explanatory
+		return type1;
+	}
+
+	public String getType2() {//self explanatory
+		return type2;
+	}
+
+	public int takeDamage(int damage) {//self explanatory
+		int answer;
+		if(health-damage<=0){
+	answer=health;
+	health = 0;
+		}
+		else {
+			health -= damage;
+			answer=damage;
+		}
+
+
+		return answer;//returns the damage that was actually done.
+		// ex) If you deal 100000 damage to a pokemon with 1, you only dealt 1 damage.
+
+	}
+	
+	public int heal(int heal) {//self explanatory
+
+		int answer;
+		if(health+heal>=baseHealth){
+			answer=baseHealth-health;
+			health = baseHealth;
+		}
+		else {
+			health +=heal;
+			answer=heal;
+		}
+
+
+		return answer;//returns the amount of health actually healed.
+		// ex) If you are at full health and recover half your health, you won't actually heal anything.
+	}
+
+	public void setAttackIncrease(int stages) {//self explanatory
+		if(attackIncrease==6){
+			battle.log(name + "'s attack can't go any higher!");
+		}
+		else {
+			int actualStages=0;
+			while (attackIncrease + 1 < 7 && stages > 0) {
+				attackIncrease++;
+				stages--;
+				actualStages++;
+			}
+//			attackIncrease += stages;
+			battle.log(name + "'s attack increased by " + actualStages + " stages!");
+		}
+	}
+
+	public void setSpecialAttackIncrease(int stages) {//self explanatory
+		if (specialAttackIncrease == 6) {
+			battle.log(name + "'s special attack can't go any higher!");
+		} else {
+			int actualStages = 0;
+			while (specialAttackIncrease + 1 < 7 && stages > 0) {
+				specialAttackIncrease++;
+				stages--;
+				actualStages++;
+			}
+//			specialAttackIncrease += stages;
+			battle.log(name + "'s special attack increased by " + actualStages + " stages!");
+		}
+	}
+
+	public void setDefenseIncrease(int stages) {//self explanatory
+		if(defenseIncrease==6){
+			battle.log(name + "'s defense can't go any higher!");
+		}
+		else {
+			int actualStages=0;
+			while (defenseIncrease + 1 < 7 && stages > 0) {
+				defenseIncrease++;
+				stages--;
+				actualStages++;
+			}
+//			defenseIncrease += stages;
+			battle.log(name + "'s defense increased by " + actualStages + " stages!");
+		}
+
+	}
+
+	public void setSpecialDefenseIncrease(int stages) {//self explanatory
+		if(specialDefenseIncrease==6){
+			battle.log(name + "'s special defense can't go any higher!");
+		}
+		else {
+			int actualStages=0;
+			while (specialDefenseIncrease + 1 < 7 && stages > 0) {
+				specialDefenseIncrease++;
+				stages--;
+				actualStages++;
+			}
+//			specialDefenseIncrease += stages;
+			battle.log(name + "'s special defense increased by " + actualStages + " stages!");
+		}
+
+}
+
+	public void setSpeedIncrease(int stages) {//self explanatory
+		if(speedIncrease==6){
+			battle.log(name + "'s speed can't go any higher!");
+		}
+		else {
+			int actualStages=0;
+			while (speedIncrease + 1 < 7 && stages > 0) {
+				speedIncrease++;
+				stages--;
+				actualStages++;
+			}
+//			speedIncrease += stages;
+			battle.log(name + "'s speed increased by " + actualStages + " stages!");
+		}
+//		speedIncrease += stages;
+//		System.out.println(name + "'s speed increased by " + stages + " stages!");
+
+	}
+
+	public void setAttackDecrease(int stages) {//self explanatory
+		if(attackDecrease==6){
+			battle.log(name + "'s attack can't go any lower!");
+		}
+		else {
+			int actualStages=0;
+			while (attackDecrease + 1 < 7 && stages > 0) {
+				attackDecrease++;
+				stages--;
+				actualStages++;
+			}
+//			attackDecrease += stages;
+			battle.log(name + "'s attack Decreased by " + actualStages + " stages...");
+		}
+
+
+	}
+
+	public void setSpecialAttackDecrease(int stages) {//self explanatory
+		if(specialAttackDecrease==6){
+			battle.log(name + "'s special attack can't go any lower!");
+		}
+		else {
+			int actualStages=0;
+			while (specialAttackDecrease + 1 < 7 && stages > 0) {
+				specialAttackDecrease++;
+				stages--;
+				actualStages++;
+			}
+//			specialAttackDecrease += stages;
+			battle.log(name + "'s special attack Decreased by " + actualStages + " stages...");
+		}
+
+	}
+
+	public void setDefenseDecrease(int stages) {//self explanatory
+		if(defenseDecrease==6){
+			battle.log(name + "'s defense can't go any lower!");
+		}
+		else {
+			int actualStages=0;
+			while (defenseDecrease + 1 < 7 && stages > 0) {
+				defenseDecrease++;
+				stages--;
+				actualStages++;
+			}
+//			defenseDecrease += stages;
+			battle.log(name + "'s defense Decreased by " + actualStages + " stages...");
+		}
+
+	}
+
+	public void setSpecialDefenseDecrease(int stages) {//self explanatory
+		if(specialDefenseDecrease==6){
+			battle.log(name + "'s special defense can't go any lower!");
+		}
+		else {
+			int actualStages=0;
+			while (specialDefenseDecrease + 1 < 7 && stages > 0) {
+				specialDefenseDecrease++;
+				stages--;
+				actualStages++;
+			}
+//			specialDefenseDecrease += stages;
+			battle.log(name + "'s special defense Decreased by " + actualStages + " stages...");
+		}
+
+	}
+
+	public void setSpeedDecrease(int stages) {//self explanatory
+		if(speedDecrease==6){
+			battle.log(name + "'s speed can't go any lower!");
+		}
+		else {
+			int actualStages=0;
+			while (speedDecrease + 1 < 7 && stages > 0) {
+				speedDecrease++;
+				stages--;
+				actualStages++;
+			}
+//			speedDecrease += stages;
+			battle.log(name + "'s speed Decreased by " + actualStages + " stages...");
+		}
+	}
+	public void resetBoosts(){//self explanatory
+		specialAttackDecrease=0;
+		specialAttackIncrease=0;
+		attackIncrease=0;
+		attackDecrease=0;
+		defenseDecrease=0;
+		defenseIncrease=0;
+		specialDefenseDecrease=0;
+		specialDefenseIncrease=0;
+		speedDecrease=0;
+		speedDecrease=0;
+	}
+
+	public String toString() {//self explanatory
+		String answer = null;
+		try {
+			answer = "\n" + "Name: " + name
+					+ "\n" + "Health: " + health + " / " + baseHealth
+					+ "\n" + "Defense: " + getDefense()
+					+ "\n" + "Attack: " + getAttack()
+					+ "\n" + "Special Attack: " + getSpecialAttack()
+					+ "\n" + "Special Defense: " + getSpecialDefense()
+					+ "\n" + "Speed: " + getSpeed()
+					+ "\n" + "Modifiers: " + (attackIncrease - attackDecrease) + " attack, "
+					+ (defenseIncrease - defenseDecrease) + " defense, "
+					+ (specialAttackIncrease - specialAttackDecrease) + " special attack, "
+					+ (specialDefenseIncrease - specialDefenseDecrease) + " special defense, "
+					+ (speedIncrease - speedDecrease) + " speed"
+					+ "\n" + "Status: " + status
+					+ "\n" + "Types: " + type1 + " and " + type2 + "\n";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return answer;
+	}
+
+	public String getStatus() {//self explanatory
+		return status;
+	}
+
+	public void setStatus(String status) {//self explanatory
+		this.status = status;
+	}
+
+	public int getBaseHealth() {//self explanatory
+		return baseHealth;
+	}
 }
